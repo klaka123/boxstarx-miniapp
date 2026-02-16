@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoxStarX 🚀</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoxStarX 🚀</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Фон -->
-    <div id="stars"></div>
+<div class="hud">
+  <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
+  <button id="depositBtn">Пополнить ⭐</button>
+</div>
 
-    <!-- Заголовок -->
-    <header>
-        <h1>BoxStarX 🚀</h1>
-    </header>
+<div class="cases-container">
+  <div class="case" data-price="50">🎁 Кейc за 50 ⭐</div>
+  <div class="case" data-price="100">🎁 Кейc за 100 ⭐</div>
+  <div class="case" data-price="500">🎁 Кейc за 500 ⭐</div>
+</div>
 
-    <!-- Кейсы -->
-    <section class="cases">
-        <div class="case" data-price="50">
-            <img src="images/case50.png" alt="Кейс 50 звезд">
-            <span>50 ⭐</span>
-            <button class="open-case">Открыть</button>
-        </div>
-        <div class="case" data-price="100">
-            <img src="images/case100.png" alt="Кейс 100 звезд">
-            <span>100 ⭐</span>
-            <button class="open-case">Открыть</button>
-        </div>
-        <div class="case" data-price="500">
-            <img src="images/case500.png" alt="Кейс 500 звезд">
-            <span>500 ⭐</span>
-            <button class="open-case">Открыть</button>
-        </div>
-    </section>
+<div class="game-container">
+  <div class="plane-section">
+    <div class="timer">До взлета: <span id="planeTimer">10</span>s</div>
+    <div class="plane-area">
+      <div id="plane" class="plane">✈️</div>
+    </div>
+    <button id="cashoutBtn">Забрать</button>
+  </div>
+</div>
 
-    <!-- Игра самолет -->
-    <section class="plane-game">
-        <h2>Игра "Самолет" ✈️</h2>
-        <input type="number" id="bet" placeholder="Ставка (мин. 10 ⭐)" min="10">
-        <button id="start-flight">Взлететь</button>
-        <div id="timer">До взлета: 10</div>
-        <div id="plane-container">
-            <img id="plane" src="images/plane.png" alt="Самолет">
-        </div>
-        <button id="cashout">Забрать</button>
-        <div id="multiplier">x1</div>
-    </section>
+<div id="depositModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Пополнение баланса</h2>
+    <input type="number" id="depositAmount" placeholder="Минимум 10 ⭐" min="10">
+    <button id="confirmDeposit">Пополнить</button>
+  </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
