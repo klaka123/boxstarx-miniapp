@@ -1,48 +1,104 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BoxStarX 🚀</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="background"></div>
+/* Общие стили */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #0d0d20, #3a0d5c);
+    color: #fff;
+    overflow-x: hidden;
+}
 
-<!-- HUD -->
-<div class="hud">
-    <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
-</div>
+header h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px #ff00ff, 0 0 40px #8a2be2;
+}
 
-<!-- Кейсы -->
-<div class="cases-container">
-    <div class="case" data-price="50">
-        <img src="data:image/png;base64,..." alt="Кейс 50⭐">
-        <div class="case-label">50 ⭐</div>
-    </div>
-    <div class="case" data-price="100">
-        <img src="data:image/png;base64,..." alt="Кейс 100⭐">
-        <div class="case-label">100 ⭐</div>
-    </div>
-    <div class="case" data-price="500">
-        <img src="data:image/png;base64,..." alt="Кейс 500⭐">
-        <div class="case-label">500 ⭐</div>
-    </div>
-</div>
+/* Фон звезды телеграм */
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/telegram-stars.png') repeat;
+    animation: starsMove 60s linear infinite;
+    z-index: -1;
+}
 
-<!-- Самолет игра -->
-<div class="plane-game">
-    <div class="plane-info">
-        <span>Ставка: </span><input type="number" id="bet" min="10" value="10"> ⭐
-        <button id="start-plane">Запустить самолет</button>
-    </div>
-    <div class="plane-timer">До взлета: <span id="countdown">10</span>s</div>
-    <div class="plane-track">
-        <div class="plane"></div>
-    </div>
-    <button id="cashout">Забрать</button>
-</div>
+@keyframes starsMove {
+    from {background-position: 0 0;}
+    to {background-position: 10000px 0;}
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+/* Кейсы */
+.cases {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.case {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s;
+}
+
+.case img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.case:hover {
+    transform: scale(1.1);
+}
+
+.open-case {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    background: #8a2be2;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.open-case:hover {
+    background: #ff00ff;
+}
+
+/* Игра самолет */
+.plane-game {
+    text-align: center;
+    margin: 40px 0;
+}
+
+#plane-container {
+    height: 150px;
+    margin: 20px 0;
+    position: relative;
+}
+
+#plane {
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 0.1s linear;
+}
+
+#multiplier {
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+#timer {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
