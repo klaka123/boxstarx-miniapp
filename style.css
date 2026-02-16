@@ -1,94 +1,126 @@
 body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(180deg, #1a001f, #3d0055);
-  color: #fff;
-  text-align: center;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle at bottom, #0b0b1f 0%, #1f0033 100%);
+    overflow-x: hidden;
 }
 
-.container {
-  padding: 20px;
+/* Фон анимированные звезды */
+body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: url('https://i.ibb.co/8c0KJXb/telegram-stars.png') repeat;
+    background-size: 40px;
+    animation: starsMove 60s linear infinite;
+    z-index: 0;
+}
+@keyframes starsMove {
+    from { background-position: 0 0; }
+    to { background-position: -2000px 1000px; }
 }
 
-.top-up input {
-  padding: 10px;
-  width: 150px;
-  border-radius: 5px;
-  border: none;
+/* HUD */
+.hud {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 18px;
+    z-index: 10;
 }
 
-.top-up button {
-  padding: 10px 20px;
-  background: #ff3dff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Таймер */
+.timer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: yellow;
+    font-size: 24px;
+    z-index: 10;
 }
 
-.cases {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 30px 0;
-}
-
-.case {
-  position: relative;
-  width: 120px;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.case:hover {
-  transform: scale(1.1);
+/* Кейсы */
+.case-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    gap: 20px;
+    z-index: 5;
+    position: relative;
 }
 
 .case img {
-  width: 100%;
-  border-radius: 10px;
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.case span {
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  right: 0;
-  font-weight: bold;
-  background: rgba(0,0,0,0.5);
-  border-radius: 5px;
-  padding: 2px 0;
+.case img:hover {
+    transform: scale(1.1);
 }
 
-.plane-container {
-  width: 100%;
-  height: 200px;
-  background: #000;
-  position: relative;
-  margin: 20px 0;
-  border-radius: 10px;
-  overflow: hidden;
+/* Самолет */
+.airplane-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    z-index: 5;
 }
 
-.plane {
-  width: 50px;
-  height: 50px;
-  background: url('static/plane.png') no-repeat center/contain;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* Анимация ракеты */
+#rocketLauncher {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+.rocket {
+    width: 80px;
+    animation: rocketUp 3s ease forwards;
+}
+@keyframes rocketUp {
+    0% { transform: translateY(100px) scale(1); opacity: 1; }
+    100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
 }
 
-#cashout {
-  padding: 10px 20px;
-  background: #00ffcc;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+/* Показывать HUD после ракеты */
+body.loaded .hud,
+body.loaded .balance,
+body.loaded .stars,
+body.loaded .case-container,
+body.loaded .airplane-container,
+body.loaded .timer,
+body.loaded button {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease;
+}
+.hud,
+.balance,
+.stars,
+.case-container,
+.airplane-container,
+.timer,
+button {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.plane-timer {
-  font-size: 18px;
-  margin: 10px 0;
+/* Кнопка */
+button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg,#8e2de2,#4a00e0);
+    color: white;
+    cursor: pointer;
+    z-index: 10;
 }
