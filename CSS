@@ -1,17 +1,22 @@
-.case {
-  width: 200px;
-  height: 200px;
-  transform-origin: bottom center;
-  animation: float 2s infinite alternate;
+body.loaded .hud,
+body.loaded .balance,
+body.loaded .stars,
+body.loaded .case-container,
+body.loaded .airplane-container,
+body.loaded .timer,
+body.loaded button {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease;
 }
-@keyframes float {
-  0% { transform: translateY(0px) scale(1); }
-  100% { transform: translateY(-10px) scale(1.05); }
-}
-.open {
-  animation: openCase 1s forwards;
-}
-@keyframes openCase {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-120deg); }
+
+.hud,
+.balance,
+.stars,
+.case-container,
+.airplane-container,
+.timer,
+button {
+  opacity: 0;
+  transform: translateY(20px);
 }
