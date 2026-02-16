@@ -3,52 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boxstarx - Самолет</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<title>BoxStarX 🚀</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="app">
+<div class="container">
+  <h1>BoxStarX 🚀</h1>
 
-  <div class="card glass">
-    <h2>Пополнение ⭐</h2>
-    <input id="amount" type="number" min="10" placeholder="Минимум 10 ⭐">
-    <button onclick="topUp()">Пополнить</button>
+  <!-- Пополнение -->
+  <div class="top-up">
+    <input type="number" id="amount" placeholder="Мин. 10 ⭐" min="10">
+    <button id="topupBtn">Пополнить</button>
   </div>
 
-  <h3 class="section">Ставка в игру «Самолет»</h3>
-  <div class="card glass">
-    <input id="bet" type="number" min="10" placeholder="Ставка (мин. 10 ⭐)">
-    <button onclick="startPlane()">Начать полёт</button>
-    <button onclick="cashOut()">Забрать до падения</button>
-    <p id="countdown">Взлёт через: 10с</p>
-    <p id="multiplier">Множитель: 1×</p>
-  </div>
-
-  <h3 class="section">Кейсы</h3>
+  <!-- Кейсы -->
   <div class="cases">
-    <div class="case gold" onclick="openCase(50)">
-      <div class="spinner">
-        <span>🎁</span><span>⭐</span><span>💎</span>
-      </div>
-      <b>Кейс 50 ⭐</b>
+    <div class="case" data-case="50">
+      <img src="static/case50.png" alt="Кейс 50⭐">
+      <span>50⭐</span>
     </div>
-    <div class="case platinum" onclick="openCase(100)">
-      <div class="spinner">
-        <span>🎁</span><span>⭐</span><span>💎</span>
-      </div>
-      <b>Кейс 100 ⭐</b>
+    <div class="case" data-case="100">
+      <img src="static/case100.png" alt="Кейс 100⭐">
+      <span>100⭐</span>
     </div>
-    <div class="case obsidian" onclick="openCase(500)">
-      <div class="spinner">
-        <span>🎁</span><span>⭐</span><span>💎</span>
-      </div>
-      <b>Кейс 500 ⭐</b>
+    <div class="case" data-case="500">
+      <img src="static/case500.png" alt="Кейс 500⭐">
+      <span>500⭐</span>
     </div>
   </div>
 
-  <div id="result" class="result"></div>
-
+  <!-- Самолет -->
+  <div class="game">
+    <h2>Игра: Самолет</h2>
+    <input type="number" id="planeBet" placeholder="Ставка (мин. 10⭐)" min="10">
+    <button id="startPlane">Старт</button>
+    <div class="plane-timer" id="planeTimer">До взлета: 10</div>
+    <div class="plane-container">
+      <div class="plane" id="plane"></div>
+    </div>
+    <button id="cashout" disabled>Забрать</button>
+    <div>Баланс: <span id="balance">0</span> ⭐</div>
+  </div>
 </div>
 
 <script src="script.js"></script>
