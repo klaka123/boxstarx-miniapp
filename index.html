@@ -1,42 +1,90 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BoxStarX 🚀</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="hud">
-  <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
-  <button id="depositBtn">Пополнить ⭐</button>
-</div>
+<!-- Добавьте этот код в основной HTML файл вашего проекта, внутри тега <body> перед другим контентом -->
+<canvas id="starCanvas"></canvas>
 
-<div class="cases-container">
-  <div class="case" data-price="50">🎁 Кейc за 50 ⭐</div>
-  <div class="case" data-price="100">🎁 Кейc за 100 ⭐</div>
-  <div class="case" data-price="500">🎁 Кейc за 500 ⭐</div>
-</div>
+<script>
+  const canvas = document.getElementById('starCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let stars = [];
+  const STAR_COUNT = 300; // Количество звезд
 
-<div class="game-container">
-  <div class="plane-section">
-    <div class="timer">До взлета: <span id="planeTimer">10</span>s</div>
-    <div class="plane-area">
-      <div id="plane" class="plane">✈️</div>
-    </div>
-    <button id="cashoutBtn">Забрать</button>
-  </div>
-</div>
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5 + 0.5, // Размер
+        speed: Math.random() * 0.5 + 0.2, // Скорость падения
+        brightness: Math.random() * 0.5 + 0.5, // Яркость для мерцания
+        flickerSpeed: Math.random() * 0.02 + 0.005 // Скорость мерцания
+      });
+    }
+  }
 
-<div id="depositModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Пополнение баланса</h2>
-    <input type="number" id="depositAmount" placeholder="Минимум 10 ⭐" min="10">
-    <button id="confirmDeposit">Пополнить</button>
-  </div>
-</div>
+  function resizeCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    initStars(); // Пересоздаем звезды при изменении размера окна
+  }
 
-<script src="script.js"></script>
-</body>
-</html>
+  function drawStars() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = 'white';
+    
+    stars.forEach(star => {
+      // Анимация падения
+      star.y += star.speed;
+      if (star.y > height) {
+        star.y = 0;
+        star.x = Math.random() * width;
+      }
+      
+      // Анимация мерцания (изменение яркости)
+      star.brightness += star.flickerSpeed;
+      if (star.brightness > 1 || star.brightness < 0.3) {
+        star.flickerSpeed *= -1; // Меняем направление
+      }
+      
+      ctx.globalAlpha = star.brightness;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  drawStars();
+</script>
+
+<style>
+  /* Стили для canvas, чтобы он был на заднем плане */
+  #starCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Помещаем позади всего контента */
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); /* Красивый градиент ночного неба */
+    display: block;
+  }
+  
+  /* Убедитесь, что ваш контент (кейсы, кнопки) имеет более высокий z-index и полупрозрачный фон, если нужно */
+  body {
+    margin: 0;
+    padding: 0;
+    color: white; /* Цвет текста для контраста */
+    font-family: sans-serif;
+  }
+  .content {
+    position: relative;
+    z-index: 1;
+    /* background: rgba(0,0,0,0.5); */ /* Можно добавить полупрозрачный фон для контента */
+  }
+</style>
