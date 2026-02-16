@@ -1,49 +1,48 @@
-<!-- Ракета при запуске -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoxStarX 🚀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Анимация ракеты при запуске -->
 <div id="rocketLauncher">
-  <img src="https://i.imgur.com/0vO1D7X.png" alt="Ракета" style="width:12vw; max-width:80px;">
+    <img src="https://i.ibb.co/ZJcF1rX/rocket.png" class="rocket" alt="Rocket">
 </div>
 
-<style>
-#rocketLauncher {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  z-index: 10;
-  pointer-events: none;
-  animation: rocketFade 3s ease forwards;
-}
+<!-- HUD -->
+<div class="hud">
+    <div class="balance">Баланс: <span id="balance">500</span> ⭐</div>
+    <div class="stars">Звезды: <span id="stars">0</span></div>
+</div>
 
-@keyframes rocketFade {
-  0% {opacity: 0; transform: translate(-50%, -50%) scale(0);}
-  30% {opacity: 1; transform: translate(-50%, -60%) scale(1.2);}
-  60% {transform: translate(-50%, -70%) scale(1);}
-  100% {opacity: 0; transform: translate(-50%, -80%) scale(0.8);}
-}
+<!-- Таймер до взлета самолета -->
+<div class="timer" id="timer">10</div>
 
-/* Плавное появление контента после ракеты */
-body.loaded .case-container,
-body.loaded .airplane-container,
-body.loaded .timer,
-body.loaded button {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 1s ease;
-}
+<!-- Самолет -->
+<div class="airplane-container">
+    <div id="airplane">✈️</div>
+</div>
 
-.case-container, .airplane-container, .timer, button {
-  opacity: 0;
-  transform: translateY(20px);
-}
-</style>
+<!-- Кейсы -->
+<div class="case-container">
+    <div class="case" data-price="50">
+        <img src="case1.png" alt="Кейс 50⭐">
+    </div>
+    <div class="case" data-price="100">
+        <img src="case2.png" alt="Кейс 100⭐">
+    </div>
+    <div class="case" data-price="500">
+        <img src="case3.png" alt="Кейс 500⭐">
+    </div>
+</div>
 
-<script>
-// После окончания анимации ракеты показываем контент
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.body.classList.add('loaded');
-    document.getElementById('rocketLauncher').remove();
-  }, 3000); // время совпадает с анимацией ракеты
-});
-</script>
+<!-- Пополнение -->
+<button id="depositBtn">Пополнить ⭐</button>
+
+<script src="script.js"></script>
+</body>
+</html>
