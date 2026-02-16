@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BoxStarX 🚀</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxStarX 🚀</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="background"></div>
+    <!-- Фон -->
+    <div id="stars"></div>
 
-<!-- HUD -->
-<div class="hud">
-    <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
-</div>
+    <!-- Заголовок -->
+    <header>
+        <h1>BoxStarX 🚀</h1>
+    </header>
 
-<!-- Кейсы -->
-<div class="cases-container">
-    <div class="case" data-price="50">
-        <img src="data:image/png;base64,..." alt="Кейс 50⭐">
-        <div class="case-label">50 ⭐</div>
-    </div>
-    <div class="case" data-price="100">
-        <img src="data:image/png;base64,..." alt="Кейс 100⭐">
-        <div class="case-label">100 ⭐</div>
-    </div>
-    <div class="case" data-price="500">
-        <img src="data:image/png;base64,..." alt="Кейс 500⭐">
-        <div class="case-label">500 ⭐</div>
-    </div>
-</div>
+    <!-- Кейсы -->
+    <section class="cases">
+        <div class="case" data-price="50">
+            <img src="images/case50.png" alt="Кейс 50 звезд">
+            <span>50 ⭐</span>
+            <button class="open-case">Открыть</button>
+        </div>
+        <div class="case" data-price="100">
+            <img src="images/case100.png" alt="Кейс 100 звезд">
+            <span>100 ⭐</span>
+            <button class="open-case">Открыть</button>
+        </div>
+        <div class="case" data-price="500">
+            <img src="images/case500.png" alt="Кейс 500 звезд">
+            <span>500 ⭐</span>
+            <button class="open-case">Открыть</button>
+        </div>
+    </section>
 
-<!-- Самолет игра -->
-<div class="plane-game">
-    <div class="plane-info">
-        <span>Ставка: </span><input type="number" id="bet" min="10" value="10"> ⭐
-        <button id="start-plane">Запустить самолет</button>
-    </div>
-    <div class="plane-timer">До взлета: <span id="countdown">10</span>s</div>
-    <div class="plane-track">
-        <div class="plane"></div>
-    </div>
-    <button id="cashout">Забрать</button>
-</div>
+    <!-- Игра самолет -->
+    <section class="plane-game">
+        <h2>Игра "Самолет" ✈️</h2>
+        <input type="number" id="bet" placeholder="Ставка (мин. 10 ⭐)" min="10">
+        <button id="start-flight">Взлететь</button>
+        <div id="timer">До взлета: 10</div>
+        <div id="plane-container">
+            <img id="plane" src="images/plane.png" alt="Самолет">
+        </div>
+        <button id="cashout">Забрать</button>
+        <div id="multiplier">x1</div>
+    </section>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
