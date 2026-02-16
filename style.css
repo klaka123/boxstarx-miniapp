@@ -1,65 +1,113 @@
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #1a2a6c, #000);
-  font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
+  background: radial-gradient(circle at top, #0b1220, #020409);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #fff;
+}
+
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 20px;
+}
+
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
 .card {
-  width: 320px;
-  margin: 40px auto;
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 40px rgba(0,0,0,0.7);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin: 0;
+}
+
+.sub {
+  font-size: 13px;
+  color: #9fb0c9;
+  margin-bottom: 14px;
 }
 
 input {
   width: 100%;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
-  margin-bottom: 15px;
-  font-size: 16px;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 15px;
 }
 
 button {
+  margin-top: 14px;
   width: 100%;
-  padding: 14px;
-  border-radius: 14px;
+  padding: 15px;
+  border-radius: 16px;
   border: none;
-  font-size: 18px;
-  font-weight: bold;
-  background: linear-gradient(135deg, gold, orange);
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(255,193,7,0.35);
+}
+
+.section {
+  margin: 10px 0 14px;
+  color: #cfd8ff;
+}
+
+.cases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 .case {
-  width: 200px;
-  height: 200px;
-  margin: 40px auto;
+  height: 140px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #ffb347, #ff8008);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  animation: glow 2s infinite;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s;
 }
 
-@keyframes glow {
-  0% { box-shadow: 0 0 10px gold; }
-  50% { box-shadow: 0 0 40px gold; }
-  100% { box-shadow: 0 0 10px gold; }
+.case span {
+  font-size: 34px;
+  margin-bottom: 6px;
 }
 
-.plane-box {
-  margin-top: 40px;
+.case:hover {
+  transform: translateY(-4px);
 }
 
-#plane {
-  font-size: 32px;
-  margin-bottom: 15px;
+.gold {
+  background: radial-gradient(circle at top, #ffdf8a, #b8870b);
+}
+
+.platinum {
+  background: radial-gradient(circle at top, #b7d7ff, #5a7cff);
+}
+
+.obsidian {
+  background: radial-gradient(circle at top, #7c4dff, #1a0033);
+}
+
+.result {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 18px;
+  min-height: 24px;
 }
