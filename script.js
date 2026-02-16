@@ -1,82 +1,118 @@
-// Таймер самолета
-let timerValue = 10;
-let timerInterval;
-let flightInterval;
-let multiplier = 1;
-let flying = false;
+let balance = 1000;
+const balanceEl = document.getElementById('balance');
 
-const plane = document.getElementById('plane');
-const timerEl = document.getElementById('timer');
-const multiplierEl = document.getElementById('multiplier');
-const startBtn = document.getElementById('start-flight');
-const cashoutBtn = document.getElementById('cashout');
-
-startBtn.onclick = () => {
-    const bet = parseInt(document.getElementById('bet').value);
-    if (bet < 10) { alert('Минимальная ставка 10 ⭐'); return; }
-
-    timerValue = 10;
-    multiplier = 1;
-    flying = false;
-    plane.style.bottom = '0px';
-    multiplierEl.textContent = 'x1';
-    
-    timerEl.textContent = `До взлета: ${timerValue}`;
-    
-    timerInterval = setInterval(() => {
-        timerValue--;
-        timerEl.textContent = `До взлета: ${timerValue}`;
-        if (timerValue <= 0) {
-            clearInterval(timerInterval);
-            startFlight(bet);
-        }
-    }, 1000);
-};
-
-cashoutBtn.onclick = () => {
-    if (flying) {
-        alert(`Вы забрали ${multiplier.toFixed(2)}x от вашей ставки!`);
-        flying = false;
-        clearInterval(flightInterval);
-        plane.style.bottom = '0px';
-        multiplierEl.textContent = 'x1';
-    }
-};
-
-function startFlight(bet) {
-    flying = true;
-    let height = 0;
-    flightInterval = setInterval(() => {
-        if (!flying) { clearInterval(flightInterval); return; }
-
-        let chance = Math.random();
-        if (chance < 0.02) multiplier = 150; // очень редко
-        else if (chance < 0.1) multiplier = 10;
-        else multiplier += 0.05 + Math.random()*0.1;
-
-        // Часто падает на маленьких множителях
-        if (Math.random() < 0.05 && multiplier < 2) {
-            alert(`Самолет упал на x${multiplier.toFixed(2)}! Вы проиграли!`);
-            flying = false;
-            clearInterval(flightInterval);
-            plane.style.bottom = '0px';
-            multiplierEl.textContent = 'x1';
-        }
-
-        multiplierEl.textContent = `x${multiplier.toFixed(2)}`;
-        height = Math.min(multiplier*20, 300);
-        plane.style.bottom = `${height}px`;
-    }, 100);
+function updateBalance(amount) {
+  balance += amount;
+  balanceEl.textContent = balance;
 }
 
-// Открытие кейса (анимация)
-document.querySelectorAll('.open-case').forEach(btn => {
-    btn.onclick = (e) => {
-        const caseDiv = e.target.parentElement;
-        caseDiv.classList.add('opening');
-        setTimeout(() => {
-            alert('Вы получили подарок!'); // Тут можно сделать выпадение с шансами
-            caseDiv.classList.remove('opening');
-        }, 2000);
-    }
+// ======= КЕЙСЫ =======
+document.querySelectorAll('.case').forEach(caseEl => {
+  caseEl.addEventListener('click', () => {
+    const price = Number(caseEl.dataset.price);
+    if(balance < price) return alert('Недостаточно ⭐');
+    updateBalance(-price);
+    caseEl.classList.add('opening');
+    setTimeout(() => {
+      caseEl.classList.remove('opening');
+      const reward = getCaseReward(price);
+      alert(`Вы получили: ${reward} ⭐`);
+      updateBalance(reward);
+    }, 1000);
+  });
 });
+
+function getCaseReward(price) {
+  const rand = Math.random();
+  if(price === 50) {
+    if(rand < 0.7) return 25;
+    if(rand < 0.85) return 50;
+    return 100;
+  }
+  if(price === 100) {
+    if(rand < 0.7) return 50;
+    if(rand < 0.85) return 100;
+    return 200;
+  }
+  if(price === 500) {
+    if(rand < 0.7) return 250;
+    if(rand < 0.85) return 500;
+    return 1000;
+  }
+}
+
+// ======= ПОПОЛНЕНИЕ =======
+const depositBtn = document.getElementById('depositBtn');
+const modal = document.getElementById('depositModal');
+const closeModal = document.querySelector('.close');
+const confirmDeposit = document.getElementById('confirmDeposit');
+
+depositBtn.onclick = () => modal.style.display = 'flex';
+closeModal.onclick = () => modal.style.display = 'none';
+confirmDeposit.onclick = () => {
+  const val = Number(document.getElementById('depositAmount').value);
+  if(val < 10) return alert('Минимум 10 ⭐');
+  updateBalance(val);
+  modal.style.display = 'none';
+};
+
+// ======= САМОЛЕТ =======
+let planeTimer = 10;
+let planeFlying = false;
+let planeValue = 1;
+const planeEl = document.getElementById('plane');
+const planeTimerEl = document.getElementById('planeTimer');
+const cashoutBtn = document.getElementById('cashoutBtn');
+
+function startPlaneGame() {
+  planeTimer = 10;
+  planeValue = 1;
+  planeFlying = false;
+  planeEl.style.transform = 'translateY(0)';
+  const countdown = setInterval(() => {
+    planeTimer--;
+    planeTimerEl.textContent = planeTimer;
+    if(planeTimer <= 0) {
+      clearInterval(countdown);
+      planeFlying = true;
+      flyPlane();
+    }
+  }, 1000);
+}
+
+function flyPlane() {
+  const duration = 20000; // 20 секунд макс
+  const start = Date.now();
+  const multiplier = getPlaneMultiplier();
+  const flight = setInterval(() => {
+    const t = (Date.now() - start)/duration;
+    if(t >= 1 || planeValue >= multiplier) {
+      clearInterval(flight);
+      planeFlying = false;
+      alert(`Самолет упал! Вы заработали: ${Math.floor(planeValue*10)} ⭐`);
+      updateBalance(Math.floor(planeValue*10));
+      return;
+    }
+    planeValue += 0.01;
+    planeEl.style.transform = `translateY(-${planeValue*10}px)`;
+  }, 50);
+}
+
+function getPlaneMultiplier() {
+  const rand = Math.random();
+  if(rand < 0.5) return 1.2 + Math.random()*0.5; // 1.2 - 1.7
+  if(rand < 0.85) return 2 + Math.random()*8; // 2 - 10
+  return 150; // редкий шанс
+}
+
+cashoutBtn.onclick = () => {
+  if(planeFlying) {
+    const earned = Math.floor(planeValue*10);
+    updateBalance(earned);
+    alert(`Вы забрали: ${earned} ⭐`);
+    planeFlying = false;
+    planeEl.style.transform = 'translateY(0)';
+  }
+}
+
+startPlaneGame();
