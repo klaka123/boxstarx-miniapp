@@ -1,40 +1,46 @@
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+// Проверяем, что Web App доступен
+let tg;
+if (window.Telegram && window.Telegram.WebApp) {
+    tg = window.Telegram.WebApp;
+    tg.expand();
+} else {
+    alert("⚠️ Пожалуйста, откройте этот мини‑апп через Telegram на любом устройстве.");
 }
 
-.container {
-  text-align: center;
-  background: rgba(0,0,0,0.5);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+// Функция открытия кейса
+function openCase() {
+    if (!tg) return; // Защита от запуска вне Telegram Web App
+
+    // Генерируем случайный результат (шансы как хотели)
+    const roll = Math.floor(Math.random() * 1000) + 1;
+    let prize = "❌ Ничего";
+
+    if (roll === 1) prize = "1000⭐";       // 0.1%
+    else if (roll <= 10) prize = "500⭐";   // 0.9%
+    else if (roll <= 50) prize = "100⭐";   // 4%
+    else if (roll <= 150) prize = "50⭐";   // 10%
+    else if (roll <= 300) prize = "20⭐";   // 15%
+
+    // Показываем результат на странице
+    const resultEl = document.getElementById("result");
+    if (resultEl) {
+        resultEl.innerText = "Результат: " + prize;
+    }
+
+    // Отправка результата боту через Telegram Web App API
+    try {
+        tg.sendData(prize);
+    } catch (err) {
+        console.error("Ошибка отправки данных боту:", err);
+        alert("Ошибка: данные не отправлены боту.");
+    }
 }
 
-button {
-  padding: 15px 25px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: #ffcc00;
-  color: #000;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #ffd633;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
+// Для адаптивности на iPhone делаем кнопку на весь экран
+window.addEventListener("load", () => {
+    const button = document.querySelector("button");
+    if (button) {
+        button.style.width = "90%";
+        button.style.fontSize = "20px";
+    }
+});
