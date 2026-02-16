@@ -5,11 +5,15 @@ input { width:100%; padding:14px; border-radius:14px; border:none; background: r
 button { width:100%; padding:14px; border-radius:16px; border:none; font-size:16px; font-weight:600; cursor:pointer; background:linear-gradient(135deg,#ffd54f,#ffb300); color:#1a1a1a; margin-bottom:10px; }
 .section { margin:10px 0; color:#cfd8ff; }
 .cases { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.case { height:140px; border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:14px; cursor:pointer; transition: transform .2s; }
-.case span { font-size:34px; margin-bottom:6px; }
+.case { height:140px; border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:14px; cursor:pointer; transition: transform .2s; position:relative; overflow:hidden; }
 .case:hover { transform: translateY(-4px); }
 .gold { background: radial-gradient(circle at top,#ffdf8a,#b8870b); }
 .platinum { background: radial-gradient(circle at top,#b7d7ff,#5a7cff); }
 .obsidian { background: radial-gradient(circle at top,#7c4dff,#1a0033); }
+
+.spinner { display:flex; gap:8px; animation: spin 1.5s linear infinite; font-size:24px; margin-bottom:8px; }
+@keyframes spin { 0%{transform:rotate(0deg);}100%{transform:rotate(360deg);} }
+
 .result { margin-top:24px; text-align:center; font-size:18px; min-height:24px; }
 #multiplier { text-align:center; font-size:20px; font-weight:bold; margin-top:10px; color:#ffd54f; }
+#countdown { text-align:center; font-size:16px; font-weight:500; color:#ff8a65; margin-bottom:5px; }
