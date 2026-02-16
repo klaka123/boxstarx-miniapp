@@ -1,65 +1,35 @@
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boxstarx Mini App</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>🎁 Boxstarx Case</h1>
+  <p>Открой кейс за 100 ⭐. Внутри много крутых подарков!</p>
 
-.container {
-  text-align: center;
-  background: rgba(0,0,0,0.6);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.8);
-  max-width: 400px;
-}
+  <div class="case-preview">
+    <div class="gift">💎</div>
+    <div class="gift">🎮</div>
+    <div class="gift">🎁</div>
+    <div class="gift">🛡️</div>
+    <div class="gift">⚡</div>
+  </div>
 
-button {
-  padding: 15px 25px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: #ffcc00;
-  color: #000;
-  cursor: pointer;
-  margin: 10px;
-  transition: 0.3s;
-}
+  <button id="openBtn">Открыть кейс</button>
 
-button:hover {
-  background: #ffd633;
-}
+  <div id="animation" class="animation"></div>
+  <p id="result">Баланс: 0⭐</p>
 
-#result {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
+  <h3>Пополнить звезды:</h3>
+  <input type="number" id="starsInput" placeholder="Введите количество ⭐">
+  <button id="payBtn">Оплатить</button>
+</div>
 
-.case-preview {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  gap: 10px;
-}
-
-.gift {
-  font-size: 30px;
-  opacity: 0.5;
-  transition: 0.5s;
-}
-
-.gift.active {
-  transform: scale(1.5);
-  opacity: 1;
-}
-
-.animation {
-  margin-top: 20px;
-  height: 50px;
-  font-size: 30px;
-}
+<script src="script.js"></script>
+</body>
+</html>
