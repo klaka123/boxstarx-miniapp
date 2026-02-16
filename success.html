@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оплата успешна</title>
+</head>
+<body>
+<h1>Оплата успешна!</h1>
+<p>Звезды успешно добавлены на ваш баланс 🎉</p>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const stars = parseInt(urlParams.get('stars')) || 0;
+  localStorage.setItem('balance', stars);
+</script>
+</body>
+</html>
