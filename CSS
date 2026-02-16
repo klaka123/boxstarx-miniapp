@@ -1,46 +1,17 @@
-body {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
+.case {
+  width: 200px;
+  height: 200px;
+  transform-origin: bottom center;
+  animation: float 2s infinite alternate;
 }
-
-.buy-card {
-  width: 320px;
-  margin: 100px auto;
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
-  text-align: center;
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-10px) scale(1.05); }
 }
-
-.buy-card h2 {
-  margin-bottom: 15px;
+.open {
+  animation: openCase 1s forwards;
 }
-
-.buy-card input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-.buy-card button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  background: linear-gradient(135deg, #ffb347, #ffcc33);
-  transition: 0.3s;
-}
-
-.buy-card button:hover {
-  transform: scale(1.05);
+@keyframes openCase {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-120deg); }
 }
