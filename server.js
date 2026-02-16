@@ -1,6 +1,15 @@
+const express = require("express");
+const cors = require("cors");
+const Stripe = require("stripe");
+const stripe = Stripe("YOUR_STRIPE_SECRET_KEY"); // вставь свой ключ Stripe
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
 app.post("/create-payment", async (req, res) => {
   const { stars } = req.body;
-  const amount = stars * 1; // 1 ⭐ = 1 цент
+  const amount = stars * 1; // 1 ⭐ = 1 цент (или любая ваша цена)
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -9,7 +18,7 @@ app.post("/create-payment", async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: { name: `${stars}⭐ в Boxstarx` },
-          unit_amount: amount * 100 // в центах
+          unit_amount: amount * 100
         },
         quantity: 1
       }],
@@ -22,3 +31,5 @@ app.post("/create-payment", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+app.listen(3000, () => console.log("Server running on port 3000"));
