@@ -1,0 +1,55 @@
+// Дополнение к коду выше
+let comets = [];
+const COMET_COUNT = 5; // Количество падающих звезд
+
+function initComets() {
+    comets = [];
+    for (let i = 0; i < COMET_COUNT; i++) {
+        comets.push({
+            x: Math.random() * width,
+            y: Math.random() * height * 0.3, // Начинают выше
+            length: Math.random() * 80 + 50, // Длина хвоста
+            speed: Math.random() * 4 + 3, // Скорость
+            angle: Math.random() * 0.2 + 0.4, // Угол падения
+            brightness: 1
+        });
+    }
+}
+
+// В функцию drawStars() добавьте отрисовку комет
+function drawStars() {
+    // ... (код отрисовки обычных звезд) ...
+    
+    // Отрисовка комет
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+    ctx.lineWidth = 2;
+    comets.forEach(comet => {
+        // Обновление позиции
+        comet.x += comet.speed * Math.cos(comet.angle);
+        comet.y += comet.speed * Math.sin(comet.angle);
+        
+        // Сброс, если улетела за экран
+        if (comet.y > height || comet.x > width) {
+            comet.x = Math.random() * width * 0.3;
+            comet.y = Math.random() * height * 0.2;
+        }
+        
+        // Рисуем хвост (линию от текущей позиции назад)
+        ctx.beginPath();
+        ctx.moveTo(comet.x, comet.y);
+        ctx.lineTo(comet.x - comet.length * Math.cos(comet.angle), comet.y - comet.length * Math.sin(comet.angle));
+        ctx.strokeStyle = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.5})`; // Мерцающий хвост
+        ctx.stroke();
+        
+        // Рисуем голову кометы
+        ctx.beginPath();
+        ctx.arc(comet.x, comet.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+    });
+    
+    requestAnimationFrame(drawStars);
+}
+
+// Не забудьте вызвать initComets() в resizeCanvas()
