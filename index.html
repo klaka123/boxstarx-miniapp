@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boxstarx</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boxstarx</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
 <div class="app">
-  <div class="header">
-    ⭐ Баланс: <span id="balance">0</span>
+
+  <div class="top">
+    ⭐ <span id="balance">0</span>
   </div>
 
+  <!-- ПОКУПКА -->
+  <div class="buy">
+    <input id="buyAmount" type="number" min="10" placeholder="Мин. 10 ⭐">
+    <button onclick="buyStars()">Купить ⭐</button>
+  </div>
+
+  <!-- КЕЙСЫ -->
   <div class="cases">
-    <div class="case" onclick="openCase(50)">🎁 Case 50⭐</div>
-    <div class="case" onclick="openCase(100)">💎 Case 100⭐</div>
-    <div class="case" onclick="openCase(500)">🏆 Case 500⭐</div>
+    <div class="case case50" onclick="openCase(50)">
+      🎁<br><span>50 ⭐</span>
+    </div>
+    <div class="case case100" onclick="openCase(100)">
+      💎<br><span>100 ⭐</span>
+    </div>
+    <div class="case case500" onclick="openCase(500)">
+      🏆<br><span>500 ⭐</span>
+    </div>
   </div>
 
+  <!-- АНИМАЦИЯ КЕЙСА -->
+  <div id="caseAnim" class="case-anim hidden">🎁</div>
+
+  <!-- САМОЛЁТ -->
   <div class="crash">
     <h3>✈️ Самолёт</h3>
-    <button onclick="playCrash()">Запустить</button>
-    <div id="crashResult"></div>
-  </div>
-
-  <div class="pay">
-    <button onclick="buyStars(100)">➕ Купить 100⭐</button>
-    <button onclick="buyStars(500)">➕ Купить 500⭐</button>
+    <input id="crashBet" type="number" min="10" placeholder="Ставка ⭐">
+    <button onclick="startCrash()">Запуск</button>
+    <div id="crashAnim"></div>
   </div>
 
   <div id="result"></div>
+
 </div>
 
 <script src="script.js"></script>
