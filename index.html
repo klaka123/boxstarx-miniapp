@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BoxStarX 3D 🚀 Telegram Подарки</title>
+    <title>BoxStarX 3D 🚀 ХАРДКОР</title>
     <style>
         /* ========== ГЛОБАЛЬНЫЕ СТИЛИ ========== */
         * {
@@ -77,7 +77,7 @@
             min-height: 100vh;
             padding: 20px 20px 40px;
             backdrop-filter: blur(2px);
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -243,7 +243,7 @@
             font-size: 2rem;
         }
 
-        /* ========== СЕКЦИИ ========== */
+        /* ========== КЕЙСЫ ========== */
         .section-title {
             font-size: 2.2rem;
             font-weight: 800;
@@ -258,7 +258,6 @@
             text-shadow: 0 0 30px rgba(255,215,0,0.3);
         }
 
-        /* ========== КЕЙСЫ (9 ШТУК) ========== */
         .cases-battle {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -278,11 +277,10 @@
             border-image-slice: 1;
             box-shadow: 0 30px 40px -20px black, 0 0 0 2px rgba(255,215,0,0.3) inset;
             position: relative;
-            transform-style: preserve-3d;
         }
 
         .battle-case:hover {
-            transform: translateY(-15px) rotateX(3deg);
+            transform: translateY(-10px);
             box-shadow: 0 40px 60px -10px black, 0 0 50px gold;
         }
 
@@ -298,7 +296,6 @@
             font-weight: bold;
             font-size: 0.8rem;
             text-transform: uppercase;
-            white-space: nowrap;
         }
 
         .case-icon {
@@ -323,12 +320,13 @@
         }
 
         .case-chance {
-            color: #aaa;
+            color: #ff6b6b;
             font-size: 0.8rem;
             margin-top: 10px;
+            font-weight: bold;
         }
 
-        /* ========== TELEGRAM ПОДАРКИ (РЕАЛЬНЫЕ) ========== */
+        /* ========== TELEGRAM ПОДАРКИ ========== */
         .gifts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -370,22 +368,6 @@
             padding: 5px;
             border-radius: 20px;
             font-size: 0.9rem;
-        }
-
-        .gift-level {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
-            color: white;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border: 2px solid gold;
         }
 
         /* ========== СИСТЕМА АПГРЕЙДА ========== */
@@ -488,7 +470,7 @@
             cursor: not-allowed;
         }
 
-        /* ========== ИНВЕНТАРЬ ========== */
+        /* ========== УВЕЛИЧЕННЫЙ ИНВЕНТАРЬ ========== */
         .inventory-section {
             background: rgba(10, 15, 30, 0.7);
             backdrop-filter: blur(10px);
@@ -496,6 +478,8 @@
             padding: 30px;
             margin: 40px 0;
             border: 1px solid gold;
+            width: 100%;
+            overflow-x: auto;
         }
 
         .inventory-header {
@@ -503,20 +487,23 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .inventory-stats {
             background: rgba(0,0,0,0.3);
-            padding: 8px 16px;
+            padding: 8px 20px;
             border-radius: 30px;
             color: gold;
+            font-size: 1.1rem;
         }
 
         .inventory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: repeat(8, 1fr);
             gap: 15px;
-            min-height: 120px;
+            min-width: min(100%, 1200px);
         }
 
         .inventory-slot {
@@ -531,12 +518,15 @@
             transition: all 0.2s;
             cursor: pointer;
             position: relative;
+            aspect-ratio: 1 / 1;
+            min-width: 90px;
         }
 
         .inventory-slot:hover {
             transform: scale(1.05);
             border-color: white;
             box-shadow: 0 0 20px gold;
+            z-index: 10;
         }
 
         .slot-emoji {
@@ -546,6 +536,7 @@
         .slot-name {
             font-size: 0.7rem;
             text-align: center;
+            word-break: break-word;
         }
 
         .slot-level {
@@ -569,11 +560,12 @@
             background: rgba(255, 255, 255, 0.05);
             border: 2px dashed #555;
             border-radius: 20px;
-            height: 100px;
+            aspect-ratio: 1 / 1;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #555;
+            min-width: 90px;
         }
 
         /* Уведомления */
@@ -595,6 +587,24 @@
             from { top: 50px; opacity: 0; }
             to { top: 100px; opacity: 1; }
         }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .inventory-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .inventory-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .hud {
+                flex-direction: column;
+                border-radius: 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -605,7 +615,7 @@
     <canvas id="starCanvas"></canvas>
 
     <!-- Приветственная надпись -->
-    <div class="splash-title">BOXSTARX 3D 🚀</div>
+    <div class="splash-title">BOXSTARX HARDCORE 🚀</div>
 
     <!-- Основной контент -->
     <div class="content">
@@ -615,7 +625,7 @@
                 <div class="balance">
                     <span id="balance">5000</span>
                 </div>
-                <button class="add-balance" id="addBalance">➕ +1000</button>
+                <button class="add-balance" id="addBalance">➕ +100</button>
             </div>
 
             <div class="bet-panel">
@@ -635,25 +645,25 @@
             <span class="multiplier" id="flightStatus">ОЖИДАНИЕ</span>
         </div>
 
-        <!-- 9 КЕЙСОВ С РАЗНЫМИ ШАНСАМИ -->
-        <h2 class="section-title">⚡ КОСМИЧЕСКИЕ КЕЙСЫ ⚡</h2>
+        <!-- Кейсы с низкими шансами -->
+        <h2 class="section-title">⚡ ХАРДКОР КЕЙСЫ ⚡</h2>
         <div class="cases-battle" id="casesContainer"></div>
 
-        <!-- TELEGRAM ПОДАРКИ (РЕАЛЬНЫЕ) -->
+        <!-- Telegram подарки -->
         <h2 class="section-title">🎁 TELEGRAM ПОДАРКИ</h2>
         <div class="gifts-grid" id="giftsContainer"></div>
 
-        <!-- СИСТЕМА АПГРЕЙДА -->
+        <!-- Система апгрейда -->
         <div class="upgrade-section">
-            <h2 class="section-title">⚡ СИСТЕМА АПГРЕЙДА</h2>
+            <h2 class="section-title">⚡ ПРОКАЧКА</h2>
             <div class="upgrade-grid" id="upgradesContainer"></div>
         </div>
 
-        <!-- ИНВЕНТАРЬ -->
+        <!-- Увеличенный инвентарь (20 слотов) -->
         <div class="inventory-section">
             <div class="inventory-header">
-                <h2 class="section-title" style="margin:0;">📦 ИНВЕНТАРЬ</h2>
-                <div class="inventory-stats" id="inventoryStats">Всего: 0</div>
+                <h2 class="section-title" style="margin:0;">📦 ИНВЕНТАРЬ (20 слотов)</h2>
+                <div class="inventory-stats" id="inventoryStats">Предметов: 0/20</div>
             </div>
             <div class="inventory-grid" id="inventoryGrid"></div>
         </div>
@@ -693,7 +703,7 @@
         dirLight.castShadow = true;
         scene.add(dirLight);
 
-        // Создание самолета (упрощенная версия для производительности)
+        // Создание самолета
         const planeGroup = new THREE.Group();
 
         // Корпус
@@ -734,7 +744,6 @@
         const ctx = starCanvas.getContext('2d');
         let width, height;
         let stars2D = [];
-        let comets = [];
         const STAR_COUNT = 400;
 
         function initStars2D() {
@@ -791,8 +800,9 @@
         let currentMultiplier = 1;
         let planeInterval = null;
         
-        // Инвентарь
+        // Инвентарь (20 слотов)
         let inventory = [];
+        const MAX_INVENTORY = 20;
         
         // Уровни апгрейда
         let upgrades = {
@@ -802,7 +812,7 @@
             giftChance: { level: 1, value: 1, price: 1000 }
         };
 
-        // Telegram подарки (реальные)
+        // Telegram подарки
         const TELEGRAM_GIFTS = [
             { id: 'star', emoji: '⭐', name: 'Звезда', basePrice: 50 },
             { id: 'heart', emoji: '❤️', name: 'Сердце', basePrice: 75 },
@@ -814,50 +824,100 @@
             { id: 'alien', emoji: '👾', name: 'Инопланетянин', basePrice: 1500 }
         ];
 
-        // Кейсы (9 штук с разными шансами)
+        // Кейсы с очень низкими шансами на выигрыш (90% проигрыш)
         const CASES = [
-            { id: 'common1', name: 'Обычный', icon: '📦', price: 100, rarity: 'common', 
-              items: [
-                { emoji: '⭐', name: 'Звезда', minLevel: 1, maxLevel: 2, chance: 45 },
-                { emoji: '❤️', name: 'Сердце', minLevel: 1, maxLevel: 2, chance: 30 },
-                { emoji: '🔥', name: 'Огонь', minLevel: 1, maxLevel: 2, chance: 20 },
-                { emoji: '💎', name: 'Алмаз', minLevel: 1, maxLevel: 2, chance: 4.5 },
-                { emoji: '👑', name: 'Корона', minLevel: 1, maxLevel: 2, chance: 0.5 }
-              ] },
-            { id: 'common2', name: 'Базовый', icon: '🎁', price: 200, rarity: 'common',
-              items: [
-                { emoji: '⭐', name: 'Звезда', minLevel: 1, maxLevel: 3, chance: 40 },
-                { emoji: '❤️', name: 'Сердце', minLevel: 1, maxLevel: 3, chance: 30 },
-                { emoji: '🔥', name: 'Огонь', minLevel: 1, maxLevel: 3, chance: 20 },
-                { emoji: '💎', name: 'Алмаз', minLevel: 1, maxLevel: 2, chance: 8 },
-                { emoji: '👑', name: 'Корона', minLevel: 1, maxLevel: 2, chance: 2 }
-              ] },
-            { id: 'rare1', name: 'Редкий', icon: '✨', price: 500, rarity: 'rare',
-              items: [
-                { emoji: '🔥', name: 'Огонь', minLevel: 1, maxLevel: 4, chance: 35 },
-                { emoji: '💎', name: 'Алмаз', minLevel: 1, maxLevel: 3, chance: 30 },
-                { emoji: '👑', name: 'Корона', minLevel: 1, maxLevel: 3, chance: 20 },
-                { emoji: '🚀', name: 'Ракета', minLevel: 1, maxLevel: 2, chance: 10 },
-                { emoji: '🏆', name: 'Трофей', minLevel: 1, maxLevel: 2, chance: 4 },
-                { emoji: '👾', name: 'Инопланетянин', minLevel: 1, maxLevel: 1, chance: 1 }
-              ] },
-            { id: 'rare2', name: 'Премиум', icon: '💫', price: 800, rarity: 'rare',
-              items: [
-                { emoji: '💎', name: 'Алмаз', minLevel: 1, maxLevel: 4, chance: 35 },
-                { emoji: '👑', name: 'Корона', minLevel: 1, maxLevel: 4, chance: 25 },
-                { emoji: '🚀', name: 'Ракета', minLevel: 1, maxLevel: 3, chance: 20 },
-                { emoji: '🏆', name: 'Трофей', minLevel: 1, maxLevel: 3, chance: 12 },
-                { emoji: '👾', name: 'Инопланетянин', minLevel: 1, maxLevel: 2, chance: 8 }
-              ] },
-            { id: 'epic1', name: 'Эпический', icon: '🌟', price: 1200, rarity: 'epic',
-              items: [
-                { emoji: '👑', name: 'Корона', minLevel: 2, maxLevel: 5, chance: 35 },
-                { emoji: '🚀', name: 'Ракета', minLevel: 2, maxLevel: 4, chance: 30 },
-                { emoji: '🏆', name: 'Трофей', minLevel: 2, maxLevel: 4, chance: 20 },
-                { emoji: '👾', name: 'Инопланетянин', minLevel: 1, maxLevel: 3, chance: 15 }
-              ] },
-            { id: 'epic2', name: 'Мифический', icon: '⚡', price: 2000, rarity: 'epic',
-              items: [
-                { emoji: '🚀', name: 'Ракета', minLevel: 2, maxLevel: 5, chance: 40 },
-                { emoji: '🏆', name: 'Трофей', minLevel: 2, maxLevel: 5, chance: 30 },
-                { emoji: '👾', name: 'Инопланетянин', minLevel: 2,
+            { 
+                id: 'common', name: 'Обычный', icon: '📦', price: 100,
+                items: [
+                    { emoji: '⭐', name: 'Звезда', chance: 6, level: 1 },
+                    { emoji: '❤️', name: 'Сердце', chance: 3, level: 1 },
+                    { emoji: '🔥', name: 'Огонь', chance: 1, level: 1 }
+                ],
+                loseChance: 90 // 90% проигрыш
+            },
+            { 
+                id: 'rare', name: 'Редкий', icon: '✨', price: 300,
+                items: [
+                    { emoji: '🔥', name: 'Огонь', chance: 4, level: 1 },
+                    { emoji: '💎', name: 'Алмаз', chance: 3, level: 1 },
+                    { emoji: '👑', name: 'Корона', chance: 2, level: 1 },
+                    { emoji: '🚀', name: 'Ракета', chance: 1, level: 1 }
+                ],
+                loseChance: 90
+            },
+            { 
+                id: 'epic', name: 'Эпический', icon: '🌟', price: 600,
+                items: [
+                    { emoji: '💎', name: 'Алмаз', chance: 4, level: 1 },
+                    { emoji: '👑', name: 'Корона', chance: 3, level: 1 },
+                    { emoji: '🚀', name: 'Ракета', chance: 2, level: 1 },
+                    { emoji: '🏆', name: 'Трофей', chance: 1, level: 1 }
+                ],
+                loseChance: 90
+            },
+            { 
+                id: 'legendary', name: 'Легендарный', icon: '👑', price: 1000,
+                items: [
+                    { emoji: '🚀', name: 'Ракета', chance: 4, level: 1 },
+                    { emoji: '🏆', name: 'Трофей', chance: 3, level: 1 },
+                    { emoji: '👾', name: 'Инопланетянин', chance: 2, level: 1 },
+                    { emoji: '💫', name: 'Комета', chance: 1, level: 2 }
+                ],
+                loseChance: 90
+            },
+            { 
+                id: 'mythic', name: 'Мифический', icon: '⚡', price: 2000,
+                items: [
+                    { emoji: '🏆', name: 'Трофей', chance: 4, level: 2 },
+                    { emoji: '👾', name: 'Инопланетянин', chance: 3, level: 2 },
+                    { emoji: '💫', name: 'Комета', chance: 2, level: 2 },
+                    { emoji: '🌠', name: 'Метеор', chance: 1, level: 3 }
+                ],
+                loseChance: 90
+            }
+        ];
+
+        // Элементы DOM
+        const balanceEl = document.getElementById('balance');
+        const betInput = document.getElementById('betAmount');
+        const startBtn = document.getElementById('startFlight');
+        const stopBtn = document.getElementById('stopFlight');
+        const addBalanceBtn = document.getElementById('addBalance');
+        const flightStatus = document.getElementById('flightStatus');
+        const inventoryGrid = document.getElementById('inventoryGrid');
+        const inventoryStats = document.getElementById('inventoryStats');
+
+        // Обновление баланса
+        function updateBalanceUI() {
+            balanceEl.textContent = balance;
+        }
+
+        // Показать уведомление
+        function showNotification(message, type = 'info') {
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.style.background = type === 'success' ? 'linear-gradient(135deg, #2e7d32, #1b5e20)' : 
+                                   type === 'error' ? 'linear-gradient(135deg, #b71c1c, #8b0000)' : 
+                                   'linear-gradient(135deg, #1976d2, #0d47a1)';
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            
+            setTimeout(() => notif.remove(), 2000);
+        }
+
+        // Добавление предмета в инвентарь
+        function addToInventory(item) {
+            if (inventory.length >= MAX_INVENTORY) {
+                showNotification('❌ Инвентарь полон! Продайте что-нибудь', 'error');
+                return false;
+            }
+            inventory.push(item);
+            updateInventoryUI();
+            showNotification(`🎁 Получен: ${item.name}`, 'success');
+            return true;
+        }
+
+        // Обновление инвентаря
+        function updateInventoryUI() {
+            inventoryGrid.innerHTML = '';
+            inventoryStats.textContent = `Предметов: ${inventory.length}/${MAX_INVENT
