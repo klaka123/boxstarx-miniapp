@@ -1,71 +1,48 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoxStarX 🚀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="background"></div>
 
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('static/img/bg_stars.png') repeat;
-    background-size: cover;
-    animation: starMove 30s linear infinite;
-    z-index: -1;
-}
+<!-- HUD -->
+<div class="hud">
+    <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
+</div>
 
-@keyframes starMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 10000px 5000px; }
-}
+<!-- Кейсы -->
+<div class="cases-container">
+    <div class="case" data-price="50">
+        <img src="data:image/png;base64,..." alt="Кейс 50⭐">
+        <div class="case-label">50 ⭐</div>
+    </div>
+    <div class="case" data-price="100">
+        <img src="data:image/png;base64,..." alt="Кейс 100⭐">
+        <div class="case-label">100 ⭐</div>
+    </div>
+    <div class="case" data-price="500">
+        <img src="data:image/png;base64,..." alt="Кейс 500⭐">
+        <div class="case-label">500 ⭐</div>
+    </div>
+</div>
 
-.rocket {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    animation: rocketFade 3s ease forwards;
-}
+<!-- Самолет игра -->
+<div class="plane-game">
+    <div class="plane-info">
+        <span>Ставка: </span><input type="number" id="bet" min="10" value="10"> ⭐
+        <button id="start-plane">Запустить самолет</button>
+    </div>
+    <div class="plane-timer">До взлета: <span id="countdown">10</span>s</div>
+    <div class="plane-track">
+        <div class="plane"></div>
+    </div>
+    <button id="cashout">Забрать</button>
+</div>
 
-@keyframes rocketFade {
-    0% { opacity: 1; bottom: 50px; }
-    100% { opacity: 0; bottom: 200px; }
-}
-
-.cases-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 50px;
-}
-
-.case {
-    width: 120px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.case:hover {
-    transform: scale(1.1);
-}
-
-.case-img {
-    width: 100%;
-    display: block;
-}
-
-.plane-timer {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    color: white;
-    background: rgba(0,0,0,0.5);
-    padding: 10px 20px;
-    border-radius: 12px;
-}
+<script src="script.js"></script>
+</body>
+</html>
