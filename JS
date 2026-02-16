@@ -1,2 +1,6 @@
-// В bot.js или Python-боте
-bot.sendInvoice(chatId, "Подарок звезд", "Пополнение звезд в игре", payload, providerToken, "RUB", prices, options)
+// JS для открытия кейса
+const caseEl = document.querySelector('.case');
+caseEl.addEventListener('click', () => {
+  caseEl.classList.add('open');
+  // Запуск частиц
+});
