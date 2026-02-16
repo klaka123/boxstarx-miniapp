@@ -1,54 +1,28 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boxstarx</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <title>Telegram Gifts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
-<div class="app">
-
-  <div class="top">
-    ⭐ <span id="balance">0</span>
+<div class="tg-card">
+  <div class="tg-header">
+    <img src="https://telegram.org/img/t_logo.png" class="tg-logo">
+    <h1>Подарок звёздами</h1>
+    <p>Поддержи бота официальным подарком ⭐</p>
   </div>
 
-  <!-- ПОКУПКА -->
-  <div class="buy">
-    <input id="buyAmount" type="number" min="10" placeholder="Мин. 10 ⭐">
-    <button onclick="buyStars()">Купить ⭐</button>
+  <div class="tg-input">
+    <input id="amount" type="number" min="10" placeholder="Сколько звёзд подарить? (мин. 10)">
   </div>
 
-  <!-- КЕЙСЫ -->
-  <div class="cases">
-    <div class="case case50" onclick="openCase(50)">
-      🎁<br><span>50 ⭐</span>
-    </div>
-    <div class="case case100" onclick="openCase(100)">
-      💎<br><span>100 ⭐</span>
-    </div>
-    <div class="case case500" onclick="openCase(500)">
-      🏆<br><span>500 ⭐</span>
-    </div>
-  </div>
-
-  <!-- АНИМАЦИЯ КЕЙСА -->
-  <div id="caseAnim" class="case-anim hidden">🎁</div>
-
-  <!-- САМОЛЁТ -->
-  <div class="crash">
-    <h3>✈️ Самолёт</h3>
-    <input id="crashBet" type="number" min="10" placeholder="Ставка ⭐">
-    <button onclick="startCrash()">Запуск</button>
-    <div id="crashAnim"></div>
-  </div>
-
-  <div id="result"></div>
-
+  <button class="tg-btn" onclick="giftStars()">🎁 Подарить звёзды</button>
 </div>
 
-<script src="script.js"></script>
 </body>
+<script src="script.js"></script>
 </html>
