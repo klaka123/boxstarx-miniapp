@@ -2,27 +2,48 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Telegram Gifts</title>
+  <title>Boxstarx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="tg-card">
-  <div class="tg-header">
-    <img src="https://telegram.org/img/t_logo.png" class="tg-logo">
-    <h1>Подарок звёздами</h1>
-    <p>Поддержи бота официальным подарком ⭐</p>
+<div class="app">
+
+  <!-- Пополнение -->
+  <div class="card glass">
+    <h2>Пополнение ⭐</h2>
+    <p class="sub">Пополнение баланса в бота @BoxstarxBot</p>
+
+    <input id="amount" type="number" min="10" placeholder="Минимум 10 ⭐">
+    <button onclick="topUp()">Пополнить</button>
   </div>
 
-  <div class="tg-input">
-    <input id="amount" type="number" min="10" placeholder="Сколько звёзд подарить? (мин. 10)">
+  <!-- Кейсы -->
+  <h3 class="section">Кейсы</h3>
+
+  <div class="cases">
+    <div class="case gold" onclick="openCase(50)">
+      <span>🎁</span>
+      <b>Кейс 50 ⭐</b>
+    </div>
+
+    <div class="case platinum" onclick="openCase(100)">
+      <span>💎</span>
+      <b>Кейс 100 ⭐</b>
+    </div>
+
+    <div class="case obsidian" onclick="openCase(500)">
+      <span>👑</span>
+      <b>Кейс 500 ⭐</b>
+    </div>
   </div>
 
-  <button class="tg-btn" onclick="giftStars()">🎁 Подарить звёзды</button>
+  <div id="result" class="result"></div>
+
 </div>
 
-</body>
 <script src="script.js"></script>
+</body>
 </html>
