@@ -1,37 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoxStarX 🚀</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoxStarX 🚀</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Фон -->
-    <div class="background"></div>
+<div class="background"></div>
 
-    <!-- Ракета -->
-    <img src="static/img/rocket.png" class="rocket" id="rocket">
+<!-- HUD -->
+<div class="hud">
+    <div class="balance">Баланс: <span id="balance">1000</span> ⭐</div>
+</div>
 
-    <!-- Кейсы -->
-    <div class="cases-container">
-        <div class="case" data-case="50">
-            <img src="static/img/case1.png" class="case-img">
-        </div>
-        <div class="case" data-case="100">
-            <img src="static/img/case2.png" class="case-img">
-        </div>
-        <div class="case" data-case="500">
-            <img src="static/img/case3.png" class="case-img">
-        </div>
+<!-- Кейсы -->
+<div class="cases-container">
+    <div class="case" data-price="50">
+        <img src="data:image/png;base64,..." alt="Кейс 50⭐">
+        <div class="case-label">50 ⭐</div>
     </div>
-
-    <!-- Таймер самолета -->
-    <div class="plane-timer">
-        <span id="timer">10</span>s до взлета!
+    <div class="case" data-price="100">
+        <img src="data:image/png;base64,..." alt="Кейс 100⭐">
+        <div class="case-label">100 ⭐</div>
     </div>
+    <div class="case" data-price="500">
+        <img src="data:image/png;base64,..." alt="Кейс 500⭐">
+        <div class="case-label">500 ⭐</div>
+    </div>
+</div>
 
-    <!-- Скрипт -->
-    <script src="script.js"></script>
+<!-- Самолет игра -->
+<div class="plane-game">
+    <div class="plane-info">
+        <span>Ставка: </span><input type="number" id="bet" min="10" value="10"> ⭐
+        <button id="start-plane">Запустить самолет</button>
+    </div>
+    <div class="plane-timer">До взлета: <span id="countdown">10</span>s</div>
+    <div class="plane-track">
+        <div class="plane"></div>
+    </div>
+    <button id="cashout">Забрать</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
