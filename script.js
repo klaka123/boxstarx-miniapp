@@ -51,7 +51,7 @@ payBtn.addEventListener("click", async () => {
   if (!amount || amount <= 0) return alert("Введите корректное количество ⭐");
 
   try {
-    const res = await ffetch("https://abcd1234.ngrok.io/create-payment"), {
+    const res = await fetch("https://abcd1234.ngrok.io/create-payment"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ stars: amount })
