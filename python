@@ -1,0 +1,46 @@
+from aiogram import Bot, Dispatcher, executor, types
+import json
+
+TOKEN = "BOT_TOKEN"
+bot = Bot(TOKEN)
+dp = Dispatcher(bot)
+
+def load():
+    try: return json.load(open("db.json"))
+    except: return {}
+
+def save(d): json.dump(d, open("db.json","w"))
+
+@dp.message_handler(content_types=types.ContentType.WEB_APP_DATA)
+async def webapp(message: types.Message):
+    data = message.web_app_data.data
+    db = load()
+    uid = str(message.from_user.id)
+
+    if data.startswith("buy_"):
+        stars = int(data.split("_")[1])
+        await bot.send_invoice(
+            chat_id=message.chat.id,
+            title=f"{stars} ⭐",
+            description="Пополнение баланса",
+            payload=f"stars_{stars}",
+            provider_token="",
+            currency="XTR",
+            prices=[types.LabeledPrice("Stars", stars)]
+        )
+
+    if data.startswith("case_win_"):
+        win = int(data.split("_")[2])
+        db[uid] = db.get(uid,0) + win
+        save(db)
+
+@dp.message_handler(content_types=types.ContentType.SUCCESSFUL_PAYMENT)
+async def success(message: types.Message):
+    stars = message.successful_payment.total_amount
+    db = load()
+    uid = str(message.from_user.id)
+    db[uid] = db.get(uid,0) + stars
+    save(db)
+    await message.answer(f"✅ Начислено {stars} ⭐")
+
+executor.start_polling(dp)
