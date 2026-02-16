@@ -21,14 +21,30 @@
     <input id="bet" type="number" min="10" placeholder="Ставка (мин. 10 ⭐)">
     <button onclick="startPlane()">Начать полёт</button>
     <button onclick="cashOut()">Забрать до падения</button>
+    <p id="countdown">Взлёт через: 10с</p>
     <p id="multiplier">Множитель: 1×</p>
   </div>
 
   <h3 class="section">Кейсы</h3>
   <div class="cases">
-    <div class="case gold" onclick="openCase(50)"><span>🎁</span><b>Кейс 50 ⭐</b></div>
-    <div class="case platinum" onclick="openCase(100)"><span>💎</span><b>Кейс 100 ⭐</b></div>
-    <div class="case obsidian" onclick="openCase(500)"><span>👑</span><b>Кейс 500 ⭐</b></div>
+    <div class="case gold" onclick="openCase(50)">
+      <div class="spinner">
+        <span>🎁</span><span>⭐</span><span>💎</span>
+      </div>
+      <b>Кейс 50 ⭐</b>
+    </div>
+    <div class="case platinum" onclick="openCase(100)">
+      <div class="spinner">
+        <span>🎁</span><span>⭐</span><span>💎</span>
+      </div>
+      <b>Кейс 100 ⭐</b>
+    </div>
+    <div class="case obsidian" onclick="openCase(500)">
+      <div class="spinner">
+        <span>🎁</span><span>⭐</span><span>💎</span>
+      </div>
+      <b>Кейс 500 ⭐</b>
+    </div>
   </div>
 
   <div id="result" class="result"></div>
