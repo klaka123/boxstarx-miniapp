@@ -2,28 +2,29 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BoxStarX 🚀</title>
 <style>
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   overflow: hidden;
-  background: radial-gradient(ellipse at bottom, #0b0b0f 0%, #1a0a2e 100%);
+  background: #0a0a12;
   color: #fff;
 }
 
-/* Фон со звездами */
+/* Анимированный фон со звездами и иконками Telegram */
 .stars {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url('https://i.imgur.com/Z9j7t7R.png') repeat;
+  background: url('https://i.imgur.com/TG1D0YU.png') repeat;
   z-index: 0;
   animation: starMove 60s linear infinite;
 }
 @keyframes starMove {
   0% {background-position: 0 0;}
-  100% {background-position: 10000px 10000px;}
+  100% {background-position: 5000px 5000px;}
 }
 
 /* Частицы кейса */
@@ -39,42 +40,45 @@ body {
 .case-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 60px;
+  gap: 15vw;
+  margin-top: 10vh;
   z-index: 1;
   position: relative;
 }
 .case {
-  width: 160px;
-  height: 160px;
-  perspective: 1000px;
+  width: 25vw;
+  max-width: 150px;
+  height: 25vw;
+  max-height: 150px;
+  perspective: 800px;
   cursor: pointer;
   position: relative;
 }
 .case img {
   width: 100%;
   height: 100%;
-  border-radius: 15px;
-  transition: transform 1s ease;
+  border-radius: 12px;
+  transition: transform 0.8s ease;
 }
 .case.open img {
-  transform: rotateY(180deg) scale(1.2);
+  transform: rotateY(180deg) scale(1.15);
 }
 
 /* Самолет */
 .airplane-container {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 35vh;
   overflow: hidden;
-  margin-top: 50px;
+  margin-top: 5vh;
   z-index: 1;
 }
 .airplane {
   position: absolute;
-  bottom: 20px;
+  bottom: 5%;
   left: 50%;
-  width: 60px;
+  width: 12vw;
+  max-width: 80px;
   transform: translateX(-50%);
   transition: bottom 0.1s linear;
 }
@@ -82,35 +86,37 @@ body {
 /* Таймер */
 .timer {
   text-align: center;
-  font-size: 28px;
-  margin-top: 20px;
+  font-size: 5vw;
+  max-font-size: 28px;
+  margin-top: 2vh;
   z-index: 1;
   position: relative;
-  text-shadow: 0 0 10px #9f5eff, 0 0 20px #3300ff;
+  text-shadow: 0 0 6px #9f5eff, 0 0 14px #3300ff;
 }
 
 /* Кнопки */
 button {
-  margin: 20px;
-  padding: 15px 35px;
+  margin: 2vh;
+  padding: 2vh 5vw;
   border: none;
   border-radius: 12px;
   background: linear-gradient(90deg, #9f5eff, #3300ff);
   color: #fff;
-  font-size: 18px;
+  font-size: 4vw;
+  max-font-size: 18px;
   cursor: pointer;
   transition: transform 0.2s;
   box-shadow: 0 0 15px rgba(159,95,255,0.5);
 }
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Частицы */
 .particle {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #fff;
   pointer-events: none;
@@ -156,7 +162,7 @@ button:hover {
 </div>
 
 <script>
-// Функция создания частиц
+// Частицы
 function createParticles(x, y, count = 20) {
   const container = document.querySelector('.particles');
   for (let i = 0; i < count; i++) {
@@ -200,16 +206,14 @@ function startFlight() {
   multiplier = 1;
   let flightInterval = setInterval(() => {
     multiplier += Math.random() * 0.1;
-    airplane.style.bottom = `${20 + multiplier*15}px`;
-    // Редко высокий множитель
-    if (Math.random() < 0.005) multiplier += 10; 
+    airplane.style.bottom = `${5 + multiplier*7}vh`;
+    if (Math.random() < 0.005) multiplier += 10;
     if (Math.random() < 0.0005) multiplier += 100;
 
-    // Падение самолета
     if (Math.random() < 0.15) {
       clearInterval(flightInterval);
       alert(`Самолет упал! Множитель: ${multiplier.toFixed(2)}x`);
-      airplane.style.bottom = '20px';
+      airplane.style.bottom = '5%';
       countdown = 10;
       flying = false;
       updateTimer();
