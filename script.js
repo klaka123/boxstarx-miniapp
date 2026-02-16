@@ -1,50 +1,82 @@
-let balance = 1000;
-document.getElementById('balance').innerText = balance;
-
-const plane = document.querySelector('.plane');
-const countdownEl = document.getElementById('countdown');
-let countdown = 10;
-let interval, planeInterval;
+// Таймер самолета
+let timerValue = 10;
+let timerInterval;
+let flightInterval;
 let multiplier = 1;
+let flying = false;
 
-document.getElementById('start-plane').addEventListener('click', () => {
-    let bet = parseInt(document.getElementById('bet').value);
-    if(bet > balance || bet < 10) return alert('Неверная ставка');
-    balance -= bet;
-    document.getElementById('balance').innerText = balance;
+const plane = document.getElementById('plane');
+const timerEl = document.getElementById('timer');
+const multiplierEl = document.getElementById('multiplier');
+const startBtn = document.getElementById('start-flight');
+const cashoutBtn = document.getElementById('cashout');
 
-    countdown = 10;
-    countdownEl.innerText = countdown;
+startBtn.onclick = () => {
+    const bet = parseInt(document.getElementById('bet').value);
+    if (bet < 10) { alert('Минимальная ставка 10 ⭐'); return; }
+
+    timerValue = 10;
     multiplier = 1;
-    plane.style.left = '0px';
-
-    interval = setInterval(() => {
-        countdown--;
-        countdownEl.innerText = countdown;
-        if(countdown <= 0){
-            clearInterval(interval);
+    flying = false;
+    plane.style.bottom = '0px';
+    multiplierEl.textContent = 'x1';
+    
+    timerEl.textContent = `До взлета: ${timerValue}`;
+    
+    timerInterval = setInterval(() => {
+        timerValue--;
+        timerEl.textContent = `До взлета: ${timerValue}`;
+        if (timerValue <= 0) {
+            clearInterval(timerInterval);
             startFlight(bet);
         }
-    },1000);
-});
+    }, 1000);
+};
 
-function startFlight(bet){
-    planeInterval = setInterval(()=>{
-        multiplier += Math.random()*0.3; // рост
-        plane.style.transform = `translateX(${multiplier*30}px) translateY(${-multiplier*2}px)`;
-        // падение
-        if(Math.random() < 0.05 && multiplier>1){
-            alert(`Самолет упал! Вы проиграли ${bet} ⭐`);
-            clearInterval(planeInterval);
+cashoutBtn.onclick = () => {
+    if (flying) {
+        alert(`Вы забрали ${multiplier.toFixed(2)}x от вашей ставки!`);
+        flying = false;
+        clearInterval(flightInterval);
+        plane.style.bottom = '0px';
+        multiplierEl.textContent = 'x1';
+    }
+};
+
+function startFlight(bet) {
+    flying = true;
+    let height = 0;
+    flightInterval = setInterval(() => {
+        if (!flying) { clearInterval(flightInterval); return; }
+
+        let chance = Math.random();
+        if (chance < 0.02) multiplier = 150; // очень редко
+        else if (chance < 0.1) multiplier = 10;
+        else multiplier += 0.05 + Math.random()*0.1;
+
+        // Часто падает на маленьких множителях
+        if (Math.random() < 0.05 && multiplier < 2) {
+            alert(`Самолет упал на x${multiplier.toFixed(2)}! Вы проиграли!`);
+            flying = false;
+            clearInterval(flightInterval);
+            plane.style.bottom = '0px';
+            multiplierEl.textContent = 'x1';
         }
-    },200);
+
+        multiplierEl.textContent = `x${multiplier.toFixed(2)}`;
+        height = Math.min(multiplier*20, 300);
+        plane.style.bottom = `${height}px`;
+    }, 100);
 }
 
-document.getElementById('cashout').addEventListener('click', () => {
-    let bet = parseInt(document.getElementById('bet').value);
-    let won = Math.floor(bet*multiplier);
-    balance += won;
-    document.getElementById('balance').innerText = balance;
-    alert(`Вы забрали ${won} ⭐`);
-    clearInterval(planeInterval);
+// Открытие кейса (анимация)
+document.querySelectorAll('.open-case').forEach(btn => {
+    btn.onclick = (e) => {
+        const caseDiv = e.target.parentElement;
+        caseDiv.classList.add('opening');
+        setTimeout(() => {
+            alert('Вы получили подарок!'); // Тут можно сделать выпадение с шансами
+            caseDiv.classList.remove('opening');
+        }, 2000);
+    }
 });
