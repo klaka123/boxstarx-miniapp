@@ -1,25 +1,35 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Case App</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boxstarx Mini App</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="app-container">
-        <h1>🎁 Открывай кейсы за ⭐</h1>
+<div class="container">
+  <h1>🎁 Boxstarx Case</h1>
+  <p>Открой кейс за 100 ⭐. Внутри много крутых подарков!</p>
 
-        <div class="balance">
-            Баланс: <span id="balance">100</span> ⭐
-        </div>
+  <div class="case-preview">
+    <div class="gift">💎</div>
+    <div class="gift">🎮</div>
+    <div class="gift">🎁</div>
+    <div class="gift">🛡️</div>
+    <div class="gift">⚡</div>
+  </div>
 
-        <button id="openCaseBtn">Открыть кейс (20⭐)</button>
-        <button id="addStarsBtn">Пополнить баланс +50⭐</button>
+  <button id="openBtn">Открыть кейс</button>
 
-        <div id="result" class="result"></div>
-    </div>
+  <div id="animation" class="animation"></div>
+  <p id="result">Баланс: 0⭐</p>
 
-    <script src="script.js"></script>
+  <h3>Пополнить звезды:</h3>
+  <input type="number" id="starsInput" placeholder="Введите количество ⭐">
+  <button id="payBtn">Оплатить</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
