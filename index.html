@@ -3,194 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoxStarX 🚀 Самолёт и Кейсы</title>
+    <title>BoxStarX 🚀 Космические Кейсы</title>
     <style>
+        /* ========== СБРОС И ОСНОВНЫЕ СТИЛИ ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             color: #fff;
-            height: 100%;
+            min-height: 100vh;
+            background: #0a0c0f;
         }
 
-        /* Canvas для звезд (ВАШ КРАСИВЫЙ ФОН) */
+        /* ========== КОСМИЧЕСКИЙ ФОН (CANVAS) ========== */
         #starCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            z-index: 0;
+            background: radial-gradient(ellipse at 30% 40%, #1b2b4a 0%, #0a0c1a 70%, #030408 100%);
             display: block;
-            pointer-events: none; /* Важно: клики проходят сквозь canvas */
+            pointer-events: none;
         }
 
-        /* HUD - панель сверху */
+        /* ========== ПРИВЕТСТВЕННАЯ НАДПИСЬ С АНИМАЦИЕЙ ========== */
+        .splash-title {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2.5rem, 15vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            z-index: 1000;
+            color: transparent;
+            background: linear-gradient(135deg, #fff8e0, #ffd966, #f9cb3b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 100, 0, 0.3);
+            letter-spacing: 8px;
+            animation: fadeZoomOut 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        @keyframes fadeZoomOut {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); filter: blur(0); }
+            40% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+            80% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); filter: blur(4px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); filter: blur(10px); visibility: hidden; }
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .content {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding-bottom: 30px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ========== HUD - ПАНЕЛЬ УПРАВЛЕНИЯ ========== */
         .hud {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            position: fixed;
-            width: 100%;
+            padding: 16px 20px;
+            background: rgba(10, 15, 25, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
             top: 0;
             z-index: 100;
-            box-sizing: border-box;
-            border-bottom: 1px solid rgba(255,215,0,0.3);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .balance { 
-            font-size: 1.2rem; 
-            text-shadow: 0 0 10px gold;
+        .balance {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #1e2533, #131824);
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
-        .bet-menu input { 
-            width: 60px; 
-            padding: 5px; 
-            margin-right: 5px; 
-            background: rgba(0,0,0,0.7);
-            border: 1px solid gold;
-            color: white;
-            border-radius: 5px;
+
+        .balance span {
+            color: #ffd966;
+            text-shadow: 0 0 15px gold;
+            margin-left: 5px;
         }
-        
-        .bet-menu button { 
-            padding: 5px 15px; 
-            cursor: pointer; 
-            background: gold;
-            border: none;
-            border-radius: 5px;
+
+        .balance::before {
+            content: "⭐";
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 8px gold);
+        }
+
+        .bet-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            background: rgba(20, 25, 38, 0.6);
+            padding: 8px 16px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .bet-menu label {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .bet-menu input {
+            width: 90px;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #ffd966;
+            color: #ffd966;
+            border-radius: 40px;
             font-weight: bold;
-            transition: transform 0.2s;
-        }
-        .bet-menu button:hover {
-            transform: scale(1.05);
-            background: #ffd700;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.2s;
         }
 
-        /* Поле для самолета */
+        .bet-menu input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 20px gold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f0b429, #f5d742);
+            color: #1a1e2b;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            box-shadow: 0 15px 25px rgba(240, 180, 40, 0.4);
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #a13d3d, #7a2e2e);
+            color: white;
+            border-color: #ff8a8a;
+        }
+
+        .btn-stop:hover:not(:disabled) {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+            box-shadow: 0 15px 25px rgba(190, 60, 60, 0.5);
+        }
+
+        .btn-stop:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, #2e5f3e, #3f8855);
+            color: white;
+            padding: 12px 20px;
+            border-color: #8bc34a;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 20px rgba(60, 150, 80, 0.4);
+        }
+
+        /* ========== САМОЛЕТ И ТАЙМЕР ========== */
         .airfield {
             position: relative;
             width: 100%;
-            height: 200px;
-            margin-top: 100px;
+            height: 240px;
+            margin-top: 30px;
             overflow: hidden;
             border-bottom: 2px solid rgba(255,215,0,0.3);
+            border-top: 2px solid rgba(255,215,0,0.2);
+            background: radial-gradient(circle at 50% 30%, #1e2a3a, #0b0f17);
+            box-shadow: inset 0 -30px 30px -10px rgba(0,0,0,0.8);
         }
 
         .plane {
             position: absolute;
-            left: -50px;
+            left: -80px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 3rem;
-            transition: left 0.1s linear;
-            filter: drop-shadow(0 0 10px gold);
-            z-index: 10;
+            font-size: 4.5rem;
+            transition: left 0.05s linear;
+            filter: drop-shadow(0 0 20px gold) drop-shadow(0 0 40px #ffaa33);
+            z-index: 20;
+            text-shadow: 2px 2px 0 #000;
         }
 
         .timer {
             text-align: center;
-            margin-top: 10px;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px cyan;
-            background: rgba(0,0,0,0.3);
-            padding: 5px;
-            border-radius: 20px;
-            width: 200px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 20px auto 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(145deg, #1a1f2e, #0f1320);
+            padding: 12px 25px;
+            border-radius: 60px;
+            width: fit-content;
+            border: 1px solid #ffd966;
+            box-shadow: 0 0 30px rgba(255,215,0,0.3);
+            letter-spacing: 2px;
         }
 
-        /* Кейсы */
+        /* ========== КЕЙСЫ В СТИЛЕ ROCKET CASE ========== */
+        .cases-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 4px;
+        }
+
         .cases {
             display: flex;
-            justify-content: space-around;
-            margin-top: 50px;
-            padding: 0 20px;
-            gap: 20px;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 30px;
+            margin: 30px 20px;
             flex-wrap: wrap;
+            perspective: 1000px;
         }
 
         .case {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, #4b0082, #8a2be2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid gold;
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            width: 180px;
+            background: linear-gradient(145deg, #20273a, #0f1524);
+            border-radius: 30px 30px 20px 20px;
+            padding: 25px 15px 20px;
             text-align: center;
-            padding: 10px;
-            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 30px -10px black, inset 0 -2px 10px rgba(255,215,0,0.1);
+            position: relative;
             backdrop-filter: blur(5px);
+            transform-style: preserve-3d;
         }
 
         .case:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px gold;
+            transform: translateY(-15px) rotateX(5deg);
+            border-color: gold;
+            box-shadow: 0 35px 40px -10px black, 0 0 40px gold;
+        }
+
+        /* Уникальные размеры кейсов */
+        .case[data-case="50"] { height: 200px; }
+        .case[data-case="100"] { height: 230px; width: 200px; }
+        .case[data-case="500"] { height: 260px; width: 220px; background: linear-gradient(145deg, #2a3150, #151d38); }
+
+        .case-icon {
+            font-size: 4.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px gold);
+            transition: transform 0.3s;
+        }
+
+        .case:hover .case-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .case-price {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, gold, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0 5px;
+            text-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+
+        .case-name {
+            color: #ccc;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.4);
+            padding: 5px 10px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .case-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.2), transparent 70%);
+            border-radius: inherit;
+            pointer-events: none;
         }
 
         .case.opening {
-            animation: rotateCase 1s ease forwards;
+            animation: caseOpen 1.2s ease forwards;
         }
 
-        @keyframes rotateCase {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); box-shadow: 0 0 50px white; }
-            100% { transform: rotateY(360deg); }
+        @keyframes caseOpen {
+            0% { transform: rotateY(0deg) scale(1); }
+            25% { transform: rotateY(15deg) scale(1.05); box-shadow: 0 0 50px gold; }
+            50% { transform: rotateY(-15deg) scale(1.1); box-shadow: 0 0 80px white; }
+            75% { transform: rotateY(10deg) scale(1.05); }
+            100% { transform: rotateY(360deg) scale(1); border-color: #fff; }
         }
 
-        /* Для красоты - небольшой отступ снизу */
-        body {
-            padding-bottom: 30px;
+        /* Анимация мультиплеера (x2, x5) */
+        .multiplier-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: linear-gradient(135deg, #f0f, #a0f);
+            padding: 10px 15px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 30px #f0f;
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 50px #f0f; }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .hud {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .bet-menu {
+                justify-content: center;
+            }
+            .case {
+                width: 150px;
+            }
+            .case[data-case="100"] { width: 170px; }
+            .case[data-case="500"] { width: 190px; }
         }
     </style>
 </head>
 <body>
-    <!-- Канвас для звезд (ВАШ КОД) -->
+    <!-- Канвас для звезд (анимированный фон) -->
     <canvas id="starCanvas"></canvas>
 
-    <!-- Интерфейс (ВАШ КОД) -->
-    <div class="hud">
-        <div class="balance">Баланс: <span id="balance">1000</span>⭐</div>
-        <div class="bet-menu">
-            Ставка: <input type="number" id="betAmount" min="10" value="10" step="10">⭐
-            <button id="startFlight">Старт!</button>
+    <!-- Красивая приветственная надпись (исчезает) -->
+    <div class="splash-title">BOXSTARX 🚀</div>
+
+    <!-- Основной контент -->
+    <div class="content">
+        <!-- HUD панель -->
+        <div class="hud">
+            <div class="balance">
+                <span id="balance">1000</span>
+            </div>
+            
+            <div class="bet-menu">
+                <label>💰 Ставка:</label>
+                <input type="number" id="betAmount" min="10" value="10" step="10">
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="startFlight">🚀 СТАРТ</button>
+                <button class="btn btn-stop" id="stopFlight" disabled>⏹️ СТОП</button>
+                <button class="btn btn-add" id="addBalance">➕ +100</button>
+            </div>
+        </div>
+
+        <!-- Аэропорт (самолет) -->
+        <div class="airfield">
+            <div id="plane" class="plane">✈️</div>
+        </div>
+
+        <!-- Таймер обратного отсчета -->
+        <div class="timer" id="takeoffTimer">🚀 Взлёт через: 10</div>
+
+        <!-- Кейсы в стиле Rocket Case -->
+        <h2 class="cases-title">⚡ КОСМИЧЕСКИЕ КЕЙСЫ ⚡</h2>
+        <div class="cases">
+            <div class="case" data-case="50">
+                <div class="case-icon">📦</div>
+                <div class="case-price">50⭐</div>
+                <div class="case-name">СТАРТОВЫЙ</div>
+                <div class="case-shine"></div>
+                <div class="multiplier-badge" style="display: none;">x2</div>
+            </div>
+            <div class="case" data-case="100">
+                <div class="case-icon">🎁</div>
+                <div class="case-price">100⭐</div>
+                <div class="case-name">ПРОДВИНУТЫЙ</div>
+                <div class="case-shine"></div>
+                <div class="multiplier-badge" style="display: none;">x3</div>
+            </div>
+            <div class="case" data-case="500">
+                <div class="case-icon">💎</div>
+                <div class="case-price">500⭐</div>
+                <div class="case-name">ЛЕГЕНДАРНЫЙ</div>
+                <div class="case-shine"></div>
+                <div class="multiplier-badge" style="display: none;">x5</div>
+            </div>
         </div>
     </div>
 
-    <div class="airfield">
-        <div id="plane" class="plane">✈️</div>
-    </div>
-
-    <div class="timer" id="takeoffTimer">Взлёт через: 10</div>
-
-    <div class="cases">
-        <div class="case" data-case="50">🎁 Кейс 50⭐</div>
-        <div class="case" data-case="100">🎁 Кейс 100⭐</div>
-        <div class="case" data-case="500">🎁 Кейс 500⭐</div>
-    </div>
-
     <script>
-        // ==================== 1. КОД ЗВЕЗДНОГО НЕБА (ВАШ КРАСИВЫЙ ФОН) ====================
-        document.addEventListener('DOMContentLoaded', function() {
+        // ==================== 1. ЗВЕЗДНЫЙ ФОН (CANVAS) ====================
+        (function initStarCanvas() {
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let stars = [];
             let comets = [];
-            const STAR_COUNT = 300;
-            const COMET_COUNT = 3;
+            const STAR_COUNT = 350;
+            const COMET_COUNT = 4;
 
             function initStars() {
                 stars = [];
@@ -198,10 +474,10 @@
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        radius: Math.random() * 1.5 + 0.5,
-                        speed: Math.random() * 0.5 + 0.2,
-                        brightness: Math.random() * 0.5 + 0.5,
-                        flickerSpeed: Math.random() * 0.02 + 0.005
+                        radius: Math.random() * 2.2 + 0.5,
+                        speed: Math.random() * 0.6 + 0.15,
+                        brightness: Math.random() * 0.5 + 0.3,
+                        flickerSpeed: Math.random() * 0.03 + 0.005
                     });
                 }
             }
@@ -210,12 +486,12 @@
                 comets = [];
                 for (let i = 0; i < COMET_COUNT; i++) {
                     comets.push({
-                        x: Math.random() * width * 0.3,
+                        x: Math.random() * width * 0.2,
                         y: Math.random() * height * 0.2,
-                        length: Math.random() * 80 + 50,
-                        speed: Math.random() * 4 + 3,
-                        angle: Math.random() * 0.2 + 0.4,
-                        brightness: 1
+                        length: Math.random() * 120 + 70,
+                        speed: Math.random() * 5 + 4,
+                        angle: Math.random() * 0.3 + 0.3,
+                        tail: []
                     });
                 }
             }
@@ -232,29 +508,27 @@
             function drawStars() {
                 ctx.clearRect(0, 0, width, height);
                 
-                // Рисуем обычные звезды
+                // Обычные звезды
                 stars.forEach(star => {
-                    star.y += star.speed;
+                    star.y += star.speed * 0.2;
                     if (star.y > height) {
                         star.y = 0;
                         star.x = Math.random() * width;
                     }
                     
                     star.brightness += star.flickerSpeed;
-                    if (star.brightness > 1 || star.brightness < 0.3) {
-                        star.flickerSpeed *= -1;
-                    }
+                    if (star.brightness > 1 || star.brightness < 0.3) star.flickerSpeed *= -1;
                     
                     ctx.globalAlpha = star.brightness;
-                    ctx.fillStyle = 'white';
+                    ctx.fillStyle = `hsl(${Math.random() * 60 + 30}, 80%, 80%)`;
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                     ctx.fill();
                 });
                 
-                // Рисуем кометы (падающие звезды)
+                // Падающие звезды (кометы)
                 ctx.globalAlpha = 1;
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 2.5;
                 comets.forEach(comet => {
                     comet.x += comet.speed * Math.cos(comet.angle);
                     comet.y += comet.speed * Math.sin(comet.angle);
@@ -269,14 +543,21 @@
                     ctx.moveTo(comet.x, comet.y);
                     ctx.lineTo(comet.x - comet.length * Math.cos(comet.angle), 
                                comet.y - comet.length * Math.sin(comet.angle));
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.5})`;
+                    const gradient = ctx.createLinearGradient(comet.x, comet.y, comet.x - comet.length, comet.y - comet.length);
+                    gradient.addColorStop(0, 'rgba(255, 255, 200, 1)');
+                    gradient.addColorStop(0.5, 'rgba(255, 200, 100, 0.5)');
+                    gradient.addColorStop(1, 'rgba(255, 100, 50, 0)');
+                    ctx.strokeStyle = gradient;
                     ctx.stroke();
                     
                     // Голова кометы
                     ctx.beginPath();
-                    ctx.arc(comet.x, comet.y, 3, 0, Math.PI * 2);
-                    ctx.fillStyle = 'white';
+                    ctx.arc(comet.x, comet.y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = '#fffbe3';
+                    ctx.shadowColor = 'gold';
+                    ctx.shadowBlur = 20;
                     ctx.fill();
+                    ctx.shadowBlur = 0;
                 });
                 
                 requestAnimationFrame(drawStars);
@@ -285,103 +566,245 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             drawStars();
-        });
+        })();
 
-        // ==================== 2. КОД ИГРЫ (САМОЛЕТ И КЕЙСЫ) ====================
-        // (Это ваш код, немного адаптированный)
+        // ==================== 2. ИГРОВАЯ ЛОГИКА ====================
         let balance = 1000;
         let plane = document.getElementById("plane");
         let betInput = document.getElementById("betAmount");
         let balanceDisplay = document.getElementById("balance");
         let startBtn = document.getElementById("startFlight");
+        let stopBtn = document.getElementById("stopFlight");
+        let addBalanceBtn = document.getElementById("addBalance");
         let timerDisplay = document.getElementById("takeoffTimer");
-        let planeInterval;
+        let planeInterval = null;
+        let countdownInterval = null;
         let countdown = 10;
+        let isFlying = false;
+        let currentMultiplier = 1;
 
+        // Функция обновления баланса
         function updateBalance() {
             balanceDisplay.innerText = balance;
         }
 
+        // Функция добавления баланса
+        function addBalance() {
+            balance += 100;
+            updateBalance();
+            showNotification('+100 ⭐ получено!', 'success');
+        }
+
+        // Функция показа уведомлений
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? 'linear-gradient(135deg, #2e7d32, #1b5e20)' : 'linear-gradient(135deg, #b71c1c, #8b0000)'};
+                color: white;
+                padding: 15px 30px;
+                border-radius: 50px;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 10px 30px black;
+                border: 1px solid gold;
+                animation: slideDown 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // Остановка игры (кнопка СТОП)
+        function stopFlight() {
+            if (!isFlying) return;
+            
+            // Останавливаем интервалы
+            if (planeInterval) {
+                clearInterval(planeInterval);
+                planeInterval = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            
+            // Рассчитываем выигрыш (текущий множитель)
+            let bet = parseInt(betInput.value);
+            let win = Math.floor(bet * currentMultiplier);
+            balance += win;
+            
+            showNotification(`✨ СТОП! Выигрыш: ${win}⭐ (x${currentMultiplier.toFixed(2)})`, 'success');
+            
+            // Сбрасываем самолет
+            plane.style.left = "-80px";
+            isFlying = false;
+            stopBtn.disabled = true;
+            startBtn.disabled = false;
+            countdown = 10;
+            timerDisplay.innerText = `🚀 Взлёт через: ${countdown}`;
+            updateBalance();
+        }
+
         // Таймер до взлёта
         function startCountdown() {
+            if (isFlying) return;
+            
             countdown = 10;
-            timerDisplay.innerText = `Взлёт через: ${countdown}`;
-            let cdInterval = setInterval(() => {
+            timerDisplay.innerText = `🚀 Взлёт через: ${countdown}`;
+            startBtn.disabled = true;
+            
+            countdownInterval = setInterval(() => {
                 countdown--;
-                timerDisplay.innerText = `Взлёт через: ${countdown}`;
-                if(countdown <= 0) {
-                    clearInterval(cdInterval);
+                timerDisplay.innerText = `🚀 Взлёт через: ${countdown}`;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
                     startFlight();
                 }
             }, 1000);
         }
 
-        // Логика самолета
+        // Старт полета
         function startFlight() {
             let bet = parseInt(betInput.value);
-            if(bet > balance) { alert("Недостаточно звезд!"); return; }
-            if(bet < 10) { alert("Минимальная ставка 10 звезд!"); return; }
+            
+            if (bet > balance) { 
+                showNotification("❌ Недостаточно звезд!", 'error');
+                startBtn.disabled = false;
+                return; 
+            }
+            if (bet < 10) { 
+                showNotification("❌ Минимальная ставка 10⭐", 'error');
+                startBtn.disabled = false;
+                return; 
+            }
 
+            // Списываем ставку
             balance -= bet;
             updateBalance();
 
-            let planeLeft = -50;
-            let speed = 2;
-            let multiplier = 1;
-            let maxMultiplier = 20;
-            let crashed = false;
+            // Параметры полета
+            let planeLeft = -80;
+            const speed = 2.5;
+            currentMultiplier = 1.0;
+            const maxMultiplier = 20;
+            
+            isFlying = true;
+            stopBtn.disabled = false;
+            timerDisplay.innerText = `✈️ ПОЛЕТ... x${currentMultiplier.toFixed(2)}`;
 
+            // Анимация полета
             planeInterval = setInterval(() => {
                 planeLeft += speed;
                 plane.style.left = planeLeft + "px";
-                multiplier += 0.01 + Math.random() * 0.02;
+                currentMultiplier += 0.02 + Math.random() * 0.03;
+                timerDisplay.innerText = `✈️ Множитель: x${currentMultiplier.toFixed(2)}`;
 
-                if(Math.random() < 0.01 || multiplier >= maxMultiplier) {
-                    crashed = true;
+                // Случайное падение или выход за экран
+                if (planeLeft > window.innerWidth + 100 || Math.random() < 0.005 || currentMultiplier >= maxMultiplier) {
                     clearInterval(planeInterval);
-                    if(multiplier < 1.1) {
-                        alert(`💥 Самолет упал! Вы проиграли ⭐${bet}`);
+                    planeInterval = null;
+                    
+                    if (currentMultiplier < 1.1) {
+                        showNotification(`💥 Самолет упал! Проигрыш: ${bet}⭐`, 'error');
                     } else {
-                        let win = Math.floor(bet * multiplier);
+                        // Если не нажали стоп - автоматический выигрыш при уходе за экран
+                        let win = Math.floor(bet * currentMultiplier);
                         balance += win;
-                        alert(`✨ Самолет упал на ${multiplier.toFixed(2)}x! Вы выиграли ⭐${win}`);
+                        showNotification(`✨ Самолет улетел! +${win}⭐ (x${currentMultiplier.toFixed(2)})`, 'success');
                     }
+                    
+                    // Сброс
+                    plane.style.left = "-80px";
+                    isFlying = false;
+                    stopBtn.disabled = true;
+                    startBtn.disabled = false;
+                    countdown = 10;
+                    timerDisplay.innerText = `🚀 Взлёт через: ${countdown}`;
                     updateBalance();
                 }
             }, 30);
         }
 
-        // Кейсы
-        document.querySelectorAll(".case").forEach(c => {
-            c.addEventListener("click", () => {
-                let value = parseInt(c.dataset.case);
-                c.classList.add("opening");
-                setTimeout(() => {
-                    let rand = Math.random() * 100;
-                    let reward = 0;
-                    if(value === 50) {
-                        if(rand <= 70) reward = 25;
-                        else if(rand <= 85) reward = 50;
-                        else reward = 100;
-                    } else if(value === 100) {
-                        if(rand <= 70) reward = 50;
-                        else if(rand <= 85) reward = 100;
-                        else reward = 200;
-                    } else if(value === 500) {
-                        if(rand <= 70) reward = 200;
-                        else if(rand <= 85) reward = 300;
-                        else reward = 500;
-                    }
-                    alert(`🎁 Вы получили ⭐${reward}`);
-                    balance += reward;
-                    updateBalance();
-                    c.classList.remove("opening");
-                }, 1000);
-            });
-        });
+        // ========== КЕЙСЫ (В СТИЛЕ ROCKET CASE) ==========
+        function openCase(caseElement) {
+            let caseValue = parseInt(caseElement.dataset.case);
+            
+            if (balance < caseValue) {
+                showNotification(`❌ Нужно ${caseValue}⭐`, 'error');
+                return;
+            }
 
-        startBtn.addEventListener("click", startCountdown);
-        updateBalance();
+            // Списываем стоимость кейса
+            balance -= caseValue;
+            updateBalance();
+
+            // Анимация открытия
+            caseElement.classList.add("opening");
+            
+            // Показываем множитель (для красоты)
+            let badge = caseElement.querySelector('.multiplier-badge');
+            badge.style.display = 'block';
+            setTimeout(() => { badge.style.display = 'none'; }, 1200);
+
+            // Расчет выигрыша
+            setTimeout(() => {
+                let rand = Math.random() * 100;
+                let reward = 0;
+                let multiplier = 1;
+
+                if (caseValue === 50) {
+                    if (rand <= 60) { reward = 30; multiplier = 1; }
+                    else if (rand <= 85) { reward = 60; multiplier = 1.5; }
+                    else if (rand <= 95) { reward = 100; multiplier = 2; }
+                    else { reward = 200; multiplier = 4; }
+                } 
+                else if (caseValue === 100) {
+                    if (rand <= 50) { reward = 70; multiplier = 1; }
+                    else if (rand <= 80) { reward = 120; multiplier = 1.5; }
+                    else if (rand <= 95) { reward = 200; multiplier = 2.5; }
+                    else { reward = 400; multiplier = 5; }
+                } 
+                else if (caseValue === 500) {
+                    if (rand <= 40) { reward = 300; multiplier = 1; }
+                    else if (rand <= 70) { reward = 600; multiplier = 1.5; }
+                    else if (rand <= 90) { reward = 1000; multiplier = 2.5; }
+                    else { reward = 2500; multiplier = 6; }
+                }
+
+                balance += reward;
+                updateBalance();
+                
+                showNotification(`🎁 ВЫИГРЫШ: ${reward}⭐ (x${multiplier})`, 'success');
+                
+                caseElement.classList.remove("opening");
+            }, 1000);
+        }
+
+        // ========== ИНИЦИАЛИЗАЦИЯ И ОБРАБОТЧИКИ ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Кнопки
+            startBtn.addEventListener("click", startCountdown);
+            stopBtn.addEventListener("click", stopFlight);
+            addBalanceBtn.addEventListener("click", addBalance);
+            
+            // Кейсы
+            document.querySelectorAll(".case").forEach(c => {
+                c.addEventListener("click", () => openCase(c));
+            });
+
+            // Обновить баланс при старте
+            updateBalance();
+            stopBtn.disabled = true;
+        });
     </script>
 </body>
 </html>
