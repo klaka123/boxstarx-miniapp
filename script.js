@@ -1,82 +1,111 @@
-/* Пополнение */
-function topUp() {
-  const amount = Number(document.getElementById("amount").value);
-  if(amount<10){ Telegram.WebApp.showAlert("Минимум 10 ⭐"); return; }
-  Telegram.WebApp.sendData(JSON.stringify({action:"topup",amount:amount}));
-}
+let balance = 0;
 
-/* Кейсы */
-const cases = {
-  50:[{prize:25,chance:70},{prize:50,chance:15},{prize:100,chance:5},{prize:200,chance:0.8},{prize:500,chance:0.2}],
-  100:[{prize:50,chance:65},{prize:100,chance:18},{prize:200,chance:7},{prize:500,chance:0.9},{prize:1000,chance:0.1}],
-  500:[{prize:200,chance:55},{prize:500,chance:15},{prize:1000,chance:5},{prize:5000,chance:0.5},{prize:10000,chance:0.05}]
+// Пополнение
+document.getElementById('topupBtn').onclick = () => {
+  let amount = parseInt(document.getElementById('amount').value);
+  if (amount >= 10) {
+    alert(`Вы пополнили ${amount} ⭐ через @BoxstarxBot`);
+    balance += amount;
+    document.getElementById('balance').innerText = balance;
+  } else {
+    alert('Минимум 10⭐');
+  }
 };
 
-function openCase(price){
-  const pool=cases[price];
-  let roll=Math.random()*100;
-  let sum=0;
-  for(let item of pool){ sum+=item.chance; if(roll<=sum){ document.getElementById("result").innerText=`🎉 Выпало: ${item.prize} ⭐`; return; } }
-  document.getElementById("result").innerText="😶 Ничего… попробуй ещё";
+// Кейсы
+document.querySelectorAll('.case').forEach(c => {
+  c.onclick = () => {
+    let caseValue = parseInt(c.dataset.case);
+    if (balance >= caseValue) {
+      balance -= caseValue;
+      document.getElementById('balance').innerText = balance;
+      openCase(caseValue);
+    } else {
+      alert('Недостаточно звезд');
+    }
+  };
+});
+
+function openCase(caseValue) {
+  // Анимация открытия кейса
+  alert(`Открыт кейс за ${caseValue}⭐`);
+  // Дроп логика
+  let rand = Math.random() * 100;
+  let prize = 0;
+  if (caseValue === 50) {
+    if (rand <= 70) prize = 25;
+    else if (rand <= 85) prize = 50;
+    else prize = 100;
+  } else if (caseValue === 100) {
+    if (rand <= 50) prize = 50;
+    else if (rand <= 80) prize = 100;
+    else prize = 200;
+  } else if (caseValue === 500) {
+    if (rand <= 50) prize = 100;
+    else if (rand <= 85) prize = 250;
+    else prize = 500;
+  }
+  balance += prize;
+  alert(`Вы выиграли ${prize}⭐!`);
+  document.getElementById('balance').innerText = balance;
 }
 
-/* Самолет */
-let planeInterval=null;
-let countdownInterval=null;
-let currentMultiplier=1;
-let crashed=false;
-let betAmount=0;
-let countdown=10;
+// Самолет
+let planeInterval, planeMultiplier = 1, flying = false;
+let planeTimerEl = document.getElementById('planeTimer');
+let planeEl = document.getElementById('plane');
 
-function startPlane(){
-  if(planeInterval) return;
-  betAmount=Number(document.getElementById("bet").value);
-  if(betAmount<10){ Telegram.WebApp.showAlert("Минимум 10 ⭐"); return; }
+document.getElementById('startPlane').onclick = () => {
+  let bet = parseInt(document.getElementById('planeBet').value);
+  if (bet >= 10 && bet <= balance) {
+    balance -= bet;
+    document.getElementById('balance').innerText = balance;
+    startPlaneGame(bet);
+  } else alert('Ставка минимальна 10⭐ и не больше баланса');
+};
 
-  currentMultiplier=1;
-  crashed=false;
-  countdown=10;
-  document.getElementById("multiplier").innerText="Множитель: 1×";
-  document.getElementById("countdown").innerText=`Взлёт через: ${countdown}s`;
-
-  countdownInterval=setInterval(()=>{
+function startPlaneGame(bet) {
+  let countdown = 10;
+  planeTimerEl.innerText = `До взлета: ${countdown}`;
+  let timer = setInterval(() => {
     countdown--;
-    document.getElementById("countdown").innerText=`Взлёт через: ${countdown}s`;
-    if(countdown<=0){ clearInterval(countdownInterval); launchPlane(); }
-  },1000);
+    planeTimerEl.innerText = `До взлета: ${countdown}`;
+    if (countdown <= 0) {
+      clearInterval(timer);
+      takeOff(bet);
+    }
+  }, 1000);
 }
 
-function launchPlane(){
-  planeInterval=setInterval(()=>{
-    if(crashed) return;
-    let chance=Math.random();
-    if(chance<0.6) currentMultiplier+=0.05;
-    else if(chance<0.95) currentMultiplier+=0.2;
-    else currentMultiplier+=1;
-    if(chance>0.998) currentMultiplier=Math.min(currentMultiplier,150);
-    if(currentMultiplier>=150) crashed=true;
-    if(Math.random()<getCrashChance(currentMultiplier)) crashed=true;
-    document.getElementById("multiplier").innerText=`Множитель: ${currentMultiplier.toFixed(2)}×`;
-    if(crashed){ endPlane(false); }
-  },100);
+function takeOff(bet) {
+  flying = true;
+  document.getElementById('cashout').disabled = false;
+  planeMultiplier = 1;
+  planeInterval = setInterval(() => {
+    // Рост мультипликатора
+    planeMultiplier += Math.random() * 0.1;
+    // Случайное падение
+    let fallChance = Math.random() * 100;
+    if (fallChance < 5) planeMultiplier = 0;
+    planeEl.style.bottom = `${planeMultiplier * 10}px`;
+    if (planeMultiplier === 0) {
+      clearInterval(planeInterval);
+      flying = false;
+      alert('Самолет упал! Ставка проиграна.');
+    }
+  }, 200);
 }
 
-function getCrashChance(mult){
-  if(mult<1.2) return 0;
-  if(mult<2) return 0.01;
-  if(mult<5) return 0.03;
-  if(mult<10) return 0.07;
-  return 0.15;
-}
-
-function cashOut(){
-  if(!planeInterval || crashed) return;
-  clearInterval(planeInterval); planeInterval=null;
-  document.getElementById("multiplier").innerText=`Вы забрали: ${(betAmount*currentMultiplier).toFixed(0)} ⭐`;
-}
-
-function endPlane(win){
-  clearInterval(planeInterval); planeInterval=null;
-  document.getElementById("countdown").innerText="";
-  if(!win) document.getElementById("multiplier").innerText=`💥 Самолет упал! Вы потеряли ставку`;
-}
+// Забрать ставку
+document.getElementById('cashout').onclick = () => {
+  if (flying) {
+    clearInterval(planeInterval);
+    flying = false;
+    let bet = parseInt(document.getElementById('planeBet').value);
+    let won = Math.floor(bet * planeMultiplier);
+    balance += won;
+    document.getElementById('balance').innerText = balance;
+    alert(`Вы забрали ${won}⭐!`);
+    document.getElementById('cashout').disabled = true;
+  }
+};
