@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boxstarx Mini App</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boxstarx</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-<div class="container">
-  <h1>🎁 Boxstarx Case</h1>
-  <p>Открой кейс за 100 ⭐. Внутри много крутых подарков!</p>
 
-  <div class="case-preview">
-    <div class="gift">💎</div>
-    <div class="gift">🎮</div>
-    <div class="gift">🎁</div>
-    <div class="gift">🛡️</div>
-    <div class="gift">⚡</div>
+<div class="app">
+  <div class="header">
+    ⭐ Баланс: <span id="balance">0</span>
   </div>
 
-  <button id="openBtn">Открыть кейс</button>
+  <div class="cases">
+    <div class="case" onclick="openCase(50)">🎁 Case 50⭐</div>
+    <div class="case" onclick="openCase(100)">💎 Case 100⭐</div>
+    <div class="case" onclick="openCase(500)">🏆 Case 500⭐</div>
+  </div>
 
-  <div id="animation" class="animation"></div>
-  <p id="result">Баланс: 0⭐</p>
+  <div class="crash">
+    <h3>✈️ Самолёт</h3>
+    <button onclick="playCrash()">Запустить</button>
+    <div id="crashResult"></div>
+  </div>
 
-  <h3>Пополнить звезды:</h3>
-  <input type="number" id="starsInput" placeholder="Введите количество ⭐">
-  <button id="payBtn">Оплатить</button>
+  <div class="pay">
+    <button onclick="buyStars(100)">➕ Купить 100⭐</button>
+    <button onclick="buyStars(500)">➕ Купить 500⭐</button>
+  </div>
+
+  <div id="result"></div>
 </div>
 
 <script src="script.js"></script>
