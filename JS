@@ -1,6 +1,6 @@
-// JS для открытия кейса
-const caseEl = document.querySelector('.case');
-caseEl.addEventListener('click', () => {
-  caseEl.classList.add('open');
-  // Запуск частиц
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.body.classList.add('loaded');
+    document.getElementById('rocketLauncher').remove();
+  }, 3000); // совпадает с анимацией ракеты
 });
