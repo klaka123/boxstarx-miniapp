@@ -1,57 +1,55 @@
-function buy() {
+function topUp() {
   const amount = Number(document.getElementById("amount").value);
   if (amount < 10) {
-    alert("Минимум 10 ⭐");
+    Telegram.WebApp.showAlert("Минимум 10 ⭐");
     return;
   }
 
   Telegram.WebApp.sendData(JSON.stringify({
-    action: "gift",
+    action: "topup",
     amount: amount
   }));
 }
 
-// 🎁 Кейс
-function openCase() {
-  const rewards = [
-    {v:1, c:50},
-    {v:2, c:30},
-    {v:5, c:15},
-    {v:10, c:5}
-  ];
-  let r = Math.random()*100, s=0;
-  for (let i of rewards) {
-    s+=i.c;
-    if (r<=s) {
-      document.getElementById("caseResult").innerText =
-        `🎉 Выпало ${i.v} ⭐`;
-      break;
+/* 🎁 КЕЙСЫ — НАСТРОЕННАЯ ЭКОНОМИКА */
+const cases = {
+  50: [
+    { prize: 25, chance: 70 },
+    { prize: 50, chance: 15 },
+    { prize: 100, chance: 5 },
+    { prize: 200, chance: 0.8 },
+    { prize: 500, chance: 0.2 }
+  ],
+  100: [
+    { prize: 50, chance: 65 },
+    { prize: 100, chance: 18 },
+    { prize: 200, chance: 7 },
+    { prize: 500, chance: 0.9 },
+    { prize: 1000, chance: 0.1 }
+  ],
+  500: [
+    { prize: 200, chance: 60 },
+    { prize: 500, chance: 20 },
+    { prize: 1000, chance: 8 },
+    { prize: 5000, chance: 1.8 },
+    { prize: 10000, chance: 0.2 }
+  ]
+};
+
+function openCase(price) {
+  const pool = cases[price];
+  let roll = Math.random() * 100;
+  let sum = 0;
+
+  for (let item of pool) {
+    sum += item.chance;
+    if (roll <= sum) {
+      document.getElementById("result").innerText =
+        `🎉 Выпало: ${item.prize} ⭐`;
+      return;
     }
   }
-}
 
-// ✈️ Самолёт
-let int;
-function getCrash() {
-  let r = Math.random();
-  if (r < 0.45) return 1.1;
-  if (r < 0.70) return 1.0;
-  if (r < 0.85) return 1.6;
-  if (r < 0.97) return 5;
-  return (20 + Math.random()*5).toFixed(1);
-}
-
-function startPlane() {
-  clearInterval(int);
-  let x = 1.0;
-  let crash = getCrash();
-
-  int = setInterval(()=>{
-    x+=0.02;
-    document.getElementById("plane").innerText = `✈️ x${x.toFixed(2)}`;
-    if (x>=crash) {
-      clearInterval(int);
-      document.getElementById("plane").innerText = `💥 Упал на x${crash}`;
-    }
-  },50);
+  document.getElementById("result").innerText =
+    `😶 Ничего… попробуй ещё`;
 }
