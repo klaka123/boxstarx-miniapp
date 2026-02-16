@@ -1,31 +1,12 @@
-.case-wrapper {
-  overflow: hidden; /* Скрываем всё, что выходит за границы */
-  width: 300px; /* Ширина видимой области */
-  border: 2px solid gold;
-  border-radius: 10px;
+#starCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Оставляем -1, чтобы быть позади всего */
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    display: block;
+    pointer-events: none; /* --- ЭТО ГЛАВНОЕ --- */
+    /* Запрещаем канвасу перехватывать клики, они "проходят" сквозь него к кнопкам */
 }
-
-.case-items {
-  display: flex;
-  gap: 10px;
-  animation: scroll 5s linear infinite; /* Бесконечная прокрутка */
-}
-
-.case-item {
-  min-width: 80px;
-  height: 80px;
-  background: rgba(255,215,0,0.2);
-  border: 1px solid gold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Сдвигаем на половину ширины дублированного списка */
-}
-
-/* Важно: В HTML нужно продублировать список предметов, чтобы не было разрыва */
-/* Например: <div class="case-items"> (предмет1, предмет2, предмет3, предмет1, предмет2, предмет3) </div> */
