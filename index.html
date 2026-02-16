@@ -7,41 +7,36 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="background"></div>
 
-<!-- Анимация ракеты при запуске -->
-<div id="rocketLauncher">
-    <img src="https://i.ibb.co/ZJcF1rX/rocket.png" class="rocket" alt="Rocket">
-</div>
-
-<!-- HUD -->
 <div class="hud">
-    <div class="balance">Баланс: <span id="balance">500</span> ⭐</div>
-    <div class="stars">Звезды: <span id="stars">0</span></div>
+    <div class="balance">⭐ 0</div>
+    <div class="timer">До взлета: <span id="countdown">10</span>s</div>
 </div>
 
-<!-- Таймер до взлета самолета -->
-<div class="timer" id="timer">10</div>
-
-<!-- Самолет -->
-<div class="airplane-container">
-    <div id="airplane">✈️</div>
-</div>
-
-<!-- Кейсы -->
-<div class="case-container">
-    <div class="case" data-price="50">
-        <img src="case1.png" alt="Кейс 50⭐">
+<div class="cases">
+    <div class="case" data-value="50">
+        <img src="static/img/case1.png" class="case-img">
+        <div class="case-label">50 ⭐</div>
     </div>
-    <div class="case" data-price="100">
-        <img src="case2.png" alt="Кейс 100⭐">
+    <div class="case" data-value="100">
+        <img src="static/img/case2.png" class="case-img">
+        <div class="case-label">100 ⭐</div>
     </div>
-    <div class="case" data-price="500">
-        <img src="case3.png" alt="Кейс 500⭐">
+    <div class="case" data-value="500">
+        <img src="static/img/case3.png" class="case-img">
+        <div class="case-label">500 ⭐</div>
     </div>
 </div>
 
-<!-- Пополнение -->
-<button id="depositBtn">Пополнить ⭐</button>
+<div class="rocket-container">
+    <img src="static/img/rocket.png" class="rocket" id="rocket">
+</div>
+
+<div class="controls">
+    <input type="number" id="bet" min="10" placeholder="Ставка ⭐">
+    <button id="startBtn">Запустить самолет</button>
+</div>
 
 <script src="script.js"></script>
 </body>
