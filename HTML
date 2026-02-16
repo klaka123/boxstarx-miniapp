@@ -1,12 +1,28 @@
-<div class="buy-card">
-  <h2>💫 Покупка звёзд</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Telegram Gifts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
 
-  <input 
-    type="number" 
-    id="amount" 
-    min="10" 
-    placeholder="Минимум 10 ⭐"
-  />
+<div class="tg-card">
+  <div class="tg-header">
+    <img src="https://telegram.org/img/t_logo.png" class="tg-logo">
+    <h1>Подарок звёздами</h1>
+    <p>Поддержи бота официальным подарком ⭐</p>
+  </div>
 
-  <button id="buyBtn">Купить</button>
+  <div class="tg-input">
+    <input id="amount" type="number" min="10" placeholder="Сколько звёзд подарить? (мин. 10)">
+  </div>
+
+  <button class="tg-btn" onclick="giftStars()">🎁 Подарить звёзды</button>
 </div>
+
+</body>
+<script src="script.js"></script>
+</html>
