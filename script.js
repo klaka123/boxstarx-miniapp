@@ -68,7 +68,8 @@ function startPlaneGame() {
   planeTimer = 10;
   planeValue = 1;
   planeFlying = false;
-  planeEl.style.transform = 'translateY(0)';
+  planeEl.style.transform = 'translate(0,0)';
+  
   const countdown = setInterval(() => {
     planeTimer--;
     planeTimerEl.textContent = planeTimer;
@@ -81,28 +82,39 @@ function startPlaneGame() {
 }
 
 function flyPlane() {
-  const duration = 20000; // 20 секунд макс
-  const start = Date.now();
-  const multiplier = getPlaneMultiplier();
+  const planeWidth = document.querySelector('.plane-area').offsetWidth - 50;
+  let posX = 0;
+  let speed = 0.5; // медленный взлёт
+  let dropChance = 0.01; // шанс резкого падения
+
   const flight = setInterval(() => {
-    const t = (Date.now() - start)/duration;
-    if(t >= 1 || planeValue >= multiplier) {
-      clearInterval(flight);
+    if(!planeFlying) return clearInterval(flight);
+
+    posX += speed;
+    planeValue += speed * 0.02;
+
+    // Резкое падение
+    if(Math.random() < dropChance) {
       planeFlying = false;
-      alert(`Самолет упал! Вы заработали: ${Math.floor(planeValue*10)} ⭐`);
+      alert(`Самолет резко упал! Вы заработали: ${Math.floor(planeValue*10)} ⭐`);
       updateBalance(Math.floor(planeValue*10));
+      planeEl.style.transform = `translate(0,0)`;
+      clearInterval(flight);
+      startPlaneGame(); // новый раунд
       return;
     }
-    planeValue += 0.01;
-    planeEl.style.transform = `translateY(-${planeValue*10}px)`;
-  }, 50);
-}
 
-function getPlaneMultiplier() {
-  const rand = Math.random();
-  if(rand < 0.5) return 1.2 + Math.random()*0.5; // 1.2 - 1.7
-  if(rand < 0.85) return 2 + Math.random()*8; // 2 - 10
-  return 150; // редкий шанс
+    planeEl.style.transform = `translateX(${posX}px)`;
+
+    if(posX >= planeWidth) {
+      planeFlying = false;
+      alert(`Самолет улетел! Вы заработали: ${Math.floor(planeValue*10)} ⭐`);
+      updateBalance(Math.floor(planeValue*10));
+      planeEl.style.transform = `translate(0,0)`;
+      clearInterval(flight);
+      startPlaneGame(); // новый раунд
+    }
+  }, 20);
 }
 
 cashoutBtn.onclick = () => {
@@ -111,7 +123,7 @@ cashoutBtn.onclick = () => {
     updateBalance(earned);
     alert(`Вы забрали: ${earned} ⭐`);
     planeFlying = false;
-    planeEl.style.transform = 'translateY(0)';
+    planeEl.style.transform = 'translate(0,0)';
   }
 }
 
