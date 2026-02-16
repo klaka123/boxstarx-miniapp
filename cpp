@@ -1,5 +1,12 @@
-index.html       — главная страница с кейсами и самолетом
-style.css        — все стили и анимации
-script.js        — логика кейсов, дропа и самолета
-success.html     — страница после пополнения
-static/          — изображения кейсов, самолет, текстуры, звезды Telegram
+/project-folder
+    index.html
+    style.css
+    script.js
+    /static
+        /img
+            bg_stars.png
+            case1.png
+            case2.png
+            case3.png
+            rocket.png
+            star_icon.png
