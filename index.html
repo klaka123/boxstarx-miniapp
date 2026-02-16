@@ -4,3 +4,32 @@
         <!-- Здесь ваши кейсы, ракета, кнопки -->
     </div>
 </body>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #starCanvas { position: fixed; top:0; left:0; width:100%; height:100%; background: black; z-index:-1; pointer-events: none; }
+        .content { position: relative; z-index:1; color: white; padding: 20px; }
+        button { padding: 15px 30px; font-size: 18px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <canvas id="starCanvas"></canvas>
+    <div class="content">
+        <h1>Кейсы работают?</h1>
+        <button onclick="alert('Клик работает!')">Нажми меня</button>
+    </div>
+
+    <script>
+        // Здесь ваш код для анимации звезд
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // ... остальной код для звезд
+        ctx.fillStyle = 'white';
+        ctx.fillRect(50, 50, 100, 100); // Просто тестовая звезда
+    </script>
+</body>
+</html>
