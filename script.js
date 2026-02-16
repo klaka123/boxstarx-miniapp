@@ -22,33 +22,43 @@ function openCase(price){
 
 /* Самолет */
 let planeInterval=null;
+let countdownInterval=null;
 let currentMultiplier=1;
 let crashed=false;
 let betAmount=0;
+let countdown=10;
 
 function startPlane(){
   if(planeInterval) return;
   betAmount=Number(document.getElementById("bet").value);
   if(betAmount<10){ Telegram.WebApp.showAlert("Минимум 10 ⭐"); return; }
+
   currentMultiplier=1;
   crashed=false;
+  countdown=10;
   document.getElementById("multiplier").innerText="Множитель: 1×";
+  document.getElementById("countdown").innerText=`Взлёт через: ${countdown}s`;
 
-  setTimeout(()=>{
-    planeInterval=setInterval(()=>{
-      if(crashed) return;
-      let chance=Math.random();
-      if(chance<0.6) currentMultiplier+=0.05; // частый рост
-      else if(chance<0.95) currentMultiplier+=0.2; // средний рост
-      else currentMultiplier+=1; // редкий
-      // редкий супер бонус
-      if(chance>0.998) currentMultiplier=Math.min(currentMultiplier,150);
-      if(currentMultiplier>=150) crashed=true;
-      if(Math.random()<getCrashChance(currentMultiplier)) crashed=true;
-      document.getElementById("multiplier").innerText=`Множитель: ${currentMultiplier.toFixed(2)}×`;
-      if(crashed){ endPlane(false); }
-    },100);
-  },10000);
+  countdownInterval=setInterval(()=>{
+    countdown--;
+    document.getElementById("countdown").innerText=`Взлёт через: ${countdown}s`;
+    if(countdown<=0){ clearInterval(countdownInterval); launchPlane(); }
+  },1000);
+}
+
+function launchPlane(){
+  planeInterval=setInterval(()=>{
+    if(crashed) return;
+    let chance=Math.random();
+    if(chance<0.6) currentMultiplier+=0.05;
+    else if(chance<0.95) currentMultiplier+=0.2;
+    else currentMultiplier+=1;
+    if(chance>0.998) currentMultiplier=Math.min(currentMultiplier,150);
+    if(currentMultiplier>=150) crashed=true;
+    if(Math.random()<getCrashChance(currentMultiplier)) crashed=true;
+    document.getElementById("multiplier").innerText=`Множитель: ${currentMultiplier.toFixed(2)}×`;
+    if(crashed){ endPlane(false); }
+  },100);
 }
 
 function getCrashChance(mult){
@@ -67,5 +77,6 @@ function cashOut(){
 
 function endPlane(win){
   clearInterval(planeInterval); planeInterval=null;
+  document.getElementById("countdown").innerText="";
   if(!win) document.getElementById("multiplier").innerText=`💥 Самолет упал! Вы потеряли ставку`;
 }
