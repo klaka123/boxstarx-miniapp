@@ -363,6 +363,33 @@
 
 <body class="" style="visibility: hidden;">
 
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+function openCase() {
+    const roll = Math.floor(Math.random() * 1000) + 1;
+    let prize = "❌ Ничего";
+
+    if (roll === 1) prize = "1000⭐";       // 0.1%
+    else if (roll <= 10) prize = "500⭐";   // 0.9%
+    else if (roll <= 50) prize = "100⭐";   // 4%
+    else if (roll <= 150) prize = "50⭐";   // 10%
+    else if (roll <= 300) prize = "20⭐";   // 15%
+
+    document.getElementById("result").innerText = "Результат: " + prize;
+
+    // Отправляем результат обратно боту
+    tg.sendData(prize);
+}
+</script>
+
+    <h1>🎁 Boxstarx Case</h1>
+<p>Открой кейс за 100 ⭐. Шансы на крупный приз очень низкие.</p>
+<button onclick="openCase()">Открыть кейс</button>
+<p id="result"></p>
+
 <section id="top_sect" class="second">
     <button id="main_btn" onclick="DemoApp.sendMessage('');">Send «Hello, World!»</button>
     <button id="with_webview_btn" onclick="DemoApp.sendMessage('', true);">Send «Hello, World!» with inline webview button</button>
