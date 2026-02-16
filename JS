@@ -1,6 +1,53 @@
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.body.classList.add('loaded');
-    document.getElementById('rocketLauncher').remove();
-  }, 3000); // совпадает с анимацией ракеты
+let balance = 0;
+const balanceEl = document.querySelector('.balance');
+const rocket = document.getElementById('rocket');
+const countdownEl = document.getElementById('countdown');
+const startBtn = document.getElementById('startBtn');
+
+let countdown = 10;
+let interval;
+
+function updateBalance() { balanceEl.textContent = `⭐ ${balance}`; }
+
+startBtn.addEventListener('click', () => {
+    let bet = parseInt(document.getElementById('bet').value);
+    if(isNaN(bet) || bet<10) { alert("Минимальная ставка 10 ⭐"); return; }
+    
+    countdown = 10;
+    countdownEl.textContent = countdown;
+
+    interval = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        if(countdown<=0){
+            clearInterval(interval);
+            launchRocket(bet);
+        }
+    },1000);
 });
+
+function launchRocket(bet){
+    rocket.style.transform = 'translateY(-300px)'; // взлет
+    rocket.style.opacity = 1;
+
+    let multiplier = simulateMultiplier();
+    setTimeout(() => {
+        balance += Math.floor(bet*multiplier);
+        updateBalance();
+        rocket.style.transform = 'translateY(0)';
+        rocket.style.opacity = 0;
+        alert(`Самолет упал! Множитель: ${multiplier}x`);
+    }, 5000); // время полета
+}
+
+function simulateMultiplier(){
+    const rand = Math.random();
+    if(rand<0.5) return 1.2;
+    if(rand<0.8) return 1.7;
+    if(rand<0.95) return 5;
+    if(rand<0.995) return 10;
+    return 25;
+}
+
+// Обновляем баланс сразу
+updateBalance();
