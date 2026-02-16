@@ -1,14 +1,10 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
-def gift_menu():
-    kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🎁 Подарить звёзды боту", callback_data="gift_stars")],
-        [InlineKeyboardButton(text="⬅️ Назад", callback_data="back")]
-    ])
-    return kb
-
-await bot.send_message(
-    user_id,
-    "✅ Пополнение подтверждено!\nХочешь подарить звёзды боту?",
-    reply_markup=gift_menu()
-)
+@dp.message()
+async def webapp_handler(message: types.Message):
+    if not message.web_app_data: return
+    data=json.loads(message.web_app_data.data)
+    if data["action"]=="topup":
+        amount=int(data["amount"])
+        kb=InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text=f"🎁 Подарить {amount} ⭐ боту", pay=True)]
+        ])
+        await message.answer(f"Пополнение {amount} ⭐ в @BoxstarxBot", reply_markup=kb)
