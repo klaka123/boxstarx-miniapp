@@ -1,0 +1,15 @@
+<script>
+document.getElementById("buyBtn").onclick = () => {
+  const amount = Number(document.getElementById("amount").value);
+
+  if (amount < 10) {
+    alert("Минимум 10 ⭐");
+    return;
+  }
+
+  Telegram.WebApp.sendData(JSON.stringify({
+    action: "buy_stars",
+    amount: amount
+  }));
+};
+</script>
