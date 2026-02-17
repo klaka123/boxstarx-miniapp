@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 СЕРАЯ ЭЛЕГАНТНОСТЬ</title>
+    <title>BOXSTARX 🚀 ИСПРАВЛЕННЫЙ АПГРЕЙД</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* ========== ЗАСТАВКА ========== */
         .splash-screen {
             position: fixed;
             top: 0;
@@ -58,7 +57,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* ========== ЗВЕЗДНЫЙ ФОН ========== */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -71,7 +69,6 @@
             pointer-events: none;
         }
 
-        /* ========== СЕРЫЕ ГРАНИЦЫ ========== */
         @keyframes grayPulse {
             0% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
             50% { border-color: #999999; box-shadow: 0 0 35px #999999; }
@@ -82,7 +79,6 @@
             animation: grayPulse 3s infinite ease-in-out;
         }
 
-        /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
         #app {
             position: relative;
             z-index: 10;
@@ -110,7 +106,6 @@
             padding-bottom: 30px;
         }
 
-        /* ========== ХЕДЕР ========== */
         .header {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -163,7 +158,6 @@
             transform: scale(0.95);
         }
 
-        /* ========== РАКЕТА ========== */
         .rocket-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -357,7 +351,6 @@
             transform: none;
         }
 
-        /* ========== КЕЙСЫ ========== */
         .section-title {
             font-size: 1.5rem;
             text-align: center;
@@ -410,7 +403,6 @@
             font-weight: 700;
         }
 
-        /* ========== СИСТЕМА АПГРЕЙДА ========== */
         .upgrade-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -737,7 +729,6 @@
             cursor: not-allowed;
         }
 
-        /* ========== ИНВЕНТАРЬ ========== */
         .inventory-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -827,7 +818,6 @@
             font-size: 0.7rem;
         }
 
-        /* ========== МОДАЛЬНЫЕ ОКНА ========== */
         .modal {
             position: fixed;
             top: 0;
@@ -964,7 +954,6 @@
             font-size: 0.9rem;
         }
 
-        /* ========== СЕЛЕКТОР ПОДАРКОВ ========== */
         .gift-selector {
             position: fixed;
             top: 0;
@@ -1081,7 +1070,6 @@
             font-weight: 700;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО ВЫИГРЫША ========== */
         .win-modal {
             position: fixed;
             top: 0;
@@ -1158,7 +1146,6 @@
             transform: scale(0.95);
         }
 
-        /* ========== ПРОМОКОДЫ ========== */
         .promo-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -1213,7 +1200,6 @@
             transform: scale(0.95);
         }
 
-        /* ========== УВЕДОМЛЕНИЯ ========== */
         .toast {
             position: fixed;
             top: 100px;
@@ -1245,7 +1231,6 @@
 
     <div id="app">
         <div class="container">
-            <!-- Хедер -->
             <header class="header">
                 <div class="balance-wrap">
                     <span class="balance-icon">⭐</span>
@@ -1254,7 +1239,6 @@
                 <button class="add-btn" id="addFunds">+100 ⭐</button>
             </header>
 
-            <!-- Ракета -->
             <section class="rocket-section">
                 <div class="rocket-window" id="rocketWindow">
                     <div class="rocket" id="rocket">🚀</div>
@@ -1283,11 +1267,9 @@
                 </div>
             </section>
 
-            <!-- Кейсы -->
             <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
-            <!-- Система апгрейда -->
             <section class="upgrade-section">
                 <div class="upgrade-title">⚡ СИСТЕМА АПГРЕЙДА ⚡</div>
                 
@@ -1332,7 +1314,6 @@
                 <button class="upgrade-btn" id="upgradeBtn" disabled>НАЧАТЬ АПГРЕЙД</button>
             </section>
 
-            <!-- Инвентарь -->
             <section class="inventory-section">
                 <div class="inventory-header">
                     <span class="inventory-title">📦 ИНВЕНТАРЬ</span>
@@ -1341,7 +1322,6 @@
                 <div class="inventory-grid" id="inventoryGrid"></div>
             </section>
 
-            <!-- Промокоды -->
             <section class="promo-section">
                 <div class="promo-title">🎁 ПРОМОКОД</div>
                 <div class="promo-input">
@@ -1352,7 +1332,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно кейса -->
     <div class="modal" id="caseModal">
         <div class="modal-header">
             <button class="modal-back" id="closeModal">←</button>
@@ -1373,7 +1352,6 @@
         <div class="contents-grid" id="modalContents"></div>
     </div>
 
-    <!-- Селектор выбора подарка -->
     <div class="gift-selector" id="giftSelector">
         <div class="selector-header">
             <button class="selector-back" id="closeSelector">←</button>
@@ -1391,7 +1369,6 @@
         <div class="gifts-grid" id="giftsGrid"></div>
     </div>
 
-    <!-- Модальное окно выигрыша -->
     <div class="win-modal" id="winModal">
         <div class="win-content">
             <div class="win-emoji">🎉</div>
@@ -1405,7 +1382,6 @@
         (function() {
             'use strict';
 
-            // ========== ЗАСТАВКА ==========
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
                 setTimeout(() => {
@@ -1413,7 +1389,6 @@
                 }, 500);
             }, 2000);
 
-            // ========== ЗВЕЗДНЫЙ ФОН ==========
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1461,7 +1436,6 @@
                 requestAnimationFrame(drawStars);
             }
 
-            // ========== ЗВЕЗДЫ В ОКНЕ ==========
             function initWindowStars() {
                 const w = document.getElementById('rocketWindow');
                 for (let i = 0; i < 20; i++) {
@@ -1477,9 +1451,7 @@
                 }
             }
 
-            // ========== ДАННЫЕ ==========
             const GIFTS = [
-                // Обычные подарки (1-50⭐)
                 { emoji: "🧸", name: "Мишка", price: 5, category: "common" },
                 { emoji: "🎈", name: "Шар", price: 8, category: "common" },
                 { emoji: "🍬", name: "Конфета", price: 10, category: "common" },
@@ -1495,23 +1467,17 @@
                 { emoji: "👕", name: "Футболка", price: 40, category: "common" },
                 { emoji: "👖", name: "Джинсы", price: 45, category: "common" },
                 { emoji: "👟", name: "Кроссовки", price: 50, category: "common" },
-                
-                // Редкие подарки (100-300⭐)
                 { emoji: "⌚", name: "Часы", price: 100, category: "rare" },
                 { emoji: "💍", name: "Кольцо", price: 150, category: "rare" },
                 { emoji: "📱", name: "Телефон", price: 200, category: "rare" },
                 { emoji: "💻", name: "Ноутбук", price: 300, category: "rare" },
                 { emoji: "🎧", name: "Наушники", price: 120, category: "rare" },
                 { emoji: "🎮", name: "Приставка", price: 250, category: "rare" },
-                
-                // Эпические подарки (500-2000⭐)
                 { emoji: "💎", name: "Алмаз", price: 500, category: "epic" },
                 { emoji: "👑", name: "Корона", price: 750, category: "epic" },
                 { emoji: "🚗", name: "Машина", price: 1000, category: "epic" },
                 { emoji: "✈️", name: "Самолет", price: 1500, category: "epic" },
                 { emoji: "🦄", name: "Единорог", price: 2000, category: "epic" },
-                
-                // Легендарные подарки (2500-5000⭐)
                 { emoji: "🏰", name: "Замок", price: 2500, category: "legendary" },
                 { emoji: "🚁", name: "Вертолет", price: 3000, category: "legendary" },
                 { emoji: "🛳️", name: "Яхта", price: 4000, category: "legendary" },
@@ -1555,7 +1521,6 @@
                 currentCategory: 'all'
             };
 
-            // ========== DOM ==========
             const el = {
                 balance: document.getElementById('balance'),
                 addFunds: document.getElementById('addFunds'),
@@ -1595,7 +1560,6 @@
 
             const slotItems = document.querySelectorAll('.slot-item');
 
-            // ========== КРУГОВОЙ АПГРЕЙД ==========
             const wheelCanvas = document.getElementById('wheelCanvas');
             const wheelCtx = wheelCanvas.getContext('2d');
 
@@ -1608,7 +1572,6 @@
                 
                 const winAngle = (winChance / 100) * 360;
                 
-                // Зеленая часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, 0, (winAngle * Math.PI) / 180);
@@ -1616,7 +1579,6 @@
                 wheelCtx.fillStyle = '#00cc66';
                 wheelCtx.fill();
                 
-                // Красная часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, (winAngle * Math.PI) / 180, 2 * Math.PI);
@@ -1624,7 +1586,6 @@
                 wheelCtx.fillStyle = '#ff4444';
                 wheelCtx.fill();
                 
-                // Контуры
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
                 wheelCtx.strokeStyle = '#cccccc';
@@ -1637,7 +1598,6 @@
                 wheelCtx.lineWidth = 2;
                 wheelCtx.stroke();
                 
-                // Разделительная линия
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.lineTo(centerX + radius * Math.cos((winAngle * Math.PI) / 180), centerY + radius * Math.sin((winAngle * Math.PI) / 180));
@@ -1646,7 +1606,6 @@
                 wheelCtx.stroke();
             }
 
-            // ========== СОХРАНЕНИЕ ==========
             function saveGame() {
                 localStorage.setItem('bsx_balance', state.balance);
                 localStorage.setItem('bsx_inventory', JSON.stringify(state.inventory));
@@ -1680,7 +1639,6 @@
                 updateUpgradeUI();
             }
 
-            // ========== ИНВЕНТАРЬ ==========
             function updateInventory() {
                 el.inventoryGrid.innerHTML = '';
                 el.inventoryCount.textContent = state.inventory.length + '/20';
@@ -1716,7 +1674,6 @@
                 showToast(`✅ ${item.name} продан за ${price}⭐`);
             }
 
-            // ========== РАКЕТА ==========
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
@@ -1822,7 +1779,6 @@
                 showWinModal(win);
             }
 
-            // ========== КЕЙСЫ ==========
             function renderCases() {
                 el.casesGrid.innerHTML = '';
                 CASES.forEach(c => {
@@ -1899,7 +1855,6 @@
                 showWinModal(totalWin);
             }
 
-            // ========== ПРОМОКОДЫ ==========
             function applyPromo() {
                 const code = el.promoField.value.toUpperCase().trim();
                 
@@ -1938,14 +1893,12 @@
                 el.promoField.value = '';
             }
 
-            // ========== АПГРЕЙД ==========
             let currentSlotIndex = null;
 
             function initUpgradeSlots() {
                 slotItems.forEach((slot, index) => {
                     slot.onclick = () => {
                         if (state.upgradeSlots[index]) {
-                            // Возвращаем подарок в инвентарь
                             state.inventory.push(state.upgradeSlots[index]);
                             state.upgradeSlots[index] = null;
                             updateUI();
@@ -1963,7 +1916,6 @@
                     return;
                 }
                 
-                // Используем giftSelector для выбора из инвентаря
                 el.giftCategories.style.display = 'none';
                 el.selectorTitle.textContent = 'Выберите подарок из инвентаря';
                 
@@ -1990,7 +1942,6 @@
             }
 
             function selectDesiredGift() {
-                // Показываем все подарки для выбора желаемого
                 el.giftCategories.style.display = 'flex';
                 el.selectorTitle.textContent = 'Выберите желаемый подарок';
                 renderGiftsGrid(state.currentCategory);
@@ -2039,7 +1990,6 @@
             }
 
             function updateUpgradeUI() {
-                // Обновляем слоты
                 slotItems.forEach((slot, i) => {
                     if (state.upgradeSlots[i]) {
                         slot.classList.add('filled');
@@ -2053,11 +2003,9 @@
                     }
                 });
 
-                // Сумма ставок
                 const total = state.upgradeSlots.reduce((sum, s) => sum + (s ? s.price : 0), 0);
                 el.totalBets.textContent = total + ' ⭐';
 
-                // Шанс выигрыша
                 if (state.desiredGift && total > 0) {
                     const chance = Math.min(Math.floor((total / state.desiredGift.price) * 100), 95);
                     el.winChance.textContent = chance + '%';
@@ -2108,7 +2056,6 @@
                 }, 3500);
             }
 
-            // ========== ИНИЦИАЛИЗАЦИЯ ==========
             function init() {
                 resizeCanvas();
                 initStars();
@@ -2122,7 +2069,6 @@
                 drawWheel(0);
                 updateDesiredDisplay();
 
-                // Категории подарков
                 document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -2132,7 +2078,6 @@
                     };
                 });
 
-                // Авто-кнопки
                 document.querySelectorAll('.auto-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.auto-btn').forEach(x => x.classList.remove('active'));
@@ -2141,7 +2086,6 @@
                     };
                 });
 
-                // Quantity кнопки
                 document.querySelectorAll('.quantity-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.quantity-btn').forEach(x => x.classList.remove('active'));
