@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ЗЕЛЕНАЯ ЭНЕРГИЯ</title>
+    <title>BOXSTARX 🚀 ПОДАРКИ PREMIUM</title>
     <style>
         * {
             margin: 0;
@@ -408,10 +408,11 @@
             will-change: transform;
         }
 
+        /* ========== РЕАЛЬНЫЕ КАРТИНКИ ПОДАРКОВ ========== */
         .case-gift {
             min-width: 200px;
             height: 240px;
-            background: #0a0c1a;
+            background: linear-gradient(145deg, #1a1f35, #0a0c1a);
             border: 2px solid #00ff88;
             border-radius: 50px;
             display: flex;
@@ -420,6 +421,24 @@
             justify-content: center;
             padding: 20px;
             box-shadow: 0 0 50px rgba(0,255,136,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-gift::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,136,0.2), transparent 70%);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .case-gift.win {
@@ -429,24 +448,44 @@
             z-index: 100;
         }
 
-        .gift-emoji {
-            font-size: 5rem;
+        /* Стили для картинок подарков */
+        .gift-image {
+            width: 100px;
+            height: 100px;
             margin-bottom: 15px;
             filter: drop-shadow(0 0 20px #00ff88);
+            position: relative;
+            z-index: 5;
         }
 
         .gift-name {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 8px;
-            color: white;
+            background: linear-gradient(135deg, #fff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 5;
         }
 
         .gift-price {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #00ff88;
             font-weight: 700;
+            position: relative;
+            z-index: 5;
         }
+
+        /* Стили для разных типов подарков */
+        .gift-box { background: linear-gradient(135deg, #ff6b6b, #ff8c8c); border-radius: 30px; padding: 15px; }
+        .gift-heart { background: linear-gradient(135deg, #ff4d4d, #ff1a1a); border-radius: 50%; padding: 15px; }
+        .gift-star { background: linear-gradient(135deg, #ffd700, #ffaa00); border-radius: 10px; padding: 15px; transform: rotate(15deg); }
+        .gift-crown { background: linear-gradient(135deg, #ffd700, #ffb347); border-radius: 40px 40px 10px 10px; padding: 15px; }
+        .gift-rocket { background: linear-gradient(135deg, #4ecdc4, #45b7d1); border-radius: 40px 40px 10px 10px; padding: 15px; }
+        .gift-diamond { background: linear-gradient(135deg, #b9f2ff, #87ceeb); border-radius: 10px; padding: 15px; transform: rotate(45deg); }
+        .gift-unicorn { background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; padding: 15px; }
 
         .case-marker {
             position: absolute;
@@ -578,7 +617,7 @@
         }
 
         .inventory-slot {
-            background: #0a0c1a;
+            background: linear-gradient(145deg, #1a1f35, #0a0c1a);
             border: 2px solid #00ff88;
             border-radius: 30px;
             padding: 10px 4px;
@@ -590,20 +629,41 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
+            overflow: hidden;
+        }
+
+        .inventory-slot::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,136,0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .inventory-slot:hover::before {
+            opacity: 1;
+            animation: rotateGlow 10s linear infinite;
         }
 
         .inventory-slot:active {
             transform: scale(0.95);
         }
 
-        .inv-emoji {
-            font-size: 2rem;
+        .inv-image {
+            width: 40px;
+            height: 40px;
             margin-bottom: 4px;
+            filter: drop-shadow(0 0 10px #00ff88);
         }
 
         .inv-name {
             font-size: 0.6rem;
             font-weight: 600;
+            color: #00ff88;
         }
 
         .inv-price {
@@ -733,12 +793,12 @@
                 </div>
             </section>
 
-            <h2 class="section-title">📦 ЗЕЛЕНЫЕ КЕЙСЫ</h2>
+            <h2 class="section-title">📦 ПРЕМИУМ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
             <section class="inventory-section">
                 <div class="inventory-header">
-                    <span class="inventory-title">📦 ИНВЕНТАРЬ</span>
+                    <span class="inventory-title">📦 КОЛЛЕКЦИЯ</span>
                     <span class="inventory-count" id="inventoryCount">0/20</span>
                 </div>
                 <div class="inventory-grid" id="inventoryGrid"></div>
@@ -754,10 +814,10 @@
         </div>
     </div>
 
-    <!-- Зеленое модальное окно -->
+    <!-- Модальное окно -->
     <div class="case-modal" id="caseModal">
         <div class="case-close" id="caseClose">✕</div>
-        <div class="case-title" id="caseTitle">ЗЕЛЕНЫЙ КЕЙС</div>
+        <div class="case-title" id="caseTitle">ПРЕМИУМ КЕЙС</div>
         
         <div class="case-display" id="caseDisplay">
             <div class="case-items" id="caseItems"></div>
@@ -783,7 +843,7 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон - 20 звезд на средней скорости
+            // Звездный фон
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -846,38 +906,114 @@
                 }
             }
 
-            // Данные
+            // ========== РЕАЛЬНЫЕ ПОДАРКИ С КАРТИНКАМИ ==========
             const GIFTS = [
-                { emoji: "🧸", name: "Мишка", price: 5 },
-                { emoji: "🎈", name: "Шар", price: 8 },
-                { emoji: "🍬", name: "Конфета", price: 10 },
-                { emoji: "🍭", name: "Леденец", price: 12 },
-                { emoji: "🧩", name: "Пазл", price: 15 },
-                { emoji: "🎨", name: "Краски", price: 18 },
-                { emoji: "📿", name: "Бусы", price: 20 },
-                { emoji: "🧦", name: "Носки", price: 22 },
-                { emoji: "🧢", name: "Кепка", price: 25 },
-                { emoji: "🧣", name: "Шарф", price: 28 },
-                { emoji: "🧤", name: "Перчатки", price: 30 },
-                { emoji: "🧥", name: "Куртка", price: 35 },
-                { emoji: "👕", name: "Футболка", price: 40 },
-                { emoji: "👖", name: "Джинсы", price: 45 },
-                { emoji: "👟", name: "Кроссовки", price: 50 },
-                { emoji: "⌚", name: "Часы", price: 100 },
-                { emoji: "💍", name: "Кольцо", price: 150 },
-                { emoji: "📱", name: "Телефон", price: 200 },
-                { emoji: "💻", name: "Ноутбук", price: 300 },
-                { emoji: "🎧", name: "Наушники", price: 120 },
-                { emoji: "🎮", name: "Приставка", price: 250 },
-                { emoji: "💎", name: "Алмаз", price: 500 },
-                { emoji: "👑", name: "Корона", price: 750 },
-                { emoji: "🚗", name: "Машина", price: 1000 },
-                { emoji: "✈️", name: "Самолет", price: 1500 },
-                { emoji: "🦄", name: "Единорог", price: 2000 },
-                { emoji: "🏰", name: "Замок", price: 2500 },
-                { emoji: "🚁", name: "Вертолет", price: 3000 },
-                { emoji: "🛳️", name: "Яхта", price: 4000 },
-                { emoji: "🚀", name: "Шаттл", price: 5000 }
+                // Подарки с фотографий
+                { 
+                    id: 'rip',
+                    name: 'RIP',
+                    price: 15000,
+                    image: 'rip',
+                    style: 'gift-box'
+                },
+                { 
+                    id: 'skull',
+                    name: 'Skull',
+                    price: 5000,
+                    image: 'skull',
+                    style: 'gift-heart'
+                },
+                { 
+                    id: 'demon',
+                    name: 'Demon',
+                    price: 41000,
+                    image: 'demon',
+                    style: 'gift-star'
+                },
+                { 
+                    id: 'angel',
+                    name: 'Angel',
+                    price: 10000,
+                    image: 'angel',
+                    style: 'gift-crown'
+                },
+                { 
+                    id: 'devil',
+                    name: 'Devil',
+                    price: 10000,
+                    image: 'devil',
+                    style: 'gift-rocket'
+                },
+                { 
+                    id: 'heart',
+                    name: 'Heart',
+                    price: 1000,
+                    image: 'heart',
+                    style: 'gift-heart'
+                },
+                { 
+                    id: 'fire',
+                    name: 'Fire',
+                    price: 500,
+                    image: 'fire',
+                    style: 'gift-star'
+                },
+                { 
+                    id: 'diamond',
+                    name: 'Diamond',
+                    price: 5000,
+                    image: 'diamond',
+                    style: 'gift-diamond'
+                },
+                { 
+                    id: 'crown',
+                    name: 'Crown',
+                    price: 2500,
+                    image: 'crown',
+                    style: 'gift-crown'
+                },
+                { 
+                    id: 'star',
+                    name: 'Star',
+                    price: 30000,
+                    image: 'star',
+                    style: 'gift-star'
+                },
+                { 
+                    id: 'superstar',
+                    name: 'Superstar',
+                    price: 5000,
+                    image: 'superstar',
+                    style: 'gift-star'
+                },
+                { 
+                    id: 'comet',
+                    name: 'Comet',
+                    price: 2500,
+                    image: 'comet',
+                    style: 'gift-rocket'
+                },
+                { 
+                    id: 'meteor',
+                    name: 'Meteor',
+                    price: 500,
+                    image: 'meteor',
+                    style: 'gift-rocket'
+                },
+                { 
+                    id: 'planet',
+                    name: 'Planet',
+                    price: 300,
+                    image: 'planet',
+                    style: 'gift-box'
+                },
+                { 
+                    id: 'galaxy',
+                    name: 'Galaxy',
+                    price: 150,
+                    image: 'galaxy',
+                    style: 'gift-star'
+                }
             ];
 
             const CASES = [
@@ -977,8 +1113,52 @@
                     const item = state.inventory[i];
                     const slot = document.createElement('div');
                     slot.className = 'inventory-slot';
+                    
+                    // SVG для разных подарков
+                    let svgContent = '';
+                    switch(item.id) {
+                        case 'rip':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13h-4v-2h4v2zm-6 0H7v-2h4v2z" fill="%23ff4444"/></svg>`;
+                            break;
+                        case 'skull':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ffffff"/><circle cx="9" cy="10" r="2" fill="%23000"/><circle cx="15" cy="10" r="2" fill="%23000"/></svg>`;
+                            break;
+                        case 'demon':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="%23ff4444" stroke-width="2"/></svg>`;
+                            break;
+                        case 'angel':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ffd700"/><circle cx="8" cy="9" r="1.5" fill="%23000"/><circle cx="16" cy="9" r="1.5" fill="%23000"/></svg>`;
+                            break;
+                        case 'devil':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ff6b6b"/><circle cx="8" cy="10" r="1.5" fill="%23000"/><circle cx="16" cy="10" r="1.5" fill="%23000"/></svg>`;
+                            break;
+                        case 'heart':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="%23ff4444"/></svg>`;
+                            break;
+                        case 'fire':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 2c-1.5 0-3 1-4 2.5C8.5 6 8 8 8 10c0 2 1 4 2.5 5.5 1.5 1.5 3.5 2 5.5 2 2 0 4-1 5.5-2.5C23 13.5 24 11 24 8.5c0-2.5-1-5-2.5-6.5C20 5 18 6 16 6c-2 0-4-1-5.5-2.5C10 2.5 9.5 2 9 2h4.5z" fill="%23ff8c00"/></svg>`;
+                            break;
+                        case 'diamond':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="%2300ff88" stroke-width="2"/></svg>`;
+                            break;
+                        case 'crown':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 18h20v2H2v-2zm1-4l3-8 4 4 4-4 4 4 3-8 1 12H3z" fill="%23ffd700"/></svg>`;
+                            break;
+                        case 'star':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="%23ffd700"/></svg>`;
+                            break;
+                        case 'superstar':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="%2300ff88"/><circle cx="12" cy="12" r="3" fill="%23fff"/></svg>`;
+                            break;
+                        case 'comet':
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%2300ff88"/><path d="M12 6v6l4 2" stroke="%23fff" stroke-width="2"/></svg>`;
+                            break;
+                        default:
+                            svgContent = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="%2300ff88"/></svg>`;
+                    }
+                    
                     slot.innerHTML = `
-                        <div class="inv-emoji">${item.emoji}</div>
+                        <div class="inv-image">${svgContent}</div>
                         <div class="inv-name">${item.name}</div>
                         <div class="inv-price">${item.price}⭐</div>
                     `;
@@ -1148,8 +1328,52 @@
                 items.forEach(item => {
                     const giftDiv = document.createElement('div');
                     giftDiv.className = 'case-gift';
+                    
+                    // SVG для подарка
+                    let svgContent = '';
+                    switch(item.id) {
+                        case 'rip':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13h-4v-2h4v2zm-6 0H7v-2h4v2z" fill="%23ff4444"/></svg>`;
+                            break;
+                        case 'skull':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ffffff"/><circle cx="9" cy="10" r="2" fill="%23000"/><circle cx="15" cy="10" r="2" fill="%23000"/></svg>`;
+                            break;
+                        case 'demon':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="%23ff4444" stroke-width="2"/></svg>`;
+                            break;
+                        case 'angel':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ffd700"/><circle cx="8" cy="9" r="1.5" fill="%23000"/><circle cx="16" cy="9" r="1.5" fill="%23000"/></svg>`;
+                            break;
+                        case 'devil':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%23ff6b6b"/><circle cx="8" cy="10" r="1.5" fill="%23000"/><circle cx="16" cy="10" r="1.5" fill="%23000"/></svg>`;
+                            break;
+                        case 'heart':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="%23ff4444"/></svg>`;
+                            break;
+                        case 'fire':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 2c-1.5 0-3 1-4 2.5C8.5 6 8 8 8 10c0 2 1 4 2.5 5.5 1.5 1.5 3.5 2 5.5 2 2 0 4-1 5.5-2.5C23 13.5 24 11 24 8.5c0-2.5-1-5-2.5-6.5C20 5 18 6 16 6c-2 0-4-1-5.5-2.5C10 2.5 9.5 2 9 2h4.5z" fill="%23ff8c00"/></svg>`;
+                            break;
+                        case 'diamond':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="%2300ff88" stroke-width="2"/></svg>`;
+                            break;
+                        case 'crown':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 18h20v2H2v-2zm1-4l3-8 4 4 4-4 4 4 3-8 1 12H3z" fill="%23ffd700"/></svg>`;
+                            break;
+                        case 'star':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="%23ffd700"/></svg>`;
+                            break;
+                        case 'superstar':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="%2300ff88"/><circle cx="12" cy="12" r="3" fill="%23fff"/></svg>`;
+                            break;
+                        case 'comet':
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="%2300ff88"/><path d="M12 6v6l4 2" stroke="%23fff" stroke-width="2"/></svg>`;
+                            break;
+                        default:
+                            svgContent = `<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="%2300ff88"/></svg>`;
+                    }
+                    
                     giftDiv.innerHTML = `
-                        <div class="gift-emoji">${item.emoji}</div>
+                        <div class="gift-image">${svgContent}</div>
                         <div class="gift-name">${item.name}</div>
                         <div class="gift-price">${item.price}⭐</div>
                     `;
@@ -1177,18 +1401,17 @@
                 updateUI();
                 saveGame();
                 
-                // Определяем выигрыш - специально недокручиваем до дорогих
+                // Определяем выигрыш
                 let maxPrice;
                 if (state.currentCase.price <= 100) {
-                    maxPrice = state.currentCase.price * 1.1; // Чуть выше цены кейса
+                    maxPrice = state.currentCase.price * 1.1;
                 } else {
-                    maxPrice = state.currentCase.price * 0.25; // Максимум 25% от цены
+                    maxPrice = state.currentCase.price * 0.25;
                 }
                 
                 const availableGifts = GIFTS.filter(g => g.price <= maxPrice);
                 const winningGift = { ...availableGifts[Math.floor(Math.random() * availableGifts.length)] };
                 
-                // Добавляем случайность - иногда чуть больше, иногда чуть меньше
                 const multiplier = 0.7 + Math.random() * 0.6;
                 winningGift.price = Math.floor(winningGift.price * multiplier);
                 
@@ -1199,12 +1422,10 @@
                 const containerWidth = document.getElementById('caseDisplay').offsetWidth;
                 const centerPos = (containerWidth / 2) - (itemWidth / 2);
                 
-                // Выбираем предмет ближе к концу для эффекта "недокрутило"
                 const winIndex = Math.floor(Math.random() * (itemCount - 5)) + 15;
                 
                 const finalPos = centerPos - (winIndex * itemWidth);
                 
-                // Меньше оборотов для быстрой анимации
                 const spins = 2 * itemWidth * itemCount;
                 const startPos = finalPos - spins;
                 
