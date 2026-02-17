@@ -1014,4 +1014,393 @@
                 { name: "ЛЕД", image: "ice", price: 499, color: "#6bc0ff", gifts: [4,5,6,7] },
                 { name: "ДРЕВО", image: "wood", price: 999, color: "#8b4513", gifts: [6,7,8,9] },
                 { name: "ЗОЛОТО", image: "gold", price: 1999, color: "#ffd700", gifts: [8,9,10,11] },
-                { name: "КРИСТАЛЛ", image: "crystal", price: 3999, color: "#e0e0ff", gifts: [
+                { name: "КРИСТАЛЛ", image: "crystal", price: 3999, color: "#e0e0ff", gifts: [10,11,0,1] }
+            ];
+
+            // ========== СОСТОЯНИЕ ==========
+            let state = {
+                balance: 5000,
+                inventory: [],
+                currentCase: null,
+                isFlying: false,
+                multiplier: 1,
+                intervalId: null,
+                planePos: -150,
+                planeTop: 50,
+                altitude: 0,
+                speed: 1.2 // ОЧЕНЬ МЕДЛЕННО
+            };
+
+            // ========== DOM ЭЛЕМЕНТЫ ==========
+            const el = {
+                balance: document.getElementById('balance'),
+                addFunds: document.getElementById('addFunds'),
+                startBtn: document.getElementById('startBtn'),
+                stopBtn: document.getElementById('stopBtn'),
+                bet: document.getElementById('bet'),
+                autoCashout: document.getElementById('autoCashout'),
+                noPlayers: document.getElementById('noPlayers'),
+                plane: document.getElementById('plane'),
+                trail: document.getElementById('trail'),
+                explosion: document.getElementById('explosion'),
+                altitude: document.getElementById('altitude'),
+                casesGrid: document.getElementById('casesGrid'),
+                inventoryGrid: document.getElementById('inventoryGrid'),
+                inventoryCount: document.getElementById('inventoryCount'),
+                multipliersGrid: document.getElementById('multipliersGrid'),
+                caseModal: document.getElementById('caseModal'),
+                closeModal: document.getElementById('closeModal'),
+                modalCaseImage: document.getElementById('modalCaseImage'),
+                modalCaseName: document.getElementById('modalCaseName'),
+                modalCasePrice: document.getElementById('modalCasePrice'),
+                modalPrizes: document.getElementById('modalPrizes'),
+                openCaseBtn: document.getElementById('openCaseBtn'),
+                winModal: document.getElementById('winModal'),
+                winAmount: document.getElementById('winAmount'),
+                closeWinModal: document.getElementById('closeWinModal')
+            };
+
+            // ========== СОХРАНЕНИЕ ==========
+            function saveGame() {
+                localStorage.setItem('bsx_elite_balance', state.balance);
+                localStorage.setItem('bsx_elite_inventory', JSON.stringify(state.inventory));
+            }
+
+            function loadGame() {
+                const b = localStorage.getItem('bsx_elite_balance');
+                const i = localStorage.getItem('bsx_elite_inventory');
+                if (b) state.balance = parseInt(b) || 5000;
+                if (i) state.inventory = JSON.parse(i) || [];
+                updateUI();
+            }
+
+            function showToast(msg) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = msg;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+
+            function showWinModal(amount) {
+                el.winAmount.textContent = `${amount} ⭐`;
+                el.winModal.classList.add('active');
+            }
+
+            function updateUI() {
+                el.balance.textContent = state.balance;
+                updateInventory();
+                updateMultipliers();
+            }
+
+            // ========== ИНВЕНТАРЬ ==========
+            function updateInventory() {
+                el.inventoryGrid.innerHTML = '';
+                el.inventoryCount.textContent = `${state.inventory.length}/20`;
+                
+                for (let i = 0; i < Math.min(state.inventory.length, 20); i++) {
+                    const item = state.inventory[i];
+                    const slot = document.createElement('div');
+                    slot.className = 'inventory-slot';
+                    slot.innerHTML = `
+                        <div class="slot-emoji">${item.emoji}</div>
+                        <div class="slot-name">${item.name}</div>
+                        <div class="slot-price">${item.price}⭐</div>
+                    `;
+                    slot.addEventListener('click', () => sellItem(i));
+                    el.inventoryGrid.appendChild(slot);
+                }
+                
+                for (let i = state.inventory.length; i < 20; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'empty-slot';
+                    empty.textContent = 'пусто';
+                    el.inventoryGrid.appendChild(empty);
+                }
+            }
+
+            function sellItem(index) {
+                const item = state.inventory[index];
+                const price = Math.floor(item.price * 0.8);
+                state.balance += price;
+                state.inventory.splice(index, 1);
+                updateUI();
+                saveGame();
+                showToast(`✅ ${item.name} продан за ${price}⭐`);
+            }
+
+            // ========== МНОЖИТЕЛИ ==========
+            function updateMultipliers() {
+                const multipliers = [
+                    (1 + Math.random() * 0.5).toFixed(2),
+                    (1 + Math.random() * 0.8).toFixed(2),
+                    (1 + Math.random() * 0.3).toFixed(2),
+                    (1 + Math.random() * 0.4).toFixed(2),
+                    "1.00"
+                ];
+                
+                el.multipliersGrid.innerHTML = '';
+                multipliers.forEach(m => {
+                    const cell = document.createElement('div');
+                    cell.className = `multiplier-cell ${m === "1.00" ? 'x100' : ''}`;
+                    cell.textContent = `x${m}`;
+                    el.multipliersGrid.appendChild(cell);
+                });
+            }
+
+            // ========== 3D САМОЛЕТ ==========
+            function startFlight() {
+                const bet = parseInt(el.bet.value) || 149;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                state.balance -= bet;
+                updateUI();
+                
+                state.isFlying = true;
+                state.multiplier = 1;
+                state.planePos = -150;
+                state.planeTop = 50;
+                state.altitude = 0;
+                state.speed = 1.2; // Начинаем очень медленно
+                
+                el.startBtn.disabled = true;
+                el.stopBtn.disabled = false;
+                el.explosion.classList.remove('active');
+                el.noPlayers.textContent = '👤 1 игрок в полете';
+                
+                if (state.intervalId) clearInterval(state.intervalId);
+                
+                // Постепенное ускорение
+                let acceleration = 0;
+                
+                state.intervalId = setInterval(() => {
+                    if (!state.isFlying) return;
+                    
+                    // Плавное ускорение
+                    acceleration += 0.001;
+                    const currentSpeed = state.speed + acceleration;
+                    
+                    state.planePos += currentSpeed;
+                    state.planeTop -= 0.1;
+                    state.altitude += 5;
+                    
+                    el.plane.style.left = state.planePos + 'px';
+                    el.plane.style.top = state.planeTop + '%';
+                    el.trail.style.width = (state.planePos + 150) + 'px';
+                    el.altitude.textContent = `${Math.floor(state.altitude)} м`;
+                    
+                    state.multiplier += 0.005 + Math.random() * 0.01;
+                    
+                    // Шанс падения зависит от ставки
+                    const crashChance = bet > 1000 ? 0.02 : (bet > 500 ? 0.01 : 0.005);
+                    
+                    if (Math.random() < crashChance) {
+                        crashPlane(bet);
+                    }
+                    
+                    if (state.planePos > 600 || state.planeTop < 10) {
+                        crashPlane(bet);
+                    }
+                }, 50);
+            }
+
+            function crashPlane(bet) {
+                clearInterval(state.intervalId);
+                state.intervalId = null;
+                
+                state.isFlying = false;
+                el.startBtn.disabled = false;
+                el.stopBtn.disabled = true;
+                el.noPlayers.textContent = '👥 Нет игроков';
+                
+                // Эффект взрыва
+                el.explosion.classList.add('active');
+                el.plane.style.opacity = '0';
+                
+                setTimeout(() => {
+                    state.planePos = -150;
+                    state.planeTop = 50;
+                    state.altitude = 0;
+                    el.plane.style.left = '-150px';
+                    el.plane.style.top = '50%';
+                    el.plane.style.opacity = '1';
+                    el.trail.style.width = '0px';
+                    el.explosion.classList.remove('active');
+                }, 1000);
+                
+                showToast(`💥 Проигрыш: ${bet}⭐`);
+            }
+
+            function stopFlight() {
+                if (!state.isFlying) return;
+                
+                clearInterval(state.intervalId);
+                state.intervalId = null;
+                
+                const bet = parseInt(el.bet.value) || 149;
+                const win = Math.floor(bet * state.multiplier);
+                
+                state.balance += win;
+                updateUI();
+                saveGame();
+                
+                state.isFlying = false;
+                el.startBtn.disabled = false;
+                el.stopBtn.disabled = true;
+                el.noPlayers.textContent = '👥 Нет игроков';
+                
+                state.planePos = -150;
+                state.planeTop = 50;
+                state.altitude = 0;
+                el.plane.style.left = '-150px';
+                el.plane.style.top = '50%';
+                el.trail.style.width = '0px';
+                
+                showWinModal(win);
+            }
+
+            // ========== КЕЙСЫ ==========
+            function getCaseImage(color, pattern) {
+                const patterns = {
+                    chrome: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${color}" stop-opacity="0.9"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0.4"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect x="10" y="10" width="80" height="80" rx="20" fill="url(%23grad)" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23ffffff" stroke-width="2"/><path d="M30 50 L70 50 M50 30 L50 70" stroke="%23ffffff" stroke-width="2"/></svg>')`,
+                    flame: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="glow"><feGaussianBlur stdDeviation="2"/></filter><path d="M50 10 Q60 30 50 50 Q40 70 50 90 Q70 70 60 40 Q50 20 50 10" fill="${color}" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><circle cx="45" cy="35" r="5" fill="%23ffff00"/></svg>')`,
+                    ice: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="glow"><feGaussianBlur stdDeviation="2"/></filter><polygon points="50,10 80,30 80,70 50,90 20,70 20,30" fill="${color}" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><polygon points="50,30 65,40 65,60 50,70 35,60 35,40" fill="%23ffffff" fill-opacity="0.4"/></svg>')`,
+                    wood: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="glow"><feGaussianBlur stdDeviation="2"/></filter><rect x="15" y="15" width="70" height="70" rx="15" fill="${color}" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><path d="M30 30 L70 70 M70 30 L30 70" stroke="%23ffffff" stroke-width="2"/></svg>')`,
+                    gold: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="glow"><feGaussianBlur stdDeviation="3"/></filter><circle cx="50" cy="50" r="35" fill="${color}" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><circle cx="50" cy="50" r="15" fill="%23ffffff" fill-opacity="0.3"/><path d="M20 20 L80 80 M80 20 L20 80" stroke="%23ffffff" stroke-width="2"/></svg>')`,
+                    crystal: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="glow"><feGaussianBlur stdDeviation="2"/></filter><polygon points="50,10 80,30 80,70 50,90 20,70 20,30" fill="${color}" stroke="%23ffffff" stroke-width="3" filter="url(%23glow)"/><polygon points="50,30 65,45 65,65 50,80 35,65 35,45" fill="none" stroke="%23ffffff" stroke-width="2"/></svg>')`
+                };
+                return patterns[pattern] || patterns.chrome;
+            }
+
+            function openCaseModal(c) {
+                state.currentCase = c;
+                el.modalCaseImage.style.backgroundImage = getCaseImage(c.color, c.image);
+                el.modalCaseName.textContent = c.name;
+                el.modalCasePrice.textContent = `★ ${c.price}`;
+                el.openCaseBtn.textContent = `ОТКРЫТЬ ЗА ★ ${c.price}`;
+                
+                el.modalPrizes.innerHTML = '';
+                c.gifts.forEach(idx => {
+                    const g = GIFTS[idx];
+                    const prize = document.createElement('div');
+                    prize.className = 'prize-item';
+                    prize.innerHTML = `
+                        <div class="prize-emoji">${g.emoji}</div>
+                        <div class="prize-name">${g.name}</div>
+                    `;
+                    el.modalPrizes.appendChild(prize);
+                });
+                
+                el.caseModal.classList.add('active');
+            }
+
+            function openCase() {
+                if (!state.currentCase) return;
+                
+                if (state.balance < state.currentCase.price) {
+                    showToast('❌ Недостаточно звезд!');
+                    el.caseModal.classList.remove('active');
+                    return;
+                }
+                
+                state.balance -= state.currentCase.price;
+                
+                // Анимация открытия
+                el.modalCaseImage.style.transform = 'scale(1.3) rotate(720deg)';
+                setTimeout(() => {
+                    el.modalCaseImage.style.transform = '';
+                }, 600);
+                
+                setTimeout(() => {
+                    if (Math.random() < 0.3) {
+                        const mult = 1.5 + Math.random() * 0.5;
+                        const idx = state.currentCase.gifts[Math.floor(Math.random() * state.currentCase.gifts.length)];
+                        const gift = { ...GIFTS[idx] };
+                        gift.price = Math.floor(gift.price * mult);
+                        state.inventory.push(gift);
+                        
+                        el.caseModal.classList.remove('active');
+                        showWinModal(gift.price);
+                    } else {
+                        const stars = Math.floor(state.currentCase.price * 0.3);
+                        state.balance += stars;
+                        
+                        el.caseModal.classList.remove('active');
+                        showWinModal(stars);
+                    }
+                    
+                    updateUI();
+                    saveGame();
+                }, 600);
+            }
+
+            // ========== РЕНДЕРИНГ КЕЙСОВ ==========
+            function renderCases() {
+                el.casesGrid.innerHTML = '';
+                CASES.forEach(c => {
+                    const card = document.createElement('div');
+                    card.className = 'case-card';
+                    card.innerHTML = `
+                        <div class="case-image" style="background-image: ${getCaseImage(c.color, c.image)}"></div>
+                        <div class="case-name">${c.name}</div>
+                        <div class="case-price">${c.price} ★</div>
+                        <div class="case-arrow">▶</div>
+                    `;
+                    card.addEventListener('click', () => openCaseModal(c));
+                    el.casesGrid.appendChild(card);
+                });
+            }
+
+            // ========== ИНИЦИАЛИЗАЦИЯ ==========
+            function init() {
+                resizeCanvas();
+                initStars();
+                drawStars();
+                
+                renderCases();
+                loadGame();
+
+                el.addFunds.addEventListener('click', () => {
+                    state.balance += 100;
+                    updateUI();
+                    saveGame();
+                    showToast('+100⭐ получено!');
+                });
+
+                el.startBtn.addEventListener('click', startFlight);
+                el.stopBtn.addEventListener('click', stopFlight);
+                
+                el.autoCashout.addEventListener('click', () => {
+                    showToast('⚡ Авто-вывод установлен на x2.0');
+                });
+                
+                el.closeModal.addEventListener('click', () => {
+                    el.caseModal.classList.remove('active');
+                });
+                
+                el.openCaseBtn.addEventListener('click', openCase);
+                el.closeWinModal.addEventListener('click', () => {
+                    el.winModal.classList.remove('active');
+                });
+
+                el.caseModal.addEventListener('click', (e) => {
+                    if (e.target === el.caseModal) {
+                        el.caseModal.classList.remove('active');
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    initStars();
+                });
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
