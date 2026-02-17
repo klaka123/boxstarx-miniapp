@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ПРЕМИУМ ДИЗАЙН</title>
+    <title>BOXSTARX 🚀 ИДЕАЛЬНЫЙ АПГРЕЙД</title>
     <style>
         * {
             margin: 0;
@@ -43,11 +43,11 @@
         .splash-title {
             font-size: clamp(2rem, 10vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(102,126,234,0.5);
+            text-shadow: 0 0 30px rgba(78,205,196,0.5);
             letter-spacing: 4px;
         }
 
@@ -91,15 +91,17 @@
             padding-bottom: 30px;
         }
 
-        /* Хедер с градиентом */
+        /* Хедер */
         .header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4ecdc4;
             border-radius: 60px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+            box-shadow: 0 0 30px rgba(78,205,196,0.3);
             position: sticky;
             top: 16px;
             z-index: 100;
@@ -113,40 +115,40 @@
 
         .balance-icon {
             font-size: 2rem;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+            filter: drop-shadow(0 0 10px #4ecdc4);
         }
 
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
-            color: white;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            color: #4ecdc4;
         }
 
         .add-btn {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.5);
+            background: rgba(78,205,196,0.2);
+            border: 2px solid #4ecdc4;
             color: white;
             padding: 10px 24px;
             border-radius: 40px;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            backdrop-filter: blur(5px);
             transition: all 0.2s;
         }
 
         .add-btn:active {
             transform: scale(0.95);
-            background: rgba(255,255,255,0.3);
+            background: rgba(78,205,196,0.3);
         }
 
-        /* Ракета с градиентом */
+        /* Ракета */
         .rocket-section {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4ecdc4;
             border-radius: 60px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(78,205,196,0.3);
         }
 
         .rocket-window {
@@ -156,7 +158,7 @@
             border-radius: 50px;
             overflow: hidden;
             margin-bottom: 15px;
-            border: 2px solid rgba(102,126,234,0.3);
+            border: 2px solid #4ecdc4;
         }
 
         .window-star {
@@ -178,7 +180,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 5rem;
-            filter: drop-shadow(0 0 30px #667eea);
+            filter: drop-shadow(0 0 30px #4ecdc4);
             z-index: 20;
         }
 
@@ -221,13 +223,12 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
-            border: 2px solid #667eea;
+            border: 2px solid #4ecdc4;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
             z-index: 25;
-            color: #667eea;
-            backdrop-filter: blur(5px);
+            color: #4ecdc4;
         }
 
         .timer {
@@ -235,12 +236,12 @@
             top: 20px;
             left: 20px;
             background: rgba(0,0,0,0.8);
-            border: 2px solid #667eea;
+            border: 2px solid #4ecdc4;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
             z-index: 25;
-            color: #667eea;
+            color: #4ecdc4;
         }
 
         .auto-buttons {
@@ -251,21 +252,19 @@
         }
 
         .auto-btn {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.1);
+            border: 2px solid #4ecdc4;
             color: white;
             padding: 10px 5px;
             border-radius: 40px;
             font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s;
         }
 
         .auto-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: white;
-            color: white;
+            background: #4ecdc4;
+            color: black;
             font-weight: bold;
         }
 
@@ -278,8 +277,8 @@
         .bet-input {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid #667eea;
-            color: #667eea;
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
             padding: 15px;
             border-radius: 40px;
             font-size: 1.2rem;
@@ -300,21 +299,16 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .flight-btn:active {
-            transform: scale(0.95);
         }
 
         .btn-start {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: #4ecdc4;
+            color: black;
         }
 
         .btn-stop {
             background: rgba(255,255,255,0.1);
-            border: 2px solid #667eea;
+            border: 2px solid #4ecdc4;
             color: white;
         }
 
@@ -328,10 +322,7 @@
             font-size: 1.5rem;
             text-align: center;
             margin: 20px 0 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
         }
 
         .cases-grid {
@@ -341,14 +332,13 @@
         }
 
         .case-card {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 2px solid #667eea;
+            background: rgba(20, 20, 30, 0.8);
+            border: 2px solid #4ecdc4;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .case-card:active {
@@ -358,29 +348,30 @@
         .case-icon {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px #667eea);
+            filter: drop-shadow(0 0 15px #4ecdc4);
         }
 
         .case-name {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 5px;
-            color: white;
         }
 
         .case-price {
             font-size: 1.4rem;
-            color: #667eea;
+            color: #4ecdc4;
             font-weight: 700;
         }
 
-        /* ========== НОВЫЙ ПРЕМИУМ ДИЗАЙН АПГРЕЙДА ========== */
+        /* ========== НОВЫЙ ИДЕАЛЬНЫЙ АПГРЕЙД ========== */
         .upgrade-section {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4ecdc4;
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 50px rgba(78,205,196,0.2);
             position: relative;
             overflow: hidden;
         }
@@ -392,11 +383,11 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(102,126,234,0.1), transparent 70%);
-            animation: rotateGlow 20s linear infinite;
+            background: radial-gradient(circle, rgba(78,205,196,0.1), transparent 70%);
+            animation: rotateBg 30s linear infinite;
         }
 
-        @keyframes rotateGlow {
+        @keyframes rotateBg {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
@@ -405,21 +396,18 @@
             font-size: 1.5rem;
             text-align: center;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
+            color: #4ecdc4;
             position: relative;
             z-index: 1;
         }
 
-        .wheel-container {
+        /* Колесо */
+        .wheel-wrapper {
             position: relative;
             width: 280px;
             height: 280px;
             margin: 0 auto 20px;
-            filter: drop-shadow(0 0 30px #667eea);
+            filter: drop-shadow(0 0 30px #4ecdc4);
             position: relative;
             z-index: 1;
         }
@@ -431,12 +419,13 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #1a1a2e;
-            border: 4px solid #667eea;
-            box-shadow: 0 0 50px rgba(102,126,234,0.3);
+            background: #1a1f35;
+            border: 4px solid #4ecdc4;
+            box-shadow: inset 0 0 30px rgba(78,205,196,0.3);
         }
 
-        .wheel-arrow-container {
+        /* Стрелка с аппаратным ускорением */
+        .arrow-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -444,65 +433,70 @@
             height: 100%;
             pointer-events: none;
             z-index: 30;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
-        .wheel-arrow {
+        .arrow {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 100px solid #667eea;
-            filter: drop-shadow(0 0 30px #667eea);
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-bottom: 110px solid #4ecdc4;
+            filter: drop-shadow(0 0 30px #4ecdc4);
             transform-origin: center;
-            transition: transform 4s cubic-bezier(0.1, 0.9, 0.2, 1);
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
-        .wheel-arrow::before {
+        .arrow::before {
             content: '';
             position: absolute;
             top: 15px;
-            left: -20px;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, #f093fb, #667eea);
+            left: -18px;
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle, #fff, #4ecdc4);
             border-radius: 50%;
-            box-shadow: 0 0 40px #f093fb;
+            box-shadow: 0 0 30px #4ecdc4;
             border: 2px solid white;
         }
 
-        .wheel-arrow::after {
+        .arrow::after {
             content: '';
             position: absolute;
             top: 25px;
-            left: -10px;
-            width: 20px;
-            height: 20px;
+            left: -8px;
+            width: 16px;
+            height: 16px;
             background: white;
             border-radius: 50%;
             box-shadow: 0 0 20px white;
         }
 
-        .wheel-arrow.spinning {
-            animation: arrowPulse 0.3s infinite alternate;
+        /* Анимация вращения с аппаратным ускорением */
+        .arrow.spinning {
+            transition: transform 3.8s cubic-bezier(0.1, 0.8, 0.2, 0.98);
+            animation: arrowGlow 0.3s infinite alternate;
         }
 
-        @keyframes arrowPulse {
-            from { filter: drop-shadow(0 0 30px #667eea); }
-            to { filter: drop-shadow(0 0 60px #f093fb) drop-shadow(0 0 90px #667eea); }
+        @keyframes arrowGlow {
+            from { filter: drop-shadow(0 0 30px #4ecdc4); }
+            to { filter: drop-shadow(0 0 60px #4ecdc4) drop-shadow(0 0 90px #45b7d1); }
         }
 
-        .wheel-center {
+        .center-piece {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
             border: 4px solid white;
             border-radius: 50%;
             display: flex;
@@ -510,29 +504,22 @@
             justify-content: center;
             font-size: 2.5rem;
             z-index: 25;
-            box-shadow: 0 0 50px #667eea;
+            box-shadow: 0 0 50px #4ecdc4;
             cursor: pointer;
-            transition: transform 0.2s;
         }
 
-        .wheel-center:active {
-            transform: translate(-50%, -50%) scale(0.95);
-        }
-
-        /* Слоты для ставок */
-        .slots-container {
+        /* Слоты */
+        .slots-area {
             margin: 20px 0;
             position: relative;
             z-index: 1;
         }
 
-        .slots-title {
+        .slots-label {
             text-align: center;
             color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .slots-grid {
@@ -541,9 +528,9 @@
             gap: 12px;
         }
 
-        .slot-item {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(102,126,234,0.3);
+        .slot-cell {
+            background: rgba(78,205,196,0.05);
+            border: 2px solid rgba(78,205,196,0.3);
             border-radius: 40px;
             padding: 15px 5px;
             text-align: center;
@@ -553,19 +540,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
             backdrop-filter: blur(5px);
         }
 
-        .slot-item:hover {
-            border-color: #667eea;
-            transform: scale(1.02);
-        }
-
-        .slot-item.filled {
-            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
-            border-color: #667eea;
-            box-shadow: 0 0 30px rgba(102,126,234,0.3);
+        .slot-cell.filled {
+            background: rgba(78,205,196,0.15);
+            border-color: #4ecdc4;
+            box-shadow: 0 0 20px rgba(78,205,196,0.3);
         }
 
         .slot-emoji {
@@ -573,73 +554,65 @@
             margin-bottom: 4px;
         }
 
-        .slot-price {
+        .slot-value {
             font-size: 0.8rem;
-            color: #667eea;
+            color: #4ecdc4;
             font-weight: 700;
         }
 
         /* Желаемый подарок */
-        .desired-container {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(102,126,234,0.3);
+        .target-area {
+            background: rgba(78,205,196,0.05);
+            border: 2px solid rgba(78,205,196,0.3);
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
             backdrop-filter: blur(5px);
         }
 
-        .desired-container:hover {
-            border-color: #667eea;
-            box-shadow: 0 0 30px rgba(102,126,234,0.3);
-        }
-
-        .desired-label {
+        .target-label {
             color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
-        .desired-gift {
+        .target-gift {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
         }
 
-        .desired-emoji {
+        .target-emoji {
             font-size: 3rem;
-            filter: drop-shadow(0 0 20px #667eea);
+            filter: drop-shadow(0 0 20px #4ecdc4);
         }
 
-        .desired-info {
+        .target-info {
             text-align: left;
         }
 
-        .desired-name {
+        .target-name {
             font-size: 1.2rem;
             font-weight: 700;
             color: white;
         }
 
-        .desired-price {
+        .target-price {
             font-size: 1.1rem;
-            color: #667eea;
+            color: #4ecdc4;
         }
 
-        .desired-empty {
+        .target-empty {
             color: rgba(255,255,255,0.3);
             font-size: 1.1rem;
             padding: 20px;
         }
 
         /* Статистика */
-        .upgrade-stats {
+        .stats-panel {
             display: flex;
             gap: 12px;
             margin: 20px 0;
@@ -647,12 +620,12 @@
             z-index: 1;
         }
 
-        .stat-item {
+        .stat-block {
             flex: 1;
-            background: rgba(255,255,255,0.03);
+            background: rgba(78,205,196,0.05);
             padding: 12px;
             border-radius: 40px;
-            border: 2px solid rgba(102,126,234,0.3);
+            border: 2px solid rgba(78,205,196,0.3);
             text-align: center;
             backdrop-filter: blur(5px);
         }
@@ -661,49 +634,47 @@
             font-size: 0.8rem;
             color: rgba(255,255,255,0.5);
             margin-bottom: 5px;
-            text-transform: uppercase;
         }
 
-        .stat-value {
+        .stat-number {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #667eea;
+            color: #4ecdc4;
         }
 
-        /* Кнопка апгрейда */
-        .upgrade-btn {
+        /* Кнопка */
+        .action-btn {
             width: 100%;
             padding: 18px;
             border: none;
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: #4ecdc4;
+            color: black;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid rgba(255,255,255,0.2);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            border: 2px solid rgba(255,255,255,0.5);
             position: relative;
             z-index: 1;
         }
 
-        .upgrade-btn:active:not(:disabled) {
+        .action-btn:active:not(:disabled) {
             transform: scale(0.97);
         }
 
-        .upgrade-btn:disabled {
+        .action-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
 
         /* Инвентарь */
         .inventory-section {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4ecdc4;
             border-radius: 60px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(78,205,196,0.3);
         }
 
         .inventory-header {
@@ -716,19 +687,16 @@
         .inventory-title {
             font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
         }
 
-        .inventory-count {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+        .inventory-counter {
+            background: rgba(78,205,196,0.1);
+            border: 2px solid #4ecdc4;
             padding: 5px 15px;
             border-radius: 40px;
             font-size: 0.9rem;
-            color: #667eea;
+            color: #4ecdc4;
         }
 
         .inventory-grid {
@@ -738,8 +706,8 @@
         }
 
         .inventory-slot {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(102,126,234,0.3);
+            background: rgba(78,205,196,0.05);
+            border: 2px solid rgba(78,205,196,0.3);
             border-radius: 30px;
             padding: 10px 4px;
             text-align: center;
@@ -749,7 +717,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.2s;
             position: relative;
         }
 
@@ -757,20 +724,20 @@
             transform: scale(0.95);
         }
 
-        .slot-emoji {
+        .inv-emoji {
             font-size: 2rem;
             margin-bottom: 4px;
         }
 
-        .slot-name {
+        .inv-name {
             font-size: 0.6rem;
             font-weight: 600;
             color: rgba(255,255,255,0.8);
         }
 
-        .slot-price {
+        .inv-price {
             font-size: 0.7rem;
-            color: #667eea;
+            color: #4ecdc4;
             position: absolute;
             bottom: 5px;
             right: 5px;
@@ -780,8 +747,8 @@
         }
 
         .empty-slot {
-            background: rgba(255,255,255,0.03);
-            border: 2px dashed rgba(102,126,234,0.3);
+            background: rgba(78,205,196,0.02);
+            border: 2px dashed rgba(78,205,196,0.3);
             border-radius: 30px;
             aspect-ratio: 1;
             display: flex;
@@ -821,8 +788,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.2);
+            border: 2px solid #4ecdc4;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -832,10 +799,7 @@
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
         }
 
         .quantity-buttons {
@@ -846,8 +810,8 @@
         }
 
         .quantity-btn {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.2);
+            border: 2px solid #4ecdc4;
             color: white;
             padding: 15px;
             border-radius: 40px;
@@ -857,8 +821,8 @@
         }
 
         .quantity-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: white;
+            background: #4ecdc4;
+            color: black;
             font-weight: bold;
         }
 
@@ -869,15 +833,15 @@
             border-radius: 60px;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: #4ecdc4;
+            color: black;
             margin: 20px 0;
             cursor: pointer;
         }
 
         .contents-title {
             font-size: 1.2rem;
-            color: #667eea;
+            color: #4ecdc4;
             margin: 20px 0 15px;
         }
 
@@ -888,8 +852,8 @@
         }
 
         .content-item {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.1);
+            border: 2px solid #4ecdc4;
             border-radius: 40px;
             padding: 15px;
             display: flex;
@@ -907,7 +871,7 @@
         }
 
         .content-price {
-            color: #667eea;
+            color: #4ecdc4;
             font-size: 0.9rem;
         }
 
@@ -941,8 +905,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.2);
+            border: 2px solid #4ecdc4;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -952,10 +916,7 @@
         .selector-title {
             font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
         }
 
         .gift-categories {
@@ -967,8 +928,8 @@
         }
 
         .category-btn {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.2);
+            border: 2px solid #4ecdc4;
             color: white;
             padding: 12px 20px;
             border-radius: 40px;
@@ -978,8 +939,8 @@
         }
 
         .category-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: white;
+            background: #4ecdc4;
+            color: black;
             font-weight: bold;
         }
 
@@ -991,13 +952,12 @@
         }
 
         .gift-option {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.1);
+            border: 2px solid #4ecdc4;
             border-radius: 40px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s;
         }
 
         .gift-option:active {
@@ -1017,10 +977,9 @@
 
         .gift-option-price {
             font-size: 1.2rem;
-            color: #667eea;
+            color: #4ecdc4;
         }
 
-        /* Модальное окно выигрыша */
         .win-modal {
             position: fixed;
             top: 0;
@@ -1040,14 +999,14 @@
         }
 
         .win-content {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 3px solid #667eea;
+            background: rgba(20, 20, 30, 0.9);
+            border: 3px solid #4ecdc4;
             border-radius: 100px;
             padding: 40px 30px;
             text-align: center;
             width: 80%;
             max-width: 350px;
-            box-shadow: 0 0 50px rgba(102,126,234,0.5);
+            box-shadow: 0 0 50px #4ecdc4;
         }
 
         .win-emoji {
@@ -1058,46 +1017,41 @@
         .win-title {
             font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
             margin-bottom: 15px;
         }
 
         .win-amount {
             font-size: 2rem;
-            color: #667eea;
+            color: #4ecdc4;
             margin-bottom: 20px;
         }
 
         .win-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #4ecdc4;
             border: none;
             padding: 12px 30px;
             border-radius: 60px;
             font-size: 1.1rem;
             font-weight: 700;
-            color: white;
+            color: black;
             cursor: pointer;
         }
 
-        /* Промокоды */
         .promo-section {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #4ecdc4;
             border-radius: 60px;
             padding: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(78,205,196,0.3);
             margin-top: 20px;
         }
 
         .promo-title {
             font-size: 1.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #4ecdc4;
             margin-bottom: 12px;
             text-align: center;
         }
@@ -1109,8 +1063,8 @@
 
         .promo-field {
             flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #667eea;
+            background: rgba(78,205,196,0.1);
+            border: 2px solid #4ecdc4;
             border-radius: 40px;
             padding: 12px 15px;
             color: white;
@@ -1119,11 +1073,11 @@
         }
 
         .promo-apply {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #4ecdc4;
             border: none;
             border-radius: 40px;
             padding: 12px 25px;
-            color: white;
+            color: black;
             font-weight: 700;
             cursor: pointer;
         }
@@ -1133,20 +1087,14 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: #4ecdc4;
+            color: black;
             padding: 12px 30px;
             border-radius: 60px;
             font-weight: 700;
             z-index: 5000;
             border: 2px solid white;
-            box-shadow: 0 0 30px #667eea;
-            animation: toastIn 0.3s;
-        }
-
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            box-shadow: 0 0 30px #4ecdc4;
         }
     </style>
 </head>
@@ -1198,54 +1146,55 @@
             <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
+            <!-- НОВЫЙ ИДЕАЛЬНЫЙ АПГРЕЙД -->
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ ПРЕМИУМ АПГРЕЙД ⚡</div>
+                <div class="upgrade-title">⚡ ИДЕАЛЬНЫЙ АПГРЕЙД ⚡</div>
                 
-                <div class="wheel-container">
+                <div class="wheel-wrapper">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
-                    <div class="wheel-arrow-container">
-                        <div class="wheel-arrow" id="wheelArrow"></div>
+                    <div class="arrow-container">
+                        <div class="arrow" id="arrow"></div>
                     </div>
-                    <div class="wheel-center" id="wheelCenter">⚡</div>
+                    <div class="center-piece" id="centerPiece">⚡</div>
                 </div>
 
-                <div class="slots-container">
-                    <div class="slots-title">ВАШИ СТАВКИ</div>
+                <div class="slots-area">
+                    <div class="slots-label">СТАВКИ (ИЗ ИНВЕНТАРЯ)</div>
                     <div class="slots-grid" id="slotsGrid">
-                        <div class="slot-item" data-slot="0"></div>
-                        <div class="slot-item" data-slot="1"></div>
-                        <div class="slot-item" data-slot="2"></div>
-                        <div class="slot-item" data-slot="3"></div>
-                        <div class="slot-item" data-slot="4"></div>
-                        <div class="slot-item" data-slot="5"></div>
+                        <div class="slot-cell" data-slot="0"></div>
+                        <div class="slot-cell" data-slot="1"></div>
+                        <div class="slot-cell" data-slot="2"></div>
+                        <div class="slot-cell" data-slot="3"></div>
+                        <div class="slot-cell" data-slot="4"></div>
+                        <div class="slot-cell" data-slot="5"></div>
                     </div>
                 </div>
 
-                <div class="desired-container" id="desiredContainer">
-                    <div class="desired-label">ЖЕЛАЕМЫЙ ПОДАРОК</div>
-                    <div id="desiredContent">
-                        <div class="desired-empty">Нажмите чтобы выбрать</div>
+                <div class="target-area" id="targetArea">
+                    <div class="target-label">ЖЕЛАЕМЫЙ ПОДАРОК</div>
+                    <div id="targetContent">
+                        <div class="target-empty">Нажмите чтобы выбрать</div>
                     </div>
                 </div>
 
-                <div class="upgrade-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Сумма ставок</div>
-                        <div class="stat-value" id="totalBets">0 ⭐</div>
+                <div class="stats-panel">
+                    <div class="stat-block">
+                        <div class="stat-label">Сумма</div>
+                        <div class="stat-number" id="totalSum">0 ⭐</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Шанс выигрыша</div>
-                        <div class="stat-value" id="winChance">0%</div>
+                    <div class="stat-block">
+                        <div class="stat-label">Шанс</div>
+                        <div class="stat-number" id="winPercent">0%</div>
                     </div>
                 </div>
 
-                <button class="upgrade-btn" id="upgradeBtn" disabled>НАЧАТЬ АПГРЕЙД</button>
+                <button class="action-btn" id="actionBtn" disabled>ЗАПУСТИТЬ АПГРЕЙД</button>
             </section>
 
             <section class="inventory-section">
                 <div class="inventory-header">
                     <span class="inventory-title">📦 ИНВЕНТАРЬ</span>
-                    <span class="inventory-count" id="inventoryCount">0/20</span>
+                    <span class="inventory-counter" id="inventoryCount">0/20</span>
                 </div>
                 <div class="inventory-grid" id="inventoryGrid"></div>
             </section>
@@ -1318,7 +1267,7 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон
+            // Звездный фон (оптимизированный)
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1326,7 +1275,7 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 25; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
@@ -1476,13 +1425,13 @@
                 closeWinModal: document.getElementById('closeWinModal'),
                 promoField: document.getElementById('promoField'),
                 applyPromo: document.getElementById('applyPromo'),
-                upgradeBtn: document.getElementById('upgradeBtn'),
-                totalBets: document.getElementById('totalBets'),
-                winChance: document.getElementById('winChance'),
-                wheelCenter: document.getElementById('wheelCenter'),
-                wheelArrow: document.getElementById('wheelArrow'),
-                desiredContainer: document.getElementById('desiredContainer'),
-                desiredContent: document.getElementById('desiredContent'),
+                actionBtn: document.getElementById('actionBtn'),
+                totalSum: document.getElementById('totalSum'),
+                winPercent: document.getElementById('winPercent'),
+                centerPiece: document.getElementById('centerPiece'),
+                arrow: document.getElementById('arrow'),
+                targetArea: document.getElementById('targetArea'),
+                targetContent: document.getElementById('targetContent'),
                 giftSelector: document.getElementById('giftSelector'),
                 closeSelector: document.getElementById('closeSelector'),
                 selectorTitle: document.getElementById('selectorTitle'),
@@ -1490,7 +1439,7 @@
                 giftCategories: document.getElementById('giftCategories')
             };
 
-            const slotItems = document.querySelectorAll('.slot-item');
+            const slotItems = document.querySelectorAll('.slot-cell');
 
             const wheelCanvas = document.getElementById('wheelCanvas');
             const wheelCtx = wheelCanvas.getContext('2d');
@@ -1523,7 +1472,7 @@
                 // Контур
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-                wheelCtx.strokeStyle = '#667eea';
+                wheelCtx.strokeStyle = '#4ecdc4';
                 wheelCtx.lineWidth = 6;
                 wheelCtx.stroke();
             }
@@ -1570,9 +1519,9 @@
                     const slot = document.createElement('div');
                     slot.className = 'inventory-slot';
                     slot.innerHTML = `
-                        <div class="slot-emoji">${item.emoji}</div>
-                        <div class="slot-name">${item.name}</div>
-                        <div class="slot-price">${item.price}⭐</div>
+                        <div class="inv-emoji">${item.emoji}</div>
+                        <div class="inv-name">${item.name}</div>
+                        <div class="inv-price">${item.price}⭐</div>
                     `;
                     slot.onclick = () => sellItem(i);
                     el.inventoryGrid.appendChild(slot);
@@ -1907,17 +1856,17 @@
 
             function updateDesiredDisplay() {
                 if (state.desiredGift) {
-                    el.desiredContent.innerHTML = `
-                        <div class="desired-gift">
-                            <div class="desired-emoji">${state.desiredGift.emoji}</div>
-                            <div class="desired-info">
-                                <div class="desired-name">${state.desiredGift.name}</div>
-                                <div class="desired-price">${state.desiredGift.price}⭐</div>
+                    el.targetContent.innerHTML = `
+                        <div class="target-gift">
+                            <div class="target-emoji">${state.desiredGift.emoji}</div>
+                            <div class="target-info">
+                                <div class="target-name">${state.desiredGift.name}</div>
+                                <div class="target-price">${state.desiredGift.price}⭐</div>
                             </div>
                         </div>
                     `;
                 } else {
-                    el.desiredContent.innerHTML = '<div class="desired-empty">Нажмите чтобы выбрать</div>';
+                    el.targetContent.innerHTML = '<div class="target-empty">Нажмите чтобы выбрать</div>';
                 }
             }
 
@@ -1927,7 +1876,7 @@
                         slot.classList.add('filled');
                         slot.innerHTML = `
                             <div class="slot-emoji">${state.upgradeSlots[i].emoji}</div>
-                            <div class="slot-price">${state.upgradeSlots[i].price}⭐</div>
+                            <div class="slot-value">${state.upgradeSlots[i].price}⭐</div>
                         `;
                     } else {
                         slot.classList.remove('filled');
@@ -1936,17 +1885,17 @@
                 });
 
                 const total = state.upgradeSlots.reduce((sum, s) => sum + (s ? s.price : 0), 0);
-                el.totalBets.textContent = total + ' ⭐';
+                el.totalSum.textContent = total + ' ⭐';
 
                 if (state.desiredGift && total > 0) {
                     const chance = Math.min(Math.floor((total / state.desiredGift.price) * 100), 95);
-                    el.winChance.textContent = chance + '%';
+                    el.winPercent.textContent = chance + '%';
                     drawWheel(chance);
-                    el.upgradeBtn.disabled = false;
+                    el.actionBtn.disabled = false;
                 } else {
-                    el.winChance.textContent = '0%';
+                    el.winPercent.textContent = '0%';
                     drawWheel(0);
-                    el.upgradeBtn.disabled = true;
+                    el.actionBtn.disabled = true;
                 }
             }
 
@@ -1957,7 +1906,7 @@
                 const chance = Math.min(Math.floor((total / state.desiredGift.price) * 100), 95);
                 
                 state.isSpinning = true;
-                el.upgradeBtn.disabled = true;
+                el.actionBtn.disabled = true;
                 
                 const spins = 6 + Math.floor(Math.random() * 4);
                 const win = Math.random() * 100 < chance;
@@ -1965,11 +1914,11 @@
                 const baseRotation = win ? 45 : 225;
                 const targetRotation = 360 * spins + baseRotation;
                 
-                el.wheelArrow.style.transform = `translate(-50%, -50%) rotate(${targetRotation}deg)`;
-                el.wheelArrow.classList.add('spinning');
+                el.arrow.style.transform = `translate(-50%, -50%) rotate(${targetRotation}deg)`;
+                el.arrow.classList.add('spinning');
                 
                 setTimeout(() => {
-                    el.wheelArrow.classList.remove('spinning');
+                    el.arrow.classList.remove('spinning');
                     
                     if (win) {
                         const winGift = { ...state.desiredGift };
@@ -1986,7 +1935,7 @@
                     saveGame();
                     
                     state.isSpinning = false;
-                }, 3500);
+                }, 3800);
             }
 
             function init() {
@@ -2045,9 +1994,9 @@
                 el.closeWinModal.onclick = () => el.winModal.classList.remove('active');
                 el.applyPromo.onclick = applyPromo;
                 
-                el.desiredContainer.onclick = selectDesiredGift;
+                el.targetArea.onclick = selectDesiredGift;
                 el.closeSelector.onclick = () => el.giftSelector.classList.remove('active');
-                el.upgradeBtn.onclick = spinWheel;
+                el.actionBtn.onclick = spinWheel;
 
                 window.onresize = () => {
                     resizeCanvas();
