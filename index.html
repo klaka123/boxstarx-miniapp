@@ -381,7 +381,7 @@
             cursor: not-allowed;
         }
 
-        /* Кейсы с аватарками */
+        /* Кейсы с эмодзи аватарками */
         .section-title {
             font-size: 1.5rem;
             text-align: center;
@@ -428,13 +428,9 @@
             transform: scale(0.97);
         }
 
-        .case-avatar {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 10px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+        .case-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
             filter: drop-shadow(0 0 15px #ff9933);
             position: relative;
             z-index: 5;
@@ -552,7 +548,7 @@
             to { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
         }
 
-        /* Круг с острой стрелкой - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+        /* Круг для апгрейда */
         .upgrade-circle-container {
             position: relative;
             width: 280px;
@@ -585,48 +581,64 @@
             transition: background 0.3s;
         }
 
-        /* НОВАЯ СТРЕЛКА - ИДЕАЛЬНОЕ ПОЛОЖЕНИЕ */
-        .upgrade-arrow-fixed {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            transform: translate(-50%, -50%);
-            z-index: 20;
-            pointer-events: none;
-        }
-
-        .upgrade-arrow-inner {
-            position: relative;
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 140px solid #ff9933;
-            transform-origin: center bottom;
-            transform: translateY(-70px) rotate(0deg);
-            filter: drop-shadow(0 0 20px #ff9933);
-            transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
-        }
-
-        .upgrade-center {
+        /* ЦЕНТРАЛЬНЫЙ ЧЕРНЫЙ КРУГ С МОЛНИЕЙ */
+        .upgrade-center-circle {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: #000;
             border: 4px solid #ff9933;
             border-radius: 50%;
-            z-index: 30;
+            z-index: 40;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ff9933;
             box-shadow: 0 0 30px #ff9933;
+        }
+
+        /* СТРЕЛКА КАК В ЧАСАХ - ВРАЩАЕТСЯ ВОКРУГ ЦЕНТРАЛЬНОГО КРУГА */
+        .upgrade-arrow-clock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 120px;
+            background: linear-gradient(180deg, #ff9933, #ff6600);
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(0deg);
+            z-index: 30;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 0 20px #ff9933;
+            transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+        }
+
+        .upgrade-arrow-clock::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: #ff9933;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .upgrade-arrow-clock::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -4px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
         }
 
         .upgrade-percent {
@@ -1456,10 +1468,10 @@
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
-            <div class="upgrade-arrow-fixed">
-                <div class="upgrade-arrow-inner" id="upgradeArrow"></div>
-            </div>
-            <div class="upgrade-center" id="upgradeCenter">⚡</div>
+            <!-- СТРЕЛКА КАК В ЧАСАХ - ВРАЩАЕТСЯ ВОКРУГ ЦЕНТРАЛЬНОГО КРУГА -->
+            <div class="upgrade-arrow-clock" id="upgradeArrow"></div>
+            <!-- ЦЕНТРАЛЬНЫЙ ЧЕРНЫЙ КРУГ С МОЛНИЕЙ -->
+            <div class="upgrade-center-circle" id="upgradeCenter">⚡</div>
         </div>
 
         <div class="upgrade-percent" id="upgradePercent">0%</div>
@@ -1883,22 +1895,13 @@
                 return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${gift.color}" rx="20"/><text x="50" y="70" font-size="50" text-anchor="middle" fill="#fff">${gift.emoji}</text></svg>`;
             }
 
-            const CASE_AVATARS = {
-                'Базовый': '📦',
-                'Серебряный': '🥈',
-                'Золотой': '🥇',
-                'Платиновый': '💎',
-                'Алмазный': '💠',
-                'Легендарный': '👑'
-            };
-
             const CASES = [
-                { name: "Базовый", icon: "📦", price: 25, avatar: '📦' },
-                { name: "Серебряный", icon: "🥈", price: 50, avatar: '🥈' },
-                { name: "Золотой", icon: "🥇", price: 100, avatar: '🥇' },
-                { name: "Платиновый", icon: "💎", price: 500, avatar: '💎' },
-                { name: "Алмазный", icon: "💠", price: 1000, avatar: '💠' },
-                { name: "Легендарный", icon: "👑", price: 5000, avatar: '👑' }
+                { name: "Базовый", emoji: "📦", price: 25 },
+                { name: "Серебряный", emoji: "🥈", price: 50 },
+                { name: "Золотой", emoji: "🥇", price: 100 },
+                { name: "Платиновый", emoji: "💎", price: 500 },
+                { name: "Алмазный", emoji: "💠", price: 1000 },
+                { name: "Легендарный", emoji: "👑", price: 5000 }
             ];
 
             const PROMO_CODES = {
@@ -2221,17 +2224,15 @@
                 }, 500);
             }
 
-            // Рендер кейсов
+            // Рендер кейсов с эмодзи
             function renderCases() {
                 el.casesGrid.innerHTML = '';
                 CASES.forEach(c => {
                     const card = document.createElement('div');
                     card.className = 'case-card';
                     
-                    const svg = `<svg width="80" height="80" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#1a1f35" stroke="#ff9933" stroke-width="3"/><text x="50" y="70" font-size="50" text-anchor="middle" fill="#ff9933">${c.avatar}</text></svg>`;
-                    
                     card.innerHTML = `
-                        <div class="case-avatar" style="background-image: url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')"></div>
+                        <div class="case-emoji">${c.emoji}</div>
                         <div class="case-name">${c.name}</div>
                         <div class="case-price">${c.price} ⭐</div>
                     `;
@@ -2701,7 +2702,7 @@
                     
                     const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                     
-                    el.upgradeArrow.style.transform = `translateY(-70px) rotate(${targetRotation}deg)`;
+                    el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
                     
                     el.upgradeActionBtn.disabled = true;
                     
@@ -2723,7 +2724,7 @@
                         saveGame();
                         el.upgradeActionBtn.disabled = false;
                         
-                        el.upgradeArrow.style.transform = 'translateY(-70px) rotate(0deg)';
+                        el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
                     }, 4000);
                 };
 
