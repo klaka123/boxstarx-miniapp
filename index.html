@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ПОДАРКИ PREMIUM</title>
+    <title>BOXSTARX 🚀 ПРЕМИУМ ВЕРСИЯ</title>
     <style>
         * {
             margin: 0;
@@ -18,6 +18,9 @@
             background: #000;
             color: #fff;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         /* Заставка */
@@ -46,9 +49,10 @@
             color: #00ff88;
             text-shadow: 0 0 30px #00ff88;
             letter-spacing: 4px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Черное небо со звездами */
+        /* Черное небо с 10 медленными звездами */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -70,6 +74,7 @@
             overflow-x: hidden;
             opacity: 0;
             transition: opacity 1s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
         #app.visible {
@@ -87,10 +92,11 @@
             padding-bottom: 30px;
         }
 
-        /* Зеленый хедер */
+        /* Зеленый хедер с улучшенным текстом */
         .header {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 12px 20px;
@@ -100,6 +106,7 @@
             position: sticky;
             top: 16px;
             z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.2);
         }
 
         .balance-wrap {
@@ -117,6 +124,8 @@
             font-size: 2rem;
             font-weight: 800;
             color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
+            letter-spacing: 0.5px;
         }
 
         .add-btn {
@@ -129,15 +138,23 @@
             font-size: 1rem;
             cursor: pointer;
             border: 1px solid #00ff88;
+            transition: all 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .add-btn:active {
+            transform: scale(0.95);
         }
 
         /* Ракета */
         .rocket-section {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.2);
         }
 
         .rocket-window {
@@ -155,12 +172,12 @@
             background: white;
             border-radius: 50%;
             filter: blur(1px);
-            animation: windowStarMove 15s linear infinite;
+            animation: windowStarMove 20s linear infinite;
         }
 
         @keyframes windowStarMove {
             from { transform: translateX(0) translateY(0); }
-            to { transform: translateX(-150px) translateY(150px); }
+            to { transform: translateX(-200px) translateY(200px); }
         }
 
         .rocket {
@@ -212,12 +229,16 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
             z-index: 25;
             color: #00ff88;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
 
         .timer {
@@ -225,12 +246,15 @@
             top: 20px;
             left: 20px;
             background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
             z-index: 25;
             color: #00ff88;
+            font-weight: 700;
         }
 
         .auto-buttons {
@@ -249,12 +273,17 @@
             font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .auto-btn.active {
             background: #00ff88;
             color: black;
             font-weight: bold;
+            text-shadow: none;
         }
 
         .bet-control {
@@ -273,6 +302,9 @@
             font-size: 1.2rem;
             text-align: center;
             outline: none;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .flight-buttons {
@@ -288,6 +320,12 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .flight-btn:active {
+            transform: scale(0.95);
         }
 
         .btn-start {
@@ -297,6 +335,8 @@
 
         .btn-stop {
             background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 2px solid #00ff88;
             color: white;
         }
@@ -304,6 +344,7 @@
         .btn-stop:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
         .section-title {
@@ -311,6 +352,9 @@
             text-align: center;
             margin: 20px 0 15px;
             color: #00ff88;
+            font-weight: 800;
+            text-shadow: 0 0 15px rgba(0,255,136,0.5);
+            letter-spacing: 1px;
         }
 
         /* Кейсы */
@@ -323,12 +367,14 @@
         .case-card {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 3px solid #00ff88;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.2s;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.2);
         }
 
         .case-card:active {
@@ -345,15 +391,17 @@
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .case-price {
             font-size: 1.4rem;
             color: #00ff88;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
 
-        /* Зеленое модальное окно */
+        /* Модальное окно */
         .case-modal {
             position: fixed;
             top: 0;
@@ -362,6 +410,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.98);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -380,6 +429,7 @@
             margin-bottom: 40px;
             text-transform: uppercase;
             letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(0,255,136,0.5);
         }
 
         .case-display {
@@ -408,7 +458,6 @@
             will-change: transform;
         }
 
-        /* ========== РЕАЛЬНЫЕ КАРТИНКИ ПОДАРКОВ ========== */
         .case-gift {
             min-width: 200px;
             height: 240px;
@@ -448,7 +497,6 @@
             z-index: 100;
         }
 
-        /* Стили для картинок подарков */
         .gift-image {
             width: 100px;
             height: 100px;
@@ -468,6 +516,7 @@
             color: transparent;
             position: relative;
             z-index: 5;
+            -webkit-font-smoothing: antialiased;
         }
 
         .gift-price {
@@ -476,16 +525,8 @@
             font-weight: 700;
             position: relative;
             z-index: 5;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
-
-        /* Стили для разных типов подарков */
-        .gift-box { background: linear-gradient(135deg, #ff6b6b, #ff8c8c); border-radius: 30px; padding: 15px; }
-        .gift-heart { background: linear-gradient(135deg, #ff4d4d, #ff1a1a); border-radius: 50%; padding: 15px; }
-        .gift-star { background: linear-gradient(135deg, #ffd700, #ffaa00); border-radius: 10px; padding: 15px; transform: rotate(15deg); }
-        .gift-crown { background: linear-gradient(135deg, #ffd700, #ffb347); border-radius: 40px 40px 10px 10px; padding: 15px; }
-        .gift-rocket { background: linear-gradient(135deg, #4ecdc4, #45b7d1); border-radius: 40px 40px 10px 10px; padding: 15px; }
-        .gift-diamond { background: linear-gradient(135deg, #b9f2ff, #87ceeb); border-radius: 10px; padding: 15px; transform: rotate(45deg); }
-        .gift-unicorn { background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 50%; padding: 15px; }
 
         .case-marker {
             position: absolute;
@@ -507,6 +548,7 @@
             transform: translateX(-50%);
             font-size: 2rem;
             color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
         }
 
         .case-marker::after {
@@ -517,6 +559,7 @@
             transform: translateX(-50%);
             font-size: 2rem;
             color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
         }
 
         .case-result {
@@ -529,6 +572,9 @@
             border: 2px solid #00ff88;
             border-radius: 60px;
             background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-shadow: 0 0 15px rgba(0,255,136,0.5);
         }
 
         .case-actions {
@@ -546,6 +592,8 @@
             background: #00ff88;
             color: black;
             transition: transform 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 0 30px rgba(0,255,136,0.5);
         }
 
         .case-btn:active {
@@ -555,6 +603,7 @@
         .case-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
         .case-close {
@@ -565,6 +614,8 @@
             height: 60px;
             border-radius: 50%;
             background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             color: white;
             font-size: 2rem;
@@ -572,6 +623,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s;
         }
 
         .case-close:active {
@@ -582,10 +634,12 @@
         .inventory-section {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 20px;
             margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.2);
         }
 
         .inventory-header {
@@ -599,15 +653,19 @@
             font-size: 1.3rem;
             font-weight: 700;
             color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
 
         .inventory-count {
             background: rgba(0,255,136,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 2px solid #00ff88;
             padding: 5px 15px;
             border-radius: 40px;
             font-size: 0.9rem;
             color: #00ff88;
+            font-weight: 600;
         }
 
         .inventory-grid {
@@ -630,6 +688,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,255,136,0.2);
         }
 
         .inventory-slot::before {
@@ -664,6 +723,7 @@
             font-size: 0.6rem;
             font-weight: 600;
             color: #00ff88;
+            -webkit-font-smoothing: antialiased;
         }
 
         .inv-price {
@@ -673,8 +733,11 @@
             bottom: 5px;
             right: 5px;
             background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             padding: 2px 5px;
             border-radius: 10px;
+            font-weight: 600;
         }
 
         .empty-slot {
@@ -687,16 +750,20 @@
             justify-content: center;
             color: #666;
             font-size: 0.7rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         /* Промокоды */
         .promo-section {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 16px;
             margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,255,136,0.2);
         }
 
         .promo-title {
@@ -705,6 +772,7 @@
             color: #00ff88;
             margin-bottom: 12px;
             text-align: center;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
         }
 
         .promo-input {
@@ -715,12 +783,20 @@
         .promo-field {
             flex: 1;
             background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 2px solid #00ff88;
             border-radius: 40px;
             padding: 12px 15px;
             color: white;
             font-size: 1rem;
             outline: none;
+            font-weight: 500;
+        }
+
+        .promo-field:focus {
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0,255,136,0.3);
         }
 
         .promo-apply {
@@ -731,6 +807,12 @@
             color: black;
             font-weight: 700;
             cursor: pointer;
+            transition: all 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .promo-apply:active {
+            transform: scale(0.95);
         }
 
         .toast {
@@ -745,6 +827,9 @@
             font-weight: 700;
             z-index: 20000;
             border: 2px solid white;
+            box-shadow: 0 0 30px #00ff88;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            -webkit-font-smoothing: antialiased;
         }
     </style>
 </head>
@@ -843,21 +928,23 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон
+            // Звездный фон - 10 медленных звезд
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let stars = [];
+            let animationFrame;
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 10; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 2 + 1,
-                        speed: Math.random() * 0.3 + 0.2,
-                        brightness: Math.random() * 0.5 + 0.3
+                        size: Math.random() * 3 + 1,
+                        speed: Math.random() * 0.15 + 0.05,
+                        brightness: Math.random() * 0.5 + 0.3,
+                        phase: Math.random() * Math.PI * 2
                     });
                 }
             }
@@ -877,18 +964,24 @@
                 
                 for (let s of stars) {
                     s.x += s.speed;
-                    if (s.x > width) s.x = 0;
+                    if (s.x > width) {
+                        s.x = 0;
+                        s.y = Math.random() * height;
+                    }
                     
-                    ctx.globalAlpha = s.brightness;
+                    // Мерцание
+                    const twinkle = Math.sin(Date.now() * 0.002 + s.phase) * 0.2 + 0.8;
+                    
+                    ctx.globalAlpha = s.brightness * twinkle;
                     ctx.fillStyle = '#fff';
                     ctx.shadowColor = '#fff';
-                    ctx.shadowBlur = 5;
+                    ctx.shadowBlur = 10;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 
-                requestAnimationFrame(drawStars);
+                animationFrame = requestAnimationFrame(drawStars);
             }
 
             function initWindowStars() {
@@ -901,119 +994,28 @@
                     s.style.width = Math.random() * 3 + 1 + 'px';
                     s.style.height = s.style.width;
                     s.style.animationDelay = Math.random() * 5 + 's';
-                    s.style.animationDuration = (Math.random() * 5 + 10) + 's';
+                    s.style.animationDuration = (Math.random() * 5 + 15) + 's';
                     w.appendChild(s);
                 }
             }
 
-            // ========== РЕАЛЬНЫЕ ПОДАРКИ С КАРТИНКАМИ ==========
+            // Данные
             const GIFTS = [
-                // Подарки с фотографий
-                { 
-                    id: 'rip',
-                    name: 'RIP',
-                    price: 15000,
-                    image: 'rip',
-                    style: 'gift-box'
-                },
-                { 
-                    id: 'skull',
-                    name: 'Skull',
-                    price: 5000,
-                    image: 'skull',
-                    style: 'gift-heart'
-                },
-                { 
-                    id: 'demon',
-                    name: 'Demon',
-                    price: 41000,
-                    image: 'demon',
-                    style: 'gift-star'
-                },
-                { 
-                    id: 'angel',
-                    name: 'Angel',
-                    price: 10000,
-                    image: 'angel',
-                    style: 'gift-crown'
-                },
-                { 
-                    id: 'devil',
-                    name: 'Devil',
-                    price: 10000,
-                    image: 'devil',
-                    style: 'gift-rocket'
-                },
-                { 
-                    id: 'heart',
-                    name: 'Heart',
-                    price: 1000,
-                    image: 'heart',
-                    style: 'gift-heart'
-                },
-                { 
-                    id: 'fire',
-                    name: 'Fire',
-                    price: 500,
-                    image: 'fire',
-                    style: 'gift-star'
-                },
-                { 
-                    id: 'diamond',
-                    name: 'Diamond',
-                    price: 5000,
-                    image: 'diamond',
-                    style: 'gift-diamond'
-                },
-                { 
-                    id: 'crown',
-                    name: 'Crown',
-                    price: 2500,
-                    image: 'crown',
-                    style: 'gift-crown'
-                },
-                { 
-                    id: 'star',
-                    name: 'Star',
-                    price: 30000,
-                    image: 'star',
-                    style: 'gift-star'
-                },
-                { 
-                    id: 'superstar',
-                    name: 'Superstar',
-                    price: 5000,
-                    image: 'superstar',
-                    style: 'gift-star'
-                },
-                { 
-                    id: 'comet',
-                    name: 'Comet',
-                    price: 2500,
-                    image: 'comet',
-                    style: 'gift-rocket'
-                },
-                { 
-                    id: 'meteor',
-                    name: 'Meteor',
-                    price: 500,
-                    image: 'meteor',
-                    style: 'gift-rocket'
-                },
-                { 
-                    id: 'planet',
-                    name: 'Planet',
-                    price: 300,
-                    image: 'planet',
-                    style: 'gift-box'
-                },
-                { 
-                    id: 'galaxy',
-                    name: 'Galaxy',
-                    price: 150,
-                    image: 'galaxy',
-                    style: 'gift-star'
-                }
+                { id: 'rip', name: 'RIP', price: 15000 },
+                { id: 'skull', name: 'Skull', price: 5000 },
+                { id: 'demon', name: 'Demon', price: 41000 },
+                { id: 'angel', name: 'Angel', price: 10000 },
+                { id: 'devil', name: 'Devil', price: 10000 },
+                { id: 'heart', name: 'Heart', price: 1000 },
+                { id: 'fire', name: 'Fire', price: 500 },
+                { id: 'diamond', name: 'Diamond', price: 5000 },
+                { id: 'crown', name: 'Crown', price: 2500 },
+                { id: 'star', name: 'Star', price: 30000 },
+                { id: 'superstar', name: 'Superstar', price: 5000 },
+                { id: 'comet', name: 'Comet', price: 2500 },
+                { id: 'meteor', name: 'Meteor', price: 500 },
+                { id: 'planet', name: 'Planet', price: 300 },
+                { id: 'galaxy', name: 'Galaxy', price: 150 }
             ];
 
             const CASES = [
@@ -1114,7 +1116,6 @@
                     const slot = document.createElement('div');
                     slot.className = 'inventory-slot';
                     
-                    // SVG для разных подарков
                     let svgContent = '';
                     switch(item.id) {
                         case 'rip':
@@ -1184,12 +1185,17 @@
                 showToast(`✅ ${item.name} продан за ${price}⭐`);
             }
 
-            // Ракета
+            // Ракета с фиксом бага
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
                 if (bet > state.balance) {
                     showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                if (state.isFlying) {
+                    showToast('❌ Ракета уже в полете!');
                     return;
                 }
                 
@@ -1304,7 +1310,7 @@
                 });
             }
 
-            // АЗАРТНОЕ ОТКРЫТИЕ КЕЙСА
+            // Открытие кейса
             function openCase(c) {
                 if (state.balance < c.price) {
                     showToast('❌ Недостаточно звезд!');
@@ -1314,10 +1320,8 @@
                 state.currentCase = c;
                 el.caseTitle.textContent = `КЕЙС: ${c.name}`;
                 
-                // Создаем трек с предметами
                 const items = [];
                 
-                // Добавляем 25 предметов для быстрой анимации
                 for (let i = 0; i < 25; i++) {
                     const randomGift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
                     items.push(randomGift);
@@ -1329,7 +1333,6 @@
                     const giftDiv = document.createElement('div');
                     giftDiv.className = 'case-gift';
                     
-                    // SVG для подарка
                     let svgContent = '';
                     switch(item.id) {
                         case 'rip':
@@ -1396,12 +1399,10 @@
                 el.caseOpenBtn.disabled = true;
                 el.caseOpenBtn.textContent = 'ОТКРЫВАЕМ...';
                 
-                // Списываем баланс
                 state.balance -= state.currentCase.price;
                 updateUI();
                 saveGame();
                 
-                // Определяем выигрыш
                 let maxPrice;
                 if (state.currentCase.price <= 100) {
                     maxPrice = state.currentCase.price * 1.1;
@@ -1501,10 +1502,14 @@
                 });
 
                 el.addFunds.onclick = () => {
-                    state.balance += 100;
-                    updateUI();
-                    saveGame();
-                    showToast('+100⭐ получено!');
+                    if (!state.isFlying) {
+                        state.balance += 100;
+                        updateUI();
+                        saveGame();
+                        showToast('+100⭐ получено!');
+                    } else {
+                        showToast('❌ Нельзя пополнить во время полета!');
+                    }
                 };
 
                 el.startBtn.onclick = startFlight;
