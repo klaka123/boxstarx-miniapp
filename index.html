@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 КРАСИВАЯ СТРЕЛКА</title>
+    <title>BOXSTARX 🚀 ОПТИМИЗИРОВАННАЯ СТРЕЛКА</title>
     <style>
         * {
             margin: 0;
@@ -354,7 +354,7 @@
             font-weight: 700;
         }
 
-        /* ========== НОВАЯ КРАСИВАЯ СТРЕЛКА ========== */
+        /* ========== ОПТИМИЗИРОВАННЫЙ АПГРЕЙД ========== */
         .upgrade-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -363,6 +363,8 @@
             padding: 20px;
             margin: 20px 0;
             animation: grayPulse 3s infinite;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
         .upgrade-title {
@@ -378,6 +380,7 @@
             height: 280px;
             margin: 0 auto 20px;
             filter: drop-shadow(0 0 30px #cccccc);
+            transform: translateZ(0);
         }
 
         .wheel-canvas {
@@ -390,6 +393,7 @@
             background: #1a1f35;
             border: 4px solid #cccccc;
             box-shadow: inset 0 0 30px rgba(200,200,200,0.3);
+            will-change: transform;
         }
 
         .wheel-arrow-container {
@@ -400,6 +404,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 30;
+            transform: translateZ(0);
         }
 
         .wheel-arrow {
@@ -409,36 +414,37 @@
             transform: translate(-50%, -50%) rotate(0deg);
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 60px solid #cccccc;
-            filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 90px solid #cccccc;
+            filter: drop-shadow(0 0 20px #cccccc);
             transform-origin: center;
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
+            transition: transform 4s cubic-bezier(0.1, 0.9, 0.2, 1);
             will-change: transform;
+            backface-visibility: hidden;
         }
 
         .wheel-arrow::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: -20px;
-            width: 40px;
-            height: 40px;
+            top: 15px;
+            left: -18px;
+            width: 36px;
+            height: 36px;
             background: radial-gradient(circle, #ffffff, #cccccc);
             border-radius: 50%;
-            box-shadow: 0 0 30px #ffffff, 0 0 60px #cccccc;
+            box-shadow: 0 0 30px #ffffff;
             border: 2px solid #999999;
         }
 
         .wheel-arrow::after {
             content: '';
             position: absolute;
-            top: 30px;
-            left: -10px;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #ffffff, #eeeeee);
+            top: 25px;
+            left: -8px;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
             border-radius: 50%;
             box-shadow: 0 0 20px white;
         }
@@ -448,8 +454,8 @@
         }
 
         @keyframes arrowGlow {
-            from { filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999); }
-            to { filter: drop-shadow(0 0 40px #cccccc) drop-shadow(0 0 80px #999999) drop-shadow(0 0 120px #666666); }
+            from { filter: drop-shadow(0 0 20px #cccccc); }
+            to { filter: drop-shadow(0 0 50px #cccccc) drop-shadow(0 0 100px #999999); }
         }
 
         .wheel-center {
@@ -457,18 +463,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(145deg, #2a2f45, #1a1f35);
             border: 4px solid #cccccc;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             z-index: 25;
-            box-shadow: 0 0 50px #cccccc, inset 0 0 20px rgba(255,255,255,0.3);
+            box-shadow: 0 0 50px #cccccc;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .wheel-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
         }
 
         .slots-container {
@@ -500,6 +511,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .slot-item:active {
+            transform: scale(0.95);
         }
 
         .slot-item.filled {
@@ -525,6 +541,11 @@
             margin: 20px 0;
             text-align: center;
             cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .desired-container:hover {
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .desired-label {
@@ -599,6 +620,11 @@
             color: black;
             cursor: pointer;
             border: 2px solid #cccccc;
+            transition: transform 0.2s;
+        }
+
+        .upgrade-btn:active:not(:disabled) {
+            transform: scale(0.97);
         }
 
         .upgrade-btn:disabled {
@@ -654,6 +680,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s;
             position: relative;
         }
 
@@ -888,6 +915,7 @@
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .gift-option:active {
@@ -1022,6 +1050,12 @@
             font-weight: 700;
             z-index: 5000;
             border: 1px solid white;
+            animation: toastIn 0.3s;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
     </style>
 </head>
@@ -1074,7 +1108,7 @@
             <div class="cases-grid" id="casesGrid"></div>
 
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ КРУГОВОЙ АПГРЕЙД ⚡</div>
+                <div class="upgrade-title">⚡ ДЛИННАЯ СТРЕЛКА ⚡</div>
                 
                 <div class="wheel-container">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
@@ -1185,6 +1219,7 @@
         (function() {
             'use strict';
 
+            // Заставка
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
                 setTimeout(() => {
@@ -1192,19 +1227,21 @@
                 }, 500);
             }, 2000);
 
+            // Звездный фон (оптимизированный)
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let stars = [];
+            let animationId;
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 25; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
                         size: Math.random() * 2 + 0.5,
-                        speed: Math.random() * 0.1 + 0.03,
+                        speed: Math.random() * 0.1 + 0.02,
                         brightness: Math.random() * 0.5 + 0.3
                     });
                 }
@@ -1236,12 +1273,12 @@
                     ctx.fill();
                 }
                 
-                requestAnimationFrame(drawStars);
+                animationId = requestAnimationFrame(drawStars);
             }
 
             function initWindowStars() {
                 const w = document.getElementById('rocketWindow');
-                for (let i = 0; i < 15; i++) {
+                for (let i = 0; i < 12; i++) {
                     const s = document.createElement('div');
                     s.className = 'window-star';
                     s.style.left = Math.random() * 100 + '%';
@@ -1254,6 +1291,7 @@
                 }
             }
 
+            // Данные
             const GIFTS = [
                 { emoji: "🧸", name: "Мишка", price: 5, category: "common" },
                 { emoji: "🎈", name: "Шар", price: 8, category: "common" },
@@ -1324,6 +1362,7 @@
                 currentCategory: 'all'
             };
 
+            // DOM элементы
             const el = {
                 balance: document.getElementById('balance'),
                 addFunds: document.getElementById('addFunds'),
@@ -1830,7 +1869,7 @@
                 state.isSpinning = true;
                 el.upgradeBtn.disabled = true;
                 
-                const spins = 8 + Math.floor(Math.random() * 6);
+                const spins = 6 + Math.floor(Math.random() * 4);
                 const win = Math.random() * 100 < chance;
                 
                 const baseRotation = win ? 45 : 225;
@@ -1857,7 +1896,7 @@
                     saveGame();
                     
                     state.isSpinning = false;
-                }, 4000);
+                }, 3500);
             }
 
             function init() {
