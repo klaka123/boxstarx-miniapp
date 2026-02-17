@@ -102,23 +102,9 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: radial-gradient(ellipse at 30% 40%, #1a1f35 0%, #0a0c1a 50%, #030514 100%);
+            background: #000;
             display: block;
             pointer-events: none;
-        }
-
-        /* Туманность */
-        .nebula {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(255,153,51,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(255,102,0,0.1) 0%, transparent 50%);
-            z-index: 1;
-            pointer-events: none;
-            mix-blend-mode: screen;
         }
 
         #app {
@@ -604,7 +590,6 @@
             transform-origin: bottom center;
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
-            border-radius: 4px 4px 0 0;
             box-shadow: 0 0 20px #ff9933;
             transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
         }
@@ -614,10 +599,12 @@
             position: absolute;
             top: -12px;
             left: -10px;
-            width: 24px;
-            height: 24px;
-            background: #ff9933;
-            border-radius: 50%;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #ff9933;
+            transform: rotate(180deg);
             box-shadow: 0 0 20px #ff9933;
         }
 
@@ -820,7 +807,7 @@
             gap: 15px;
             padding: 0 15px;
             align-items: center;
-            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transition: transform 2.5s cubic-bezier(0.1, 0.8, 0.2, 1);
         }
 
         .case-gift {
@@ -841,6 +828,12 @@
             box-shadow: 0 0 50px #ff9933;
             transform: scale(1.05);
             z-index: 100;
+            animation: winPulse 0.5s infinite alternate;
+        }
+
+        @keyframes winPulse {
+            from { box-shadow: 0 0 30px #ff9933; }
+            to { box-shadow: 0 0 80px #ff9933; }
         }
 
         .gift-image {
@@ -1747,7 +1740,6 @@
     <div class="click-effect" id="clickEffect"></div>
 
     <canvas id="starCanvas"></canvas>
-    <div class="nebula"></div>
 
     <div id="app">
         <div class="container">
@@ -2164,7 +2156,7 @@
                 }, 1000);
             }, 3000);
 
-            // Звездный фон
+            // Звездный фон - черный с желтыми звездами
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -2173,14 +2165,13 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 80; i++) {
+                for (let i = 0; i < 200; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 3 + 1,
-                        speed: Math.random() * 0.15 + 0.05,
-                        brightness: Math.random() * 0.5 + 0.3,
-                        color: `hsl(${Math.random() * 60 + 200}, 80%, 70%)`
+                        size: Math.random() * 2 + 0.5,
+                        brightness: Math.random() * 0.8 + 0.2,
+                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)` // Желтые оттенки
                     });
                 }
             }
@@ -2196,38 +2187,34 @@
             function drawStars() {
                 ctx.clearRect(0, 0, width, height);
                 
-                const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
-                gradient.addColorStop(0, '#1a1f35');
-                gradient.addColorStop(0.3, '#0a0c1a');
-                gradient.addColorStop(0.6, '#030514');
-                gradient.addColorStop(1, '#000000');
-                ctx.fillStyle = gradient;
+                // Черный фон
+                ctx.fillStyle = '#000';
                 ctx.fillRect(0, 0, width, height);
                 
+                // Рисуем звезды
                 for (let s of stars) {
-                    s.x += s.speed;
-                    if (s.x > width) {
-                        s.x = 0;
-                        s.y = Math.random() * height;
-                    }
-                    
                     ctx.globalAlpha = s.brightness;
                     ctx.fillStyle = s.color;
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 5;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 
-                if (Math.random() < 0.0002) {
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1;
+                
+                // Редкие падающие звезды (медленные)
+                if (Math.random() < 0.0005) {
                     shootingStars.push({
                         x: Math.random() * width,
                         y: Math.random() * height * 0.2,
-                        length: Math.random() * 200 + 150,
-                        speed: Math.random() * 4 + 2,
+                        length: Math.random() * 150 + 100,
+                        speed: Math.random() * 2 + 1,
                         angle: Math.random() * 0.3 + 0.35,
-                        life: 300
+                        life: 500,
+                        color: '#ffdd44'
                     });
                 }
                 
@@ -2243,11 +2230,11 @@
                         continue;
                     }
                     
-                    ctx.globalAlpha = s.life / 300;
-                    ctx.strokeStyle = '#ff9933';
-                    ctx.lineWidth = 3;
-                    ctx.shadowColor = '#ff9933';
-                    ctx.shadowBlur = 20;
+                    ctx.globalAlpha = s.life / 500;
+                    ctx.strokeStyle = s.color;
+                    ctx.lineWidth = 2;
+                    ctx.shadowColor = s.color;
+                    ctx.shadowBlur = 15;
                     
                     ctx.beginPath();
                     ctx.moveTo(s.x, s.y);
@@ -2255,8 +2242,8 @@
                     ctx.stroke();
                     
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, 5, 0, Math.PI * 2);
-                    ctx.fillStyle = '#ff9933';
+                    ctx.arc(s.x, s.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = s.color;
                     ctx.fill();
                 }
                 
@@ -2763,7 +2750,7 @@
                     el.caseMultipleContainer.appendChild(rowDiv);
                     
                     const items = [];
-                    for (let i = 0; i < 70; i++) {
+                    for (let i = 0; i < 50; i++) {
                         let gift;
                         if (state.currentCase.price === 25) {
                             const cheapGifts = GIFTS.filter(g => g.price <= 30);
@@ -2892,6 +2879,7 @@
                 
                 state.multipleResults = results;
                 
+                // Анимация прокрутки для каждого ряда
                 for (let r = 0; r < state.selectedQty; r++) {
                     const caseItems = document.getElementById(`caseItems_${r}`);
                     if (!caseItems) continue;
@@ -2903,24 +2891,35 @@
                     const containerWidth = 800;
                     const centerPos = (containerWidth / 2) - (itemWidth / 2);
                     
-                    const winIndex = Math.floor(Math.random() * (itemCount - 20)) + 20;
+                    // Выбираем случайный выигрышный индекс ближе к центру
+                    const winIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
                     
                     const finalPos = centerPos - (winIndex * itemWidth);
                     
-                    const spins = 4 * itemWidth * itemCount;
-                    const startPos = finalPos - spins;
-                    
-                    caseItems.style.transform = `translateX(${startPos}px)`;
-                    
+                    // Сбрасываем предыдущие классы
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
+                    // Сначала быстро прокручиваем влево, затем останавливаемся на выигрыше
+                    const spins = 3 * itemCount * itemWidth;
+                    const startPos = finalPos - spins;
+                    
+                    // Устанавливаем начальную позицию
+                    caseItems.style.transition = 'none';
+                    caseItems.style.transform = `translateX(${startPos}px)`;
+                    
+                    // Запускаем анимацию
                     setTimeout(() => {
+                        caseItems.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
+                        // Подсвечиваем выигрыш после остановки
                         setTimeout(() => {
-                            if (items[winIndex]) items[winIndex].classList.add('win');
+                            if (items[winIndex]) {
+                                items[winIndex].classList.add('win');
+                                sound.playWinSound();
+                            }
                         }, 2500);
-                    }, 2500);
+                    }, 50);
                 }
                 
                 setTimeout(() => {
@@ -2963,7 +2962,7 @@
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
-                }, 5000);
+                }, 3000);
             }
 
             el.sellConfirm.onclick = () => {
@@ -3048,10 +3047,11 @@
             function updateBlackjackUI(showDealerAll = false) {
                 // Карты игрока
                 el.playerCards.innerHTML = '';
-                state.blackjack.playerCards.forEach(card => {
+                state.blackjack.playerCards.forEach((card, index) => {
                     const cardEl = document.createElement('div');
                     cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
                     cardEl.textContent = `${card.value}${card.suit}`;
+                    cardEl.style.animation = `cardDeal 0.3s ease-out ${index * 0.1}s both`;
                     el.playerCards.appendChild(cardEl);
                 });
                 
@@ -3062,9 +3062,11 @@
                     if (index === 1 && !showDealerAll && state.blackjack.gameActive) {
                         cardEl.className = 'blackjack-card';
                         cardEl.textContent = '?';
+                        cardEl.style.animation = `cardDeal 0.3s ease-out ${index * 0.1}s both`;
                     } else {
                         cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
                         cardEl.textContent = `${card.value}${card.suit}`;
+                        cardEl.style.animation = `cardDeal 0.3s ease-out ${index * 0.1}s both`;
                     }
                     el.dealerCards.appendChild(cardEl);
                 });
@@ -3090,24 +3092,30 @@
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
                 
-                // Раздаем карты
-                state.blackjack.playerCards.push(state.blackjack.deck.pop());
-                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
-                state.blackjack.playerCards.push(state.blackjack.deck.pop());
-                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                // Раздаем карты с анимацией
+                setTimeout(() => {
+                    state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    updateBlackjackUI();
+                }, 100);
                 
-                state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
-                state.blackjack.dealerScore = calculateScore([state.blackjack.dealerCards[0]]);
-                state.blackjack.gameActive = true;
-                state.blackjack.bet = bet;
-                
-                updateBlackjackUI();
-                
-                el.blackjackHit.disabled = false;
-                el.blackjackStand.disabled = false;
-                el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
-                el.blackjackNew.disabled = false;
-                el.blackjackMessage.textContent = 'Ваш ход';
+                setTimeout(() => {
+                    state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    
+                    state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                    state.blackjack.dealerScore = calculateScore([state.blackjack.dealerCards[0]]);
+                    state.blackjack.gameActive = true;
+                    state.blackjack.bet = bet;
+                    
+                    updateBlackjackUI();
+                    
+                    el.blackjackHit.disabled = false;
+                    el.blackjackStand.disabled = false;
+                    el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
+                    el.blackjackNew.disabled = false;
+                    el.blackjackMessage.textContent = 'Ваш ход';
+                }, 200);
             }
 
             function blackjackHit() {
