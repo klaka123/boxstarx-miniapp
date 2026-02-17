@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ИСПРАВЛЕННАЯ ВЕРСИЯ</title>
+    <title>BOXSTARX 🚀 КРАСИВАЯ СТРЕЛКА</title>
     <style>
         * {
             margin: 0;
@@ -354,6 +354,7 @@
             font-weight: 700;
         }
 
+        /* ========== НОВАЯ КРАСИВАЯ СТРЕЛКА ========== */
         .upgrade-section {
             background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -388,6 +389,7 @@
             border-radius: 50%;
             background: #1a1f35;
             border: 4px solid #cccccc;
+            box-shadow: inset 0 0 30px rgba(200,200,200,0.3);
         }
 
         .wheel-arrow-container {
@@ -402,40 +404,52 @@
 
         .wheel-arrow {
             position: absolute;
-            top: -15px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 60px solid #cccccc;
-            filter: drop-shadow(0 0 20px #cccccc);
-            transform-origin: bottom center;
-            transition: transform 3.5s;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 60px solid #cccccc;
+            filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999);
+            transform-origin: center;
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
+            will-change: transform;
         }
 
         .wheel-arrow::before {
             content: '';
             position: absolute;
-            top: -70px;
-            left: -15px;
-            width: 30px;
-            height: 30px;
-            background: #cccccc;
+            top: 20px;
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffffff, #cccccc);
             border-radius: 50%;
-            box-shadow: 0 0 30px #cccccc;
+            box-shadow: 0 0 30px #ffffff, 0 0 60px #cccccc;
+            border: 2px solid #999999;
         }
 
         .wheel-arrow::after {
             content: '';
             position: absolute;
-            top: -60px;
-            left: -8px;
-            width: 16px;
-            height: 16px;
-            background: white;
+            top: 30px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ffffff, #eeeeee);
             border-radius: 50%;
+            box-shadow: 0 0 20px white;
+        }
+
+        .wheel-arrow.spinning {
+            animation: arrowGlow 0.3s infinite alternate;
+        }
+
+        @keyframes arrowGlow {
+            from { filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999); }
+            to { filter: drop-shadow(0 0 40px #cccccc) drop-shadow(0 0 80px #999999) drop-shadow(0 0 120px #666666); }
         }
 
         .wheel-center {
@@ -443,9 +457,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: #1a1f35;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #2a2f45, #1a1f35);
             border: 4px solid #cccccc;
             border-radius: 50%;
             display: flex;
@@ -453,6 +467,7 @@
             justify-content: center;
             font-size: 2.5rem;
             z-index: 25;
+            box-shadow: 0 0 50px #cccccc, inset 0 0 20px rgba(255,255,255,0.3);
             cursor: pointer;
         }
 
@@ -1059,7 +1074,7 @@
             <div class="cases-grid" id="casesGrid"></div>
 
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ СИСТЕМА АПГРЕЙДА ⚡</div>
+                <div class="upgrade-title">⚡ КРУГОВОЙ АПГРЕЙД ⚡</div>
                 
                 <div class="wheel-container">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
@@ -1170,7 +1185,6 @@
         (function() {
             'use strict';
 
-            // Заставка
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
                 setTimeout(() => {
@@ -1178,7 +1192,6 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1241,7 +1254,6 @@
                 }
             }
 
-            // Данные
             const GIFTS = [
                 { emoji: "🧸", name: "Мишка", price: 5, category: "common" },
                 { emoji: "🎈", name: "Шар", price: 8, category: "common" },
@@ -1312,7 +1324,6 @@
                 currentCategory: 'all'
             };
 
-            // DOM элементы
             const el = {
                 balance: document.getElementById('balance'),
                 addFunds: document.getElementById('addFunds'),
@@ -1724,11 +1735,9 @@
             }
 
             function selectDesiredGift() {
-                // Показываем все категории
                 el.giftCategories.style.display = 'flex';
                 el.selectorTitle.textContent = 'Выберите желаемый подарок';
                 
-                // Сбрасываем активную категорию
                 document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.dataset.cat === 'all') {
@@ -1821,14 +1830,18 @@
                 state.isSpinning = true;
                 el.upgradeBtn.disabled = true;
                 
-                const spins = 10 + Math.floor(Math.random() * 8);
+                const spins = 8 + Math.floor(Math.random() * 6);
                 const win = Math.random() * 100 < chance;
                 
-                const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
+                const baseRotation = win ? 45 : 225;
+                const targetRotation = 360 * spins + baseRotation;
                 
-                el.wheelArrow.style.transform = `translateX(-50%) rotate(${targetRotation}deg)`;
+                el.wheelArrow.style.transform = `translate(-50%, -50%) rotate(${targetRotation}deg)`;
+                el.wheelArrow.classList.add('spinning');
                 
                 setTimeout(() => {
+                    el.wheelArrow.classList.remove('spinning');
+                    
                     if (win) {
                         const winGift = { ...state.desiredGift };
                         state.inventory.push(winGift);
@@ -1844,7 +1857,7 @@
                     saveGame();
                     
                     state.isSpinning = false;
-                }, 3500);
+                }, 4000);
             }
 
             function init() {
@@ -1860,7 +1873,6 @@
                 drawWheel(0);
                 updateDesiredDisplay();
 
-                // Категории подарков
                 document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -1870,7 +1882,6 @@
                     };
                 });
 
-                // Авто-кнопки
                 document.querySelectorAll('.auto-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.auto-btn').forEach(x => x.classList.remove('active'));
@@ -1879,7 +1890,6 @@
                     };
                 });
 
-                // Quantity кнопки
                 document.querySelectorAll('.quantity-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.quantity-btn').forEach(x => x.classList.remove('active'));
@@ -1906,12 +1916,7 @@
                 el.closeWinModal.onclick = () => el.winModal.classList.remove('active');
                 el.applyPromo.onclick = applyPromo;
                 
-                // Прямое назначение обработчика
-                el.desiredContainer.onclick = function() {
-                    console.log('Клик по желаемому подарку');
-                    selectDesiredGift();
-                };
-                
+                el.desiredContainer.onclick = selectDesiredGift;
                 el.closeSelector.onclick = () => el.giftSelector.classList.remove('active');
                 el.upgradeBtn.onclick = spinWheel;
 
