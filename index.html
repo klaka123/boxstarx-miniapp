@@ -468,7 +468,7 @@
             color: #ff9933;
         }
 
-        /* Круг с острой стрелкой (ИСПРАВЛЕНО) */
+        /* Круг с острой стрелкой */
         .upgrade-circle-container {
             position: relative;
             width: 280px;
@@ -500,32 +500,32 @@
             transition: background 0.3s;
         }
 
-        /* Стрелка в центре круга */
-        .upgrade-arrow-container {
+        /* Стрелка строго в центре - ИДЕАЛЬНОЕ ПОЛОЖЕНИЕ */
+        .upgrade-arrow-wrapper {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 20;
             pointer-events: none;
+            z-index: 20;
         }
 
         .upgrade-arrow {
             position: relative;
             width: 0;
             height: 0;
-            border-left: 14px solid transparent;
-            border-right: 14px solid transparent;
-            border-bottom: 130px solid #ff9933;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 140px solid #ff9933; /* Чуть длиннее */
             transform-origin: center center;
-            transform: rotate(0deg) translateY(-65px);
             filter: drop-shadow(0 0 20px #ff9933);
             transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+            /* Смещаем вверх на половину высоты, чтобы центр был точно в центре круга */
+            transform: translateY(-70px) rotate(0deg);
         }
 
         .upgrade-center {
@@ -686,6 +686,8 @@
             display: flex;
             gap: 15px;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .case-multiple-btn {
@@ -796,18 +798,42 @@
             text-shadow: 0 0 20px #ff9933;
         }
 
-        .case-result {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #ff9933;
+        .case-results-container {
+            width: 100%;
+            max-width: 800px;
             margin-bottom: 30px;
-            text-align: center;
-            padding: 20px 30px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
             border: 2px solid #ff9933;
-            border-radius: 60px;
-            background: rgba(0,0,0,0.8);
-            max-width: 90%;
-            word-wrap: break-word;
+        }
+
+        .case-result-item {
+            background: rgba(255,153,51,0.1);
+            border: 1px solid #ff9933;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+        }
+
+        .case-result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .case-result-win {
+            color: #00cc66;
+            font-weight: 700;
+        }
+
+        .case-result-lose {
+            color: #ff4444;
+            font-weight: 700;
         }
 
         .case-actions {
@@ -957,6 +983,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .inventory-title {
@@ -1154,7 +1182,7 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        /* Селектор подарков для ставки (только из инвентаря) */
+        /* Селектор подарков */
         .gift-selector {
             position: fixed;
             top: 0;
@@ -1318,7 +1346,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда (3 кнопки) -->
+    <!-- Модальное окно апгрейда -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -1329,7 +1357,7 @@
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
-            <div class="upgrade-arrow-container">
+            <div class="upgrade-arrow-wrapper">
                 <div class="upgrade-arrow" id="upgradeArrow"></div>
             </div>
             <div class="upgrade-center" id="upgradeCenter">⚡</div>
@@ -1371,7 +1399,9 @@
             <div class="case-marker"></div>
         </div>
         
-        <div class="case-result" id="caseResult" style="display: none;"></div>
+        <div class="case-results-container" id="caseResults" style="display: none;">
+            <div id="caseResultsList"></div>
+        </div>
         
         <div class="case-actions">
             <button class="case-btn" id="caseOpenBtn">ОТКРЫТЬ</button>
@@ -1534,36 +1564,67 @@
                 }
             }
 
-            // Подарки
+            // Подарки - МНОГО ДЕШЕВЫХ
             const GIFTS = [
-                { id: 'rip', name: 'RIP', price: 15000, emoji: '💀', color: '#333' },
-                { id: 'skull', name: 'SKULL', price: 5000, emoji: '💀', color: '#444' },
-                { id: 'demon', name: 'DEMON', price: 41000, emoji: '👿', color: '#800' },
-                { id: 'angel', name: 'ANGEL', price: 10000, emoji: '👼', color: '#ffd700' },
-                { id: 'devil', name: 'DEVIL', price: 10000, emoji: '😈', color: '#ff4444' },
-                { id: 'heart', name: 'HEART', price: 1000, emoji: '❤️', color: '#ff6b6b' },
-                { id: 'fire', name: 'FIRE', price: 500, emoji: '🔥', color: '#ff8c00' },
-                { id: 'diamond', name: 'DIAMOND', price: 5000, emoji: '💎', color: '#00ff88' },
-                { id: 'crown', name: 'CROWN', price: 2500, emoji: '👑', color: '#ffd700' },
-                { id: 'star', name: 'STAR', price: 30000, emoji: '⭐', color: '#ffd700' },
-                { id: 'superstar', name: 'SUPERSTAR', price: 5000, emoji: '🌟', color: '#00ff88' },
-                { id: 'comet', name: 'COMET', price: 2500, emoji: '☄️', color: '#66ccff' },
-                { id: 'meteor', name: 'METEOR', price: 500, emoji: '🌠', color: '#ff8c00' },
-                { id: 'planet', name: 'PLANET', price: 300, emoji: '🪐', color: '#4a90e2' },
-                { id: 'galaxy', name: 'GALAXY', price: 150, emoji: '🌌', color: '#9b59b6' },
-                { id: 'legend1', name: 'LEGEND', price: 6500, emoji: '👾', color: '#ff00ff' },
-                { id: 'legend2', name: 'MYTHIC', price: 7000, emoji: '🐉', color: '#ff4500' },
-                { id: 'legend3', name: 'GODLY', price: 7500, emoji: '👁️', color: '#00ffff' },
-                { id: 'legend4', name: 'COSMIC', price: 8000, emoji: '🌠', color: '#9932cc' },
-                { id: 'common1', name: 'TOY', price: 5, emoji: '🧸', color: '#8b4513' },
-                { id: 'common2', name: 'BALLOON', price: 8, emoji: '🎈', color: '#ff69b4' },
-                { id: 'common3', name: 'CANDY', price: 10, emoji: '🍬', color: '#ff1493' },
-                { id: 'common4', name: 'PUZZLE', price: 15, emoji: '🧩', color: '#32cd32' },
-                { id: 'common5', name: 'PAINT', price: 18, emoji: '🎨', color: '#ff4500' },
-                { id: 'common6', name: 'SOCKS', price: 22, emoji: '🧦', color: '#cd853f' },
-                { id: 'common7', name: 'HAT', price: 25, emoji: '🧢', color: '#1e90ff' },
-                { id: 'common8', name: 'SCARF', price: 28, emoji: '🧣', color: '#dc143c' },
-                { id: 'common9', name: 'GLOVES', price: 30, emoji: '🧤', color: '#b8860b' }
+                // Очень дешевые (1-10⭐)
+                { id: 'common1', name: 'TOY', price: 1, emoji: '🧸', color: '#8b4513' },
+                { id: 'common2', name: 'BALLOON', price: 2, emoji: '🎈', color: '#ff69b4' },
+                { id: 'common3', name: 'CANDY', price: 3, emoji: '🍬', color: '#ff1493' },
+                { id: 'common4', name: 'STICKER', price: 4, emoji: '🏷️', color: '#32cd32' },
+                { id: 'common5', name: 'MAGNET', price: 5, emoji: '🧲', color: '#ff4500' },
+                { id: 'common6', name: 'KEYCHAIN', price: 6, emoji: '🔑', color: '#cd853f' },
+                { id: 'common7', name: 'POSTCARD', price: 7, emoji: '📧', color: '#1e90ff' },
+                { id: 'common8', name: 'BADGE', price: 8, emoji: '📛', color: '#dc143c' },
+                { id: 'common9', name: 'PIN', price: 9, emoji: '📌', color: '#b8860b' },
+                { id: 'common10', name: 'COIN', price: 10, emoji: '🪙', color: '#ffd700' },
+                
+                // Дешевые (11-30⭐)
+                { id: 'common11', name: 'TOY CAR', price: 11, emoji: '🚗', color: '#8b4513' },
+                { id: 'common12', name: 'BALL', price: 12, emoji: '⚽', color: '#ff69b4' },
+                { id: 'common13', name: 'BOOK', price: 13, emoji: '📚', color: '#ff1493' },
+                { id: 'common14', name: 'PEN', price: 14, emoji: '✒️', color: '#32cd32' },
+                { id: 'common15', name: 'PENCIL', price: 15, emoji: '✏️', color: '#ff4500' },
+                { id: 'common16', name: 'ERASER', price: 16, emoji: '🧼', color: '#cd853f' },
+                { id: 'common17', name: 'RULER', price: 17, emoji: '📏', color: '#1e90ff' },
+                { id: 'common18', name: 'NOTEBOOK', price: 18, emoji: '📓', color: '#dc143c' },
+                { id: 'common19', name: 'BAG', price: 19, emoji: '👜', color: '#b8860b' },
+                { id: 'common20', name: 'HAT', price: 20, emoji: '🧢', color: '#ffd700' },
+                
+                // Средние (21-50⭐)
+                { id: 'common21', name: 'SCARF', price: 22, emoji: '🧣', color: '#8b4513' },
+                { id: 'common22', name: 'GLOVES', price: 24, emoji: '🧤', color: '#ff69b4' },
+                { id: 'common23', name: 'SOCKS', price: 26, emoji: '🧦', color: '#ff1493' },
+                { id: 'common24', name: 'SHOES', price: 28, emoji: '👟', color: '#32cd32' },
+                { id: 'common25', name: 'WATCH', price: 30, emoji: '⌚', color: '#ff4500' },
+                
+                // Редкие (50-200⭐)
+                { id: 'rare1', name: 'RING', price: 50, emoji: '💍', color: '#cd853f' },
+                { id: 'rare2', name: 'NECKLACE', price: 75, emoji: '📿', color: '#1e90ff' },
+                { id: 'rare3', name: 'BRACELET', price: 100, emoji: '🔗', color: '#dc143c' },
+                { id: 'rare4', name: 'EARRINGS', price: 125, emoji: '💎', color: '#b8860b' },
+                
+                // Эпические (200-500⭐)
+                { id: 'epic1', name: 'HEADPHONES', price: 200, emoji: '🎧', color: '#8b4513' },
+                { id: 'epic2', name: 'SPEAKER', price: 250, emoji: '🔊', color: '#ff69b4' },
+                { id: 'epic3', name: 'KEYBOARD', price: 300, emoji: '⌨️', color: '#ff1493' },
+                { id: 'epic4', name: 'MOUSE', price: 350, emoji: '🖱️', color: '#32cd32' },
+                
+                // Легендарные (500-5000⭐)
+                { id: 'legend1', name: 'RIP', price: 500, emoji: '💀', color: '#333' },
+                { id: 'legend2', name: 'SKULL', price: 750, emoji: '💀', color: '#444' },
+                { id: 'legend3', name: 'HEART', price: 1000, emoji: '❤️', color: '#ff6b6b' },
+                { id: 'legend4', name: 'FIRE', price: 1500, emoji: '🔥', color: '#ff8c00' },
+                { id: 'legend5', name: 'DIAMOND', price: 2000, emoji: '💎', color: '#00ff88' },
+                { id: 'legend6', name: 'CROWN', price: 2500, emoji: '👑', color: '#ffd700' },
+                { id: 'legend7', name: 'STAR', price: 3000, emoji: '⭐', color: '#ffd700' },
+                { id: 'legend8', name: 'COMET', price: 3500, emoji: '☄️', color: '#66ccff' },
+                { id: 'legend9', name: 'METEOR', price: 4000, emoji: '🌠', color: '#ff8c00' },
+                { id: 'legend10', name: 'GALAXY', price: 4500, emoji: '🌌', color: '#9b59b6' },
+                { id: 'legend11', name: 'DEMON', price: 5000, emoji: '👿', color: '#800' },
+                { id: 'legend12', name: 'ANGEL', price: 5500, emoji: '👼', color: '#ffd700' },
+                { id: 'legend13', name: 'DEVIL', price: 6000, emoji: '😈', color: '#ff4444' },
+                { id: 'legend14', name: 'GODLY', price: 6500, emoji: '👁️', color: '#00ffff' },
+                { id: 'legend15', name: 'COSMIC', price: 7000, emoji: '🌠', color: '#9932cc' }
             ];
 
             function getGiftSVG(gift) {
@@ -1617,7 +1678,8 @@
                 currentSelector: null,
                 pendingSellItem: null,
                 inventoryPage: 1,
-                maxInventoryPages: 2
+                maxInventoryPages: 2,
+                multipleResults: []
             };
 
             const el = {
@@ -1654,7 +1716,8 @@
                 caseModal: document.getElementById('caseModal'),
                 caseTitle: document.getElementById('caseTitle'),
                 caseItems: document.getElementById('caseItems'),
-                caseResult: document.getElementById('caseResult'),
+                caseResults: document.getElementById('caseResults'),
+                caseResultsList: document.getElementById('caseResultsList'),
                 caseOpenBtn: document.getElementById('caseOpenBtn'),
                 caseClose: document.getElementById('caseClose'),
                 quantityBtns: document.querySelectorAll('.case-quantity .quantity-btn'),
@@ -1759,7 +1822,6 @@
                     el.inventoryGrid.appendChild(e);
                 }
                 
-                // Обновляем пагинацию
                 const maxPage = Math.max(1, Math.ceil((state.inventory.length || 0) / 20));
                 state.maxInventoryPages = maxPage;
                 el.inventoryPageIndicator.textContent = `${state.inventoryPage}/${maxPage}`;
@@ -1776,7 +1838,6 @@
                 state.balance = (state.balance || 0) + price;
                 state.inventory.splice(index, 1);
                 
-                // Корректируем страницу если нужно
                 const maxPage = Math.max(1, Math.ceil(state.inventory.length / 20));
                 if (state.inventoryPage > maxPage) {
                     state.inventoryPage = maxPage;
@@ -1803,7 +1864,7 @@
                 }
             };
 
-            // Ракета
+            // Ракета с новой логикой
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
@@ -1859,10 +1920,44 @@
                         stopFlight();
                     }
                     
-                    if (Math.random() < 0.03) {
+                    // Новая логика падения
+                    const crashChance = getCrashChance(bet, state.multiplier);
+                    
+                    if (Math.random() < crashChance) {
                         crashRocket(bet);
                     }
                 }, 80);
+            }
+
+            function getCrashChance(bet, multiplier) {
+                // Базовая вероятность падения
+                let baseChance = 0.02;
+                
+                // Если ставка большая - шанс падения выше
+                if (bet > 5000) {
+                    baseChance = 0.15; // Часто падает на 1.1x-1.5x
+                } else if (bet > 2000) {
+                    baseChance = 0.08;
+                } else if (bet > 1000) {
+                    baseChance = 0.05;
+                }
+                
+                // Чем выше множитель, тем больше шанс падения
+                const multiplierFactor = Math.max(0, (multiplier - 1) * 0.1);
+                
+                let chance = baseChance + multiplierFactor;
+                
+                // Часто падает на 2x-3x
+                if (multiplier > 2 && multiplier < 3) {
+                    chance += 0.03;
+                }
+                
+                // Редко долетает до 5x
+                if (multiplier > 5) {
+                    chance += 0.1;
+                }
+                
+                return Math.min(chance, 0.3);
             }
 
             function crashRocket(bet) {
@@ -1943,6 +2038,7 @@
                 }
                 
                 state.currentCase = c;
+                state.multipleResults = [];
                 el.caseTitle.textContent = `КЕЙС: ${c.name}`;
                 
                 el.multipleButtons.innerHTML = '';
@@ -1964,14 +2060,14 @@
                         gift = cheapGifts[Math.floor(Math.random() * cheapGifts.length)];
                     } else if (c.price === 50) {
                         if (Math.random() < 0.1) {
-                            gift = GIFTS.find(g => g.price === 100) || GIFTS[0];
+                            gift = GIFTS.find(g => g.price >= 90 && g.price <= 110) || GIFTS[0];
                         } else {
                             const cheapGifts = GIFTS.filter(g => g.price <= 25);
                             gift = cheapGifts[Math.floor(Math.random() * cheapGifts.length)];
                         }
                     } else if (c.price === 100) {
                         if (Math.random() < 0.1) {
-                            gift = GIFTS.find(g => g.price === 120) || GIFTS[0];
+                            gift = GIFTS.find(g => g.price >= 110 && g.price <= 130) || GIFTS[0];
                         } else {
                             const midGifts = GIFTS.filter(g => g.price <= 80);
                             gift = midGifts[Math.floor(Math.random() * midGifts.length)];
@@ -2018,7 +2114,8 @@
                     el.caseItems.appendChild(giftDiv);
                 });
                 
-                el.caseResult.style.display = 'none';
+                el.caseResults.style.display = 'none';
+                el.caseResultsList.innerHTML = '';
                 el.caseItems.style.transform = 'translateX(0)';
                 el.caseOpenBtn.disabled = false;
                 el.caseOpenBtn.textContent = 'ОТКРЫТЬ';
@@ -2049,14 +2146,14 @@
                         winningGift = { ...cheapGifts[Math.floor(Math.random() * cheapGifts.length)] };
                     } else if (state.currentCase.price === 50) {
                         if (Math.random() < 0.1) {
-                            winningGift = { ...GIFTS.find(g => g.price === 100) || GIFTS[0] };
+                            winningGift = { ...GIFTS.find(g => g.price >= 90 && g.price <= 110) || GIFTS[0] };
                         } else {
                             const cheapGifts = GIFTS.filter(g => g.price <= 25);
                             winningGift = { ...cheapGifts[Math.floor(Math.random() * cheapGifts.length)] };
                         }
                     } else if (state.currentCase.price === 100) {
                         if (Math.random() < 0.1) {
-                            winningGift = { ...GIFTS.find(g => g.price === 120) || GIFTS[0] };
+                            winningGift = { ...GIFTS.find(g => g.price >= 110 && g.price <= 130) || GIFTS[0] };
                         } else {
                             const midGifts = GIFTS.filter(g => g.price <= 80);
                             winningGift = { ...midGifts[Math.floor(Math.random() * midGifts.length)] };
@@ -2090,6 +2187,8 @@
                     results.push(winningGift);
                 }
                 
+                state.multipleResults = [...state.multipleResults, ...results];
+                
                 const items = document.querySelectorAll('.case-gift');
                 const itemCount = items.length;
                 
@@ -2120,19 +2219,14 @@
                             if (items[index]) items[index].classList.add('win');
                         });
                         
-                        if (results.length === 1) {
+                        // Показываем результаты
+                        updateResultsDisplay();
+                        
+                        if (results.length === 1 && state.selectedQty === 1) {
                             const gift = results[0];
-                            el.caseResult.style.display = 'block';
-                            el.caseResult.textContent = `${gift.name} +${gift.price}⭐`;
                             showSellPrompt(gift);
                         } else {
-                            let resultText = '';
-                            results.forEach(r => {
-                                resultText += `${r.name} +${r.price}⭐ `;
-                            });
-                            el.caseResult.style.display = 'block';
-                            el.caseResult.textContent = resultText;
-                            
+                            // Добавляем все в инвентарь
                             results.forEach(gift => {
                                 if (!state.inventory) state.inventory = [];
                                 state.inventory.push(gift);
@@ -2147,6 +2241,26 @@
                         state.isOpening = false;
                     }, 2500);
                 }, 2500);
+            }
+
+            function updateResultsDisplay() {
+                if (state.multipleResults.length > 0) {
+                    el.caseResults.style.display = 'block';
+                    el.caseResultsList.innerHTML = '';
+                    
+                    state.multipleResults.forEach((result, index) => {
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = 'case-result-item';
+                        
+                        const isWin = result.price > (state.currentCase?.price || 0);
+                        
+                        resultDiv.innerHTML = `
+                            <span>#${index + 1} ${result.name}</span>
+                            <span class="${isWin ? 'case-result-win' : 'case-result-lose'}">${result.price}⭐</span>
+                        `;
+                        el.caseResultsList.appendChild(resultDiv);
+                    });
+                }
             }
 
             function startMultipleOpening() {
@@ -2363,6 +2477,7 @@
                 el.caseClose.onclick = () => {
                     el.caseModal.classList.remove('active');
                     state.isOpening = false;
+                    state.multipleResults = [];
                 };
 
                 el.openUpgradeBtn.onclick = () => {
@@ -2392,12 +2507,12 @@
                     
                     const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
                     
-                    const spins = 5 + Math.floor(Math.random() * 5); // Больше оборотов
+                    const spins = 5 + Math.floor(Math.random() * 5);
                     const win = Math.random() * 100 < chance;
                     
                     const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                     
-                    el.upgradeArrow.style.transform = `rotate(${targetRotation}deg) translateY(-65px)`;
+                    el.upgradeArrow.style.transform = `translateY(-70px) rotate(${targetRotation}deg)`;
                     
                     el.upgradeActionBtn.disabled = true;
                     
@@ -2417,8 +2532,8 @@
                         saveGame();
                         el.upgradeActionBtn.disabled = false;
                         
-                        el.upgradeArrow.style.transform = `rotate(0deg) translateY(-65px)`;
-                    }, 4000); // Дольше анимация
+                        el.upgradeArrow.style.transform = 'translateY(-70px) rotate(0deg)';
+                    }, 4000);
                 };
 
                 window.onresize = () => {
