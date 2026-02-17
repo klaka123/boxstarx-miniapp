@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 CASE BATTLE СТИЛЬ</title>
+    <title>BOXSTARX 🚀 СЕРАЯ ЭЛЕГАНТНОСТЬ</title>
     <style>
         * {
             margin: 0;
@@ -43,11 +43,11 @@
         .splash-title {
             font-size: clamp(2rem, 10vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #fff, #ff9933, #ff6600, #ff9933);
+            background: linear-gradient(135deg, #fff, #cccccc, #999999, #cccccc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px #ff9933, 0 0 60px #ff6600;
+            text-shadow: 0 0 30px #cccccc, 0 0 60px #999999;
             letter-spacing: 4px;
             animation: splashPulse 2s infinite ease-in-out;
         }
@@ -71,15 +71,15 @@
             pointer-events: none;
         }
 
-        /* ========== ОРАНЖЕВЫЕ ГРАНИЦЫ ========== */
-        @keyframes orangePulse {
-            0% { border-color: #ff9933; box-shadow: 0 0 20px #ff9933; }
-            50% { border-color: #ff6600; box-shadow: 0 0 35px #ff6600; }
-            100% { border-color: #ff9933; box-shadow: 0 0 20px #ff9933; }
+        /* ========== СЕРЫЕ ГРАНИЦЫ ========== */
+        @keyframes grayPulse {
+            0% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
+            50% { border-color: #999999; box-shadow: 0 0 35px #999999; }
+            100% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
         }
 
-        .orange-border {
-            animation: orangePulse 3s infinite ease-in-out;
+        .gray-border {
+            animation: grayPulse 3s infinite ease-in-out;
         }
 
         /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
@@ -112,15 +112,15 @@
 
         /* ========== ХЕДЕР ========== */
         .header {
-            background: rgba(10, 10, 20, 0.8);
+            background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: orangePulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite ease-in-out;
             position: sticky;
             top: 16px;
             z-index: 100;
@@ -134,13 +134,13 @@
 
         .balance-icon {
             font-size: 2rem;
-            filter: drop-shadow(0 0 10px #ff9933);
+            filter: drop-shadow(0 0 10px #cccccc);
         }
 
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #ff9933);
+            background: linear-gradient(135deg, #fff, #cccccc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -165,19 +165,19 @@
 
         /* ========== РАКЕТА ========== */
         .rocket-section {
-            background: rgba(10, 10, 20, 0.8);
+            background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
-            animation: orangePulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite ease-in-out;
         }
 
         .rocket-window {
             position: relative;
             height: 220px;
             background: #000;
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 50px;
             overflow: hidden;
             margin-bottom: 15px;
@@ -202,7 +202,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 5rem;
-            filter: drop-shadow(0 0 30px #ff9933);
+            filter: drop-shadow(0 0 30px #cccccc);
             z-index: 20;
         }
 
@@ -246,13 +246,13 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
             font-weight: 700;
             z-index: 25;
-            color: #ff9933;
+            color: #cccccc;
             backdrop-filter: blur(5px);
         }
 
@@ -261,7 +261,7 @@
             top: 20px;
             left: 20px;
             background: rgba(0,0,0,0.8);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
@@ -277,8 +277,8 @@
         }
 
         .auto-btn {
-            background: rgba(255, 153, 51, 0.2);
-            border: 2px solid #ff9933;
+            background: rgba(200, 200, 200, 0.2);
+            border: 2px solid #cccccc;
             color: white;
             padding: 10px 5px;
             border-radius: 40px;
@@ -289,7 +289,7 @@
         }
 
         .auto-btn.active {
-            background: #ff9933;
+            background: #cccccc;
             color: black;
             font-weight: bold;
         }
@@ -307,8 +307,8 @@
         .bet-input {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid #ff9933;
-            color: #ff9933;
+            border: 2px solid #cccccc;
+            color: #cccccc;
             padding: 15px;
             border-radius: 40px;
             font-size: 1.2rem;
@@ -318,7 +318,7 @@
         }
 
         .bet-input:focus {
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 20px #cccccc;
         }
 
         .flight-buttons {
@@ -342,8 +342,8 @@
         }
 
         .btn-start {
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: white;
+            background: linear-gradient(135deg, #cccccc, #999999);
+            color: black;
         }
 
         .btn-stop {
@@ -362,8 +362,8 @@
             font-size: 1.5rem;
             text-align: center;
             margin: 20px 0 15px;
-            color: #ff9933;
-            text-shadow: 0 0 15px #ff9933;
+            color: #cccccc;
+            text-shadow: 0 0 15px #cccccc;
         }
 
         .cases-grid {
@@ -374,7 +374,7 @@
 
         .case-card {
             background: linear-gradient(145deg, #1a1f35, #0f1428);
-            border: 3px solid #ff9933;
+            border: 3px solid #cccccc;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
@@ -389,13 +389,13 @@
         }
 
         .case-card:hover {
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .case-icon {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px #ff9933);
+            filter: drop-shadow(0 0 15px #cccccc);
         }
 
         .case-name {
@@ -406,19 +406,19 @@
 
         .case-price {
             font-size: 1.4rem;
-            color: #ff9933;
+            color: #cccccc;
             font-weight: 700;
         }
 
-        /* ========== НОВАЯ СИСТЕМА АПГРЕЙДА CASE BATTLE ========== */
+        /* ========== СИСТЕМА АПГРЕЙДА ========== */
         .upgrade-section {
-            background: rgba(10, 10, 20, 0.8);
+            background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
-            animation: orangePulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite ease-in-out;
             position: relative;
             overflow: hidden;
         }
@@ -430,7 +430,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,153,51,0.1), transparent 70%);
+            background: radial-gradient(circle, rgba(200,200,200,0.1), transparent 70%);
             animation: rotateGlow 20s linear infinite;
             z-index: 0;
         }
@@ -444,10 +444,10 @@
             font-size: 1.3rem;
             text-align: center;
             margin-bottom: 20px;
-            color: #ff9933;
+            color: #cccccc;
             position: relative;
             z-index: 1;
-            text-shadow: 0 0 15px #ff9933;
+            text-shadow: 0 0 15px #cccccc;
         }
 
         .wheel-container {
@@ -455,7 +455,7 @@
             width: 280px;
             height: 280px;
             margin: 0 auto 20px;
-            filter: drop-shadow(0 0 30px #ff9933);
+            filter: drop-shadow(0 0 30px #cccccc);
             position: relative;
             z-index: 1;
         }
@@ -468,12 +468,11 @@
             height: 100%;
             border-radius: 50%;
             background: #1a1f35;
-            box-shadow: 0 0 50px #ff9933, inset 0 0 30px rgba(255,153,51,0.5);
+            box-shadow: 0 0 50px #cccccc, inset 0 0 30px rgba(200,200,200,0.5);
             transition: all 0.3s ease;
-            border: 4px solid gold;
+            border: 4px solid #cccccc;
         }
 
-        /* Стрелка как в case battle */
         .wheel-arrow-container {
             position: absolute;
             top: 0;
@@ -493,8 +492,8 @@
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-top: 60px solid #ff9933;
-            filter: drop-shadow(0 0 20px #ff9933);
+            border-top: 60px solid #cccccc;
+            filter: drop-shadow(0 0 20px #cccccc);
             transform-origin: bottom center;
             transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1);
             will-change: transform;
@@ -507,9 +506,9 @@
             left: -15px;
             width: 30px;
             height: 30px;
-            background: radial-gradient(circle, gold, #ff9933);
+            background: radial-gradient(circle, #cccccc, #999999);
             border-radius: 50%;
-            box-shadow: 0 0 30px gold;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .wheel-arrow::after {
@@ -529,8 +528,8 @@
         }
 
         @keyframes arrowGlow {
-            from { filter: drop-shadow(0 0 20px #ff9933) drop-shadow(0 0 40px #ff6600); }
-            to { filter: drop-shadow(0 0 50px #ff9933) drop-shadow(0 0 100px #ff6600); }
+            from { filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999); }
+            to { filter: drop-shadow(0 0 50px #cccccc) drop-shadow(0 0 100px #999999); }
         }
 
         .wheel-center {
@@ -541,28 +540,27 @@
             width: 90px;
             height: 90px;
             background: linear-gradient(145deg, #1a1f35, #0f1428);
-            border: 4px solid gold;
+            border: 4px solid #cccccc;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             z-index: 25;
-            box-shadow: 0 0 50px #ff9933, inset 0 0 20px rgba(255,153,51,0.5);
+            box-shadow: 0 0 50px #cccccc, inset 0 0 20px rgba(200,200,200,0.5);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .wheel-center:hover {
             transform: translate(-50%, -50%) scale(1.15);
-            box-shadow: 0 0 70px #ff9933;
+            box-shadow: 0 0 70px #cccccc;
         }
 
         .wheel-center:active {
             transform: translate(-50%, -50%) scale(0.95);
         }
 
-        /* Слоты для ставок */
         .slots-container {
             margin: 20px 0;
             position: relative;
@@ -586,7 +584,7 @@
 
         .slot-item {
             background: rgba(15, 20, 40, 0.9);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 40px;
             padding: 15px 5px;
             text-align: center;
@@ -597,7 +595,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 0 15px #ff9933;
+            box-shadow: 0 0 15px #cccccc;
         }
 
         .slot-item:active {
@@ -605,9 +603,9 @@
         }
 
         .slot-item.filled {
-            background: rgba(255, 153, 51, 0.3);
-            border-color: gold;
-            box-shadow: 0 0 30px gold;
+            background: rgba(200, 200, 200, 0.3);
+            border-color: #cccccc;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .slot-emoji {
@@ -617,14 +615,13 @@
 
         .slot-price {
             font-size: 0.8rem;
-            color: gold;
+            color: #cccccc;
             font-weight: 700;
         }
 
-        /* Желаемый подарок */
         .desired-container {
             background: rgba(0,0,0,0.5);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
@@ -634,7 +631,7 @@
         }
 
         .desired-container:hover {
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .desired-container:active {
@@ -657,7 +654,7 @@
 
         .desired-emoji {
             font-size: 3rem;
-            filter: drop-shadow(0 0 20px #ff9933);
+            filter: drop-shadow(0 0 20px #cccccc);
         }
 
         .desired-info {
@@ -667,12 +664,12 @@
         .desired-name {
             font-size: 1.2rem;
             font-weight: 700;
-            color: gold;
+            color: #cccccc;
         }
 
         .desired-price {
             font-size: 1.1rem;
-            color: #ff9933;
+            color: #cccccc;
         }
 
         .desired-empty {
@@ -681,7 +678,6 @@
             padding: 20px;
         }
 
-        /* Статистика */
         .upgrade-stats {
             display: flex;
             justify-content: space-around;
@@ -695,8 +691,8 @@
             background: rgba(0,0,0,0.5);
             padding: 10px 20px;
             border-radius: 40px;
-            border: 2px solid #ff9933;
-            box-shadow: 0 0 20px #ff9933;
+            border: 2px solid #cccccc;
+            box-shadow: 0 0 20px #cccccc;
             flex: 1;
             margin: 0 5px;
         }
@@ -710,7 +706,7 @@
         .stat-value {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #ff9933;
+            color: #cccccc;
         }
 
         .upgrade-btn {
@@ -720,16 +716,16 @@
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: white;
+            background: linear-gradient(135deg, #cccccc, #999999);
+            color: black;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 2px solid gold;
+            border: 2px solid #cccccc;
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
             z-index: 1;
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .upgrade-btn:active:not(:disabled) {
@@ -743,12 +739,12 @@
 
         /* ========== ИНВЕНТАРЬ ========== */
         .inventory-section {
-            background: rgba(10, 10, 20, 0.8);
+            background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
-            animation: orangePulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite ease-in-out;
         }
 
         .inventory-header {
@@ -761,12 +757,12 @@
         .inventory-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #ff9933;
+            color: #cccccc;
         }
 
         .inventory-count {
-            background: rgba(255, 153, 51, 0.2);
-            border: 1px solid #ff9933;
+            background: rgba(200, 200, 200, 0.2);
+            border: 1px solid #cccccc;
             padding: 5px 15px;
             border-radius: 40px;
             font-size: 0.9rem;
@@ -780,7 +776,7 @@
 
         .inventory-slot {
             background: #0f1428;
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 30px;
             padding: 10px 4px;
             text-align: center;
@@ -810,7 +806,7 @@
 
         .slot-price {
             font-size: 0.7rem;
-            color: #ff9933;
+            color: #cccccc;
             position: absolute;
             bottom: 5px;
             right: 5px;
@@ -821,7 +817,7 @@
 
         .empty-slot {
             background: #0f1428;
-            border: 2px dashed #ff9933;
+            border: 2px dashed #cccccc;
             border-radius: 30px;
             aspect-ratio: 1;
             display: flex;
@@ -861,8 +857,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
+            background: rgba(200,200,200,0.2);
+            border: 2px solid #cccccc;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -877,7 +873,7 @@
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ff9933;
+            color: #cccccc;
         }
 
         .quantity-buttons {
@@ -888,8 +884,8 @@
         }
 
         .quantity-btn {
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
+            background: rgba(200,200,200,0.2);
+            border: 2px solid #cccccc;
             color: white;
             padding: 15px;
             border-radius: 40px;
@@ -904,7 +900,7 @@
         }
 
         .quantity-btn.active {
-            background: #ff9933;
+            background: #cccccc;
             color: black;
             font-weight: bold;
         }
@@ -916,8 +912,8 @@
             border-radius: 60px;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: white;
+            background: linear-gradient(135deg, #cccccc, #999999);
+            color: black;
             margin: 20px 0;
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -929,7 +925,7 @@
 
         .contents-title {
             font-size: 1.2rem;
-            color: #ff9933;
+            color: #cccccc;
             margin: 20px 0 15px;
         }
 
@@ -940,8 +936,8 @@
         }
 
         .content-item {
-            background: rgba(255,153,51,0.1);
-            border: 2px solid #ff9933;
+            background: rgba(200,200,200,0.1);
+            border: 2px solid #cccccc;
             border-radius: 40px;
             padding: 15px;
             display: flex;
@@ -964,7 +960,7 @@
         }
 
         .content-price {
-            color: #ff9933;
+            color: #cccccc;
             font-size: 0.9rem;
         }
 
@@ -998,8 +994,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
+            background: rgba(200,200,200,0.2);
+            border: 2px solid #cccccc;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -1014,7 +1010,7 @@
         .selector-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ff9933;
+            color: #cccccc;
         }
 
         .gift-categories {
@@ -1026,8 +1022,8 @@
         }
 
         .category-btn {
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
+            background: rgba(200,200,200,0.2);
+            border: 2px solid #cccccc;
             color: white;
             padding: 12px 20px;
             border-radius: 40px;
@@ -1038,7 +1034,7 @@
         }
 
         .category-btn.active {
-            background: #ff9933;
+            background: #cccccc;
             color: black;
             font-weight: bold;
         }
@@ -1052,7 +1048,7 @@
 
         .gift-option {
             background: #1a1f35;
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 40px;
             padding: 20px 10px;
             text-align: center;
@@ -1065,7 +1061,7 @@
         }
 
         .gift-option:hover {
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 30px #cccccc;
         }
 
         .gift-option-emoji {
@@ -1081,7 +1077,7 @@
 
         .gift-option-price {
             font-size: 1.2rem;
-            color: gold;
+            color: #cccccc;
             font-weight: 700;
         }
 
@@ -1106,13 +1102,13 @@
 
         .win-content {
             background: #1a1f35;
-            border: 3px solid #ff9933;
+            border: 3px solid #cccccc;
             border-radius: 100px;
             padding: 40px 30px;
             text-align: center;
             width: 80%;
             max-width: 350px;
-            box-shadow: 0 0 50px #ff9933;
+            box-shadow: 0 0 50px #cccccc;
             animation: winPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -1136,24 +1132,24 @@
         .win-title {
             font-size: 2rem;
             font-weight: 900;
-            color: #ff9933;
+            color: #cccccc;
             margin-bottom: 15px;
         }
 
         .win-amount {
             font-size: 2rem;
-            color: #ff9933;
+            color: #cccccc;
             margin-bottom: 20px;
         }
 
         .win-btn {
-            background: #ff9933;
+            background: #cccccc;
             border: none;
             padding: 12px 30px;
             border-radius: 60px;
             font-size: 1.1rem;
             font-weight: 700;
-            color: white;
+            color: black;
             cursor: pointer;
             transition: transform 0.2s ease;
         }
@@ -1164,19 +1160,19 @@
 
         /* ========== ПРОМОКОДЫ ========== */
         .promo-section {
-            background: rgba(10, 10, 20, 0.8);
+            background: rgba(20, 20, 30, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 16px;
-            animation: orangePulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite ease-in-out;
             margin-top: 20px;
         }
 
         .promo-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #ff9933;
+            color: #cccccc;
             margin-bottom: 12px;
             text-align: center;
         }
@@ -1189,7 +1185,7 @@
         .promo-field {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid #ff9933;
+            border: 2px solid #cccccc;
             border-radius: 40px;
             padding: 12px 15px;
             color: white;
@@ -1199,15 +1195,15 @@
         }
 
         .promo-field:focus {
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 20px #cccccc;
         }
 
         .promo-apply {
-            background: linear-gradient(135deg, #ff9933, #ff6600);
+            background: linear-gradient(135deg, #cccccc, #999999);
             border: none;
             border-radius: 40px;
             padding: 12px 25px;
-            color: white;
+            color: black;
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -1223,15 +1219,15 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: white;
+            background: linear-gradient(135deg, #cccccc, #999999);
+            color: black;
             padding: 12px 30px;
             border-radius: 60px;
             font-weight: 700;
             z-index: 5000;
             animation: toastIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid white;
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 20px #cccccc;
         }
 
         @keyframes toastIn {
@@ -1291,9 +1287,9 @@
             <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
-            <!-- Новая система апгрейда Case Battle -->
+            <!-- Система апгрейда -->
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ CASE BATTLE АПГРЕЙД ⚡</div>
+                <div class="upgrade-title">⚡ СИСТЕМА АПГРЕЙДА ⚡</div>
                 
                 <div class="wheel-container">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
@@ -1377,7 +1373,7 @@
         <div class="contents-grid" id="modalContents"></div>
     </div>
 
-    <!-- Селектор выбора подарка (для желаемого) -->
+    <!-- Селектор выбора подарка -->
     <div class="gift-selector" id="giftSelector">
         <div class="selector-header">
             <button class="selector-back" id="closeSelector">←</button>
@@ -1593,7 +1589,8 @@
                 desiredContent: document.getElementById('desiredContent'),
                 giftSelector: document.getElementById('giftSelector'),
                 closeSelector: document.getElementById('closeSelector'),
-                giftsGrid: document.getElementById('giftsGrid')
+                giftsGrid: document.getElementById('giftsGrid'),
+                giftCategories: document.getElementById('giftCategories')
             };
 
             const slotItems = document.querySelectorAll('.slot-item');
@@ -1607,14 +1604,11 @@
                 const centerY = 140;
                 const radius = 130;
                 
-                // Очищаем canvas
                 wheelCtx.clearRect(0, 0, 280, 280);
                 
-                // Рисуем секторы
-                const total = 360;
                 const winAngle = (winChance / 100) * 360;
                 
-                // Зеленая часть (выигрыш)
+                // Зеленая часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, 0, (winAngle * Math.PI) / 180);
@@ -1622,7 +1616,7 @@
                 wheelCtx.fillStyle = '#00cc66';
                 wheelCtx.fill();
                 
-                // Красная часть (проигрыш)
+                // Красная часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, (winAngle * Math.PI) / 180, 2 * Math.PI);
@@ -1630,17 +1624,16 @@
                 wheelCtx.fillStyle = '#ff4444';
                 wheelCtx.fill();
                 
-                // Контур
+                // Контуры
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-                wheelCtx.strokeStyle = 'gold';
+                wheelCtx.strokeStyle = '#cccccc';
                 wheelCtx.lineWidth = 6;
                 wheelCtx.stroke();
                 
-                // Внутренний контур
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius - 3, 0, 2 * Math.PI);
-                wheelCtx.strokeStyle = '#ff9933';
+                wheelCtx.strokeStyle = '#cccccc';
                 wheelCtx.lineWidth = 2;
                 wheelCtx.stroke();
                 
@@ -1945,7 +1938,9 @@
                 el.promoField.value = '';
             }
 
-            // ========== НОВАЯ СИСТЕМА АПГРЕЙДА ==========
+            // ========== АПГРЕЙД ==========
+            let currentSlotIndex = null;
+
             function initUpgradeSlots() {
                 slotItems.forEach((slot, index) => {
                     slot.onclick = () => {
@@ -1955,20 +1950,23 @@
                             state.upgradeSlots[index] = null;
                             updateUI();
                         } else {
-                            // Выбираем подарок из инвентаря
-                            openInventorySelector(index);
+                            currentSlotIndex = index;
+                            openInventorySelector();
                         }
                     };
                 });
             }
 
-            function openInventorySelector(slotIndex) {
+            function openInventorySelector() {
                 if (state.inventory.length === 0) {
                     showToast('❌ Инвентарь пуст');
                     return;
                 }
                 
-                // Временно используем селектор для выбора из инвентаря
+                // Используем giftSelector для выбора из инвентаря
+                el.giftCategories.style.display = 'none';
+                el.selectorTitle.textContent = 'Выберите подарок из инвентаря';
+                
                 el.giftsGrid.innerHTML = '';
                 
                 state.inventory.forEach((gift, idx) => {
@@ -1980,7 +1978,7 @@
                         <div class="gift-option-price">${gift.price}⭐</div>
                     `;
                     option.onclick = () => {
-                        state.upgradeSlots[slotIndex] = { ...gift };
+                        state.upgradeSlots[currentSlotIndex] = { ...gift };
                         state.inventory.splice(idx, 1);
                         updateUI();
                         el.giftSelector.classList.remove('active');
@@ -1992,6 +1990,9 @@
             }
 
             function selectDesiredGift() {
+                // Показываем все подарки для выбора желаемого
+                el.giftCategories.style.display = 'flex';
+                el.selectorTitle.textContent = 'Выберите желаемый подарок';
                 renderGiftsGrid(state.currentCategory);
                 el.giftSelector.classList.add('active');
             }
@@ -2052,21 +2053,16 @@
                     }
                 });
 
-                // Считаем сумму ставок
+                // Сумма ставок
                 const total = state.upgradeSlots.reduce((sum, s) => sum + (s ? s.price : 0), 0);
                 el.totalBets.textContent = total + ' ⭐';
 
-                // Шанс выигрыша = сумма ставок / цена желаемого подарка * 100%
+                // Шанс выигрыша
                 if (state.desiredGift && total > 0) {
                     const chance = Math.min(Math.floor((total / state.desiredGift.price) * 100), 95);
                     el.winChance.textContent = chance + '%';
                     drawWheel(chance);
-                    
-                    if (chance > 0) {
-                        el.upgradeBtn.disabled = false;
-                    } else {
-                        el.upgradeBtn.disabled = true;
-                    }
+                    el.upgradeBtn.disabled = false;
                 } else {
                     el.winChance.textContent = '0%';
                     drawWheel(0);
@@ -2086,7 +2082,6 @@
                 const spins = 10 + Math.floor(Math.random() * 8);
                 const win = Math.random() * 100 < chance;
                 
-                // Стрелка останавливается на зеленой или красной зоне
                 const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                 
                 el.wheelArrow.style.transform = `translateX(-50%) rotate(${targetRotation}deg)`;
@@ -2103,7 +2098,6 @@
                         showToast('💥 ПРОВАЛ! Все сгорело');
                     }
                     
-                    // Очищаем все слоты
                     state.upgradeSlots = [null, null, null, null, null, null];
                     state.desiredGift = null;
                     updateDesiredDisplay();
