@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 РАБОЧИЕ КЕЙСЫ</title>
+    <title>BOXSTARX 🚀 ЗЕЛЕНАЯ ЭНЕРГИЯ</title>
     <style>
         * {
             margin: 0;
@@ -15,11 +15,12 @@
 
         body {
             overflow: hidden;
-            background: #0a0c1a;
+            background: #000;
             color: #fff;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        /* Заставка */
         .splash-screen {
             position: fixed;
             top: 0;
@@ -42,11 +43,12 @@
         .splash-title {
             font-size: clamp(2rem, 10vw, 4rem);
             font-weight: 900;
-            color: gold;
-            text-shadow: 0 0 30px gold;
+            color: #00ff88;
+            text-shadow: 0 0 30px #00ff88;
             letter-spacing: 4px;
         }
 
+        /* Черное небо со звездами */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -85,9 +87,11 @@
             padding-bottom: 30px;
         }
 
+        /* Зеленый хедер */
         .header {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 12px 20px;
             display: flex;
@@ -106,16 +110,17 @@
 
         .balance-icon {
             font-size: 2rem;
+            filter: drop-shadow(0 0 10px #00ff88);
         }
 
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
-            color: gold;
+            color: #00ff88;
         }
 
         .add-btn {
-            background: #2e7d32;
+            background: #00aa44;
             border: none;
             color: white;
             padding: 10px 24px;
@@ -123,11 +128,14 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
+            border: 1px solid #00ff88;
         }
 
+        /* Ракета */
         .rocket-section {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 20px;
         }
@@ -136,7 +144,7 @@
             position: relative;
             height: 200px;
             background: #000;
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             border-radius: 50px;
             overflow: hidden;
             margin-bottom: 15px;
@@ -161,7 +169,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 5rem;
-            filter: drop-shadow(0 0 30px gold);
+            filter: drop-shadow(0 0 30px #00ff88);
             z-index: 20;
         }
 
@@ -204,12 +212,12 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
             z-index: 25;
-            color: gold;
+            color: #00ff88;
         }
 
         .timer {
@@ -217,12 +225,12 @@
             top: 20px;
             left: 20px;
             background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
             z-index: 25;
-            color: gold;
+            color: #00ff88;
         }
 
         .auto-buttons {
@@ -233,8 +241,8 @@
         }
 
         .auto-btn {
-            background: rgba(255,215,0,0.1);
-            border: 2px solid gold;
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
             color: white;
             padding: 10px 5px;
             border-radius: 40px;
@@ -244,7 +252,7 @@
         }
 
         .auto-btn.active {
-            background: gold;
+            background: #00ff88;
             color: black;
             font-weight: bold;
         }
@@ -258,8 +266,8 @@
         .bet-input {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid gold;
-            color: gold;
+            border: 2px solid #00ff88;
+            color: #00ff88;
             padding: 15px;
             border-radius: 40px;
             font-size: 1.2rem;
@@ -283,13 +291,13 @@
         }
 
         .btn-start {
-            background: gold;
+            background: #00ff88;
             color: black;
         }
 
         .btn-stop {
             background: rgba(255,255,255,0.1);
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             color: white;
         }
 
@@ -302,9 +310,10 @@
             font-size: 1.5rem;
             text-align: center;
             margin: 20px 0 15px;
-            color: gold;
+            color: #00ff88;
         }
 
+        /* Кейсы */
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -312,12 +321,14 @@
         }
 
         .case-card {
-            background: rgba(0,0,0,0.8);
-            border: 3px solid gold;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 3px solid #00ff88;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .case-card:active {
@@ -327,7 +338,7 @@
         .case-icon {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px gold);
+            filter: drop-shadow(0 0 15px #00ff88);
         }
 
         .case-name {
@@ -338,18 +349,19 @@
 
         .case-price {
             font-size: 1.4rem;
-            color: gold;
+            color: #00ff88;
             font-weight: 700;
         }
 
-        /* ========== НОВОЕ РАБОЧЕЕ ОКНО ОТКРЫТИЯ ========== */
+        /* Зеленое модальное окно */
         .case-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -364,7 +376,7 @@
         .case-title {
             font-size: 2rem;
             font-weight: 900;
-            color: gold;
+            color: #00ff88;
             margin-bottom: 40px;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -376,11 +388,11 @@
             max-width: 800px;
             height: 300px;
             overflow: hidden;
-            border: 4px solid gold;
+            border: 4px solid #00ff88;
             border-radius: 60px;
             background: #000;
             margin-bottom: 40px;
-            box-shadow: 0 0 100px gold;
+            box-shadow: 0 0 100px #00ff88;
         }
 
         .case-items {
@@ -392,27 +404,27 @@
             gap: 20px;
             padding: 0 20px;
             align-items: center;
-            transition: transform 4s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transition: transform 2.5s cubic-bezier(0.1, 0.9, 0.2, 1);
             will-change: transform;
         }
 
         .case-gift {
             min-width: 200px;
             height: 240px;
-            background: #1a1f35;
-            border: 2px solid gold;
+            background: #0a0c1a;
+            border: 2px solid #00ff88;
             border-radius: 50px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            box-shadow: 0 0 50px rgba(255,215,0,0.3);
+            box-shadow: 0 0 50px rgba(0,255,136,0.3);
         }
 
         .case-gift.win {
-            border-color: gold;
-            box-shadow: 0 0 100px gold;
+            border-color: #00ff88;
+            box-shadow: 0 0 100px #00ff88;
             transform: scale(1.1);
             z-index: 100;
         }
@@ -420,7 +432,7 @@
         .gift-emoji {
             font-size: 5rem;
             margin-bottom: 15px;
-            filter: drop-shadow(0 0 20px gold);
+            filter: drop-shadow(0 0 20px #00ff88);
         }
 
         .gift-name {
@@ -432,7 +444,7 @@
 
         .gift-price {
             font-size: 1.5rem;
-            color: gold;
+            color: #00ff88;
             font-weight: 700;
         }
 
@@ -443,8 +455,8 @@
             transform: translateX(-50%);
             width: 4px;
             height: 100%;
-            background: gold;
-            box-shadow: 0 0 30px gold;
+            background: #00ff88;
+            box-shadow: 0 0 30px #00ff88;
             z-index: 1000;
         }
 
@@ -455,7 +467,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 2rem;
-            color: gold;
+            color: #00ff88;
         }
 
         .case-marker::after {
@@ -465,17 +477,17 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 2rem;
-            color: gold;
+            color: #00ff88;
         }
 
         .case-result {
             font-size: 2rem;
             font-weight: 900;
-            color: gold;
+            color: #00ff88;
             margin-bottom: 30px;
             text-align: center;
             padding: 20px 50px;
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             border-radius: 60px;
             background: rgba(0,0,0,0.8);
         }
@@ -492,7 +504,7 @@
             font-size: 1.5rem;
             font-weight: 900;
             cursor: pointer;
-            background: gold;
+            background: #00ff88;
             color: black;
             transition: transform 0.2s;
         }
@@ -514,7 +526,7 @@
             height: 60px;
             border-radius: 50%;
             background: rgba(255,255,255,0.1);
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             color: white;
             font-size: 2rem;
             cursor: pointer;
@@ -527,9 +539,11 @@
             transform: scale(0.95);
         }
 
+        /* Инвентарь */
         .inventory-section {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 20px;
             margin-top: 20px;
@@ -545,16 +559,16 @@
         .inventory-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: gold;
+            color: #00ff88;
         }
 
         .inventory-count {
-            background: rgba(255,215,0,0.1);
-            border: 2px solid gold;
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
             padding: 5px 15px;
             border-radius: 40px;
             font-size: 0.9rem;
-            color: gold;
+            color: #00ff88;
         }
 
         .inventory-grid {
@@ -564,8 +578,8 @@
         }
 
         .inventory-slot {
-            background: #0f1428;
-            border: 2px solid gold;
+            background: #0a0c1a;
+            border: 2px solid #00ff88;
             border-radius: 30px;
             padding: 10px 4px;
             text-align: center;
@@ -594,7 +608,7 @@
 
         .inv-price {
             font-size: 0.7rem;
-            color: gold;
+            color: #00ff88;
             position: absolute;
             bottom: 5px;
             right: 5px;
@@ -604,8 +618,8 @@
         }
 
         .empty-slot {
-            background: #0f1428;
-            border: 2px dashed gold;
+            background: #0a0c1a;
+            border: 2px dashed #00ff88;
             border-radius: 30px;
             aspect-ratio: 1;
             display: flex;
@@ -615,9 +629,11 @@
             font-size: 0.7rem;
         }
 
+        /* Промокоды */
         .promo-section {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid gold;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
             border-radius: 60px;
             padding: 16px;
             margin-top: 20px;
@@ -626,7 +642,7 @@
         .promo-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: gold;
+            color: #00ff88;
             margin-bottom: 12px;
             text-align: center;
         }
@@ -639,7 +655,7 @@
         .promo-field {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid gold;
+            border: 2px solid #00ff88;
             border-radius: 40px;
             padding: 12px 15px;
             color: white;
@@ -648,7 +664,7 @@
         }
 
         .promo-apply {
-            background: gold;
+            background: #00ff88;
             border: none;
             border-radius: 40px;
             padding: 12px 25px;
@@ -662,7 +678,7 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: gold;
+            background: #00ff88;
             color: black;
             padding: 12px 30px;
             border-radius: 60px;
@@ -717,7 +733,7 @@
                 </div>
             </section>
 
-            <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
+            <h2 class="section-title">📦 ЗЕЛЕНЫЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
             <section class="inventory-section">
@@ -738,10 +754,10 @@
         </div>
     </div>
 
-    <!-- РАБОЧЕЕ ОКНО ОТКРЫТИЯ КЕЙСА -->
+    <!-- Зеленое модальное окно -->
     <div class="case-modal" id="caseModal">
         <div class="case-close" id="caseClose">✕</div>
-        <div class="case-title" id="caseTitle">ОТКРЫТИЕ КЕЙСА</div>
+        <div class="case-title" id="caseTitle">ЗЕЛЕНЫЙ КЕЙС</div>
         
         <div class="case-display" id="caseDisplay">
             <div class="case-items" id="caseItems"></div>
@@ -767,7 +783,7 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон
+            // Звездный фон - 20 звезд на средней скорости
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -775,12 +791,12 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 20; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 2 + 0.5,
-                        speed: Math.random() * 0.1 + 0.02,
+                        size: Math.random() * 2 + 1,
+                        speed: Math.random() * 0.3 + 0.2,
                         brightness: Math.random() * 0.5 + 0.3
                     });
                 }
@@ -806,7 +822,7 @@
                     ctx.globalAlpha = s.brightness;
                     ctx.fillStyle = '#fff';
                     ctx.shadowColor = '#fff';
-                    ctx.shadowBlur = 3;
+                    ctx.shadowBlur = 5;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -817,7 +833,7 @@
 
             function initWindowStars() {
                 const w = document.getElementById('rocketWindow');
-                for (let i = 0; i < 15; i++) {
+                for (let i = 0; i < 10; i++) {
                     const s = document.createElement('div');
                     s.className = 'window-star';
                     s.style.left = Math.random() * 100 + '%';
@@ -857,7 +873,11 @@
                 { emoji: "👑", name: "Корона", price: 750 },
                 { emoji: "🚗", name: "Машина", price: 1000 },
                 { emoji: "✈️", name: "Самолет", price: 1500 },
-                { emoji: "🦄", name: "Единорог", price: 2000 }
+                { emoji: "🦄", name: "Единорог", price: 2000 },
+                { emoji: "🏰", name: "Замок", price: 2500 },
+                { emoji: "🚁", name: "Вертолет", price: 3000 },
+                { emoji: "🛳️", name: "Яхта", price: 4000 },
+                { emoji: "🚀", name: "Шаттл", price: 5000 }
             ];
 
             const CASES = [
@@ -874,7 +894,7 @@
                 'GIFT2026': 250,
                 'STAR2026': 300,
                 'COSMIC': 1000,
-                'ORANGE': 100,
+                'GREEN': 100,
                 'ROCKET': 200,
                 'BOXSTAR': 750,
                 'HAPPY2026': 400
@@ -910,7 +930,6 @@
                 promoField: document.getElementById('promoField'),
                 applyPromo: document.getElementById('applyPromo'),
                 
-                // Модальное окно
                 caseModal: document.getElementById('caseModal'),
                 caseTitle: document.getElementById('caseTitle'),
                 caseItems: document.getElementById('caseItems'),
@@ -1105,7 +1124,7 @@
                 });
             }
 
-            // ========== РАБОЧЕЕ ОТКРЫТИЕ КЕЙСА ==========
+            // АЗАРТНОЕ ОТКРЫТИЕ КЕЙСА
             function openCase(c) {
                 if (state.balance < c.price) {
                     showToast('❌ Недостаточно звезд!');
@@ -1118,16 +1137,14 @@
                 // Создаем трек с предметами
                 const items = [];
                 
-                // Добавляем 30 случайных предметов
-                for (let i = 0; i < 30; i++) {
+                // Добавляем 25 предметов для быстрой анимации
+                for (let i = 0; i < 25; i++) {
                     const randomGift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
                     items.push(randomGift);
                 }
                 
-                // Очищаем трек
                 el.caseItems.innerHTML = '';
                 
-                // Добавляем предметы в трек
                 items.forEach(item => {
                     const giftDiv = document.createElement('div');
                     giftDiv.className = 'case-gift';
@@ -1139,17 +1156,11 @@
                     el.caseItems.appendChild(giftDiv);
                 });
                 
-                // Скрываем результат
                 el.caseResult.style.display = 'none';
-                
-                // Сбрасываем позицию
                 el.caseItems.style.transform = 'translateX(0)';
-                
-                // Активируем кнопку
                 el.caseOpenBtn.disabled = false;
                 el.caseOpenBtn.textContent = 'ОТКРЫТЬ';
                 
-                // Показываем модальное окно
                 el.caseModal.classList.add('active');
             }
 
@@ -1166,65 +1177,59 @@
                 updateUI();
                 saveGame();
                 
-                // Определяем выигрыш
+                // Определяем выигрыш - специально недокручиваем до дорогих
                 let maxPrice;
                 if (state.currentCase.price <= 100) {
-                    maxPrice = state.currentCase.price * 1.2;
+                    maxPrice = state.currentCase.price * 1.1; // Чуть выше цены кейса
                 } else {
-                    maxPrice = state.currentCase.price * 0.3;
+                    maxPrice = state.currentCase.price * 0.25; // Максимум 25% от цены
                 }
                 
                 const availableGifts = GIFTS.filter(g => g.price <= maxPrice);
                 const winningGift = { ...availableGifts[Math.floor(Math.random() * availableGifts.length)] };
-                winningGift.price = Math.floor(winningGift.price * (0.3 + Math.random() * 0.7));
                 
-                // Получаем все предметы
+                // Добавляем случайность - иногда чуть больше, иногда чуть меньше
+                const multiplier = 0.7 + Math.random() * 0.6;
+                winningGift.price = Math.floor(winningGift.price * multiplier);
+                
                 const items = document.querySelectorAll('.case-gift');
                 const itemCount = items.length;
                 
-                // Рассчитываем смещение
-                const itemWidth = 220; // 200px ширина + 20px gap
+                const itemWidth = 220;
                 const containerWidth = document.getElementById('caseDisplay').offsetWidth;
                 const centerPos = (containerWidth / 2) - (itemWidth / 2);
                 
-                // Выбираем случайный предмет для выигрыша
-                const winIndex = Math.floor(Math.random() * itemCount);
+                // Выбираем предмет ближе к концу для эффекта "недокрутило"
+                const winIndex = Math.floor(Math.random() * (itemCount - 5)) + 15;
                 
-                // Рассчитываем финальную позицию
                 const finalPos = centerPos - (winIndex * itemWidth);
                 
-                // Добавляем обороты
-                const spins = 3 * itemWidth * itemCount;
+                // Меньше оборотов для быстрой анимации
+                const spins = 2 * itemWidth * itemCount;
                 const startPos = finalPos - spins;
                 
-                // Запускаем анимацию
                 el.caseItems.style.transform = `translateX(${startPos}px)`;
                 
-                // Убираем подсветку
                 items.forEach(item => item.classList.remove('win'));
                 
                 setTimeout(() => {
                     el.caseItems.style.transform = `translateX(${finalPos}px)`;
                     
                     setTimeout(() => {
-                        // Подсвечиваем выигрыш
                         items[winIndex].classList.add('win');
                         
-                        // Показываем результат
                         el.caseResult.style.display = 'block';
                         el.caseResult.textContent = `${winningGift.name} +${winningGift.price}⭐`;
                         
-                        // Добавляем в инвентарь
                         state.inventory.push(winningGift);
                         updateUI();
                         saveGame();
                         
-                        // Активируем кнопку
                         el.caseOpenBtn.disabled = false;
                         el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                         state.isOpening = false;
-                    }, 3500);
-                }, 3500);
+                    }, 2500);
+                }, 2500);
             }
 
             // Промокоды
@@ -1285,7 +1290,6 @@
                 el.stopBtn.onclick = stopFlight;
                 el.applyPromo.onclick = applyPromo;
                 
-                // Обработчики для кейсов
                 el.caseOpenBtn.onclick = startOpening;
                 el.caseClose.onclick = () => {
                     el.caseModal.classList.remove('active');
