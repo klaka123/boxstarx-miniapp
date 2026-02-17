@@ -597,15 +597,15 @@
         .upgrade-arrow-clock::before {
             content: '';
             position: absolute;
-            top: -12px;
-            left: -10px;
+            top: -20px;
+            left: -8px;
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
             border-bottom: 20px solid #ff9933;
-            transform: rotate(180deg);
-            box-shadow: 0 0 20px #ff9933;
+            transform: rotate(0deg);
+            filter: drop-shadow(0 0 10px #ff9933);
         }
 
         .upgrade-center-circle {
@@ -807,7 +807,7 @@
             gap: 15px;
             padding: 0 15px;
             align-items: center;
-            transition: transform 2.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
 
         .case-gift {
@@ -821,19 +821,20 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
+            transition: all 0.3s;
         }
 
         .case-gift.win {
             border-color: #ff9933;
-            box-shadow: 0 0 50px #ff9933;
-            transform: scale(1.05);
+            box-shadow: 0 0 80px #ff9933;
+            transform: scale(1.1);
             z-index: 100;
             animation: winPulse 0.5s infinite alternate;
         }
 
         @keyframes winPulse {
-            from { box-shadow: 0 0 30px #ff9933; }
-            to { box-shadow: 0 0 80px #ff9933; }
+            from { box-shadow: 0 0 30px #ff9933; transform: scale(1.05); }
+            to { box-shadow: 0 0 100px #ff9933; transform: scale(1.15); }
         }
 
         .gift-image {
@@ -1748,7 +1749,7 @@
                     <span class="balance-icon">⭐</span>
                     <span class="balance-value" id="balance">10000</span>
                 </div>
-                <button class="add-btn" id="addFunds">+100 ⭐</button>
+                <button class="add-btn" id="addFunds">+1000 ⭐</button>
             </header>
 
             <!-- Кнопки на главном -->
@@ -1901,7 +1902,7 @@
             <button class="blackjack-action-btn hit" id="blackjackHit" disabled>➕ ВЗЯТЬ</button>
             <button class="blackjack-action-btn stand" id="blackjackStand" disabled>✋ СТОП</button>
             <button class="blackjack-action-btn double" id="blackjackDouble" disabled>💸 УДВОИТЬ</button>
-            <button class="blackjack-action-btn new" id="blackjackNew">🔄 НОВАЯ ИГРА</button>
+            <button class="blackjack-action-btn new" id="blackjackNew" disabled>🔄 НОВАЯ ИГРА</button>
         </div>
 
         <div class="blackjack-message" id="blackjackMessage">Начните новую игру</div>
@@ -2165,13 +2166,15 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 200; i++) {
+                for (let i = 0; i < 300; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 2 + 0.5,
+                        size: Math.random() * 2.5 + 0.5,
+                        speed: Math.random() * 0.3 + 0.1, // Быстрее
                         brightness: Math.random() * 0.8 + 0.2,
-                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)` // Желтые оттенки
+                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`, // Желтые оттенки
+                        phase: Math.random() * Math.PI * 2
                     });
                 }
             }
@@ -2193,10 +2196,20 @@
                 
                 // Рисуем звезды
                 for (let s of stars) {
-                    ctx.globalAlpha = s.brightness;
+                    // Мерцание
+                    const twinkle = Math.sin(Date.now() * 0.002 + s.phase) * 0.3 + 0.7;
+                    
+                    // Движение вправо
+                    s.x += s.speed;
+                    if (s.x > width) {
+                        s.x = 0;
+                        s.y = Math.random() * height;
+                    }
+                    
+                    ctx.globalAlpha = s.brightness * twinkle;
                     ctx.fillStyle = s.color;
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 5;
+                    ctx.shadowBlur = 8;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -2205,15 +2218,15 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
                 
-                // Редкие падающие звезды (медленные)
-                if (Math.random() < 0.0005) {
+                // Редкие падающие звезды (очень медленные)
+                if (Math.random() < 0.0003) {
                     shootingStars.push({
                         x: Math.random() * width,
                         y: Math.random() * height * 0.2,
                         length: Math.random() * 150 + 100,
-                        speed: Math.random() * 2 + 1,
+                        speed: Math.random() * 1.0 + 0.3, // Еще медленнее
                         angle: Math.random() * 0.3 + 0.35,
-                        life: 500,
+                        life: 600,
                         color: '#ffdd44'
                     });
                 }
@@ -2230,11 +2243,11 @@
                         continue;
                     }
                     
-                    ctx.globalAlpha = s.life / 500;
+                    ctx.globalAlpha = s.life / 600;
                     ctx.strokeStyle = s.color;
-                    ctx.lineWidth = 2;
+                    ctx.lineWidth = 2.5;
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 20;
                     
                     ctx.beginPath();
                     ctx.moveTo(s.x, s.y);
@@ -2242,7 +2255,7 @@
                     ctx.stroke();
                     
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, 3, 0, Math.PI * 2);
+                    ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
                     ctx.fillStyle = s.color;
                     ctx.fill();
                 }
@@ -2317,7 +2330,16 @@
                 { id: 'legend15', name: 'COSMIC', price: 7000, emoji: '🌠', color: '#9932cc' },
                 { id: 'legend16', name: 'UNIVERSE', price: 8000, emoji: '🌌', color: '#4b0082' },
                 { id: 'legend17', name: 'INFINITY', price: 9000, emoji: '∞', color: '#ff1493' },
-                { id: 'legend18', name: 'ETERNITY', price: 10000, emoji: '⏳', color: '#daa520' }
+                { id: 'legend18', name: 'ETERNITY', price: 10000, emoji: '⏳', color: '#daa520' },
+                
+                // Еще больше подарков
+                { id: 'mythic1', name: 'DRAGON', price: 12000, emoji: '🐉', color: '#8b0000' },
+                { id: 'mythic2', name: 'PHOENIX', price: 15000, emoji: '🔥', color: '#ff4500' },
+                { id: 'mythic3', name: 'THOR', price: 18000, emoji: '⚡', color: '#4169e1' },
+                { id: 'mythic4', name: 'ODIN', price: 20000, emoji: '👁️', color: '#2e8b57' },
+                { id: 'mythic5', name: 'ZEUS', price: 25000, emoji: '⚡', color: '#ffd700' },
+                { id: 'mythic6', name: 'POSEIDON', price: 30000, emoji: '🌊', color: '#1e90ff' },
+                { id: 'mythic7', name: 'HADES', price: 35000, emoji: '💀', color: '#4a4a4a' }
             ];
 
             function getGiftSVG(gift) {
@@ -2879,7 +2901,7 @@
                 
                 state.multipleResults = results;
                 
-                // Анимация прокрутки для каждого ряда
+                // Кинематографичная анимация прокрутки для каждого ряда
                 for (let r = 0; r < state.selectedQty; r++) {
                     const caseItems = document.getElementById(`caseItems_${r}`);
                     if (!caseItems) continue;
@@ -2899,17 +2921,17 @@
                     // Сбрасываем предыдущие классы
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
-                    // Сначала быстро прокручиваем влево, затем останавливаемся на выигрыше
-                    const spins = 3 * itemCount * itemWidth;
+                    // Кинематографичная анимация: быстрый старт, замедление в конце
+                    const spins = 4 * itemCount * itemWidth;
                     const startPos = finalPos - spins;
                     
                     // Устанавливаем начальную позицию
                     caseItems.style.transition = 'none';
                     caseItems.style.transform = `translateX(${startPos}px)`;
                     
-                    // Запускаем анимацию
+                    // Запускаем анимацию с эффектом замедления
                     setTimeout(() => {
-                        caseItems.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
+                        caseItems.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
                         // Подсвечиваем выигрыш после остановки
@@ -2918,7 +2940,7 @@
                                 items[winIndex].classList.add('win');
                                 sound.playWinSound();
                             }
-                        }, 2500);
+                        }, 3500);
                     }, 50);
                 }
                 
@@ -2962,7 +2984,7 @@
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
-                }, 3000);
+                }, 4000);
             }
 
             el.sellConfirm.onclick = () => {
@@ -3088,19 +3110,31 @@
                     return;
                 }
                 
+                // Сбрасываем состояние
                 state.blackjack.deck = createDeck();
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
                 
+                // Блокируем кнопку новой игры
+                el.blackjackNew.disabled = true;
+                
                 // Раздаем карты с анимацией
                 setTimeout(() => {
                     state.blackjack.playerCards.push(state.blackjack.deck.pop());
-                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                     updateBlackjackUI();
                 }, 100);
                 
                 setTimeout(() => {
+                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    updateBlackjackUI();
+                }, 200);
+                
+                setTimeout(() => {
                     state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                    updateBlackjackUI();
+                }, 300);
+                
+                setTimeout(() => {
                     state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                     
                     state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
@@ -3113,9 +3147,9 @@
                     el.blackjackHit.disabled = false;
                     el.blackjackStand.disabled = false;
                     el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
-                    el.blackjackNew.disabled = false;
+                    // Кнопка новой игры все еще disabled
                     el.blackjackMessage.textContent = 'Ваш ход';
-                }, 200);
+                }, 400);
             }
 
             function blackjackHit() {
@@ -3133,6 +3167,7 @@
                     el.blackjackHit.disabled = true;
                     el.blackjackStand.disabled = true;
                     el.blackjackDouble.disabled = true;
+                    el.blackjackNew.disabled = false; // Разблокируем новую игру
                     el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
                     sound.playLoseSound();
                     updateUI();
@@ -3181,6 +3216,7 @@
                 el.blackjackHit.disabled = true;
                 el.blackjackStand.disabled = true;
                 el.blackjackDouble.disabled = true;
+                el.blackjackNew.disabled = false; // Разблокируем новую игру
                 el.blackjackMessage.textContent = message;
                 
                 updateUI();
@@ -3449,10 +3485,10 @@
 
                 el.addFunds.onclick = () => {
                     if (!state.isFlying) {
-                        state.balance = (state.balance || 0) + 100;
+                        state.balance = (state.balance || 0) + 1000;
                         updateUI();
                         saveGame();
-                        showToast('+100⭐ получено!');
+                        showToast('+1000⭐ получено!');
                     } else {
                         showToast('❌ Нельзя пополнить во время полета!');
                     }
