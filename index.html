@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ИСПРАВЛЕННЫЙ АПГРЕЙД</title>
+    <title>BOXSTARX 🚀 ИСПРАВЛЕННАЯ ВЕРСИЯ</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1.5s ease;
             pointer-events: none;
         }
 
@@ -42,19 +42,12 @@
         .splash-title {
             font-size: clamp(2rem, 10vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #fff, #cccccc, #999999, #cccccc);
+            background: linear-gradient(135deg, #fff, #cccccc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px #cccccc, 0 0 60px #999999;
+            text-shadow: 0 0 30px #cccccc;
             letter-spacing: 4px;
-            animation: splashPulse 2s infinite ease-in-out;
-        }
-
-        @keyframes splashPulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 1; }
         }
 
         #starCanvas {
@@ -75,10 +68,6 @@
             100% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
         }
 
-        .gray-border {
-            animation: grayPulse 3s infinite ease-in-out;
-        }
-
         #app {
             position: relative;
             z-index: 10;
@@ -86,9 +75,8 @@
             height: 100vh;
             overflow-y: auto;
             overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
             opacity: 0;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1s ease;
         }
 
         #app.visible {
@@ -115,7 +103,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: grayPulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite;
             position: sticky;
             top: 16px;
             z-index: 100;
@@ -135,14 +123,11 @@
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #cccccc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #cccccc;
         }
 
         .add-btn {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            background: #2e7d32;
             border: none;
             color: white;
             padding: 10px 24px;
@@ -150,12 +135,7 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s ease;
             border: 1px solid #81c784;
-        }
-
-        .add-btn:active {
-            transform: scale(0.95);
         }
 
         .rocket-section {
@@ -164,12 +144,12 @@
             border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
-            animation: grayPulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite;
         }
 
         .rocket-window {
             position: relative;
-            height: 220px;
+            height: 200px;
             background: #000;
             border: 2px solid #cccccc;
             border-radius: 50px;
@@ -214,7 +194,6 @@
 
         .rocket.explode {
             opacity: 0;
-            animation: none;
         }
 
         .explosion {
@@ -226,7 +205,7 @@
             opacity: 0;
             z-index: 30;
             text-shadow: 0 0 50px #ff6600;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: transform 0.5s;
         }
 
         .explosion.show {
@@ -244,10 +223,8 @@
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
-            font-weight: 700;
             z-index: 25;
             color: #cccccc;
-            backdrop-filter: blur(5px);
         }
 
         .timer {
@@ -260,7 +237,6 @@
             border-radius: 40px;
             font-size: 1.2rem;
             z-index: 25;
-            backdrop-filter: blur(5px);
         }
 
         .auto-buttons {
@@ -279,17 +255,11 @@
             font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s ease;
         }
 
         .auto-btn.active {
             background: #cccccc;
             color: black;
-            font-weight: bold;
-        }
-
-        .auto-btn:active {
-            transform: scale(0.95);
         }
 
         .bet-control {
@@ -308,11 +278,6 @@
             font-size: 1.2rem;
             text-align: center;
             outline: none;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .bet-input:focus {
-            box-shadow: 0 0 20px #cccccc;
         }
 
         .flight-buttons {
@@ -328,27 +293,21 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .flight-btn:active {
-            transform: scale(0.95);
         }
 
         .btn-start {
-            background: linear-gradient(135deg, #cccccc, #999999);
+            background: #cccccc;
             color: black;
         }
 
         .btn-stop {
-            background: linear-gradient(135deg, #333333, #666666);
+            background: #333333;
             color: white;
         }
 
         .btn-stop:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
         .section-title {
@@ -356,7 +315,6 @@
             text-align: center;
             margin: 20px 0 15px;
             color: #cccccc;
-            text-shadow: 0 0 15px #cccccc;
         }
 
         .cases-grid {
@@ -366,23 +324,16 @@
         }
 
         .case-card {
-            background: linear-gradient(145deg, #1a1f35, #0f1428);
+            background: #1a1f35;
             border: 3px solid #cccccc;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .case-card:active {
             transform: scale(0.97);
-        }
-
-        .case-card:hover {
-            box-shadow: 0 0 30px #cccccc;
         }
 
         .case-icon {
@@ -410,26 +361,7 @@
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
-            animation: grayPulse 3s infinite ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .upgrade-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(200,200,200,0.1), transparent 70%);
-            animation: rotateGlow 20s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            animation: grayPulse 3s infinite;
         }
 
         .upgrade-title {
@@ -437,9 +369,6 @@
             text-align: center;
             margin-bottom: 20px;
             color: #cccccc;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 0 15px #cccccc;
         }
 
         .wheel-container {
@@ -448,8 +377,6 @@
             height: 280px;
             margin: 0 auto 20px;
             filter: drop-shadow(0 0 30px #cccccc);
-            position: relative;
-            z-index: 1;
         }
 
         .wheel-canvas {
@@ -460,8 +387,6 @@
             height: 100%;
             border-radius: 50%;
             background: #1a1f35;
-            box-shadow: 0 0 50px #cccccc, inset 0 0 30px rgba(200,200,200,0.5);
-            transition: all 0.3s ease;
             border: 4px solid #cccccc;
         }
 
@@ -487,8 +412,7 @@
             border-top: 60px solid #cccccc;
             filter: drop-shadow(0 0 20px #cccccc);
             transform-origin: bottom center;
-            transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1);
-            will-change: transform;
+            transition: transform 3.5s;
         }
 
         .wheel-arrow::before {
@@ -498,7 +422,7 @@
             left: -15px;
             width: 30px;
             height: 30px;
-            background: radial-gradient(circle, #cccccc, #999999);
+            background: #cccccc;
             border-radius: 50%;
             box-shadow: 0 0 30px #cccccc;
         }
@@ -512,16 +436,6 @@
             height: 16px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 20px white;
-        }
-
-        .wheel-arrow.spinning {
-            animation: arrowGlow 0.2s infinite alternate;
-        }
-
-        @keyframes arrowGlow {
-            from { filter: drop-shadow(0 0 20px #cccccc) drop-shadow(0 0 40px #999999); }
-            to { filter: drop-shadow(0 0 50px #cccccc) drop-shadow(0 0 100px #999999); }
         }
 
         .wheel-center {
@@ -531,7 +445,7 @@
             transform: translate(-50%, -50%);
             width: 90px;
             height: 90px;
-            background: linear-gradient(145deg, #1a1f35, #0f1428);
+            background: #1a1f35;
             border: 4px solid #cccccc;
             border-radius: 50%;
             display: flex;
@@ -539,24 +453,11 @@
             justify-content: center;
             font-size: 2.5rem;
             z-index: 25;
-            box-shadow: 0 0 50px #cccccc, inset 0 0 20px rgba(200,200,200,0.5);
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .wheel-center:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-            box-shadow: 0 0 70px #cccccc;
-        }
-
-        .wheel-center:active {
-            transform: translate(-50%, -50%) scale(0.95);
         }
 
         .slots-container {
             margin: 20px 0;
-            position: relative;
-            z-index: 1;
         }
 
         .slots-title {
@@ -564,8 +465,6 @@
             color: #aaa;
             font-size: 0.9rem;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .slots-grid {
@@ -575,7 +474,7 @@
         }
 
         .slot-item {
-            background: rgba(15, 20, 40, 0.9);
+            background: #0f1428;
             border: 2px solid #cccccc;
             border-radius: 40px;
             padding: 15px 5px;
@@ -586,18 +485,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 15px #cccccc;
-        }
-
-        .slot-item:active {
-            transform: scale(0.95);
         }
 
         .slot-item.filled {
             background: rgba(200, 200, 200, 0.3);
             border-color: #cccccc;
-            box-shadow: 0 0 30px #cccccc;
         }
 
         .slot-emoji {
@@ -608,7 +500,6 @@
         .slot-price {
             font-size: 0.8rem;
             color: #cccccc;
-            font-weight: 700;
         }
 
         .desired-container {
@@ -619,22 +510,12 @@
             margin: 20px 0;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .desired-container:hover {
-            box-shadow: 0 0 30px #cccccc;
-        }
-
-        .desired-container:active {
-            transform: scale(0.98);
         }
 
         .desired-label {
             color: #aaa;
             font-size: 0.9rem;
             margin-bottom: 10px;
-            text-transform: uppercase;
         }
 
         .desired-gift {
@@ -647,10 +528,6 @@
         .desired-emoji {
             font-size: 3rem;
             filter: drop-shadow(0 0 20px #cccccc);
-        }
-
-        .desired-info {
-            text-align: left;
         }
 
         .desired-name {
@@ -672,27 +549,22 @@
 
         .upgrade-stats {
             display: flex;
-            justify-content: space-around;
+            gap: 10px;
             margin: 20px 0;
-            position: relative;
-            z-index: 1;
         }
 
         .stat-item {
-            text-align: center;
+            flex: 1;
             background: rgba(0,0,0,0.5);
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 40px;
             border: 2px solid #cccccc;
-            box-shadow: 0 0 20px #cccccc;
-            flex: 1;
-            margin: 0 5px;
+            text-align: center;
         }
 
         .stat-label {
             font-size: 0.8rem;
             color: #aaa;
-            margin-bottom: 5px;
         }
 
         .stat-value {
@@ -708,20 +580,10 @@
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #cccccc, #999999);
+            background: #cccccc;
             color: black;
             cursor: pointer;
-            transition: all 0.2s ease;
             border: 2px solid #cccccc;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 0 30px #cccccc;
-        }
-
-        .upgrade-btn:active:not(:disabled) {
-            transform: scale(0.97);
         }
 
         .upgrade-btn:disabled {
@@ -735,7 +597,7 @@
             border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 20px;
-            animation: grayPulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite;
         }
 
         .inventory-header {
@@ -752,7 +614,7 @@
         }
 
         .inventory-count {
-            background: rgba(200, 200, 200, 0.2);
+            background: rgba(200,200,200,0.2);
             border: 1px solid #cccccc;
             padding: 5px 15px;
             border-radius: 40px;
@@ -777,7 +639,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.2s ease;
             position: relative;
         }
 
@@ -825,7 +686,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             padding: 20px;
@@ -853,11 +713,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin-right: 15px;
-            transition: transform 0.2s ease;
-        }
-
-        .modal-back:active {
-            transform: scale(0.95);
         }
 
         .modal-title {
@@ -882,17 +737,11 @@
             font-size: 1.2rem;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .quantity-btn:active {
-            transform: scale(0.95);
         }
 
         .quantity-btn.active {
             background: #cccccc;
             color: black;
-            font-weight: bold;
         }
 
         .open-btn {
@@ -902,15 +751,10 @@
             border-radius: 60px;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #cccccc, #999999);
+            background: #cccccc;
             color: black;
             margin: 20px 0;
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .open-btn:active {
-            transform: scale(0.98);
         }
 
         .contents-title {
@@ -933,11 +777,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.2s ease;
-        }
-
-        .content-item:active {
-            transform: scale(0.98);
         }
 
         .content-emoji {
@@ -961,7 +800,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             padding: 20px;
@@ -989,11 +827,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             margin-right: 15px;
-            transition: transform 0.2s ease;
-        }
-
-        .selector-back:active {
-            transform: scale(0.95);
         }
 
         .selector-title {
@@ -1019,13 +852,11 @@
             font-size: 1rem;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.2s ease;
         }
 
         .category-btn.active {
             background: #cccccc;
             color: black;
-            font-weight: bold;
         }
 
         .gifts-grid {
@@ -1042,15 +873,10 @@
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .gift-option:active {
             transform: scale(0.95);
-        }
-
-        .gift-option:hover {
-            box-shadow: 0 0 30px #cccccc;
         }
 
         .gift-option-emoji {
@@ -1067,7 +893,6 @@
         .gift-option-price {
             font-size: 1.2rem;
             color: #cccccc;
-            font-weight: 700;
         }
 
         .win-modal {
@@ -1077,7 +902,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -1096,25 +920,11 @@
             text-align: center;
             width: 80%;
             max-width: 350px;
-            box-shadow: 0 0 50px #cccccc;
-            animation: winPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes winPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .win-emoji {
             font-size: 4rem;
             margin-bottom: 15px;
-            animation: winEmoji 2s infinite ease-in-out;
-        }
-
-        @keyframes winEmoji {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
         }
 
         .win-title {
@@ -1139,11 +949,6 @@
             font-weight: 700;
             color: black;
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .win-btn:active {
-            transform: scale(0.95);
         }
 
         .promo-section {
@@ -1152,7 +957,7 @@
             border: 2px solid #cccccc;
             border-radius: 60px;
             padding: 16px;
-            animation: grayPulse 3s infinite ease-in-out;
+            animation: grayPulse 3s infinite;
             margin-top: 20px;
         }
 
@@ -1178,26 +983,16 @@
             color: white;
             font-size: 1rem;
             outline: none;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .promo-field:focus {
-            box-shadow: 0 0 20px #cccccc;
         }
 
         .promo-apply {
-            background: linear-gradient(135deg, #cccccc, #999999);
+            background: #cccccc;
             border: none;
             border-radius: 40px;
             padding: 12px 25px;
             color: black;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .promo-apply:active {
-            transform: scale(0.95);
         }
 
         .toast {
@@ -1205,20 +1000,13 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #cccccc, #999999);
+            background: #cccccc;
             color: black;
             padding: 12px 30px;
             border-radius: 60px;
             font-weight: 700;
             z-index: 5000;
-            animation: toastIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid white;
-            box-shadow: 0 0 20px #cccccc;
-        }
-
-        @keyframes toastIn {
-            from { top: 50px; opacity: 0; transform: translateX(-50%) scale(0.8); }
-            to { top: 100px; opacity: 1; transform: translateX(-50%) scale(1); }
         }
     </style>
 </head>
@@ -1355,7 +1143,7 @@
     <div class="gift-selector" id="giftSelector">
         <div class="selector-header">
             <button class="selector-back" id="closeSelector">←</button>
-            <div class="selector-title">Выберите желаемый подарок</div>
+            <div class="selector-title" id="selectorTitle">Выберите желаемый подарок</div>
         </div>
 
         <div class="gift-categories" id="giftCategories">
@@ -1382,6 +1170,7 @@
         (function() {
             'use strict';
 
+            // Заставка
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
                 setTimeout(() => {
@@ -1389,6 +1178,7 @@
                 }, 500);
             }, 2000);
 
+            // Звездный фон
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1396,7 +1186,7 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 30; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
@@ -1438,7 +1228,7 @@
 
             function initWindowStars() {
                 const w = document.getElementById('rocketWindow');
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 15; i++) {
                     const s = document.createElement('div');
                     s.className = 'window-star';
                     s.style.left = Math.random() * 100 + '%';
@@ -1451,6 +1241,7 @@
                 }
             }
 
+            // Данные
             const GIFTS = [
                 { emoji: "🧸", name: "Мишка", price: 5, category: "common" },
                 { emoji: "🎈", name: "Шар", price: 8, category: "common" },
@@ -1521,6 +1312,7 @@
                 currentCategory: 'all'
             };
 
+            // DOM элементы
             const el = {
                 balance: document.getElementById('balance'),
                 addFunds: document.getElementById('addFunds'),
@@ -1545,7 +1337,6 @@
                 promoField: document.getElementById('promoField'),
                 applyPromo: document.getElementById('applyPromo'),
                 upgradeBtn: document.getElementById('upgradeBtn'),
-                slotsGrid: document.getElementById('slotsGrid'),
                 totalBets: document.getElementById('totalBets'),
                 winChance: document.getElementById('winChance'),
                 wheelCenter: document.getElementById('wheelCenter'),
@@ -1554,6 +1345,7 @@
                 desiredContent: document.getElementById('desiredContent'),
                 giftSelector: document.getElementById('giftSelector'),
                 closeSelector: document.getElementById('closeSelector'),
+                selectorTitle: document.getElementById('selectorTitle'),
                 giftsGrid: document.getElementById('giftsGrid'),
                 giftCategories: document.getElementById('giftCategories')
             };
@@ -1572,6 +1364,7 @@
                 
                 const winAngle = (winChance / 100) * 360;
                 
+                // Зеленая часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, 0, (winAngle * Math.PI) / 180);
@@ -1579,6 +1372,7 @@
                 wheelCtx.fillStyle = '#00cc66';
                 wheelCtx.fill();
                 
+                // Красная часть
                 wheelCtx.beginPath();
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.arc(centerX, centerY, radius, (winAngle * Math.PI) / 180, 2 * Math.PI);
@@ -1586,23 +1380,11 @@
                 wheelCtx.fillStyle = '#ff4444';
                 wheelCtx.fill();
                 
+                // Контур
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
                 wheelCtx.strokeStyle = '#cccccc';
                 wheelCtx.lineWidth = 6;
-                wheelCtx.stroke();
-                
-                wheelCtx.beginPath();
-                wheelCtx.arc(centerX, centerY, radius - 3, 0, 2 * Math.PI);
-                wheelCtx.strokeStyle = '#cccccc';
-                wheelCtx.lineWidth = 2;
-                wheelCtx.stroke();
-                
-                wheelCtx.beginPath();
-                wheelCtx.moveTo(centerX, centerY);
-                wheelCtx.lineTo(centerX + radius * Math.cos((winAngle * Math.PI) / 180), centerY + radius * Math.sin((winAngle * Math.PI) / 180));
-                wheelCtx.strokeStyle = '#fff';
-                wheelCtx.lineWidth = 4;
                 wheelCtx.stroke();
             }
 
@@ -1942,9 +1724,21 @@
             }
 
             function selectDesiredGift() {
+                // Показываем все категории
                 el.giftCategories.style.display = 'flex';
                 el.selectorTitle.textContent = 'Выберите желаемый подарок';
-                renderGiftsGrid(state.currentCategory);
+                
+                // Сбрасываем активную категорию
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.cat === 'all') {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                state.currentCategory = 'all';
+                renderGiftsGrid('all');
+                
                 el.giftSelector.classList.add('active');
             }
 
@@ -2033,11 +1827,8 @@
                 const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                 
                 el.wheelArrow.style.transform = `translateX(-50%) rotate(${targetRotation}deg)`;
-                el.wheelArrow.classList.add('spinning');
                 
                 setTimeout(() => {
-                    el.wheelArrow.classList.remove('spinning');
-                    
                     if (win) {
                         const winGift = { ...state.desiredGift };
                         state.inventory.push(winGift);
@@ -2069,6 +1860,7 @@
                 drawWheel(0);
                 updateDesiredDisplay();
 
+                // Категории подарков
                 document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -2078,6 +1870,7 @@
                     };
                 });
 
+                // Авто-кнопки
                 document.querySelectorAll('.auto-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.auto-btn').forEach(x => x.classList.remove('active'));
@@ -2086,6 +1879,7 @@
                     };
                 });
 
+                // Quantity кнопки
                 document.querySelectorAll('.quantity-btn').forEach(b => {
                     b.onclick = () => {
                         document.querySelectorAll('.quantity-btn').forEach(x => x.classList.remove('active'));
@@ -2112,7 +1906,12 @@
                 el.closeWinModal.onclick = () => el.winModal.classList.remove('active');
                 el.applyPromo.onclick = applyPromo;
                 
-                el.desiredContainer.onclick = selectDesiredGift;
+                // Прямое назначение обработчика
+                el.desiredContainer.onclick = function() {
+                    console.log('Клик по желаемому подарку');
+                    selectDesiredGift();
+                };
+                
                 el.closeSelector.onclick = () => el.giftSelector.classList.remove('active');
                 el.upgradeBtn.onclick = spinWheel;
 
