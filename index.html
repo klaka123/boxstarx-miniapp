@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ПРОФЕССИОНАЛЬНЫЙ АПГРЕЙД</title>
+    <title>BOXSTARX 🚀 ИСПРАВЛЕННАЯ ВЕРСИЯ</title>
     <style>
         * {
             margin: 0;
@@ -69,7 +69,6 @@
             background: #000;
             display: block;
             pointer-events: none;
-            will-change: transform;
         }
 
         /* ========== ОРАНЖЕВЫЕ ГРАНИЦЫ ========== */
@@ -190,7 +189,6 @@
             border-radius: 50%;
             filter: blur(1px);
             animation: windowStarMove 15s linear infinite;
-            will-change: transform;
         }
 
         @keyframes windowStarMove {
@@ -206,7 +204,6 @@
             font-size: 5rem;
             filter: drop-shadow(0 0 30px #ff9933);
             z-index: 20;
-            will-change: transform;
         }
 
         .rocket.shaking {
@@ -413,7 +410,7 @@
             font-weight: 700;
         }
 
-        /* ========== ПРОФЕССИОНАЛЬНЫЙ КРУГОВОЙ АПГРЕЙД ========== */
+        /* ========== КРУГОВОЙ АПГРЕЙД ========== */
         .upgrade-section {
             background: rgba(10, 10, 20, 0.8);
             backdrop-filter: blur(10px);
@@ -655,7 +652,7 @@
             cursor: not-allowed;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО ВЫБОРА ПОДАРКА ========== */
+        /* ========== СЕЛЕКТОР ПОДАРКОВ ========== */
         .gift-selector {
             position: fixed;
             top: 0;
@@ -860,6 +857,143 @@
             justify-content: center;
             color: #666;
             font-size: 0.7rem;
+        }
+
+        /* ========== МОДАЛЬНОЕ ОКНО ========== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-back:active {
+            transform: scale(0.95);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff9933;
+        }
+
+        .quantity-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quantity-btn {
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            padding: 15px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+
+        .quantity-btn.active {
+            background: #ff9933;
+            color: black;
+            font-weight: bold;
+        }
+
+        .open-btn {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            color: white;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .open-btn:active {
+            transform: scale(0.98);
+        }
+
+        .contents-title {
+            font-size: 1.2rem;
+            color: #ff9933;
+            margin: 20px 0 15px;
+        }
+
+        .contents-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .content-item {
+            background: rgba(255,153,51,0.1);
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .content-item:active {
+            transform: scale(0.98);
+        }
+
+        .content-emoji {
+            font-size: 2rem;
+        }
+
+        .content-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .content-price {
+            color: #ff9933;
+            font-size: 0.9rem;
         }
 
         /* ========== МОДАЛЬНОЕ ОКНО ВЫИГРЫША ========== */
@@ -1068,9 +1202,9 @@
             <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
-            <!-- Профессиональный круговой апгрейд -->
+            <!-- Круговой апгрейд -->
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ ПРОФЕССИОНАЛЬНЫЙ АПГРЕЙД ⚡</div>
+                <div class="upgrade-title">⚡ КРУГОВОЙ АПГРЕЙД ⚡</div>
                 
                 <div class="wheel-container">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
@@ -1148,7 +1282,7 @@
     <div class="gift-selector" id="giftSelector">
         <div class="selector-header">
             <button class="selector-back" id="closeSelector">←</button>
-            <div class="selector-title">Выберите желаемый подарок</div>
+            <div class="selector-title">Выберите подарок</div>
         </div>
 
         <div class="gift-categories" id="giftCategories">
@@ -1358,8 +1492,7 @@
                 wheelArrow: document.getElementById('wheelArrow'),
                 giftSelector: document.getElementById('giftSelector'),
                 closeSelector: document.getElementById('closeSelector'),
-                giftsGrid: document.getElementById('giftsGrid'),
-                giftCategories: document.getElementById('giftCategories')
+                giftsGrid: document.getElementById('giftsGrid')
             };
 
             const slotItems = document.querySelectorAll('.slot-item');
@@ -1372,6 +1505,9 @@
                 const centerX = 140;
                 const centerY = 140;
                 const radius = 130;
+                
+                // Очищаем canvas
+                wheelCtx.clearRect(0, 0, 280, 280);
                 
                 // Зеленая часть (выигрыш)
                 wheelCtx.beginPath();
@@ -1410,17 +1546,6 @@
                 wheelCtx.strokeStyle = '#fff';
                 wheelCtx.lineWidth = 4;
                 wheelCtx.stroke();
-                
-                // Добавляем градиент
-                const gradient = wheelCtx.createRadialGradient(centerX - 30, centerY - 30, 20, centerX, centerY, radius);
-                gradient.addColorStop(0, 'rgba(255,255,255,0.2)');
-                gradient.addColorStop(1, 'rgba(0,0,0,0.2)');
-                wheelCtx.fillStyle = gradient;
-                wheelCtx.globalCompositeOperation = 'overlay';
-                wheelCtx.beginPath();
-                wheelCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-                wheelCtx.fill();
-                wheelCtx.globalCompositeOperation = 'source-over';
             }
 
             // ========== СОХРАНЕНИЕ ==========
@@ -1722,10 +1847,10 @@
                 slotItems.forEach((slot, index) => {
                     slot.onclick = () => {
                         if (state.upgradeSlots[index]) {
+                            // Возвращаем подарок в инвентарь
                             state.inventory.push(state.upgradeSlots[index]);
                             state.upgradeSlots[index] = null;
-                            updateUpgradeUI();
-                            updateInventory();
+                            updateUI();
                         } else {
                             currentSlotIndex = index;
                             openGiftSelector('slot');
@@ -1797,13 +1922,10 @@
 
                 if (state.desiredGift && filled > 0) {
                     const total = state.upgradeSlots.reduce((sum, s) => sum + (s ? s.price : 0), 0);
-                    
-                    // Реальные шансы: 10% + 5% за каждый слот
                     const chance = Math.min(10 + filled * 5, 40);
                     el.winChance.textContent = chance + '%';
                     drawWheel(chance);
                     
-                    // Желаемый подарок должен быть минимум на 20% больше
                     const min = Math.floor(total * 1.2);
                     if (state.desiredGift.price >= min) {
                         el.upgradeBtn.disabled = false;
@@ -1848,6 +1970,7 @@
                         showToast('💥 ПРОВАЛ! Все сгорело');
                     }
                     
+                    // Очищаем все слоты и желаемый подарок
                     state.upgradeSlots = [null, null, null, null, null, null];
                     state.desiredGift = null;
                     el.wheelCenter.textContent = '⚡';
