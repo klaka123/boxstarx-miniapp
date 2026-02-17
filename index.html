@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BoxStarX 🚀 Telegram Подарки</title>
+    <title>BoxStarX PRO 🚀 КОСМИЧЕСКИЕ КЕЙСЫ</title>
     <style>
         * {
             margin: 0;
@@ -13,47 +13,124 @@
         }
 
         body {
-            background: #0a0c15;
+            overflow: hidden;
+            background: #000;
             color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
         }
 
-        #game {
+        /* ========== НЕВЕРОЯТНОЕ ЗВЕЗДНОЕ НЕБО ========== */
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, #1a1f30, #0f1422);
-            border-radius: 40px;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at 30% 40%, #0a0c20 0%, #020308 100%);
+            display: block;
+            pointer-events: none;
+        }
+
+        /* Туманность с переливами */
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(180, 120, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(100, 180, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 120, 200, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 20%, rgba(200, 255, 120, 0.08) 0%, transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            animation: nebulaPulse 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes nebulaPulse {
+            0% { opacity: 0.3; filter: hue-rotate(0deg) blur(3px); }
+            50% { opacity: 0.6; filter: hue-rotate(20deg) blur(4px); }
+            100% { opacity: 0.3; filter: hue-rotate(40deg) blur(3px); }
+        }
+
+        /* Парящие частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 0 20px currentColor;
+            animation: floatParticle 30s infinite linear;
+            color: hsl(var(--hue), 90%, 70%);
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-200px) translateX(150px) rotate(360deg); opacity: 0; }
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        #app {
+            position: relative;
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .content {
+            min-height: 100vh;
             padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,215,0,0.3);
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 100px;
+        }
+
+        /* ========== ПРЕМИУМ ХЕДЕР ========== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: rgba(10, 15, 30, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 40px;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .balance {
-            background: #232a3a;
-            padding: 15px 20px;
-            border-radius: 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border: 1px solid gold;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
         }
 
         .balance span {
             color: gold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            text-shadow: 0 0 20px gold;
         }
 
-        .balance button {
+        .add-btn {
             background: #2e7d32;
             border: none;
             color: white;
@@ -62,52 +139,112 @@
             font-weight: bold;
             cursor: pointer;
             border: 1px solid #81c784;
-            transition: all 0.2s;
         }
 
-        .balance button:active {
-            transform: scale(0.95);
-        }
-
-        .flight-panel {
-            background: #1a2133;
-            border-radius: 30px;
+        /* ========== АНИМИРОВАННЫЙ САМОЛЕТ ========== */
+        .plane-container {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid gold;
+            position: relative;
+            overflow: hidden;
         }
 
-        .flight-controls {
-            display: flex;
-            gap: 10px;
+        .plane-scene {
+            position: relative;
+            height: 120px;
+            background: linear-gradient(180deg, #0a1020 0%, #040810 100%);
+            border-radius: 30px;
+            border: 1px solid gold;
+            overflow: hidden;
             margin-bottom: 15px;
         }
 
-        .flight-controls input {
+        .runway {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(90deg, #333, #555, #333);
+            border-top: 2px solid gold;
+        }
+
+        .runway::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, gold 0px, gold 20px, transparent 20px, transparent 40px);
+            transform: translateY(-50%);
+        }
+
+        .animated-plane {
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 20px gold) drop-shadow(0 0 40px orange);
+            transition: left 0.03s linear;
+            z-index: 5;
+        }
+
+        .plane-trail {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, gold, transparent);
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            border-radius: 2px;
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        .crash-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 10;
+            text-shadow: 0 0 30px red;
+        }
+
+        .plane-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .plane-controls input {
             flex: 1;
             background: #0f1625;
             border: 1px solid gold;
             color: gold;
-            padding: 12px;
+            padding: 15px;
             border-radius: 30px;
             font-size: 1.1rem;
             text-align: center;
-            outline: none;
         }
 
-        .flight-controls button {
+        .plane-controls button {
             flex: 1;
-            padding: 12px;
+            padding: 15px;
             border: none;
             border-radius: 30px;
             font-weight: bold;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .flight-controls button:active {
-            transform: scale(0.95);
+            transition: 0.2s;
         }
 
         #startFlight {
@@ -124,146 +261,254 @@
             cursor: not-allowed;
         }
 
-        .flight-info {
+        .multiplier-display {
             text-align: center;
+            margin-top: 15px;
             font-size: 1.3rem;
-            padding: 15px;
-            background: #0f1625;
-            border-radius: 30px;
-            border: 1px solid gold;
         }
 
-        .multiplier {
+        .multiplier-value {
             color: gold;
             font-size: 2rem;
             font-weight: bold;
             margin-left: 10px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            text-align: center;
-            margin: 25px 0 15px;
-            color: gold;
+        /* ========== МЕНЮ КЕЙСОВ (КАК НА СКРИНЕ) ========== */
+        .cases-menu {
             display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid gold;
+            padding-bottom: 10px;
         }
 
+        .cases-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .cases-tab.active {
+            background: rgba(255,215,0,0.3);
+            border-color: gold;
+            box-shadow: 0 0 20px gold;
+        }
+
+        /* ========== СЕТКА КЕЙСОВ ========== */
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .case-card {
-            background: linear-gradient(145deg, #232b3f, #141b2b);
-            border-radius: 20px;
-            padding: 15px 5px;
+        .case-item {
+            background: linear-gradient(145deg, #1e2842, #0e162a);
+            border-radius: 25px;
+            padding: 20px 10px;
             text-align: center;
             border: 2px solid gold;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .case-card:active {
+        .case-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.6s;
+        }
+
+        .case-item:hover::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .case-item:active {
             transform: scale(0.95);
         }
 
         .case-icon {
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
         .case-name {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: bold;
             margin-bottom: 5px;
         }
 
         .case-price {
             color: gold;
-            font-size: 1.1rem;
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        .gifts-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+        /* ========== ПОЛНОЭКРАННОЕ МЕНЮ КЕЙСА ========== */
+        .case-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .case-modal.active {
+            display: flex;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: gold;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,0,0,0.3);
+        }
+
+        .modal-case-icon {
+            font-size: 6rem;
+            text-align: center;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 30px gold);
+        }
+
+        .modal-price {
+            text-align: center;
+            font-size: 2rem;
+            color: gold;
+            margin-bottom: 30px;
+        }
+
+        .prizes-title {
+            color: gold;
+            font-size: 1.5rem;
             margin-bottom: 20px;
         }
 
-        .gift-card {
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .prize-item {
             background: #1e2638;
-            border-radius: 15px;
-            padding: 12px 5px;
+            border-radius: 20px;
+            padding: 15px 5px;
             text-align: center;
             border: 1px solid gold;
-            cursor: pointer;
-            transition: 0.2s;
         }
 
-        .gift-card:active {
-            transform: scale(0.95);
-            background: #2a3347;
-        }
-
-        .gift-emoji {
+        .prize-emoji {
             font-size: 2rem;
             margin-bottom: 5px;
         }
 
-        .gift-name {
-            font-size: 0.7rem;
+        .prize-name {
+            font-size: 0.8rem;
             color: gold;
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        .gift-price {
-            font-size: 0.7rem;
-            background: #0f1625;
-            padding: 3px;
-            border-radius: 10px;
+        .spin-btn {
+            background: linear-gradient(135deg, #f9d423, #fdaa33);
+            border: none;
+            padding: 20px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            border: 2px solid gold;
         }
 
-        .inventory-section {
+        .double-tap {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .demo-btn {
+            background: #1e2638;
+            border: 1px solid gold;
+            color: white;
+            padding: 15px;
+            border-radius: 30px;
+            width: 100%;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* ========== ПОДАРКИ ========== */
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .gift-card {
+            background: #1e2638;
+            border-radius: 20px;
+            padding: 15px 5px;
+            text-align: center;
+            border: 1px solid gold;
+            cursor: pointer;
+        }
+
+        /* ========== ИНВЕНТАРЬ ========== */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             background: #1a2133;
             border-radius: 30px;
             padding: 20px;
             border: 1px solid gold;
         }
 
-        .inventory-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .inventory-stats {
-            background: #0f1625;
-            padding: 8px 15px;
-            border-radius: 20px;
-            color: gold;
-            font-size: 0.9rem;
-        }
-
-        .inventory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
         .inventory-slot {
             background: #0f1625;
             border: 1px solid gold;
             border-radius: 15px;
-            padding: 10px 5px;
+            padding: 10px;
             text-align: center;
             aspect-ratio: 1;
             display: flex;
@@ -271,30 +516,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .inventory-slot:active {
-            transform: scale(0.95);
-            background: #1a2340;
-        }
-
-        .inventory-slot .emoji {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-
-        .inventory-slot .name {
-            font-size: 0.6rem;
-            color: gold;
-        }
-
-        .inventory-slot .price {
-            font-size: 0.6rem;
-            background: #00000050;
-            padding: 2px 5px;
-            border-radius: 10px;
-            margin-top: 3px;
         }
 
         .empty-slot {
@@ -306,7 +527,6 @@
             align-items: center;
             justify-content: center;
             color: #555;
-            font-size: 0.7rem;
         }
 
         .notification {
@@ -319,9 +539,8 @@
             padding: 15px 30px;
             border-radius: 30px;
             font-weight: bold;
-            z-index: 1000;
+            z-index: 2000;
             border: 1px solid gold;
-            box-shadow: 0 10px 30px black;
             animation: slideDown 0.3s;
         }
 
@@ -336,183 +555,312 @@
     </style>
 </head>
 <body>
-    <div id="game">
-        <!-- Баланс -->
-        <div class="balance">
-            <span>⭐ <span id="balance">1000</span></span>
-            <button id="addBalance">+100⭐</button>
-        </div>
+    <canvas id="starCanvas"></canvas>
+    <div class="nebula"></div>
+    <div class="particles" id="particles"></div>
 
-        <!-- Самолет -->
-        <div class="flight-panel">
-            <div class="flight-controls">
-                <input type="number" id="betAmount" min="10" value="100" step="10">
-                <button id="startFlight">🚀 ВЗЛЕТ</button>
-                <button id="stopFlight" disabled>⏹️ СТОП</button>
+    <div id="app">
+        <div class="content">
+            <!-- Хедер -->
+            <div class="header">
+                <div class="balance">
+                    ⭐ <span id="balance">1549</span>
+                </div>
+                <button class="add-btn" id="addBalance">+100</button>
             </div>
-            <div class="flight-info">
-                <span>💰 Множитель:</span>
-                <span class="multiplier" id="multiplier">1.00x</span>
+
+            <!-- Анимированный самолет -->
+            <div class="plane-container">
+                <div class="plane-scene" id="planeScene">
+                    <div class="runway"></div>
+                    <div class="animated-plane" id="animatedPlane">✈️</div>
+                    <div class="plane-trail" id="planeTrail" style="width: 0px;"></div>
+                    <div class="crash-effect" id="crashEffect">💥</div>
+                </div>
+                
+                <div class="plane-controls">
+                    <input type="number" id="betAmount" min="10" value="149" step="10">
+                    <button id="startFlight">🚀 КРУТИТЬ</button>
+                    <button id="stopFlight" disabled>⏹️ СТОП</button>
+                </div>
+                
+                <div class="multiplier-display">
+                    <span>МНОЖИТЕЛЬ:</span>
+                    <span class="multiplier-value" id="multiplier">1.00x</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Кейсы -->
-        <div class="section-title">
-            <span>⚡</span> КОСМИЧЕСКИЕ КЕЙСЫ <span>⚡</span>
-        </div>
-        <div class="cases-grid" id="casesContainer"></div>
-
-        <!-- Telegram Подарки (ОРИГИНАЛЬНЫЕ) -->
-        <div class="section-title">
-            <span>🎁</span> TELEGRAM ПОДАРКИ <span>🎁</span>
-        </div>
-        <div class="gifts-grid" id="giftsContainer"></div>
-
-        <!-- Инвентарь -->
-        <div class="inventory-section">
-            <div class="inventory-header">
-                <span class="section-title" style="margin:0;">📦 ИНВЕНТАРЬ</span>
-                <span class="inventory-stats" id="inventoryStats">0/16</span>
+            <!-- Меню кейсов (как на скрине) -->
+            <div class="cases-menu">
+                <div class="cases-tab active" data-tab="обычные">ОБЫЧНЫЕ</div>
+                <div class="cases-tab" data-tab="редкие">РЕДКИЕ</div>
+                <div class="cases-tab" data-tab="эпические">ЭПИЧЕСКИЕ</div>
             </div>
+
+            <!-- Сетка кейсов -->
+            <div class="cases-grid" id="casesGrid"></div>
+
+            <!-- Подарки -->
+            <div class="gifts-grid" id="giftsGrid"></div>
+
+            <!-- Инвентарь -->
             <div class="inventory-grid" id="inventoryGrid"></div>
         </div>
     </div>
 
+    <!-- Полноэкранное меню кейса -->
+    <div class="case-modal" id="caseModal">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">ОБЫЧНЫЙ КЕЙС</div>
+            <button class="close-modal" id="closeModal">✕</button>
+        </div>
+        
+        <div class="modal-case-icon" id="modalIcon">📦</div>
+        <div class="modal-price" id="modalPrice">★ 149</div>
+        
+        <div class="prizes-title">ПРИЗЫ</div>
+        <div class="prizes-grid" id="prizesGrid"></div>
+        
+        <button class="spin-btn" id="spinBtn">КРУТИТЬ ЗА ★ 149</button>
+        <div class="double-tap">👆 ДВОЙНОЙ ТАП ДЛЯ БЫСТРОГО ПРОКРУТА</div>
+        
+        <button class="demo-btn" id="demoBtn">🎮 ДЕМО</button>
+    </div>
+
     <script>
-        // ========== ОРИГИНАЛЬНЫЕ TELEGRAM ПОДАРКИ ==========
+        // ========== НЕВЕРОЯТНОЕ ЗВЕЗДНОЕ НЕБО ==========
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let stars = [];
+        let shootingStars = [];
+        
+        const STAR_COUNT = 800;
+        const SHOOTING_STAR_COUNT = 15;
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 3 + 1,
+                    speed: Math.random() * 0.1 + 0.05,
+                    brightness: Math.random() * 0.5 + 0.2,
+                    flickerSpeed: Math.random() * 0.01 + 0.005,
+                    hue: Math.random() * 360
+                });
+            }
+
+            shootingStars = [];
+            for (let i = 0; i < SHOOTING_STAR_COUNT; i++) {
+                shootingStars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height * 0.3,
+                    length: Math.random() * 200 + 100,
+                    speed: Math.random() * 12 + 8,
+                    angle: Math.random() * 0.4 + 0.3,
+                    hue: Math.random() * 360
+                });
+            }
+        }
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initStars();
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Глубокий космос
+            const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+            gradient.addColorStop(0, '#05071a');
+            gradient.addColorStop(0.5, '#02030a');
+            gradient.addColorStop(1, '#000000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Медленные переливающиеся звезды
+            stars.forEach(star => {
+                star.y += star.speed * 0.05;
+                if (star.y > height) {
+                    star.y = 0;
+                    star.x = Math.random() * width;
+                }
+                
+                star.brightness += star.flickerSpeed;
+                if (star.brightness > 1 || star.brightness < 0.3) star.flickerSpeed *= -1;
+                
+                star.hue = (star.hue + 0.1) % 360;
+                
+                ctx.globalAlpha = star.brightness * 0.7;
+                ctx.fillStyle = `hsl(${star.hue}, 80%, 70%)`;
+                ctx.shadowColor = `hsl(${star.hue}, 80%, 70%)`;
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Частые падающие звезды
+            ctx.shadowBlur = 30;
+            shootingStars.forEach(star => {
+                star.x += star.speed * Math.cos(star.angle);
+                star.y += star.speed * Math.sin(star.angle);
+                
+                if (star.y > height || star.x > width) {
+                    star.x = Math.random() * width * 0.3;
+                    star.y = Math.random() * height * 0.2;
+                }
+                
+                star.hue = (star.hue + 2) % 360;
+                
+                // Хвост
+                const gradient = ctx.createLinearGradient(
+                    star.x, star.y,
+                    star.x - star.length * Math.cos(star.angle),
+                    star.y - star.length * Math.sin(star.angle)
+                );
+                gradient.addColorStop(0, `hsla(${star.hue}, 100%, 80%, 1)`);
+                gradient.addColorStop(0.5, `hsla(${star.hue}, 100%, 60%, 0.5)`);
+                gradient.addColorStop(1, 'transparent');
+                
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(
+                    star.x - star.length * Math.cos(star.angle),
+                    star.y - star.length * Math.sin(star.angle)
+                );
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Голова
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = `hsl(${star.hue}, 100%, 90%)`;
+                ctx.shadowColor = `hsl(${star.hue}, 100%, 70%)`;
+                ctx.fill();
+            });
+            
+            ctx.shadowBlur = 0;
+            requestAnimationFrame(drawStars);
+        }
+
+        // ========== ДАННЫЕ ==========
         const TELEGRAM_GIFTS = [
-            // Оригинальные подарки из Telegram (точь-в-точь)
-            { emoji: "🎂", name: "Торт", price: 15 },
-            { emoji: "❤️", name: "Сердце", price: 25 },
-            { emoji: "🔥", name: "Огонь", price: 50 },
-            { emoji: "🎁", name: "Подарок", price: 50 },
-            
-            { emoji: "🎉", name: "Праздник", price: 100 },
-            { emoji: "💎", name: "Алмаз", price: 100 },
-            { emoji: "👑", name: "Корона", price: 150 },
-            { emoji: "🚀", name: "Ракета", price: 150 },
-            
-            { emoji: "⭐", name: "Звезда", price: 250 },
-            { emoji: "🌟", name: "Суперзвезда", price: 300 },
-            { emoji: "💫", name: "Комета", price: 500 },
-            { emoji: "⚡", name: "Молния", price: 500 },
-            
-            { emoji: "🎈", name: "Шар", price: 750 },
-            { emoji: "🎊", name: "Конфетти", price: 1000 },
-            { emoji: "✨", name: "Блестки", price: 1500 },
-            { emoji: "🦄", name: "Единорог", price: 2500 },
-            
-            { emoji: "🌈", name: "Радуга", price: 3000 },
-            { emoji: "🌠", name: "Метеор", price: 5000 },
-            { emoji: "☄️", name: "Астероид", price: 7500 },
-            { emoji: "🛸", name: "НЛО", price: 10000 }
+            { emoji: "🎂", name: "ТОРТ", price: 15 },
+            { emoji: "❤️", name: "СЕРДЦЕ", price: 25 },
+            { emoji: "🔥", name: "ОГОНЬ", price: 50 },
+            { emoji: "🎁", name: "ПОДАРОК", price: 50 },
+            { emoji: "🎉", name: "ПРАЗДНИК", price: 100 },
+            { emoji: "💎", name: "АЛМАЗ", price: 100 },
+            { emoji: "👑", name: "КОРОНА", price: 150 },
+            { emoji: "🚀", name: "РАКЕТА", price: 150 },
+            { emoji: "⭐", name: "ЗВЕЗДА", price: 250 },
+            { emoji: "🌟", name: "СУПЕРЗВЕЗДА", price: 300 },
+            { emoji: "💫", name: "КОМЕТА", price: 500 },
+            { emoji: "⚡", name: "МОЛНИЯ", price: 500 },
+            { emoji: "🎈", name: "ШАР", price: 750 },
+            { emoji: "🎊", name: "КОНФЕТТИ", price: 1000 },
+            { emoji: "✨", name: "БЛЕСТКИ", price: 1500 },
+            { emoji: "🦄", name: "ЕДИНОРОГ", price: 2500 }
         ];
 
-        // Кейсы
-        const CASES = [
-            { 
-                name: 'БАЗОВЫЙ', 
-                icon: '📦', 
-                price: 100,
-                gifts: [0,1,2,3] // Торт, Сердце, Огонь, Подарок
-            },
-            { 
-                name: 'ПРОДВИНУТЫЙ', 
-                icon: '✨', 
-                price: 300,
-                gifts: [4,5,6,7] // Праздник, Алмаз, Корона, Ракета
-            },
-            { 
-                name: 'ЭЛИТНЫЙ', 
-                icon: '👑', 
-                price: 1000,
-                gifts: [8,9,10,11] // Звезда, Суперзвезда, Комета, Молния
-            }
-        ];
+        const CASES = {
+            обычные: [
+                { name: "PLAYER", icon: "🎮", price: 149, gifts: [0,1,2,3] },
+                { name: "BEAR", icon: "🐻", price: 199, gifts: [1,2,3,4] },
+                { name: "LAMP", icon: "💡", price: 249, gifts: [2,3,4,5] },
+                { name: "SKULL", icon: "💀", price: 499, gifts: [3,4,5,6] },
+                { name: "NEKO", icon: "🐱", price: 999, gifts: [4,5,6,7] },
+                { name: "BRICK", icon: "🧱", price: 1499, gifts: [5,6,7,8] }
+            ],
+            редкие: [
+                { name: "DRAGON", icon: "🐉", price: 1999, gifts: [6,7,8,9] },
+                { name: "PHOENIX", icon: "🔥", price: 2999, gifts: [7,8,9,10] }
+            ],
+            эпические: [
+                { name: "GOD", icon: "👼", price: 4999, gifts: [8,9,10,11] },
+                { name: "DEMON", icon: "👿", price: 9999, gifts: [9,10,11,12] }
+            ]
+        };
 
         // Состояние игры
-        let balance = 1000;
+        let balance = 1549;
         let inventory = [];
+        let currentCase = null;
         let isFlying = false;
         let multiplier = 1;
         let planeInterval = null;
+        let planePosition = -80;
 
         // DOM элементы
         const balanceEl = document.getElementById('balance');
-        const betInput = document.getElementById('betAmount');
+        const addBtn = document.getElementById('addBalance');
         const startBtn = document.getElementById('startFlight');
         const stopBtn = document.getElementById('stopFlight');
         const multiplierEl = document.getElementById('multiplier');
-        const addBalanceBtn = document.getElementById('addBalance');
-        const casesContainer = document.getElementById('casesContainer');
-        const giftsContainer = document.getElementById('giftsContainer');
+        const animatedPlane = document.getElementById('animatedPlane');
+        const planeTrail = document.getElementById('planeTrail');
+        const crashEffect = document.getElementById('crashEffect');
+        const casesGrid = document.getElementById('casesGrid');
+        const giftsGrid = document.getElementById('giftsGrid');
         const inventoryGrid = document.getElementById('inventoryGrid');
-        const inventoryStats = document.getElementById('inventoryStats');
+        const caseModal = document.getElementById('caseModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalPrice = document.getElementById('modalPrice');
+        const prizesGrid = document.getElementById('prizesGrid');
+        const spinBtn = document.getElementById('spinBtn');
+        const demoBtn = document.getElementById('demoBtn');
 
-        // Загрузка сохранения
+        // Сохранение
+        function saveGame() {
+            localStorage.setItem('bsx_balance', balance);
+            localStorage.setItem('bsx_inventory', JSON.stringify(inventory));
+        }
+
         function loadGame() {
-            const savedBalance = localStorage.getItem('boxstarx_balance');
-            const savedInventory = localStorage.getItem('boxstarx_inventory');
-            
+            const savedBalance = localStorage.getItem('bsx_balance');
+            const savedInventory = localStorage.getItem('bsx_inventory');
             if (savedBalance) balance = parseInt(savedBalance);
             if (savedInventory) inventory = JSON.parse(savedInventory);
-            
             updateBalance();
             updateInventory();
         }
 
-        // Сохранение игры
-        function saveGame() {
-            localStorage.setItem('boxstarx_balance', balance);
-            localStorage.setItem('boxstarx_inventory', JSON.stringify(inventory));
-        }
-
-        // Уведомление
-        function showNotification(message, isSuccess = true) {
+        function showNotification(msg, isSuccess = true) {
             const notif = document.createElement('div');
             notif.className = `notification ${!isSuccess ? 'error' : ''}`;
-            notif.textContent = message;
+            notif.textContent = msg;
             document.body.appendChild(notif);
-            
             setTimeout(() => notif.remove(), 2000);
         }
 
-        // Обновление баланса
         function updateBalance() {
             balanceEl.textContent = balance;
             saveGame();
         }
 
-        // Обновление инвентаря
         function updateInventory() {
             inventoryGrid.innerHTML = '';
-            inventoryStats.textContent = `${inventory.length}/16`;
-            
-            if (inventory.length === 0) {
-                // Показываем пустые слоты
-                for (let i = 0; i < 8; i++) {
-                    const empty = document.createElement('div');
-                    empty.className = 'empty-slot';
-                    empty.textContent = 'пусто';
-                    inventoryGrid.appendChild(empty);
-                }
-                return;
-            }
-            
-            // Показываем предметы
-            inventory.forEach((item, index) => {
+            inventory.slice(0, 8).forEach((item, i) => {
                 const slot = document.createElement('div');
                 slot.className = 'inventory-slot';
                 slot.innerHTML = `
-                    <div class="emoji">${item.emoji}</div>
-                    <div class="name">${item.name}</div>
-                    <div class="price">${item.price}⭐</div>
+                    <div style="font-size: 1.8rem;">${item.emoji}</div>
+                    <div style="font-size: 0.6rem;">${item.name}</div>
+                    <div style="font-size: 0.6rem;">${item.price}⭐</div>
                 `;
-                slot.onclick = () => sellItem(index);
+                slot.onclick = () => sellItem(i);
                 inventoryGrid.appendChild(slot);
             });
-            
-            // Заполняем оставшиеся слоты пустыми
             for (let i = inventory.length; i < 8; i++) {
                 const empty = document.createElement('div');
                 empty.className = 'empty-slot';
@@ -521,136 +869,81 @@
             }
         }
 
-        // Продажа предмета (ЗА 80% ОТ ЦЕНЫ!)
         function sellItem(index) {
             const item = inventory[index];
-            const sellPrice = Math.floor(item.price * 0.8); // 80% от цены
-            
+            const sellPrice = Math.floor(item.price * 0.8);
             balance += sellPrice;
             inventory.splice(index, 1);
-            
             updateBalance();
             updateInventory();
-            showNotification(`✅ ${item.name} продан за ${sellPrice}⭐`);
+            showNotification(`✅ Продан за ${sellPrice}⭐`);
         }
 
-        // Покупка подарка
-        function buyGift(gift) {
-            if (balance < gift.price) {
-                showNotification('❌ Недостаточно звезд!', false);
-                return;
-            }
-            
-            balance -= gift.price;
-            inventory.push({
-                emoji: gift.emoji,
-                name: gift.name,
-                price: gift.price
-            });
-            
-            updateBalance();
-            updateInventory();
-            showNotification(`🎁 Куплен: ${gift.name}`);
-        }
-
-        // Открытие кейса
-        function openCase(caseData) {
-            if (balance < caseData.price) {
-                showNotification('❌ Недостаточно звезд!', false);
-                return;
-            }
-            
-            balance -= caseData.price;
-            updateBalance();
-            
-            // 70% шанс проигрыша, 30% шанс выигрыша
-            const isWin = Math.random() < 0.3;
-            
-            if (isWin) {
-                // ВЫИГРЫШ - дорогой подарок (x1.5 - x2)
-                const multiplier = 1.5 + Math.random() * 0.5;
-                const giftIndex = caseData.gifts[Math.floor(Math.random() * caseData.gifts.length)];
-                const gift = { ...TELEGRAM_GIFTS[giftIndex] };
-                gift.price = Math.floor(gift.price * multiplier);
-                
-                inventory.push(gift);
-                showNotification(`🎉 ВЫИГРЫШ x${multiplier.toFixed(2)}! ${gift.name}`);
-            } else {
-                // ПРОИГРЫШ - дешевый подарок или звезды
-                if (Math.random() < 0.5) {
-                    // Звезды (30% от стоимости кейса)
-                    const starsWin = Math.floor(caseData.price * 0.3);
-                    balance += starsWin;
-                    showNotification(`⭐ Утешение: ${starsWin} звезд`);
-                } else {
-                    // Дешевый подарок (30% от цены)
-                    const giftIndex = caseData.gifts[0];
-                    const gift = { ...TELEGRAM_GIFTS[giftIndex] };
-                    gift.price = Math.floor(gift.price * 0.3);
-                    
-                    inventory.push(gift);
-                    showNotification(`📦 Утешение: ${gift.name}`);
-                }
-            }
-            
-            updateBalance();
-            updateInventory();
-        }
-
-        // Логика самолета
+        // Самолет
         function startFlight() {
-            const bet = parseInt(betInput.value);
+            const bet = parseInt(document.getElementById('betAmount').value);
             
             if (bet > balance) {
                 showNotification('❌ Недостаточно звезд!', false);
                 return;
             }
             
-            if (bet < 10) {
-                showNotification('❌ Минимальная ставка 10⭐', false);
-                return;
-            }
-            
-            // Списываем ставку
             balance -= bet;
             updateBalance();
             
-            // Запускаем полет
             isFlying = true;
-            multiplier = 1.0;
+            multiplier = 1;
+            planePosition = -80;
             startBtn.disabled = true;
             stopBtn.disabled = false;
+            crashEffect.style.opacity = '0';
             
             if (planeInterval) clearInterval(planeInterval);
             
             planeInterval = setInterval(() => {
                 if (!isFlying) return;
                 
-                // Увеличиваем множитель
-                multiplier += 0.01 + Math.random() * 0.02;
+                planePosition += 2;
+                animatedPlane.style.left = planePosition + 'px';
+                planeTrail.style.width = (planePosition + 100) + 'px';
+                planeTrail.style.right = 'auto';
+                planeTrail.style.left = '0';
+                
+                multiplier += 0.02 + Math.random() * 0.03;
                 multiplierEl.textContent = multiplier.toFixed(2) + 'x';
                 
                 // Шанс падения
-                const crashChance = 0.005 + (multiplier - 1) * 0.002;
-                
-                if (Math.random() < crashChance) {
-                    // Самолет упал
-                    clearInterval(planeInterval);
-                    planeInterval = null;
-                    
-                    isFlying = false;
-                    startBtn.disabled = false;
-                    stopBtn.disabled = true;
-                    
-                    multiplierEl.textContent = '💥 ПАДЕНИЕ';
-                    showNotification(`💥 Проигрыш: ${bet}⭐`, false);
+                if (Math.random() < 0.01 + (multiplier - 1) * 0.005) {
+                    crashPlane(bet);
                 }
                 
-                // 5% шанс долететь до 50x
-                if (multiplier >= 50 && Math.random() < 0.05) {
-                    showNotification('🏆 ДЖЕКПОТ 50x! 🏆');
+                // Улетел
+                if (planePosition > 400) {
+                    crashPlane(bet);
                 }
-            }, 100);
+            }, 50);
+        }
+
+        function crashPlane(bet) {
+            clearInterval(planeInterval);
+            planeInterval = null;
+            
+            isFlying = false;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            
+            crashEffect.style.opacity = '1';
+            multiplierEl.textContent = '💥 ПАДЕНИЕ';
+            
+            setTimeout(() => {
+                planePosition = -80;
+                animatedPlane.style.left = '-80px';
+                planeTrail.style.width = '0px';
+                crashEffect.style.opacity = '0';
+                multiplierEl.textContent = '1.00x';
+            }, 1000);
+            
+            showNotification(`💥 Проигрыш: ${bet}⭐`, false);
         }
 
         function stopFlight() {
@@ -659,7 +952,7 @@
             clearInterval(planeInterval);
             planeInterval = null;
             
-            const bet = parseInt(betInput.value);
+            const bet = parseInt(document.getElementById('betAmount').value);
             const win = Math.floor(bet * multiplier);
             
             balance += win;
@@ -669,63 +962,36 @@
             startBtn.disabled = false;
             stopBtn.disabled = true;
             
+            planePosition = -80;
+            animatedPlane.style.left = '-80px';
+            planeTrail.style.width = '0px';
             multiplierEl.textContent = '1.00x';
+            
             showNotification(`✨ Выигрыш: ${win}⭐ (x${multiplier.toFixed(2)})`);
         }
 
-        // Рендер кейсов
-        function renderCases() {
-            casesContainer.innerHTML = '';
-            CASES.forEach(c => {
-                const card = document.createElement('div');
-                card.className = 'case-card';
-                card.innerHTML = `
-                    <div class="case-icon">${c.icon}</div>
-                    <div class="case-name">${c.name}</div>
-                    <div class="case-price">${c.price}⭐</div>
-                `;
-                card.onclick = () => openCase(c);
-                casesContainer.appendChild(card);
-            });
-        }
-
-        // Рендер подарков (ТОЛЬКО ОРИГИНАЛЬНЫЕ)
-        function renderGifts() {
-            giftsContainer.innerHTML = '';
+        // Кейсы
+        function openCaseModal(caseData) {
+            currentCase = caseData;
+            modalTitle.textContent = caseData.name;
+            modalIcon.textContent = caseData.icon;
+            modalPrice.textContent = `★ ${caseData.price}`;
+            spinBtn.textContent = `КРУТИТЬ ЗА ★ ${caseData.price}`;
             
-            // Показываем только первые 12 подарков для компактности
-            TELEGRAM_GIFTS.slice(0, 12).forEach(g => {
-                const card = document.createElement('div');
-                card.className = 'gift-card';
-                card.innerHTML = `
-                    <div class="gift-emoji">${g.emoji}</div>
-                    <div class="gift-name">${g.name}</div>
-                    <div class="gift-price">${g.price}⭐</div>
+            prizesGrid.innerHTML = '';
+            caseData.gifts.forEach(index => {
+                const gift = TELEGRAM_GIFTS[index];
+                const prize = document.createElement('div');
+                prize.className = 'prize-item';
+                prize.innerHTML = `
+                    <div class="prize-emoji">${gift.emoji}</div>
+                    <div class="prize-name">${gift.name}</div>
+                    <div>${gift.price}⭐</div>
                 `;
-                card.onclick = () => buyGift(g);
-                giftsContainer.appendChild(card);
+                prizesGrid.appendChild(prize);
             });
-        }
-
-        // Инициализация
-        function init() {
-            loadGame();
-            renderCases();
-            renderGifts();
-            updateInventory();
             
-            // Обработчики
-            startBtn.onclick = startFlight;
-            stopBtn.onclick = stopFlight;
-            addBalanceBtn.onclick = () => {
-                balance += 100;
-                updateBalance();
-                showNotification('+100⭐ получено!');
-            };
+            caseModal.classList.add('active');
         }
 
-        // Запуск
-        init();
-    </script>
-</body>
-</html>
+        function spinCase
