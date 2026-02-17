@@ -3,22 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BoxStarX PRO 🚀 КОСМИЧЕСКИЕ КЕЙСЫ</title>
+    <title>BOXSTARX FINAL 🚀 АБСОЛЮТНОЕ СОВЕРШЕНСТВО</title>
     <style>
+        /* ========== ПЕРЕМЕННЫЕ И СБРОС ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            /* Золотая гамма */
+            --gold-1: #fff9e6;
+            --gold-2: #ffe48f;
+            --gold-3: #ffd700;
+            --gold-4: #ffaa33;
+            --gold-5: #ff8c00;
+            
+            /* Фоны */
+            --bg-deep: #0a0c1a;
+            --bg-medium: #12172e;
+            --bg-light: #1e2640;
+            --glass-bg: rgba(20, 25, 45, 0.4);
+            
+            /* Системные */
+            --success: #2e7d32;
+            --success-light: #81c784;
+            --error: #b71c1c;
+            --error-light: #ef5350;
+            
+            /* Тени */
+            --shadow-sm: 0 10px 20px rgba(0, 0, 0, 0.6);
+            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.8);
+            --shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.9);
+            --glow-gold: 0 0 30px var(--gold-3);
+            --glow-gold-intense: 0 0 60px var(--gold-3);
+            
+            /* Скругления */
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --radius-xxl: 64px;
         }
 
         body {
             overflow: hidden;
             background: #000;
-            color: white;
+            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ========== НЕВЕРОЯТНОЕ ЗВЕЗДНОЕ НЕБО ========== */
+        /* ========== ИДЕАЛЬНАЯ ЗВЕЗДНАЯ СИСТЕМА ========== */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -26,36 +63,54 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: radial-gradient(ellipse at 30% 40%, #0a0c20 0%, #020308 100%);
+            background: radial-gradient(ellipse at 30% 40%, #0f142a 0%, #03051a 100%);
             display: block;
             pointer-events: none;
         }
 
-        /* Туманность с переливами */
+        /* Туманность */
         .nebula {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(180, 120, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(100, 180, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 120, 200, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 20%, rgba(200, 255, 120, 0.08) 0%, transparent 40%);
             z-index: 1;
             pointer-events: none;
             mix-blend-mode: overlay;
-            animation: nebulaPulse 20s infinite alternate ease-in-out;
         }
 
-        @keyframes nebulaPulse {
-            0% { opacity: 0.3; filter: hue-rotate(0deg) blur(3px); }
-            50% { opacity: 0.6; filter: hue-rotate(20deg) blur(4px); }
-            100% { opacity: 0.3; filter: hue-rotate(40deg) blur(3px); }
+        .nebula-1 {
+            background: radial-gradient(circle at 20% 30%, rgba(150, 100, 255, 0.3) 0%, transparent 60%);
+            animation: nebulaMove1 45s infinite alternate ease-in-out;
         }
 
-        /* Парящие частицы */
+        .nebula-2 {
+            background: radial-gradient(circle at 80% 70%, rgba(100, 200, 255, 0.25) 0%, transparent 60%);
+            animation: nebulaMove2 40s infinite alternate-reverse ease-in-out;
+        }
+
+        .nebula-3 {
+            background: radial-gradient(circle at 40% 80%, rgba(255, 150, 200, 0.2) 0%, transparent 60%);
+            animation: nebulaMove3 50s infinite alternate ease-in-out;
+        }
+
+        @keyframes nebulaMove1 {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.2; filter: hue-rotate(0deg); }
+            100% { transform: scale(1.3) translate(-4%, 3%); opacity: 0.6; filter: hue-rotate(50deg); }
+        }
+
+        @keyframes nebulaMove2 {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.2; filter: hue-rotate(0deg); }
+            100% { transform: scale(1.35) translate(5%, -3%); opacity: 0.55; filter: hue-rotate(-40deg); }
+        }
+
+        @keyframes nebulaMove3 {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.15; filter: hue-rotate(0deg); }
+            100% { transform: scale(1.25) translate(-3%, -4%); opacity: 0.5; filter: hue-rotate(70deg); }
+        }
+
+        /* Частицы */
         .particles {
             position: fixed;
             top: 0;
@@ -64,27 +119,28 @@
             height: 100%;
             z-index: 2;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.7);
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
-            box-shadow: 0 0 20px currentColor;
-            animation: floatParticle 30s infinite linear;
-            color: hsl(var(--hue), 90%, 70%);
+            box-shadow: 0 0 25px currentColor;
+            animation: particleFly 35s infinite linear;
+            will-change: transform, opacity;
         }
 
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-200px) translateX(150px) rotate(360deg); opacity: 0; }
+        @keyframes particleFly {
+            0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-300px) translateX(300px) scale(0.2); opacity: 0; }
         }
 
-        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
         #app {
             position: relative;
             z-index: 10;
@@ -92,906 +148,1482 @@
             height: 100vh;
             overflow-y: auto;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            backdrop-filter: blur(2px);
+            scrollbar-width: none;
         }
 
-        .content {
+        #app::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
             min-height: 100vh;
             padding: 20px;
             max-width: 500px;
             margin: 0 auto;
-            padding-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        /* ========== ПРЕМИУМ ХЕДЕР ========== */
+        /* ========== ИДЕАЛЬНЫЙ ХЕДЕР ========== */
         .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: var(--radius-xl);
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            background: rgba(10, 15, 30, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 40px;
-            padding: 15px 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            z-index: 100;
         }
 
-        .balance {
+        .balance-wrap {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            font-weight: bold;
+            gap: 12px;
         }
 
-        .balance span {
-            color: gold;
-            text-shadow: 0 0 20px gold;
+        .balance-icon {
+            font-size: 2.4rem;
+            filter: drop-shadow(0 0 25px var(--gold-3));
+            animation: iconSpin 4s infinite ease-in-out;
+        }
+
+        @keyframes iconSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            33% { transform: rotate(5deg) scale(1.1); }
+            66% { transform: rotate(-5deg) scale(1.05); }
+        }
+
+        .balance-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold-3), var(--gold-4));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 40px var(--gold-3);
         }
 
         .add-btn {
-            background: #2e7d32;
+            background: linear-gradient(135deg, var(--success), #1b5e20);
             border: none;
             color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
+            padding: 14px 30px;
+            border-radius: var(--radius-xl);
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
-            border: 1px solid #81c784;
+            border: 1px solid var(--success-light);
+            box-shadow: 0 10px 20px rgba(46,125,50,0.4);
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        /* ========== АНИМИРОВАННЫЙ САМОЛЕТ ========== */
-        .plane-container {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 20px;
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(46,125,50,0.7);
+        }
+
+        .add-btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* ========== ИДЕАЛЬНАЯ СИСТЕМА САМОЛЕТА ========== */
+        .flight-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xxl);
+            padding: 24px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flight-stage {
+            position: relative;
+            height: 240px;
+            background: linear-gradient(180deg, #111c36 0%, #040c1c 100%);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--gold-3);
+            overflow: hidden;
             margin-bottom: 20px;
-            border: 1px solid gold;
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--glow-gold);
         }
 
-        .plane-scene {
-            position: relative;
-            height: 120px;
-            background: linear-gradient(180deg, #0a1020 0%, #040810 100%);
-            border-radius: 30px;
-            border: 1px solid gold;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .runway {
+        .runway-base {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 30px;
-            background: linear-gradient(90deg, #333, #555, #333);
-            border-top: 2px solid gold;
+            height: 50px;
+            background: linear-gradient(90deg, #222, #555, #222);
+            border-top: 2px solid var(--gold-3);
         }
 
-        .runway::after {
-            content: '';
+        .runway-stripes {
             position: absolute;
-            top: 50%;
+            bottom: 25px;
             left: 0;
             width: 100%;
             height: 2px;
-            background: repeating-linear-gradient(90deg, gold 0px, gold 20px, transparent 20px, transparent 40px);
-            transform: translateY(-50%);
+            background: repeating-linear-gradient(90deg, var(--gold-3) 0px, var(--gold-3) 20px, transparent 20px, transparent 40px);
+            animation: stripeMove 2s linear infinite;
+            filter: drop-shadow(0 0 15px var(--gold-3));
         }
 
-        .animated-plane {
+        @keyframes stripeMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-40px); }
+        }
+
+        .plane-model {
             position: absolute;
-            left: -80px;
-            top: 50%;
+            left: -120px;
+            top: 40%;
             transform: translateY(-50%);
-            font-size: 3.5rem;
-            filter: drop-shadow(0 0 20px gold) drop-shadow(0 0 40px orange);
-            transition: left 0.03s linear;
-            z-index: 5;
+            font-size: 6rem;
+            filter: drop-shadow(0 0 50px var(--gold-3)) drop-shadow(0 0 100px var(--gold-4));
+            transition: left 0.02s linear;
+            z-index: 10;
+            animation: planeBob 1s infinite alternate ease-in-out;
+            will-change: left, transform;
+        }
+
+        @keyframes planeBob {
+            0% { transform: translateY(-50%) translateY(0); }
+            100% { transform: translateY(-50%) translateY(-15px); }
         }
 
         .plane-trail {
             position: absolute;
-            height: 4px;
-            background: linear-gradient(90deg, gold, transparent);
-            top: 50%;
+            height: 18px;
+            background: linear-gradient(90deg, var(--gold-3), var(--gold-4), var(--gold-5), transparent);
+            top: 40%;
             transform: translateY(-50%);
             right: 0;
-            border-radius: 2px;
-            opacity: 0.7;
-            filter: blur(2px);
+            border-radius: 9px;
+            opacity: 0.9;
+            filter: blur(8px);
+            transition: width 0.02s linear;
+            box-shadow: 0 0 70px var(--gold-3);
+            will-change: width;
         }
 
-        .crash-effect {
+        .crash-animation {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
+            font-size: 8rem;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
             pointer-events: none;
-            z-index: 10;
-            text-shadow: 0 0 30px red;
+            z-index: 20;
+            text-shadow: 0 0 100px #ff0000, 0 0 200px #ff6600;
+            animation: crashShake 0.3s infinite;
         }
 
-        .plane-controls {
+        @keyframes crashShake {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(20deg); }
+            75% { transform: translate(-50%, -50%) rotate(-20deg); }
+        }
+
+        /* Элементы управления */
+        .control-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
-        .plane-controls input {
+        .bet-input {
             flex: 1;
-            background: #0f1625;
-            border: 1px solid gold;
-            color: gold;
-            padding: 15px;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            background: rgba(10, 15, 30, 0.98);
+            border: 2px solid var(--gold-3);
+            color: var(--gold-3);
+            padding: 18px;
+            border-radius: var(--radius-xl);
+            font-size: 1.2rem;
+            font-weight: 600;
             text-align: center;
-        }
-
-        .plane-controls button {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
+            outline: none;
+            box-shadow: var(--glow-gold);
             transition: 0.2s;
         }
 
-        #startFlight {
-            background: linear-gradient(135deg, #f9d423, #fdaa33);
+        .bet-input:focus {
+            box-shadow: var(--glow-gold-intense);
+            transform: scale(1.02);
+            border-color: #fff;
         }
 
-        #stopFlight {
-            background: linear-gradient(135deg, #dc3545, #b02a37);
-            color: white;
-        }
-
-        #stopFlight:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .multiplier-display {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1.3rem;
-        }
-
-        .multiplier-value {
-            color: gold;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        /* ========== МЕНЮ КЕЙСОВ (КАК НА СКРИНЕ) ========== */
-        .cases-menu {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid gold;
-            padding-bottom: 10px;
-        }
-
-        .cases-tab {
+        .flight-button {
             flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .flight-button:active {
+            transform: scale(0.95);
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #f9d423, #fdaa33, #ff8c00);
+            box-shadow: 0 0 30px rgba(249,212,35,0.6);
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #b02a37, #8b0000);
+            color: white;
+            box-shadow: 0 0 30px rgba(220,53,69,0.6);
+        }
+
+        .btn-stop:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        /* Множитель */
+        .multiplier-panel {
             text-align: center;
-            padding: 10px;
-            background: rgba(255,215,0,0.1);
-            border-radius: 30px;
+            padding: 18px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gold-3);
+            box-shadow: var(--glow-gold);
+        }
+
+        .multiplier-label {
+            font-size: 1.1rem;
+            color: #aaa;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .multiplier-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd966, #ffaa33, #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-left: 15px;
+            animation: pulseGlow 0.8s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 30px var(--gold-3); }
+            to { text-shadow: 0 0 80px var(--gold-3); }
+        }
+
+        /* ========== NFT-ГАЛЕРЕЯ ========== */
+        .section-head {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 30px 0 20px;
+            background: linear-gradient(135deg, #fff, var(--gold-3), var(--gold-4), #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            animation: headPulse 3s infinite;
+        }
+
+        .section-head::before,
+        .section-head::after {
+            content: '✦';
+            margin: 0 15px;
+            opacity: 0.7;
+            animation: starFlash 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes headPulse {
+            0% { text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            50% { text-shadow: 0 0 70px rgba(255,215,0,0.9); }
+        }
+
+        @keyframes starFlash {
+            0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.4) rotate(180deg); filter: drop-shadow(0 0 15px gold); }
+        }
+
+        .nft-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+            perspective: 2500px;
+        }
+
+        .nft-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 18px 5px;
+            text-align: center;
+            border: 2px solid var(--gold-3);
             cursor: pointer;
             transition: 0.3s;
-            border: 1px solid transparent;
+            transform-style: preserve-3d;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            animation: cardFloat 4s infinite alternate;
         }
 
-        .cases-tab.active {
-            background: rgba(255,215,0,0.3);
-            border-color: gold;
-            box-shadow: 0 0 20px gold;
+        @keyframes cardFloat {
+            0% { transform: translateY(0) rotateX(0deg); }
+            100% { transform: translateY(-15px) rotateX(6deg); }
         }
 
-        /* ========== СЕТКА КЕЙСОВ ========== */
-        .cases-grid {
+        .nft-item:hover {
+            transform: translateY(-25px) rotateX(12deg) scale(1.12);
+            box-shadow: var(--shadow-lg), 0 0 80px var(--gold-3);
+            z-index: 100;
+        }
+
+        .nft-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 30px var(--gold-3));
+            animation: emojiBeat 2s infinite;
+        }
+
+        @keyframes emojiBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 50px var(--gold-3)); }
+        }
+
+        .nft-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-3);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nft-cost {
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 12px;
+            border-radius: var(--radius-xl);
+            display: inline-block;
+            border: 1px solid var(--gold-3);
+            font-weight: 600;
+        }
+
+        .nft-level {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-3), var(--gold-4));
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            border: 2px solid white;
+            box-shadow: 0 0 30px var(--gold-3);
+            animation: levelPulse 1s infinite;
+        }
+
+        @keyframes levelPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); box-shadow: 0 0 50px var(--gold-3); }
+        }
+
+        /* ========== СИСТЕМА КЕЙСОВ ========== */
+        .cases-layout {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        .case-item {
-            background: linear-gradient(145deg, #1e2842, #0e162a);
-            border-radius: 25px;
-            padding: 20px 10px;
+        .case-block {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xxl);
+            padding: 30px 15px;
             text-align: center;
-            border: 2px solid gold;
+            border: 3px solid var(--gold-3);
             cursor: pointer;
             transition: 0.3s;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
+            animation: caseLevitate 5s infinite alternate;
         }
 
-        .case-item::before {
+        @keyframes caseLevitate {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .case-block:hover {
+            transform: translateY(-30px) scale(1.05);
+            box-shadow: var(--shadow-lg), 0 0 100px var(--gold-3);
+        }
+
+        .case-block::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
-            transform: translateX(-100%) rotate(45deg);
-            transition: transform 0.6s;
+            background: radial-gradient(circle, rgba(255,215,0,0.3), transparent 70%);
+            animation: spinGlow 15s linear infinite;
         }
 
-        .case-item:hover::before {
-            transform: translateX(100%) rotate(45deg);
+        @keyframes spinGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .case-item:active {
+        .case-emoji {
+            font-size: 5.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 50px var(--gold-3));
+            animation: emojiFloat 2s infinite alternate;
+        }
+
+        @keyframes emojiFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        .case-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--gold-3);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        .case-value {
+            font-size: 2.4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd966, #ffaa33, #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ========== ИНВЕНТАРЬ ========== */
+        .inventory-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xxl);
+            padding: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: var(--shadow-lg);
+            margin-top: 20px;
+        }
+
+        .inventory-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .inventory-heading {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .inventory-counter {
+            background: rgba(0,0,0,0.7);
+            padding: 10px 24px;
+            border-radius: var(--radius-xl);
+            color: var(--gold-3);
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: 1px solid var(--gold-3);
+            box-shadow: var(--glow-gold);
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .inventory-cell {
+            background: rgba(10, 15, 25, 0.98);
+            border: 2px solid var(--gold-3);
+            border-radius: var(--radius-lg);
+            padding: 15px 5px;
+            text-align: center;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .inventory-cell:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 70px var(--gold-3);
+            border-color: #fff;
+        }
+
+        .inventory-cell:active {
             transform: scale(0.95);
         }
 
-        .case-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .cell-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 0 20px var(--gold-3));
         }
 
-        .case-name {
+        .cell-name {
+            font-size: 0.75rem;
+            color: var(--gold-3);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .cell-price {
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.7);
+            padding: 3px 10px;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--gold-3);
+        }
+
+        .cell-empty {
+            background: rgba(10, 15, 25, 0.5);
+            border: 2px dashed var(--gold-3);
+            border-radius: var(--radius-lg);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
             font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        .case-price {
-            color: gold;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        /* ========== ПОЛНОЭКРАННОЕ МЕНЮ КЕЙСА ========== */
-        .case-modal {
+        /* ========== МОДАЛЬНОЕ ОКНО ========== */
+        .modal-window {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(70px);
+            -webkit-backdrop-filter: blur(70px);
+            z-index: 2000;
             display: none;
             flex-direction: column;
-            padding: 20px;
+            padding: 30px 20px;
             overflow-y: auto;
+            animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .case-modal.active {
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.7) translateY(70px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-window.active {
             display: flex;
         }
 
-        .modal-header {
+        .modal-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        .modal-title {
-            font-size: 2rem;
-            color: gold;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
+        .modal-close {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--gold-3);
             color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: rgba(255,0,0,0.3);
+            font-size: 2.4rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 25px rgba(255,215,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .modal-case-icon {
-            font-size: 6rem;
-            text-align: center;
-            margin: 20px 0;
-            filter: drop-shadow(0 0 30px gold);
+        .modal-close:hover {
+            background: var(--gold-3);
+            color: black;
+            transform: scale(1.2) rotate(90deg);
+            box-shadow: 0 0 60px var(--gold-3);
         }
 
-        .modal-price {
+        .modal-heading {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, var(--gold-3), var(--gold-4));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 4px;
+        }
+
+        .modal-preview {
+            background: rgba(30, 35, 55, 0.7);
+            backdrop-filter: blur(25px);
+            border-radius: var(--radius-xxl);
+            padding: 60px;
             text-align: center;
-            font-size: 2rem;
-            color: gold;
+            margin-bottom: 40px;
+            border: 3px solid var(--gold-3);
+            box-shadow: 0 0 150px var(--gold-3);
+            animation: previewGlow 3s infinite;
+        }
+
+        @keyframes previewGlow {
+            0% { box-shadow: 0 0 70px var(--gold-3); }
+            50% { box-shadow: 0 0 170px var(--gold-3); }
+        }
+
+        .modal-case-emoji {
+            font-size: 12rem;
+            filter: drop-shadow(0 0 80px var(--gold-3));
+            animation: modalEmojiFloat 2s infinite alternate;
+        }
+
+        @keyframes modalEmojiFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-35px) scale(1.1); }
+        }
+
+        .modal-case-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--gold-3);
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .modal-case-cost {
+            font-size: 3rem;
+            color: var(--gold-3);
+            font-weight: 700;
+        }
+
+        .prizes-label {
+            font-size: 2.4rem;
+            color: var(--gold-3);
+            text-align: center;
             margin-bottom: 30px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
 
-        .prizes-title {
-            color: gold;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .prizes-grid {
+        .prizes-layout {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .prize-item {
-            background: #1e2638;
-            border-radius: 20px;
-            padding: 15px 5px;
+        .prize-tile {
+            background: rgba(30, 35, 55, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: var(--radius-xl);
+            padding: 35px 15px;
             text-align: center;
-            border: 1px solid gold;
+            border: 2px solid var(--gold-3);
+            transition: 0.3s;
+            animation: tileFloat 3s infinite alternate;
+        }
+
+        @keyframes tileFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .prize-tile:hover {
+            transform: scale(1.15) translateY(-20px);
+            box-shadow: 0 0 80px var(--gold-3);
+            z-index: 100;
         }
 
         .prize-emoji {
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 30px var(--gold-3));
         }
 
         .prize-name {
-            font-size: 0.8rem;
-            color: gold;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-3);
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        .spin-btn {
-            background: linear-gradient(135deg, #f9d423, #fdaa33);
+        .prize-rarity {
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.7);
+            padding: 6px 20px;
+            border-radius: var(--radius-xl);
+            display: inline-block;
+            border: 1px solid var(--gold-3);
+        }
+
+        .open-case-button {
+            background: linear-gradient(135deg, #f9d423, #fdaa33, #ff8c00);
             border: none;
-            padding: 20px;
-            border-radius: 60px;
-            font-size: 1.5rem;
-            font-weight: bold;
+            padding: 35px;
+            border-radius: var(--radius-xxl);
+            font-size: 3rem;
+            font-weight: 900;
             cursor: pointer;
-            margin: 20px 0;
-            border: 2px solid gold;
+            margin: 25px 0;
+            border: 3px solid var(--gold-3);
+            box-shadow: 0 0 120px var(--gold-3);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            transition: 0.3s;
+            animation: buttonPulse 2s infinite;
+            color: #1a1e2b;
         }
 
-        .double-tap {
+        @keyframes buttonPulse {
+            0% { transform: scale(1); box-shadow: 0 0 80px var(--gold-3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 180px var(--gold-3); }
+        }
+
+        .open-case-button:active {
+            transform: scale(0.95);
+        }
+
+        .tap-hint {
             text-align: center;
             color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .demo-btn {
-            background: #1e2638;
-            border: 1px solid gold;
-            color: white;
-            padding: 15px;
-            border-radius: 30px;
-            width: 100%;
             font-size: 1.2rem;
-            cursor: pointer;
+            animation: hintPulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        /* ========== ПОДАРКИ ========== */
-        .gifts-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
+        @keyframes hintPulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; text-shadow: 0 0 30px var(--gold-3); }
         }
 
-        .gift-card {
-            background: #1e2638;
-            border-radius: 20px;
-            padding: 15px 5px;
-            text-align: center;
-            border: 1px solid gold;
-            cursor: pointer;
-        }
-
-        /* ========== ИНВЕНТАРЬ ========== */
-        .inventory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            background: #1a2133;
-            border-radius: 30px;
-            padding: 20px;
-            border: 1px solid gold;
-        }
-
-        .inventory-slot {
-            background: #0f1625;
-            border: 1px solid gold;
-            border-radius: 15px;
-            padding: 10px;
-            text-align: center;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .empty-slot {
-            background: #0f1625;
-            border: 1px dashed #555;
-            border-radius: 15px;
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-        }
-
-        .notification {
+        /* ========== УВЕДОМЛЕНИЯ ========== */
+        .toast {
             position: fixed;
-            top: 20px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            background: linear-gradient(135deg, var(--success), #1b5e20);
             color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: bold;
-            z-index: 2000;
-            border: 1px solid gold;
-            animation: slideDown 0.3s;
+            padding: 20px 50px;
+            border-radius: var(--radius-xxl);
+            font-weight: 700;
+            font-size: 1.3rem;
+            z-index: 3000;
+            border: 2px solid var(--gold-3);
+            box-shadow: 0 20px 60px black;
+            animation: toastIn 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        .notification.error {
-            background: linear-gradient(135deg, #b71c1c, #8b0000);
+        .toast.error {
+            background: linear-gradient(135deg, var(--error), #8b0000);
         }
 
-        @keyframes slideDown {
-            from { top: -50px; opacity: 0; }
-            to { top: 20px; opacity: 1; }
+        @keyframes toastIn {
+            from { top: -50px; opacity: 0; transform: translateX(-50%) scale(0.7); }
+            to { top: 30px; opacity: 1; transform: translateX(-50%) scale(1); }
         }
     </style>
 </head>
 <body>
+    <!-- Звездный фон -->
     <canvas id="starCanvas"></canvas>
-    <div class="nebula"></div>
-    <div class="particles" id="particles"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
+    <div class="particles" id="particleField"></div>
 
+    <!-- Основное приложение -->
     <div id="app">
-        <div class="content">
+        <div class="container">
             <!-- Хедер -->
-            <div class="header">
-                <div class="balance">
-                    ⭐ <span id="balance">1549</span>
+            <header class="header">
+                <div class="balance-wrap">
+                    <span class="balance-icon">⭐</span>
+                    <span class="balance-value" id="balanceDisplay">5000</span>
                 </div>
-                <button class="add-btn" id="addBalance">+100</button>
-            </div>
+                <button class="add-btn" id="addMoneyBtn">+100</button>
+            </header>
 
-            <!-- Анимированный самолет -->
-            <div class="plane-container">
-                <div class="plane-scene" id="planeScene">
-                    <div class="runway"></div>
-                    <div class="animated-plane" id="animatedPlane">✈️</div>
-                    <div class="plane-trail" id="planeTrail" style="width: 0px;"></div>
-                    <div class="crash-effect" id="crashEffect">💥</div>
-                </div>
-                
-                <div class="plane-controls">
-                    <input type="number" id="betAmount" min="10" value="149" step="10">
-                    <button id="startFlight">🚀 КРУТИТЬ</button>
-                    <button id="stopFlight" disabled>⏹️ СТОП</button>
+            <!-- Самолет -->
+            <section class="flight-section">
+                <div class="flight-stage" id="flightStage">
+                    <div class="runway-base"></div>
+                    <div class="runway-stripes"></div>
+                    <div class="plane-model" id="planeElement">✈️</div>
+                    <div class="plane-trail" id="trailElement" style="width: 0px;"></div>
+                    <div class="crash-animation" id="crashElement">💥</div>
                 </div>
                 
-                <div class="multiplier-display">
-                    <span>МНОЖИТЕЛЬ:</span>
-                    <span class="multiplier-value" id="multiplier">1.00x</span>
+                <div class="control-group">
+                    <input type="number" class="bet-input" id="betField" min="10" value="149" step="10" placeholder="Ставка">
+                    <button class="flight-button btn-start" id="startFlightBtn">🚀 СТАРТ</button>
+                    <button class="flight-button btn-stop" id="stopFlightBtn" disabled>⏹️ СТОП</button>
                 </div>
-            </div>
+                
+                <div class="multiplier-panel">
+                    <span class="multiplier-label">МНОЖИТЕЛЬ</span>
+                    <span class="multiplier-number" id="multiplierDisplay">1.00x</span>
+                </div>
+            </section>
 
-            <!-- Меню кейсов (как на скрине) -->
-            <div class="cases-menu">
-                <div class="cases-tab active" data-tab="обычные">ОБЫЧНЫЕ</div>
-                <div class="cases-tab" data-tab="редкие">РЕДКИЕ</div>
-                <div class="cases-tab" data-tab="эпические">ЭПИЧЕСКИЕ</div>
-            </div>
+            <!-- NFT галерея -->
+            <h2 class="section-head">NFT ГАЛЕРЕЯ</h2>
+            <div class="nft-grid" id="nftContainer"></div>
 
-            <!-- Сетка кейсов -->
-            <div class="cases-grid" id="casesGrid"></div>
-
-            <!-- Подарки -->
-            <div class="gifts-grid" id="giftsGrid"></div>
+            <!-- Кейсы -->
+            <h2 class="section-head">КЕЙСЫ</h2>
+            <div class="cases-layout" id="casesContainer"></div>
 
             <!-- Инвентарь -->
-            <div class="inventory-grid" id="inventoryGrid"></div>
+            <section class="inventory-box">
+                <div class="inventory-head">
+                    <span class="inventory-heading">ИНВЕНТАРЬ</span>
+                    <span class="inventory-counter" id="inventoryCounter">0/24</span>
+                </div>
+                <div class="inventory-grid" id="inventoryContainer"></div>
+            </section>
         </div>
     </div>
 
-    <!-- Полноэкранное меню кейса -->
-    <div class="case-modal" id="caseModal">
-        <div class="modal-header">
-            <div class="modal-title" id="modalTitle">ОБЫЧНЫЙ КЕЙС</div>
-            <button class="close-modal" id="closeModal">✕</button>
+    <!-- Модальное окно -->
+    <div class="modal-window" id="caseModal">
+        <div class="modal-bar">
+            <button class="modal-close" id="closeModalBtn">←</button>
+            <div class="modal-heading" id="modalTitle">КЕЙС</div>
+            <div style="width: 70px;"></div>
         </div>
         
-        <div class="modal-case-icon" id="modalIcon">📦</div>
-        <div class="modal-price" id="modalPrice">★ 149</div>
+        <div class="modal-preview">
+            <div class="modal-case-emoji" id="modalIcon">📦</div>
+            <div class="modal-case-title" id="modalCaseTitle">НАЗВАНИЕ</div>
+            <div class="modal-case-cost" id="modalCaseCost">★ 0</div>
+        </div>
         
-        <div class="prizes-title">ПРИЗЫ</div>
-        <div class="prizes-grid" id="prizesGrid"></div>
+        <h3 class="prizes-label">ВОЗМОЖНЫЕ ПРИЗЫ</h3>
+        <div class="prizes-layout" id="modalPrizesContainer"></div>
         
-        <button class="spin-btn" id="spinBtn">КРУТИТЬ ЗА ★ 149</button>
-        <div class="double-tap">👆 ДВОЙНОЙ ТАП ДЛЯ БЫСТРОГО ПРОКРУТА</div>
-        
-        <button class="demo-btn" id="demoBtn">🎮 ДЕМО</button>
+        <button class="open-case-button" id="openCaseModalBtn">ОТКРЫТЬ ЗА ★ 0</button>
+        <div class="tap-hint">👆 ДВОЙНОЙ ТАП ДЛЯ БЫСТРОГО ОТКРЫТИЯ</div>
     </div>
 
     <script>
-        // ========== НЕВЕРОЯТНОЕ ЗВЕЗДНОЕ НЕБО ==========
-        const canvas = document.getElementById('starCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let stars = [];
-        let shootingStars = [];
-        
-        const STAR_COUNT = 800;
-        const SHOOTING_STAR_COUNT = 15;
+        (function() {
+            'use strict';
 
-        function initStars() {
-            stars = [];
-            for (let i = 0; i < STAR_COUNT; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 3 + 1,
-                    speed: Math.random() * 0.1 + 0.05,
-                    brightness: Math.random() * 0.5 + 0.2,
-                    flickerSpeed: Math.random() * 0.01 + 0.005,
-                    hue: Math.random() * 360
+            // ========== КОНФИГУРАЦИЯ ==========
+            const CONFIG = {
+                STAR_COUNT: 3000,
+                SHOOTING_STAR_COUNT: 60,
+                INVENTORY_SIZE: 24,
+                INITIAL_BALANCE: 5000,
+                MIN_BET: 10,
+                FLIGHT_SPEED: 2.2,
+                CRASH_BASE_CHANCE: 0.007,
+                WIN_CHANCE: 0.3
+            };
+
+            // ========== ДАННЫЕ ==========
+            const NFT_GIFTS = [
+                { emoji: "🎂", name: "ТОРТ", price: 15, rarity: 1 },
+                { emoji: "❤️", name: "СЕРДЦЕ", price: 25, rarity: 1 },
+                { emoji: "🔥", name: "ОГОНЬ", price: 50, rarity: 1 },
+                { emoji: "🎁", name: "ПОДАРОК", price: 50, rarity: 1 },
+                { emoji: "🎉", name: "ПРАЗДНИК", price: 100, rarity: 1 },
+                { emoji: "💎", name: "АЛМАЗ", price: 100, rarity: 1 },
+                { emoji: "👑", name: "КОРОНА", price: 150, rarity: 2 },
+                { emoji: "🚀", name: "РАКЕТА", price: 150, rarity: 2 },
+                { emoji: "⭐", name: "ЗВЕЗДА", price: 250, rarity: 2 },
+                { emoji: "🌟", name: "СУПЕРЗВЕЗДА", price: 300, rarity: 2 },
+                { emoji: "💫", name: "КОМЕТА", price: 500, rarity: 3 },
+                { emoji: "⚡", name: "МОЛНИЯ", price: 500, rarity: 3 },
+                { emoji: "🎈", name: "ШАР", price: 750, rarity: 3 },
+                { emoji: "🎊", name: "КОНФЕТТИ", price: 1000, rarity: 3 },
+                { emoji: "✨", name: "БЛЕСТКИ", price: 1500, rarity: 4 },
+                { emoji: "🦄", name: "ЕДИНОРОГ", price: 2500, rarity: 4 },
+                { emoji: "🌈", name: "РАДУГА", price: 3000, rarity: 4 },
+                { emoji: "🌠", name: "МЕТЕОР", price: 5000, rarity: 5 },
+                { emoji: "☄️", name: "АСТЕРОИД", price: 7500, rarity: 5 },
+                { emoji: "🛸", name: "НЛО", price: 10000, rarity: 5 }
+            ];
+
+            const CASES = [
+                { name: "PLAYER", icon: "🎮", price: 149, gifts: [0,1,2,3,4,5] },
+                { name: "BEAR", icon: "🐻", price: 199, gifts: [1,2,3,4,5,6] },
+                { name: "LAMP", icon: "💡", price: 249, gifts: [2,3,4,5,6,7] },
+                { name: "SKULL", icon: "💀", price: 499, gifts: [3,4,5,6,7,8] },
+                { name: "NEKO", icon: "🐱", price: 999, gifts: [4,5,6,7,8,9] },
+                { name: "BRICK", icon: "🧱", price: 1499, gifts: [5,6,7,8,9,10] },
+                { name: "DRAGON", icon: "🐉", price: 2499, gifts: [6,7,8,9,10,11] },
+                { name: "PHOENIX", icon: "🔥", price: 3999, gifts: [7,8,9,10,11,12] }
+            ];
+
+            // ========== СОСТОЯНИЕ ==========
+            const state = {
+                balance: CONFIG.INITIAL_BALANCE,
+                inventory: [],
+                currentCase: null,
+                isFlying: false,
+                multiplier: 1,
+                intervalId: null,
+                planePos: -120
+            };
+
+            // ========== DOM ЭЛЕМЕНТЫ ==========
+            const elements = {
+                balance: document.getElementById('balanceDisplay'),
+                addMoney: document.getElementById('addMoneyBtn'),
+                startBtn: document.getElementById('startFlightBtn'),
+                stopBtn: document.getElementById('stopFlightBtn'),
+                betField: document.getElementById('betField'),
+                multiplier: document.getElementById('multiplierDisplay'),
+                plane: document.getElementById('planeElement'),
+                trail: document.getElementById('trailElement'),
+                crash: document.getElementById('crashElement'),
+                nftContainer: document.getElementById('nftContainer'),
+                casesContainer: document.getElementById('casesContainer'),
+                inventoryContainer: document.getElementById('inventoryContainer'),
+                inventoryCounter: document.getElementById('inventoryCounter'),
+                modal: document.getElementById('caseModal'),
+                closeModal: document.getElementById('closeModalBtn'),
+                modalTitle: document.getElementById('modalTitle'),
+                modalIcon: document.getElementById('modalIcon'),
+                modalCaseTitle: document.getElementById('modalCaseTitle'),
+                modalCaseCost: document.getElementById('modalCaseCost'),
+                modalPrizes: document.getElementById('modalPrizesContainer'),
+                openModalBtn: document.getElementById('openCaseModalBtn')
+            };
+
+            // ========== ЗВЕЗДНАЯ СИСТЕМА ==========
+            const canvas = document.getElementById('starCanvas');
+            if (!canvas) throw new Error('Canvas not found');
+            
+            const ctx = canvas.getContext('2d');
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            let stars = [];
+            let shootingStars = [];
+
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < CONFIG.STAR_COUNT; i++) {
+                    stars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 5 + 1,
+                        speed: Math.random() * 0.2 + 0.02,
+                        brightness: Math.random() * 0.5 + 0.2,
+                        flicker: Math.random() * 0.02 + 0.001,
+                        hue: Math.random() * 360
+                    });
+                }
+
+                shootingStars = [];
+                for (let i = 0; i < CONFIG.SHOOTING_STAR_COUNT; i++) {
+                    shootingStars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height * 0.3,
+                        length: Math.random() * 700 + 350,
+                        speed: Math.random() * 35 + 30,
+                        angle: Math.random() * 0.5 + 0.25,
+                        hue: Math.random() * 360,
+                        tail: []
+                    });
+                }
+            }
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+                initStars();
+            }
+
+            function drawStars() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Глубокий космос
+                const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+                gradient.addColorStop(0, '#0f142a');
+                gradient.addColorStop(0.3, '#090d22');
+                gradient.addColorStop(0.6, '#04071a');
+                gradient.addColorStop(1, '#000000');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+                
+                // Звезды
+                ctx.shadowBlur = 25;
+                for (let i = 0; i < stars.length; i++) {
+                    const s = stars[i];
+                    s.y += s.speed * 0.02;
+                    if (s.y > height) {
+                        s.y = 0;
+                        s.x = Math.random() * width;
+                    }
+                    s.brightness += s.flicker;
+                    if (s.brightness > 1 || s.brightness < 0.3) s.flicker *= -1;
+                    s.hue = (s.hue + 0.05) % 360;
+                    
+                    ctx.globalAlpha = s.brightness * 0.8;
+                    ctx.fillStyle = `hsl(${s.hue}, 100%, 75%)`;
+                    ctx.shadowColor = `hsl(${s.hue}, 100%, 65%)`;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Падающие звезды
+                ctx.shadowBlur = 80;
+                for (let i = 0; i < shootingStars.length; i++) {
+                    const ss = shootingStars[i];
+                    ss.x += ss.speed * Math.cos(ss.angle);
+                    ss.y += ss.speed * Math.sin(ss.angle);
+                    
+                    ss.tail.push({ x: ss.x, y: ss.y });
+                    if (ss.tail.length > 35) ss.tail.shift();
+                    
+                    if (ss.y > height + 200 || ss.x > width + 200) {
+                        ss.x = Math.random() * width * 0.3;
+                        ss.y = Math.random() * height * 0.2;
+                        ss.tail = [];
+                    }
+                    
+                    ss.hue = (ss.hue + 10) % 360;
+                    
+                    for (let j = 0; j < ss.tail.length; j++) {
+                        const p = ss.tail[j];
+                        const alpha = (j / ss.tail.length) * 0.8;
+                        const size = 6 + (j / ss.tail.length) * 12;
+                        
+                        ctx.globalAlpha = alpha;
+                        ctx.fillStyle = `hsl(${ss.hue}, 100%, 80%)`;
+                        ctx.shadowColor = `hsl(${ss.hue}, 100%, 70%)`;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, size * 0.8, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    ctx.globalAlpha = 1;
+                    ctx.fillStyle = `hsl(${ss.hue}, 100%, 95%)`;
+                    ctx.shadowColor = `hsl(${ss.hue}, 100%, 80%)`;
+                    ctx.beginPath();
+                    ctx.arc(ss.x, ss.y, 18, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                ctx.shadowBlur = 0;
+                requestAnimationFrame(drawStars);
+            }
+
+            // ========== ЧАСТИЦЫ ==========
+            function initParticles() {
+                const field = document.getElementById('particleField');
+                if (!field) return;
+                field.innerHTML = '';
+                for (let i = 0; i < 120; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.animationDelay = Math.random() * 30 + 's';
+                    p.style.animationDuration = (Math.random() * 25 + 30) + 's';
+                    p.style.background = `hsl(${Math.random() * 360}, 100%, 75%)`;
+                    field.appendChild(p);
+                }
+            }
+
+            // ========== СОХРАНЕНИЕ ==========
+            function saveGame() {
+                try {
+                    localStorage.setItem('bsx_final_balance', state.balance);
+                    localStorage.setItem('bsx_final_inventory', JSON.stringify(state.inventory));
+                } catch (e) {
+                    console.warn('Save error:', e);
+                }
+            }
+
+            function loadGame() {
+                try {
+                    const savedBalance = localStorage.getItem('bsx_final_balance');
+                    const savedInventory = localStorage.getItem('bsx_final_inventory');
+                    if (savedBalance) state.balance = parseInt(savedBalance) || CONFIG.INITIAL_BALANCE;
+                    if (savedInventory) state.inventory = JSON.parse(savedInventory) || [];
+                } catch (e) {
+                    console.warn('Load error:', e);
+                }
+                updateUI();
+            }
+
+            // ========== УВЕДОМЛЕНИЯ ==========
+            function showToast(msg, isSuccess = true) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${!isSuccess ? 'error' : ''}`;
+                toast.textContent = msg;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2500);
+            }
+
+            // ========== ОБНОВЛЕНИЕ UI ==========
+            function updateUI() {
+                if (elements.balance) elements.balance.textContent = state.balance;
+                updateInventory();
+            }
+
+            function updateInventory() {
+                if (!elements.inventoryContainer || !elements.inventoryCounter) return;
+                
+                elements.inventoryContainer.innerHTML = '';
+                elements.inventoryCounter.textContent = `${state.inventory.length}/${CONFIG.INVENTORY_SIZE}`;
+                
+                for (let i = 0; i < Math.min(state.inventory.length, CONFIG.INVENTORY_SIZE); i++) {
+                    const item = state.inventory[i];
+                    const slot = document.createElement('div');
+                    slot.className = 'inventory-cell';
+                    slot.innerHTML = `
+                        <div class="cell-emoji">${item.emoji}</div>
+                        <div class="cell-name">${item.name}</div>
+                        <div class="cell-price">${item.price}⭐</div>
+                    `;
+                    slot.addEventListener('click', () => sellItem(i));
+                    elements.inventoryContainer.appendChild(slot);
+                }
+                
+                for (let i = state.inventory.length; i < CONFIG.INVENTORY_SIZE; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'cell-empty';
+                    empty.textContent = 'пусто';
+                    elements.inventoryContainer.appendChild(empty);
+                }
+            }
+
+            function sellItem(index) {
+                if (index >= state.inventory.length) return;
+                const item = state.inventory[index];
+                const price = Math.floor(item.price * 0.8);
+                state.balance += price;
+                state.inventory.splice(index, 1);
+                updateUI();
+                saveGame();
+                showToast(`✅ ${item.name} продан за ${price}⭐`);
+            }
+
+            // ========== САМОЛЕТ ==========
+            function startFlight() {
+                const bet = parseInt(elements.betField?.value) || 149;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!', false);
+                    return;
+                }
+                
+                if (bet < CONFIG.MIN_BET) {
+                    showToast(`❌ Мин. ставка ${CONFIG.MIN_BET}⭐`, false);
+                    return;
+                }
+                
+                state.balance -= bet;
+                updateUI();
+                saveGame();
+                
+                state.isFlying = true;
+                state.multiplier = 1;
+                state.planePos = -120;
+                if (elements.startBtn) elements.startBtn.disabled = true;
+                if (elements.stopBtn) elements.stopBtn.disabled = false;
+                if (elements.crash) elements.crash.style.opacity = '0';
+                if (elements.multiplier) elements.multiplier.textContent = '1.00x';
+                
+                if (state.intervalId) clearInterval(state.intervalId);
+                
+                state.intervalId = setInterval(() => {
+                    if (!state.isFlying) return;
+                    
+                    state.planePos += CONFIG.FLIGHT_SPEED;
+                    if (elements.plane) elements.plane.style.left = state.planePos + 'px';
+                    if (elements.trail) elements.trail.style.width = (state.planePos + 140) + 'px';
+                    
+                    state.multiplier += 0.022 + Math.random() * 0.025;
+                    if (elements.multiplier) elements.multiplier.textContent = state.multiplier.toFixed(2) + 'x';
+                    
+                    const crashChance = CONFIG.CRASH_BASE_CHANCE + (state.multiplier - 1) * 0.006;
+                    if (Math.random() < crashChance) {
+                        crashPlane(bet);
+                    }
+                    
+                    if (state.planePos > 600) {
+                        crashPlane(bet);
+                    }
+                }, 30);
+            }
+
+            function crashPlane(bet) {
+                if (state.intervalId) {
+                    clearInterval(state.intervalId);
+                    state.intervalId = null;
+                }
+                
+                state.isFlying = false;
+                if (elements.startBtn) elements.startBtn.disabled = false;
+                if (elements.stopBtn) elements.stopBtn.disabled = true;
+                if (elements.crash) elements.crash.style.opacity = '1';
+                if (elements.multiplier) elements.multiplier.textContent = '💥 ПАДЕНИЕ';
+                
+                setTimeout(() => {
+                    state.planePos = -120;
+                    if (elements.plane) elements.plane.style.left = '-120px';
+                    if (elements.trail) elements.trail.style.width = '0px';
+                    if (elements.crash) elements.crash.style.opacity = '0';
+                    if (elements.multiplier) elements.multiplier.textContent = '1.00x';
+                }, 1000);
+                
+                showToast(`💥 Проигрыш: ${bet}⭐`, false);
+            }
+
+            function stopFlight() {
+                if (!state.isFlying) return;
+                
+                if (state.intervalId) {
+                    clearInterval(state.intervalId);
+                    state.intervalId = null;
+                }
+                
+                const bet = parseInt(elements.betField?.value) || 149;
+                const win = Math.floor(bet * state.multiplier);
+                
+                state.balance += win;
+                updateUI();
+                saveGame();
+                
+                state.isFlying = false;
+                if (elements.startBtn) elements.startBtn.disabled = false;
+                if (elements.stopBtn) elements.stopBtn.disabled = true;
+                
+                state.planePos = -120;
+                if (elements.plane) elements.plane.style.left = '-120px';
+                if (elements.trail) elements.trail.style.width = '0px';
+                if (elements.multiplier) elements.multiplier.textContent = '1.00x';
+                
+                showToast(`✨ Выигрыш: ${win}⭐ (x${state.multiplier.toFixed(2)})`);
+            }
+
+            // ========== КЕЙСЫ ==========
+            function openCaseModal(caseData) {
+                state.currentCase = caseData;
+                if (elements.modalTitle) elements.modalTitle.textContent = caseData.name;
+                if (elements.modalIcon) elements.modalIcon.textContent = caseData.icon;
+                if (elements.modalCaseTitle) elements.modalCaseTitle.textContent = caseData.name;
+                if (elements.modalCaseCost) elements.modalCaseCost.textContent = `★ ${caseData.price}`;
+                if (elements.openModalBtn) elements.openModalBtn.textContent = `ОТКРЫТЬ ЗА ★ ${caseData.price}`;
+                
+                if (elements.modalPrizes) {
+                    elements.modalPrizes.innerHTML = '';
+                    caseData.gifts.forEach(idx => {
+                        const gift = NFT_GIFTS[idx];
+                        const prize = document.createElement('div');
+                        prize.className = 'prize-tile';
+                        prize.innerHTML = `
+                            <div class="prize-emoji">${gift.emoji}</div>
+                            <div class="prize-name">${gift.name}</div>
+                            <div class="prize-rarity">${gift.rarity}★</div>
+                        `;
+                        elements.modalPrizes.appendChild(prize);
+                    });
+                }
+                
+                if (elements.modal) elements.modal.classList.add('active');
+            }
+
+            function openCase() {
+                if (!state.currentCase) return;
+                
+                if (state.balance < state.currentCase.price) {
+                    showToast('❌ Недостаточно звезд!', false);
+                    return;
+                }
+                
+                state.balance -= state.currentCase.price;
+                
+                if (Math.random() < CONFIG.WIN_CHANCE) {
+                    const mult = 1.5 + Math.random() * 0.5;
+                    const idx = state.currentCase.gifts[Math.floor(Math.random() * state.currentCase.gifts.length)];
+                    const gift = { ...NFT_GIFTS[idx] };
+                    gift.price = Math.floor(gift.price * mult);
+                    state.inventory.push(gift);
+                    showToast(`🎉 ВЫИГРЫШ x${mult.toFixed(2)}! ${gift.name}`);
+                } else {
+                    if (Math.random() < 0.5) {
+                        const stars = Math.floor(state.currentCase.price * 0.3);
+                        state.balance += stars;
+                        showToast(`⭐ Утешение: ${stars} звезд`);
+                    } else {
+                        const idx = state.currentCase.gifts[0];
+                        const gift = { ...NFT_GIFTS[idx] };
+                        gift.price = Math.floor(gift.price * 0.3);
+                        state.inventory.push(gift);
+                        showToast(`📦 Утешение: ${gift.name}`);
+                    }
+                }
+                
+                updateUI();
+                saveGame();
+            }
+
+            // ========== РЕНДЕРИНГ ==========
+            function renderNFTs() {
+                if (!elements.nftContainer) return;
+                elements.nftContainer.innerHTML = '';
+                NFT_GIFTS.slice(0, 16).forEach(g => {
+                    const card = document.createElement('div');
+                    card.className = 'nft-item';
+                    card.innerHTML = `
+                        <div class="nft-emoji">${g.emoji}</div>
+                        <div class="nft-name">${g.name}</div>
+                        <div class="nft-cost">${g.price}⭐</div>
+                        <div class="nft-level">${g.rarity}</div>
+                    `;
+                    card.addEventListener('click', () => {
+                        if (state.balance >= g.price) {
+                            state.balance -= g.price;
+                            state.inventory.push(g);
+                            updateUI();
+                            saveGame();
+                            showToast(`🎁 Куплен: ${g.name}`);
+                        } else {
+                            showToast('❌ Недостаточно звезд!', false);
+                        }
+                    });
+                    elements.nftContainer.appendChild(card);
                 });
             }
 
-            shootingStars = [];
-            for (let i = 0; i < SHOOTING_STAR_COUNT; i++) {
-                shootingStars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height * 0.3,
-                    length: Math.random() * 200 + 100,
-                    speed: Math.random() * 12 + 8,
-                    angle: Math.random() * 0.4 + 0.3,
-                    hue: Math.random() * 360
+            function renderCases() {
+                if (!elements.casesContainer) return;
+                elements.casesContainer.innerHTML = '';
+                CASES.forEach(c => {
+                    const card = document.createElement('div');
+                    card.className = 'case-block';
+                    card.innerHTML = `
+                        <div class="case-emoji">${c.icon}</div>
+                        <div class="case-title">${c.name}</div>
+                        <div class="case-value">★ ${c.price}</div>
+                    `;
+                    card.addEventListener('click', () => openCaseModal(c));
+                    elements.casesContainer.appendChild(card);
                 });
             }
-        }
 
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            initStars();
-        }
+            // ========== ИНИЦИАЛИЗАЦИЯ ==========
+            function initEventListeners() {
+                if (elements.addMoney) {
+                    elements.addMoney.addEventListener('click', () => {
+                        state.balance += 100;
+                        updateUI();
+                        saveGame();
+                        showToast('+100⭐ получено!');
+                    });
+                }
 
-        function drawStars() {
-            ctx.clearRect(0, 0, width, height);
-            
-            // Глубокий космос
-            const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
-            gradient.addColorStop(0, '#05071a');
-            gradient.addColorStop(0.5, '#02030a');
-            gradient.addColorStop(1, '#000000');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-            
-            // Медленные переливающиеся звезды
-            stars.forEach(star => {
-                star.y += star.speed * 0.05;
-                if (star.y > height) {
-                    star.y = 0;
-                    star.x = Math.random() * width;
+                if (elements.startBtn) elements.startBtn.addEventListener('click', startFlight);
+                if (elements.stopBtn) elements.stopBtn.addEventListener('click', stopFlight);
+                
+                if (elements.closeModal) {
+                    elements.closeModal.addEventListener('click', () => {
+                        if (elements.modal) elements.modal.classList.remove('active');
+                    });
                 }
                 
-                star.brightness += star.flickerSpeed;
-                if (star.brightness > 1 || star.brightness < 0.3) star.flickerSpeed *= -1;
+                if (elements.openModalBtn) elements.openModalBtn.addEventListener('click', openCase);
                 
-                star.hue = (star.hue + 0.1) % 360;
-                
-                ctx.globalAlpha = star.brightness * 0.7;
-                ctx.fillStyle = `hsl(${star.hue}, 80%, 70%)`;
-                ctx.shadowColor = `hsl(${star.hue}, 80%, 70%)`;
-                ctx.shadowBlur = 10;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            // Частые падающие звезды
-            ctx.shadowBlur = 30;
-            shootingStars.forEach(star => {
-                star.x += star.speed * Math.cos(star.angle);
-                star.y += star.speed * Math.sin(star.angle);
-                
-                if (star.y > height || star.x > width) {
-                    star.x = Math.random() * width * 0.3;
-                    star.y = Math.random() * height * 0.2;
+                if (elements.modal) {
+                    elements.modal.addEventListener('click', (e) => {
+                        if (e.target === elements.modal) {
+                            elements.modal.classList.remove('active');
+                        }
+                    });
                 }
-                
-                star.hue = (star.hue + 2) % 360;
-                
-                // Хвост
-                const gradient = ctx.createLinearGradient(
-                    star.x, star.y,
-                    star.x - star.length * Math.cos(star.angle),
-                    star.y - star.length * Math.sin(star.angle)
-                );
-                gradient.addColorStop(0, `hsla(${star.hue}, 100%, 80%, 1)`);
-                gradient.addColorStop(0.5, `hsla(${star.hue}, 100%, 60%, 0.5)`);
-                gradient.addColorStop(1, 'transparent');
-                
-                ctx.beginPath();
-                ctx.moveTo(star.x, star.y);
-                ctx.lineTo(
-                    star.x - star.length * Math.cos(star.angle),
-                    star.y - star.length * Math.sin(star.angle)
-                );
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 4;
-                ctx.stroke();
-                
-                // Голова
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = `hsl(${star.hue}, 100%, 90%)`;
-                ctx.shadowColor = `hsl(${star.hue}, 100%, 70%)`;
-                ctx.fill();
-            });
-            
-            ctx.shadowBlur = 0;
-            requestAnimationFrame(drawStars);
-        }
-
-        // ========== ДАННЫЕ ==========
-        const TELEGRAM_GIFTS = [
-            { emoji: "🎂", name: "ТОРТ", price: 15 },
-            { emoji: "❤️", name: "СЕРДЦЕ", price: 25 },
-            { emoji: "🔥", name: "ОГОНЬ", price: 50 },
-            { emoji: "🎁", name: "ПОДАРОК", price: 50 },
-            { emoji: "🎉", name: "ПРАЗДНИК", price: 100 },
-            { emoji: "💎", name: "АЛМАЗ", price: 100 },
-            { emoji: "👑", name: "КОРОНА", price: 150 },
-            { emoji: "🚀", name: "РАКЕТА", price: 150 },
-            { emoji: "⭐", name: "ЗВЕЗДА", price: 250 },
-            { emoji: "🌟", name: "СУПЕРЗВЕЗДА", price: 300 },
-            { emoji: "💫", name: "КОМЕТА", price: 500 },
-            { emoji: "⚡", name: "МОЛНИЯ", price: 500 },
-            { emoji: "🎈", name: "ШАР", price: 750 },
-            { emoji: "🎊", name: "КОНФЕТТИ", price: 1000 },
-            { emoji: "✨", name: "БЛЕСТКИ", price: 1500 },
-            { emoji: "🦄", name: "ЕДИНОРОГ", price: 2500 }
-        ];
-
-        const CASES = {
-            обычные: [
-                { name: "PLAYER", icon: "🎮", price: 149, gifts: [0,1,2,3] },
-                { name: "BEAR", icon: "🐻", price: 199, gifts: [1,2,3,4] },
-                { name: "LAMP", icon: "💡", price: 249, gifts: [2,3,4,5] },
-                { name: "SKULL", icon: "💀", price: 499, gifts: [3,4,5,6] },
-                { name: "NEKO", icon: "🐱", price: 999, gifts: [4,5,6,7] },
-                { name: "BRICK", icon: "🧱", price: 1499, gifts: [5,6,7,8] }
-            ],
-            редкие: [
-                { name: "DRAGON", icon: "🐉", price: 1999, gifts: [6,7,8,9] },
-                { name: "PHOENIX", icon: "🔥", price: 2999, gifts: [7,8,9,10] }
-            ],
-            эпические: [
-                { name: "GOD", icon: "👼", price: 4999, gifts: [8,9,10,11] },
-                { name: "DEMON", icon: "👿", price: 9999, gifts: [9,10,11,12] }
-            ]
-        };
-
-        // Состояние игры
-        let balance = 1549;
-        let inventory = [];
-        let currentCase = null;
-        let isFlying = false;
-        let multiplier = 1;
-        let planeInterval = null;
-        let planePosition = -80;
-
-        // DOM элементы
-        const balanceEl = document.getElementById('balance');
-        const addBtn = document.getElementById('addBalance');
-        const startBtn = document.getElementById('startFlight');
-        const stopBtn = document.getElementById('stopFlight');
-        const multiplierEl = document.getElementById('multiplier');
-        const animatedPlane = document.getElementById('animatedPlane');
-        const planeTrail = document.getElementById('planeTrail');
-        const crashEffect = document.getElementById('crashEffect');
-        const casesGrid = document.getElementById('casesGrid');
-        const giftsGrid = document.getElementById('giftsGrid');
-        const inventoryGrid = document.getElementById('inventoryGrid');
-        const caseModal = document.getElementById('caseModal');
-        const closeModal = document.getElementById('closeModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalIcon = document.getElementById('modalIcon');
-        const modalPrice = document.getElementById('modalPrice');
-        const prizesGrid = document.getElementById('prizesGrid');
-        const spinBtn = document.getElementById('spinBtn');
-        const demoBtn = document.getElementById('demoBtn');
-
-        // Сохранение
-        function saveGame() {
-            localStorage.setItem('bsx_balance', balance);
-            localStorage.setItem('bsx_inventory', JSON.stringify(inventory));
-        }
-
-        function loadGame() {
-            const savedBalance = localStorage.getItem('bsx_balance');
-            const savedInventory = localStorage.getItem('bsx_inventory');
-            if (savedBalance) balance = parseInt(savedBalance);
-            if (savedInventory) inventory = JSON.parse(savedInventory);
-            updateBalance();
-            updateInventory();
-        }
-
-        function showNotification(msg, isSuccess = true) {
-            const notif = document.createElement('div');
-            notif.className = `notification ${!isSuccess ? 'error' : ''}`;
-            notif.textContent = msg;
-            document.body.appendChild(notif);
-            setTimeout(() => notif.remove(), 2000);
-        }
-
-        function updateBalance() {
-            balanceEl.textContent = balance;
-            saveGame();
-        }
-
-        function updateInventory() {
-            inventoryGrid.innerHTML = '';
-            inventory.slice(0, 8).forEach((item, i) => {
-                const slot = document.createElement('div');
-                slot.className = 'inventory-slot';
-                slot.innerHTML = `
-                    <div style="font-size: 1.8rem;">${item.emoji}</div>
-                    <div style="font-size: 0.6rem;">${item.name}</div>
-                    <div style="font-size: 0.6rem;">${item.price}⭐</div>
-                `;
-                slot.onclick = () => sellItem(i);
-                inventoryGrid.appendChild(slot);
-            });
-            for (let i = inventory.length; i < 8; i++) {
-                const empty = document.createElement('div');
-                empty.className = 'empty-slot';
-                empty.textContent = 'пусто';
-                inventoryGrid.appendChild(empty);
             }
-        }
 
-        function sellItem(index) {
-            const item = inventory[index];
-            const sellPrice = Math.floor(item.price * 0.8);
-            balance += sellPrice;
-            inventory.splice(index, 1);
-            updateBalance();
-            updateInventory();
-            showNotification(`✅ Продан за ${sellPrice}⭐`);
-        }
-
-        // Самолет
-        function startFlight() {
-            const bet = parseInt(document.getElementById('betAmount').value);
-            
-            if (bet > balance) {
-                showNotification('❌ Недостаточно звезд!', false);
-                return;
+            function init() {
+                resizeCanvas();
+                initStars();
+                drawStars();
+                initParticles();
+                initEventListeners();
+                renderNFTs();
+                renderCases();
+                loadGame();
+                
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    initStars();
+                });
             }
-            
-            balance -= bet;
-            updateBalance();
-            
-            isFlying = true;
-            multiplier = 1;
-            planePosition = -80;
-            startBtn.disabled = true;
-            stopBtn.disabled = false;
-            crashEffect.style.opacity = '0';
-            
-            if (planeInterval) clearInterval(planeInterval);
-            
-            planeInterval = setInterval(() => {
-                if (!isFlying) return;
-                
-                planePosition += 2;
-                animatedPlane.style.left = planePosition + 'px';
-                planeTrail.style.width = (planePosition + 100) + 'px';
-                planeTrail.style.right = 'auto';
-                planeTrail.style.left = '0';
-                
-                multiplier += 0.02 + Math.random() * 0.03;
-                multiplierEl.textContent = multiplier.toFixed(2) + 'x';
-                
-                // Шанс падения
-                if (Math.random() < 0.01 + (multiplier - 1) * 0.005) {
-                    crashPlane(bet);
-                }
-                
-                // Улетел
-                if (planePosition > 400) {
-                    crashPlane(bet);
-                }
-            }, 50);
-        }
 
-        function crashPlane(bet) {
-            clearInterval(planeInterval);
-            planeInterval = null;
-            
-            isFlying = false;
-            startBtn.disabled = false;
-            stopBtn.disabled = true;
-            
-            crashEffect.style.opacity = '1';
-            multiplierEl.textContent = '💥 ПАДЕНИЕ';
-            
-            setTimeout(() => {
-                planePosition = -80;
-                animatedPlane.style.left = '-80px';
-                planeTrail.style.width = '0px';
-                crashEffect.style.opacity = '0';
-                multiplierEl.textContent = '1.00x';
-            }, 1000);
-            
-            showNotification(`💥 Проигрыш: ${bet}⭐`, false);
-        }
-
-        function stopFlight() {
-            if (!isFlying) return;
-            
-            clearInterval(planeInterval);
-            planeInterval = null;
-            
-            const bet = parseInt(document.getElementById('betAmount').value);
-            const win = Math.floor(bet * multiplier);
-            
-            balance += win;
-            updateBalance();
-            
-            isFlying = false;
-            startBtn.disabled = false;
-            stopBtn.disabled = true;
-            
-            planePosition = -80;
-            animatedPlane.style.left = '-80px';
-            planeTrail.style.width = '0px';
-            multiplierEl.textContent = '1.00x';
-            
-            showNotification(`✨ Выигрыш: ${win}⭐ (x${multiplier.toFixed(2)})`);
-        }
-
-        // Кейсы
-        function openCaseModal(caseData) {
-            currentCase = caseData;
-            modalTitle.textContent = caseData.name;
-            modalIcon.textContent = caseData.icon;
-            modalPrice.textContent = `★ ${caseData.price}`;
-            spinBtn.textContent = `КРУТИТЬ ЗА ★ ${caseData.price}`;
-            
-            prizesGrid.innerHTML = '';
-            caseData.gifts.forEach(index => {
-                const gift = TELEGRAM_GIFTS[index];
-                const prize = document.createElement('div');
-                prize.className = 'prize-item';
-                prize.innerHTML = `
-                    <div class="prize-emoji">${gift.emoji}</div>
-                    <div class="prize-name">${gift.name}</div>
-                    <div>${gift.price}⭐</div>
-                `;
-                prizesGrid.appendChild(prize);
-            });
-            
-            caseModal.classList.add('active');
-        }
-
-        function spinCase
+            // Старт
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>
