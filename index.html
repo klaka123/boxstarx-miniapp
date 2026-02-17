@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 3D 🚀 КЕЙСЫ ПРЕМИУМ</title>
+    <title>BOXSTARX ELITE 🚀 ПРЕМИУМ КЕЙСЫ</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             overflow: hidden;
             background: #000;
             color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* ========== ОПТИМИЗИРОВАННЫЙ ЗВЕЗДНЫЙ ФОН ========== */
@@ -34,21 +34,21 @@
             will-change: transform;
         }
 
-        /* ========== ОЧЕНЬ МЕДЛЕННАЯ RGB ПОДСВЕТКА ========== */
+        /* ========== ЭКСТРЕМАЛЬНО МЕДЛЕННАЯ RGB ПОДСВЕТКА ========== */
         @keyframes ultraSlowRGB {
-            0% { border-color: #ff0000; box-shadow: 0 0 30px #ff0000; }
-            12.5% { border-color: #ff8800; box-shadow: 0 0 30px #ff8800; }
-            25% { border-color: #ffff00; box-shadow: 0 0 30px #ffff00; }
-            37.5% { border-color: #00ff00; box-shadow: 0 0 30px #00ff00; }
-            50% { border-color: #0088ff; box-shadow: 0 0 30px #0088ff; }
-            62.5% { border-color: #8800ff; box-shadow: 0 0 30px #8800ff; }
-            75% { border-color: #ff00ff; box-shadow: 0 0 30px #ff00ff; }
-            87.5% { border-color: #ff0088; box-shadow: 0 0 30px #ff0088; }
-            100% { border-color: #ff0000; box-shadow: 0 0 30px #ff0000; }
+            0% { border-color: #ff0000; box-shadow: 0 0 40px #ff0000; }
+            12.5% { border-color: #ff8800; box-shadow: 0 0 40px #ff8800; }
+            25% { border-color: #ffff00; box-shadow: 0 0 40px #ffff00; }
+            37.5% { border-color: #00ff00; box-shadow: 0 0 40px #00ff00; }
+            50% { border-color: #0088ff; box-shadow: 0 0 40px #0088ff; }
+            62.5% { border-color: #8800ff; box-shadow: 0 0 40px #8800ff; }
+            75% { border-color: #ff00ff; box-shadow: 0 0 40px #ff00ff; }
+            87.5% { border-color: #ff0088; box-shadow: 0 0 40px #ff0088; }
+            100% { border-color: #ff0000; box-shadow: 0 0 40px #ff0000; }
         }
 
         .rgb-ultra-slow {
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
         }
 
         /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
@@ -79,15 +79,15 @@
 
         /* ========== ХЕДЕР ========== */
         .header {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(20px);
             border: 2px solid;
-            border-radius: 50px;
+            border-radius: 60px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
             position: sticky;
             top: 16px;
             z-index: 100;
@@ -100,68 +100,72 @@
         }
 
         .balance-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px gold);
         }
 
         .balance-value {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
+            background: linear-gradient(135deg, #fff, gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .add-btn {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: none;
             color: white;
             padding: 10px 24px;
             border-radius: 40px;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: transform 0.2s;
+            border: 1px solid #81c784;
         }
 
         .add-btn:active {
             transform: scale(0.95);
         }
 
-        /* ========== 3D САМОЛЕТ ========== */
+        /* ========== СИСТЕМА САМОЛЕТА (GiftSpinner стиль) ========== */
         .flight-section {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(20px);
             border: 2px solid;
-            border-radius: 50px;
-            padding: 16px;
-            animation: ultraSlowRGB 20s infinite;
+            border-radius: 60px;
+            padding: 20px;
+            animation: ultraSlowRGB 30s infinite;
         }
 
         .flight-window {
             position: relative;
-            height: 220px;
-            background: linear-gradient(180deg, #0a1a3a 0%, #000 100%);
+            height: 200px;
+            background: linear-gradient(180deg, #0f1a3a 0%, #020210 100%);
             border: 2px solid;
-            border-radius: 40px;
+            border-radius: 50px;
             overflow: hidden;
-            margin-bottom: 12px;
-            animation: ultraSlowRGB 20s infinite;
-            perspective: 500px;
+            margin-bottom: 20px;
+            animation: ultraSlowRGB 30s infinite;
         }
 
-        /* 3D эффект для неба */
-        .sky-3d {
+        /* Текстура неба */
+        .sky-texture {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(100,150,255,0.3), transparent 70%);
-            transform-style: preserve-3d;
-            animation: skyPulse 8s infinite alternate;
+            background: radial-gradient(circle at 30% 40%, rgba(100,150,255,0.2), transparent 60%),
+                        radial-gradient(circle at 70% 60%, rgba(255,150,100,0.1), transparent 60%);
+            animation: skyPulse 15s infinite alternate;
         }
 
         @keyframes skyPulse {
-            0% { opacity: 0.3; transform: rotateX(0deg); }
-            100% { opacity: 0.6; transform: rotateX(5deg); }
+            0% { opacity: 0.4; }
+            100% { opacity: 0.7; }
         }
 
         /* Горизонт */
@@ -176,39 +180,58 @@
             z-index: 5;
         }
 
-        /* 3D Самолет */
+        /* Облака с текстурами */
+        .cloud {
+            position: absolute;
+            background: rgba(255,255,255,0.15);
+            border-radius: 100px;
+            filter: blur(15px);
+            animation: cloudMove 20s linear infinite;
+            will-change: transform;
+        }
+
+        .cloud1 { width: 150px; height: 50px; top: 30px; left: -200px; }
+        .cloud2 { width: 200px; height: 60px; top: 120px; left: -300px; animation-delay: 7s; }
+        .cloud3 { width: 180px; height: 45px; top: 160px; left: -250px; animation-delay: 14s; }
+
+        @keyframes cloudMove {
+            from { transform: translateX(0); }
+            to { transform: translateX(800px); }
+        }
+
+        /* 3D Самолет с текстурами */
         .plane-3d {
             position: absolute;
             left: -150px;
             top: 50%;
             transform: translateY(-50%) translateZ(20px) rotateY(0deg);
-            font-size: 5rem;
-            filter: drop-shadow(0 0 30px cyan) drop-shadow(0 0 60px magenta);
-            transition: left 0.02s linear, top 0.02s linear, transform 0.1s ease;
+            font-size: 5.5rem;
+            filter: drop-shadow(0 0 40px cyan) drop-shadow(0 0 80px magenta);
+            transition: left 0.03s linear, top 0.03s linear;
             z-index: 20;
             will-change: left, top;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-            animation: plane3dFloat 1s infinite alternate;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5), 4px 4px 0 rgba(255,215,0,0.3);
+            animation: planeFloat 2s infinite alternate;
         }
 
-        @keyframes plane3dFloat {
+        @keyframes planeFloat {
             0% { transform: translateY(-50%) translateZ(20px) rotateY(0deg); }
-            100% { transform: translateY(-50%) translateZ(30px) rotateY(10deg); }
+            100% { transform: translateY(-50%) translateZ(40px) rotateY(10deg); }
         }
 
         /* След */
-        .trail-3d {
+        .trail {
             position: absolute;
-            height: 20px;
-            background: linear-gradient(90deg, cyan, magenta, yellow);
+            height: 25px;
+            background: linear-gradient(90deg, cyan, magenta, gold);
             top: 50%;
             transform: translateY(-50%);
             right: 0;
-            border-radius: 10px;
-            opacity: 0.8;
-            filter: blur(8px);
-            transition: width 0.02s linear;
-            box-shadow: 0 0 40px cyan;
+            border-radius: 15px;
+            opacity: 0.9;
+            filter: blur(12px);
+            transition: width 0.03s linear;
+            box-shadow: 0 0 60px cyan;
             z-index: 15;
         }
 
@@ -220,116 +243,173 @@
             transform: translate(-50%, -50%) scale(0);
             font-size: 0;
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
             z-index: 30;
             pointer-events: none;
             white-space: nowrap;
+            text-shadow: 0 0 50px red, 0 0 100px orange;
         }
 
         .explosion.active {
-            font-size: 8rem;
+            font-size: 10rem;
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Облака */
-        .cloud-3d {
+        /* Индикатор высоты */
+        .altitude {
             position: absolute;
-            background: rgba(255,255,255,0.15);
-            border-radius: 100px;
-            filter: blur(12px);
-            animation: cloudMove3D 10s linear infinite;
-            will-change: transform;
-        }
-
-        .cloud1 { width: 120px; height: 40px; top: 30px; left: -150px; }
-        .cloud2 { width: 180px; height: 50px; top: 120px; left: -220px; animation-delay: 3s; }
-        .cloud3 { width: 140px; height: 35px; top: 180px; left: -180px; animation-delay: 6s; }
-
-        @keyframes cloudMove3D {
-            from { transform: translateX(0) translateZ(0); }
-            to { transform: translateX(700px) translateZ(50px); }
-        }
-
-        /* Высота */
-        .altitude-indicator {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 15px;
+            right: 15px;
             background: rgba(0,0,0,0.7);
             border: 1px solid;
-            animation: ultraSlowRGB 20s infinite;
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            animation: ultraSlowRGB 30s infinite;
+            padding: 8px 15px;
+            border-radius: 40px;
+            font-size: 1rem;
             z-index: 25;
             backdrop-filter: blur(5px);
         }
 
+        /* Топ выигрышей */
+        .top-winners {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 0 5px;
+        }
+
+        .top-title {
+            font-size: 1rem;
+            color: gold;
+        }
+
+        .multiplier-badge {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid gold;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* Сетка множителей */
+        .multipliers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .multiplier-cell {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 25px;
+            padding: 8px 4px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .multiplier-cell.x100 {
+            color: #ff6b6b;
+        }
+
         /* Управление */
-        .control-group {
+        .control-panel {
+            background: rgba(0,0,0,0.3);
+            border-radius: 40px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .schedule-bet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+
+        .bet-controls {
             display: flex;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .bet-input {
             flex: 2;
             background: rgba(0, 0, 0, 0.9);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
             color: white;
-            padding: 14px;
+            padding: 15px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-align: center;
             outline: none;
         }
 
+        .auto-cashout {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid;
+            animation: ultraSlowRGB 30s infinite;
+            color: white;
+            padding: 15px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .flight-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
         .flight-btn {
             flex: 1;
-            padding: 14px;
+            padding: 16px;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.1s;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #f9d423, #fdaa33);
+            color: black;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
             color: white;
         }
 
-        .flight-btn:active {
-            transform: scale(0.95);
-        }
-
-        .flight-btn:disabled {
+        .btn-stop:disabled {
             opacity: 0.3;
-            pointer-events: none;
+            cursor: not-allowed;
         }
 
-        .multiplier-panel {
+        .no-players {
             text-align: center;
-            padding: 12px;
-            background: rgba(0,0,0,0.7);
-            border: 2px solid;
-            border-radius: 50px;
-            animation: ultraSlowRGB 20s infinite;
+            color: #aaa;
+            margin-top: 10px;
+            font-size: 0.9rem;
         }
 
-        .multiplier-number {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-left: 8px;
-        }
-
-        /* ========== КЕЙСЫ С КАРТИНКАМИ ========== */
+        /* ========== КЕЙСЫ ========== */
         .section-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
-            margin: 16px 0 12px;
+            margin: 20px 0 15px;
+            letter-spacing: 2px;
         }
 
         .cases-grid {
@@ -339,11 +419,11 @@
         }
 
         .case-card {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(10, 10, 20, 0.9);
             border: 3px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 60px;
-            padding: 20px 10px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 70px;
+            padding: 20px 15px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.2s;
@@ -363,7 +443,7 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255,215,0,0.2), transparent 70%);
-            animation: rotateGlow 15s linear infinite;
+            animation: rotateGlow 20s linear infinite;
         }
 
         @keyframes rotateGlow {
@@ -378,7 +458,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            filter: drop-shadow(0 0 20px gold);
+            filter: drop-shadow(0 0 30px gold);
             position: relative;
             z-index: 5;
             transition: transform 0.3s;
@@ -404,6 +484,16 @@
             z-index: 5;
         }
 
+        .case-arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: gold;
+            z-index: 5;
+        }
+
         /* ========== ПОЛНОЭКРАННОЕ МЕНЮ КЕЙСА ========== */
         .case-modal {
             position: fixed;
@@ -412,19 +502,13 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(40px);
             z-index: 1000;
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            animation: modalFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .case-modal.active {
@@ -432,55 +516,58 @@
         }
 
         .modal-content {
-            background: rgba(10, 10, 20, 0.9);
+            background: rgba(20, 20, 35, 0.9);
             border: 4px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 80px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 100px;
             padding: 40px 30px;
             text-align: center;
             max-width: 450px;
             width: 100%;
-            transform: translateY(0);
-            animation: modalFloat 3s infinite alternate;
+            animation: modalFloat 4s infinite alternate;
         }
 
         @keyframes modalFloat {
             from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+            to { transform: translateY(-15px); }
         }
 
         .modal-case-image {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             margin: 0 auto 25px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            filter: drop-shadow(0 0 50px gold);
-            animation: modalImageFloat 3s infinite alternate;
+            filter: drop-shadow(0 0 70px gold);
+            animation: modalImageFloat 4s infinite alternate;
         }
 
         @keyframes modalImageFloat {
             from { transform: scale(1) rotate(0deg); }
-            to { transform: scale(1.1) rotate(5deg); }
+            to { transform: scale(1.1) rotate(8deg); }
         }
 
         .modal-case-name {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 900;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .modal-case-price {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: gold;
             margin-bottom: 30px;
         }
 
         .prizes-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
-            opacity: 0.8;
+            color: #aaa;
         }
 
         .prizes-grid {
@@ -493,8 +580,8 @@
         .prize-item {
             background: rgba(255,255,255,0.05);
             border: 1px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 30px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 40px;
             padding: 15px 5px;
             text-align: center;
             transition: transform 0.2s;
@@ -505,7 +592,7 @@
         }
 
         .prize-emoji {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 5px;
         }
 
@@ -518,17 +605,16 @@
             width: 100%;
             padding: 20px;
             border: none;
-            border-radius: 60px;
-            font-size: 1.8rem;
+            border-radius: 70px;
+            font-size: 2rem;
             font-weight: 900;
             cursor: pointer;
-            background: rgba(255,255,255,0.1);
-            border: 3px solid;
-            animation: ultraSlowRGB 20s infinite;
-            color: white;
+            background: linear-gradient(135deg, #f9d423, #fdaa33);
+            color: black;
             transition: transform 0.2s;
             text-transform: uppercase;
             letter-spacing: 3px;
+            border: 2px solid gold;
         }
 
         .open-case-btn:active {
@@ -544,7 +630,7 @@
             border-radius: 50%;
             background: rgba(255,255,255,0.1);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
             color: white;
             font-size: 2rem;
             cursor: pointer;
@@ -560,19 +646,19 @@
 
         /* ========== ИНВЕНТАРЬ ========== */
         .inventory-section {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(20px);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 50px;
-            padding: 16px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 60px;
+            padding: 20px;
         }
 
         .inventory-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .inventory-title {
@@ -583,7 +669,7 @@
         .inventory-counter {
             background: rgba(0,0,0,0.7);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
             padding: 6px 16px;
             border-radius: 40px;
             font-size: 1rem;
@@ -598,9 +684,9 @@
         .inventory-slot {
             background: rgba(0, 0, 0, 0.9);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 30px;
-            padding: 10px 4px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 40px;
+            padding: 12px 4px;
             text-align: center;
             aspect-ratio: 1;
             display: flex;
@@ -609,7 +695,6 @@
             justify-content: center;
             cursor: pointer;
             transition: transform 0.1s;
-            position: relative;
         }
 
         .inventory-slot:active {
@@ -617,7 +702,7 @@
         }
 
         .slot-emoji {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 4px;
         }
 
@@ -635,8 +720,8 @@
         .empty-slot {
             background: rgba(0, 0, 0, 0.5);
             border: 2px dashed;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 30px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 40px;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
@@ -653,17 +738,11 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(30px);
             z-index: 2000;
             display: none;
             align-items: center;
             justify-content: center;
-            animation: winFadeIn 0.3s;
-        }
-
-        @keyframes winFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .win-modal.active {
@@ -671,15 +750,15 @@
         }
 
         .win-content {
-            background: rgba(10, 10, 20, 0.9);
+            background: rgba(20, 20, 35, 0.9);
             border: 4px solid;
-            animation: ultraSlowRGB 20s infinite;
-            border-radius: 100px;
-            padding: 50px 40px;
+            animation: ultraSlowRGB 30s infinite;
+            border-radius: 120px;
+            padding: 60px 40px;
             text-align: center;
             max-width: 400px;
             width: 90%;
-            animation: winPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: winPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes winPop {
@@ -688,39 +767,43 @@
         }
 
         .win-emoji {
-            font-size: 6rem;
+            font-size: 7rem;
             margin-bottom: 20px;
-            animation: winEmoji 2s infinite;
+            animation: winEmoji 3s infinite;
         }
 
         @keyframes winEmoji {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 50px gold); }
         }
 
         .win-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
         }
 
         .win-amount {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: gold;
             margin-bottom: 30px;
         }
 
         .win-button {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            background: linear-gradient(135deg, #f9d423, #fdaa33);
+            border: none;
+            color: black;
+            padding: 18px 40px;
+            border-radius: 60px;
+            font-size: 1.3rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: transform 0.2s;
+            border: 2px solid gold;
         }
 
         .win-button:active {
@@ -730,23 +813,24 @@
         /* ========== УВЕДОМЛЕНИЯ ========== */
         .toast {
             position: fixed;
-            top: 80px;
+            top: 100px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.9);
             border: 2px solid;
-            animation: ultraSlowRGB 20s infinite;
+            animation: ultraSlowRGB 30s infinite;
             color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
+            padding: 15px 40px;
+            border-radius: 60px;
             font-weight: 700;
             z-index: 3000;
             animation: toastIn 0.3s;
+            font-size: 1.1rem;
         }
 
         @keyframes toastIn {
-            from { top: 20px; opacity: 0; }
-            to { top: 80px; opacity: 1; }
+            from { top: 50px; opacity: 0; }
+            to { top: 100px; opacity: 1; }
         }
     </style>
 </head>
@@ -764,29 +848,51 @@
                 <button class="add-btn" id="addFunds">+100 ⭐</button>
             </header>
 
-            <!-- 3D Самолет -->
+            <!-- Система самолета (GiftSpinner стиль) -->
             <section class="flight-section">
                 <div class="flight-window">
-                    <div class="sky-3d"></div>
+                    <div class="sky-texture"></div>
                     <div class="horizon"></div>
-                    <div class="cloud-3d cloud1"></div>
-                    <div class="cloud-3d cloud2"></div>
-                    <div class="cloud-3d cloud3"></div>
+                    <div class="cloud cloud1"></div>
+                    <div class="cloud cloud2"></div>
+                    <div class="cloud cloud3"></div>
                     <div class="plane-3d" id="plane">✈️</div>
-                    <div class="trail-3d" id="trail" style="width: 0px;"></div>
+                    <div class="trail" id="trail" style="width: 0px;"></div>
                     <div class="explosion" id="explosion">💥✨💥</div>
-                    <div class="altitude-indicator" id="altitude">Высота: 0 м</div>
+                    <div class="altitude" id="altitude">0 м</div>
                 </div>
-                
-                <div class="control-group">
-                    <input type="number" class="bet-input" id="bet" min="10" value="149" step="10">
-                    <button class="flight-btn" id="startBtn">🚀 ВЗЛЕТ</button>
-                    <button class="flight-btn" id="stopBtn" disabled>⏹️ СТОП</button>
+
+                <!-- Топ выигрышей -->
+                <div class="top-winners">
+                    <span class="top-title">🏆 Топ выигрышей</span>
+                    <span class="multiplier-badge">Защита от x1.0</span>
                 </div>
-                
-                <div class="multiplier-panel">
-                    <span>МНОЖИТЕЛЬ:</span>
-                    <span class="multiplier-number" id="multiplier">1.00x</span>
+                <div class="multipliers-grid" id="multipliersGrid">
+                    <div class="multiplier-cell">x1.01</div>
+                    <div class="multiplier-cell">x1.71</div>
+                    <div class="multiplier-cell">x1.25</div>
+                    <div class="multiplier-cell">x1.28</div>
+                    <div class="multiplier-cell x100">x1.00</div>
+                </div>
+
+                <!-- Управление -->
+                <div class="control-panel">
+                    <div class="schedule-bet">
+                        <span>📅 Запланировать ставку</span>
+                        <span>10 ⭐</span>
+                    </div>
+                    
+                    <div class="bet-controls">
+                        <input type="number" class="bet-input" id="bet" min="10" value="149" step="10">
+                        <div class="auto-cashout" id="autoCashout">Авто-вывод</div>
+                    </div>
+                    
+                    <div class="flight-buttons">
+                        <button class="flight-btn btn-start" id="startBtn">🚀 ВЗЛЕТ</button>
+                        <button class="flight-btn btn-stop" id="stopBtn" disabled>⏹️ СТОП</button>
+                    </div>
+                    
+                    <div class="no-players" id="noPlayers">👥 Нет игроков</div>
                 </div>
             </section>
 
@@ -839,16 +945,15 @@
             const ctx = canvas.getContext('2d');
             let width, height;
             let stars = [];
-            let animationFrame;
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 60; i++) { // Меньше звезд для производительности
+                for (let i = 0; i < 40; i++) { // Еще меньше звезд для производительности
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 2 + 1,
-                        speed: Math.random() * 2 + 0.5,
+                        size: Math.random() * 2 + 0.5,
+                        speed: Math.random() * 0.3 + 0.1, // ОЧЕНЬ МЕДЛЕННО
                         brightness: Math.random() * 0.5 + 0.3
                     });
                 }
@@ -877,13 +982,13 @@
                     ctx.globalAlpha = s.brightness;
                     ctx.fillStyle = '#fff';
                     ctx.shadowColor = '#fff';
-                    ctx.shadowBlur = 5;
+                    ctx.shadowBlur = 3;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 
-                animationFrame = requestAnimationFrame(drawStars);
+                requestAnimationFrame(drawStars);
             }
 
             // ========== ДАННЫЕ ==========
@@ -902,412 +1007,11 @@
                 { emoji: "⚡", name: "МОЛНИЯ", price: 500 }
             ];
 
-            // Кейсы с дизайном из CS:GO/Case Battle
+            // Кейсы с дизайном
             const CASES = [
-                { 
-                    name: "ХРОМ", 
-                    image: "chrome", 
-                    price: 149, 
-                    color: "#4a90e2",
-                    gifts: [0,1,2,3] 
-                },
-                { 
-                    name: "ПЛАМЯ", 
-                    image: "flame", 
-                    price: 299, 
-                    color: "#ff6b6b",
-                    gifts: [2,3,4,5] 
-                },
-                { 
-                    name: "ЛЕД", 
-                    image: "ice", 
-                    price: 499, 
-                    color: "#6bc0ff",
-                    gifts: [4,5,6,7] 
-                },
-                { 
-                    name: "ДРЕВО", 
-                    image: "wood", 
-                    price: 999, 
-                    color: "#8b4513",
-                    gifts: [6,7,8,9] 
-                },
-                { 
-                    name: "ЗОЛОТО", 
-                    image: "gold", 
-                    price: 1999, 
-                    color: "#ffd700",
-                    gifts: [8,9,10,11] 
-                },
-                { 
-                    name: "КРИСТАЛЛ", 
-                    image: "crystal", 
-                    price: 3999, 
-                    color: "#e0e0ff",
-                    gifts: [10,11,0,1] 
-                }
-            ];
-
-            // ========== СОСТОЯНИЕ ==========
-            let state = {
-                balance: 5000,
-                inventory: [],
-                currentCase: null,
-                isFlying: false,
-                multiplier: 1,
-                intervalId: null,
-                planePos: -150,
-                planeTop: 50,
-                altitude: 0
-            };
-
-            // ========== DOM ЭЛЕМЕНТЫ ==========
-            const el = {
-                balance: document.getElementById('balance'),
-                addFunds: document.getElementById('addFunds'),
-                startBtn: document.getElementById('startBtn'),
-                stopBtn: document.getElementById('stopBtn'),
-                bet: document.getElementById('bet'),
-                multiplier: document.getElementById('multiplier'),
-                plane: document.getElementById('plane'),
-                trail: document.getElementById('trail'),
-                explosion: document.getElementById('explosion'),
-                altitude: document.getElementById('altitude'),
-                casesGrid: document.getElementById('casesGrid'),
-                inventoryGrid: document.getElementById('inventoryGrid'),
-                inventoryCount: document.getElementById('inventoryCount'),
-                caseModal: document.getElementById('caseModal'),
-                closeModal: document.getElementById('closeModal'),
-                modalCaseImage: document.getElementById('modalCaseImage'),
-                modalCaseName: document.getElementById('modalCaseName'),
-                modalCasePrice: document.getElementById('modalCasePrice'),
-                modalPrizes: document.getElementById('modalPrizes'),
-                openCaseBtn: document.getElementById('openCaseBtn'),
-                winModal: document.getElementById('winModal'),
-                winAmount: document.getElementById('winAmount'),
-                closeWinModal: document.getElementById('closeWinModal')
-            };
-
-            // ========== СОХРАНЕНИЕ ==========
-            function saveGame() {
-                localStorage.setItem('bsx_3d_balance', state.balance);
-                localStorage.setItem('bsx_3d_inventory', JSON.stringify(state.inventory));
-            }
-
-            function loadGame() {
-                const b = localStorage.getItem('bsx_3d_balance');
-                const i = localStorage.getItem('bsx_3d_inventory');
-                if (b) state.balance = parseInt(b) || 5000;
-                if (i) state.inventory = JSON.parse(i) || [];
-                updateUI();
-            }
-
-            function showToast(msg) {
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = msg;
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 2000);
-            }
-
-            function showWinModal(amount) {
-                el.winAmount.textContent = `${amount} ⭐`;
-                el.winModal.classList.add('active');
-            }
-
-            function updateUI() {
-                el.balance.textContent = state.balance;
-                updateInventory();
-            }
-
-            // ========== ИНВЕНТАРЬ ==========
-            function updateInventory() {
-                el.inventoryGrid.innerHTML = '';
-                el.inventoryCount.textContent = `${state.inventory.length}/20`;
-                
-                for (let i = 0; i < Math.min(state.inventory.length, 20); i++) {
-                    const item = state.inventory[i];
-                    const slot = document.createElement('div');
-                    slot.className = 'inventory-slot';
-                    slot.innerHTML = `
-                        <div class="slot-emoji">${item.emoji}</div>
-                        <div class="slot-name">${item.name}</div>
-                        <div class="slot-price">${item.price}⭐</div>
-                    `;
-                    slot.addEventListener('click', () => sellItem(i));
-                    el.inventoryGrid.appendChild(slot);
-                }
-                
-                for (let i = state.inventory.length; i < 20; i++) {
-                    const empty = document.createElement('div');
-                    empty.className = 'empty-slot';
-                    empty.textContent = 'пусто';
-                    el.inventoryGrid.appendChild(empty);
-                }
-            }
-
-            function sellItem(index) {
-                const item = state.inventory[index];
-                const price = Math.floor(item.price * 0.8);
-                state.balance += price;
-                state.inventory.splice(index, 1);
-                updateUI();
-                saveGame();
-                showToast(`✅ ${item.name} продан за ${price}⭐`);
-            }
-
-            // ========== 3D САМОЛЕТ ==========
-            function startFlight() {
-                const bet = parseInt(el.bet.value) || 149;
-                
-                if (bet > state.balance) {
-                    showToast('❌ Недостаточно звезд!');
-                    return;
-                }
-                
-                state.balance -= bet;
-                updateUI();
-                
-                state.isFlying = true;
-                state.multiplier = 1;
-                state.planePos = -150;
-                state.planeTop = 50;
-                state.altitude = 0;
-                el.startBtn.disabled = true;
-                el.stopBtn.disabled = false;
-                el.explosion.classList.remove('active');
-                
-                if (state.intervalId) clearInterval(state.intervalId);
-                
-                // Логика шансов в зависимости от ставки
-                const baseSpeed = bet > 1000 ? 3.5 : (bet > 500 ? 2.8 : 2.2);
-                const crashModifier = bet > 1000 ? 0.03 : (bet > 500 ? 0.02 : 0.01);
-                
-                state.intervalId = setInterval(() => {
-                    if (!state.isFlying) return;
-                    
-                    // Движение вправо и вверх
-                    state.planePos += baseSpeed;
-                    state.planeTop -= 0.5;
-                    state.altitude += 30;
-                    
-                    el.plane.style.left = state.planePos + 'px';
-                    el.plane.style.top = state.planeTop + '%';
-                    el.trail.style.width = (state.planePos + 150) + 'px';
-                    el.altitude.textContent = `Высота: ${Math.floor(state.altitude)} м`;
-                    
-                    state.multiplier += 0.02 + Math.random() * 0.02;
-                    el.multiplier.textContent = state.multiplier.toFixed(2) + 'x';
-                    
-                    // Шанс падения зависит от ставки
-                    const crashChance = crashModifier + (state.multiplier - 1) * 0.003;
-                    
-                    if (Math.random() < crashChance) {
-                        crashPlane(bet);
-                    }
-                    
-                    if (state.planePos > 600) {
-                        crashPlane(bet);
-                    }
-                    
-                    if (state.planeTop < 10) {
-                        crashPlane(bet);
-                    }
-                }, 30);
-            }
-
-            function crashPlane(bet) {
-                clearInterval(state.intervalId);
-                state.intervalId = null;
-                
-                state.isFlying = false;
-                el.startBtn.disabled = false;
-                el.stopBtn.disabled = true;
-                
-                // Эффект взрыва
-                el.explosion.classList.add('active');
-                el.plane.style.opacity = '0';
-                
-                setTimeout(() => {
-                    state.planePos = -150;
-                    state.planeTop = 50;
-                    state.altitude = 0;
-                    el.plane.style.left = '-150px';
-                    el.plane.style.top = '50%';
-                    el.plane.style.opacity = '1';
-                    el.trail.style.width = '0px';
-                    el.explosion.classList.remove('active');
-                    el.multiplier.textContent = '1.00x';
-                    el.altitude.textContent = 'Высота: 0 м';
-                }, 1000);
-                
-                showToast(`💥 Проигрыш: ${bet}⭐`);
-            }
-
-            function stopFlight() {
-                if (!state.isFlying) return;
-                
-                clearInterval(state.intervalId);
-                state.intervalId = null;
-                
-                const bet = parseInt(el.bet.value) || 149;
-                const win = Math.floor(bet * state.multiplier);
-                
-                state.balance += win;
-                updateUI();
-                saveGame();
-                
-                state.isFlying = false;
-                el.startBtn.disabled = false;
-                el.stopBtn.disabled = true;
-                
-                state.planePos = -150;
-                state.planeTop = 50;
-                state.altitude = 0;
-                el.plane.style.left = '-150px';
-                el.plane.style.top = '50%';
-                el.trail.style.width = '0px';
-                el.multiplier.textContent = '1.00x';
-                el.altitude.textContent = 'Высота: 0 м';
-                
-                showWinModal(win);
-            }
-
-            // ========== КЕЙСЫ ==========
-            function getCaseImage(color, pattern) {
-                const patterns = {
-                    chrome: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${color}" stop-opacity="0.8"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0.3"/></linearGradient></defs><rect x="10" y="10" width="80" height="80" rx="20" fill="url(%23grad)" stroke="%23ffffff" stroke-width="3"/><circle cx="50" cy="50" r="25" fill="none" stroke="%23ffffff" stroke-width="2"/><path d="M30 50 L70 50 M50 30 L50 70" stroke="%23ffffff" stroke-width="2"/></svg>')`,
-                    flame: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 Q60 30 50 50 Q40 70 50 90 Q70 70 60 40 Q50 20 50 10" fill="${color}" stroke="%23ffffff" stroke-width="3"/><circle cx="45" cy="35" r="5" fill="%23ffff00"/></svg>')`,
-                    ice: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 80,30 80,70 50,90 20,70 20,30" fill="${color}" stroke="%23ffffff" stroke-width="3"/><polygon points="50,30 65,40 65,60 50,70 35,60 35,40" fill="%23ffffff" fill-opacity="0.3"/></svg>')`,
-                    wood: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="10" fill="${color}" stroke="%23ffffff" stroke-width="3"/><path d="M30 30 L70 70 M70 30 L30 70" stroke="%23ffffff" stroke-width="2"/></svg>')`,
-                    gold: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="${color}" stroke="%23ffffff" stroke-width="3"/><circle cx="50" cy="50" r="15" fill="%23ffffff" fill-opacity="0.3"/><path d="M20 20 L80 80 M80 20 L20 80" stroke="%23ffffff" stroke-width="2"/></svg>')`,
-                    crystal: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 80,30 80,70 50,90 20,70 20,30" fill="${color}" stroke="%23ffffff" stroke-width="3"/><polygon points="50,30 65,45 65,65 50,80 35,65 35,45" fill="none" stroke="%23ffffff" stroke-width="2"/></svg>')`
-                };
-                return patterns[pattern] || patterns.chrome;
-            }
-
-            function openCaseModal(c) {
-                state.currentCase = c;
-                el.modalCaseImage.style.backgroundImage = getCaseImage(c.color, c.image);
-                el.modalCaseName.textContent = c.name;
-                el.modalCasePrice.textContent = `★ ${c.price}`;
-                el.openCaseBtn.textContent = `ОТКРЫТЬ ЗА ★ ${c.price}`;
-                
-                el.modalPrizes.innerHTML = '';
-                c.gifts.forEach(idx => {
-                    const g = GIFTS[idx];
-                    const prize = document.createElement('div');
-                    prize.className = 'prize-item';
-                    prize.innerHTML = `
-                        <div class="prize-emoji">${g.emoji}</div>
-                        <div class="prize-name">${g.name}</div>
-                    `;
-                    el.modalPrizes.appendChild(prize);
-                });
-                
-                el.caseModal.classList.add('active');
-            }
-
-            function openCase() {
-                if (!state.currentCase) return;
-                
-                if (state.balance < state.currentCase.price) {
-                    showToast('❌ Недостаточно звезд!');
-                    el.caseModal.classList.remove('active');
-                    return;
-                }
-                
-                state.balance -= state.currentCase.price;
-                
-                // Анимация открытия
-                el.modalCaseImage.style.transform = 'scale(1.2) rotate(360deg)';
-                setTimeout(() => {
-                    el.modalCaseImage.style.transform = '';
-                }, 500);
-                
-                if (Math.random() < 0.3) {
-                    const mult = 1.5 + Math.random() * 0.5;
-                    const idx = state.currentCase.gifts[Math.floor(Math.random() * state.currentCase.gifts.length)];
-                    const gift = { ...GIFTS[idx] };
-                    gift.price = Math.floor(gift.price * mult);
-                    state.inventory.push(gift);
-                    
-                    setTimeout(() => {
-                        el.caseModal.classList.remove('active');
-                        showWinModal(gift.price);
-                    }, 500);
-                } else {
-                    const stars = Math.floor(state.currentCase.price * 0.3);
-                    state.balance += stars;
-                    
-                    setTimeout(() => {
-                        el.caseModal.classList.remove('active');
-                        showWinModal(stars);
-                    }, 500);
-                }
-                
-                updateUI();
-                saveGame();
-            }
-
-            // ========== РЕНДЕРИНГ КЕЙСОВ ==========
-            function renderCases() {
-                el.casesGrid.innerHTML = '';
-                CASES.forEach(c => {
-                    const card = document.createElement('div');
-                    card.className = 'case-card';
-                    card.innerHTML = `
-                        <div class="case-image" style="background-image: ${getCaseImage(c.color, c.image)}"></div>
-                        <div class="case-name">${c.name}</div>
-                        <div class="case-price">${c.price}⭐</div>
-                    `;
-                    card.addEventListener('click', () => openCaseModal(c));
-                    el.casesGrid.appendChild(card);
-                });
-            }
-
-            // ========== ИНИЦИАЛИЗАЦИЯ ==========
-            function init() {
-                resizeCanvas();
-                initStars();
-                drawStars();
-                
-                renderCases();
-                loadGame();
-
-                el.addFunds.addEventListener('click', () => {
-                    state.balance += 100;
-                    updateUI();
-                    saveGame();
-                    showToast('+100⭐ получено!');
-                });
-
-                el.startBtn.addEventListener('click', startFlight);
-                el.stopBtn.addEventListener('click', stopFlight);
-                
-                el.closeModal.addEventListener('click', () => {
-                    el.caseModal.classList.remove('active');
-                });
-                
-                el.openCaseBtn.addEventListener('click', openCase);
-                el.closeWinModal.addEventListener('click', () => {
-                    el.winModal.classList.remove('active');
-                });
-
-                el.caseModal.addEventListener('click', (e) => {
-                    if (e.target === el.caseModal) {
-                        el.caseModal.classList.remove('active');
-                    }
-                });
-
-                window.addEventListener('resize', () => {
-                    resizeCanvas();
-                    initStars();
-                });
-            }
-
-            init();
-        })();
-    </script>
-</body>
-</html>
+                { name: "ХРОМ", image: "chrome", price: 149, color: "#4a90e2", gifts: [0,1,2,3] },
+                { name: "ПЛАМЯ", image: "flame", price: 299, color: "#ff6b6b", gifts: [2,3,4,5] },
+                { name: "ЛЕД", image: "ice", price: 499, color: "#6bc0ff", gifts: [4,5,6,7] },
+                { name: "ДРЕВО", image: "wood", price: 999, color: "#8b4513", gifts: [6,7,8,9] },
+                { name: "ЗОЛОТО", image: "gold", price: 1999, color: "#ffd700", gifts: [8,9,10,11] },
+                { name: "КРИСТАЛЛ", image: "crystal", price: 3999, color: "#e0e0ff", gifts: [
