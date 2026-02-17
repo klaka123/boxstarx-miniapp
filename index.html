@@ -22,6 +22,71 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Кинематографичная заставка */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+        }
+
+        .splash-content {
+            text-align: center;
+            animation: cinematicReveal 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .splash-title {
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #ffd700, #ff9933, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 50px rgba(255,215,0,0.8), 0 0 100px rgba(255,153,51,0.5);
+            letter-spacing: 8px;
+            animation: titlePulse 2s infinite alternate;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .splash-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 20px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: subtitleFade 2s infinite alternate;
+        }
+
+        @keyframes cinematicReveal {
+            0% { transform: scale(0.8) translateY(30px); opacity: 0; filter: blur(10px); }
+            30% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
+            70% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(1.2) translateY(-30px); opacity: 0; filter: blur(10px); }
+        }
+
+        @keyframes titlePulse {
+            from { text-shadow: 0 0 50px rgba(255,215,0,0.8), 0 0 100px rgba(255,153,51,0.5); }
+            to { text-shadow: 0 0 80px rgba(255,215,0,1), 0 0 150px rgba(255,153,51,0.8); }
+        }
+
+        @keyframes subtitleFade {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
         /* Эффект нажатия */
         .click-effect {
             position: fixed;
@@ -52,41 +117,7 @@
             }
         }
 
-        /* Заставка */
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-        }
-
-        .splash-screen.hidden {
-            opacity: 0;
-        }
-
-        .splash-title {
-            font-size: clamp(2rem, 10vw, 4rem);
-            font-weight: 900;
-            color: #ff9933;
-            text-shadow: 0 0 30px #ff9933, 0 0 60px #ff6600;
-            letter-spacing: 4px;
-            animation: splashPulse 2s infinite alternate;
-        }
-
-        @keyframes splashPulse {
-            from { transform: scale(1); opacity: 1; text-shadow: 0 0 30px #ff9933; }
-            to { transform: scale(1.1); opacity: 0.9; text-shadow: 0 0 60px #ff9933, 0 0 120px #ff6600; }
-        }
-
-        /* Новый звездный фон с медленными звездами */
+        /* Черный фон с медленными звездами */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -197,6 +228,31 @@
         }
 
         .upgrade-main-btn:active {
+            transform: scale(0.98);
+        }
+
+        .blackjack-main-btn {
+            background: linear-gradient(135deg, #0a3d2e, #1a5a40);
+            border: 2px solid gold;
+            border-radius: 60px;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: gold;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px gold;
+            transition: all 0.3s;
+        }
+
+        .blackjack-main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px gold;
+        }
+
+        .blackjack-main-btn:active {
             transform: scale(0.98);
         }
 
@@ -465,6 +521,218 @@
             z-index: 5;
         }
 
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА ========== */
+        .upgrade-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .upgrade-modal.active {
+            display: flex;
+        }
+
+        .upgrade-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .upgrade-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upgrade-back:active {
+            transform: scale(0.95);
+        }
+
+        .upgrade-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff9933;
+        }
+
+        .upgrade-circle-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 30px;
+            z-index: 10;
+        }
+
+        .upgrade-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1a1f35;
+            border: 4px solid #ff9933;
+            box-shadow: 0 0 50px rgba(255,153,51,0.3);
+            overflow: hidden;
+        }
+
+        .upgrade-circle-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(#00cc66 0deg, #ff4444 0deg);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .upgrade-arrow-clock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 120px;
+            background: linear-gradient(180deg, #ff9933, #ff6600);
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(0deg);
+            z-index: 30;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 0 20px #ff9933;
+            transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+        }
+
+        .upgrade-arrow-clock::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: #ff9933;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .upgrade-center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #000;
+            border: 4px solid #ff9933;
+            border-radius: 50%;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ff9933;
+            box-shadow: 0 0 30px #ff9933;
+        }
+
+        .upgrade-percent {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ff9933;
+            margin-bottom: 10px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .upgrade-binomial {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        .upgrade-selectors {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .upgrade-selector {
+            background: rgba(255,153,51,0.1);
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .upgrade-selector:hover {
+            background: rgba(255,153,51,0.2);
+        }
+
+        .upgrade-selector:active {
+            transform: scale(0.98);
+        }
+
+        .selector-label {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .selector-value {
+            font-size: 1.2rem;
+            color: #ff9933;
+            font-weight: 700;
+        }
+
+        .upgrade-action-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: #ff9933;
+            color: black;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .upgrade-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .upgrade-action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* ========== МОДАЛЬНОЕ ОКНО КЕЙСА ========== */
         .case-modal {
             position: fixed;
@@ -717,6 +985,213 @@
             transform: scale(0.95);
         }
 
+        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK ========== */
+        .blackjack-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a3d2e, #0a2a20);
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .blackjack-modal.active {
+            display: flex;
+        }
+
+        .blackjack-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .blackjack-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,215,0,0.2);
+            border: 2px solid gold;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blackjack-back:active {
+            transform: scale(0.95);
+        }
+
+        .blackjack-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: gold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .blackjack-video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 3px solid gold;
+            box-shadow: 0 0 50px gold;
+            position: relative;
+            background: #000;
+        }
+
+        .blackjack-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .blackjack-table-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid gold;
+            border-radius: 40px;
+            padding: 10px 20px;
+            color: gold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blackjack-bet-panel {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid gold;
+        }
+
+        .blackjack-bet-label {
+            font-size: 1.1rem;
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .blackjack-bet-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .blackjack-bet-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 12px;
+            border: 2px solid gold;
+            border-radius: 40px;
+            background: rgba(255,215,0,0.1);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .blackjack-bet-btn:hover {
+            background: rgba(255,215,0,0.2);
+        }
+
+        .blackjack-bet-btn.active {
+            background: gold;
+            color: black;
+        }
+
+        .blackjack-bet-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid gold;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.5);
+            color: gold;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+        }
+
+        .blackjack-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .blackjack-action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blackjack-action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .blackjack-action-btn.hit {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            box-shadow: 0 0 30px #4caf50;
+        }
+
+        .blackjack-action-btn.stand {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            box-shadow: 0 0 30px #f44336;
+        }
+
+        .blackjack-action-btn.double {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            box-shadow: 0 0 30px #ff9800;
+        }
+
+        .blackjack-action-btn.new {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+            box-shadow: 0 0 30px #2196f3;
+        }
+
+        .blackjack-action-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .blackjack-message {
+            text-align: center;
+            font-size: 1.5rem;
+            color: gold;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid gold;
+            border-radius: 60px;
+            background: rgba(0,0,0,0.5);
+        }
+
         /* ========== МОДАЛЬНОЕ ОКНО МОНЕТКИ ========== */
         .coinflip-modal {
             position: fixed;
@@ -775,7 +1250,6 @@
             margin: 30px auto;
             position: relative;
             transform-style: preserve-3d;
-            animation: coinFlip 2s ease-out;
         }
 
         .coinflip-coin.spinning {
@@ -785,12 +1259,6 @@
         @keyframes coinFlipSpin {
             from { transform: rotateY(0); }
             to { transform: rotateY(360deg); }
-        }
-
-        @keyframes coinFlip {
-            0% { transform: rotateY(0); }
-            50% { transform: rotateY(720deg); }
-            100% { transform: rotateY(0); }
         }
 
         .coin-side {
@@ -1141,16 +1609,111 @@
             from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+
+        /* Селектор подарков */
+        .gift-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            z-index: 15000;
+            overflow-y: auto;
+        }
+
+        .gift-selector.active {
+            display: flex;
+        }
+
+        .selector-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .selector-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selector-back:active {
+            transform: scale(0.95);
+        }
+
+        .selector-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff9933;
+        }
+
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .selector-item {
+            background: #1a1f35;
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .selector-item:active {
+            transform: scale(0.95);
+        }
+
+        .selector-item-image {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .selector-item-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .selector-item-price {
+            font-size: 1.2rem;
+            color: #ff9933;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
+    <!-- Кинематографичная заставка -->
+    <div class="splash-screen" id="splash">
+        <div class="splash-content">
+            <div class="splash-title">BOXSTARX</div>
+            <div class="splash-subtitle">🚀 КОСМИЧЕСКОЕ КАЗИНО</div>
+        </div>
+    </div>
+
     <!-- Эффект нажатия -->
     <div class="click-effect" id="clickEffect"></div>
-
-    <!-- Заставка -->
-    <div class="splash-screen" id="splash">
-        <div class="splash-title">@BoxstarxBot</div>
-    </div>
 
     <canvas id="starCanvas"></canvas>
 
@@ -1166,6 +1729,7 @@
 
             <!-- Кнопки на главном -->
             <button class="upgrade-main-btn" id="openUpgradeBtn">⚡ UPGRADE ⚡</button>
+            <button class="blackjack-main-btn" id="openBlackjackBtn">🃏 BLACKJACK 🃏</button>
             <button class="coinflip-main-btn" id="openCoinflipBtn">🪙 МОНЕТКА 🪙</button>
 
             <section class="rocket-section">
@@ -1277,6 +1841,41 @@
         </div>
     </div>
 
+    <!-- Модальное окно Blackjack -->
+    <div class="blackjack-modal" id="blackjackModal">
+        <div class="blackjack-header">
+            <div class="blackjack-back" id="blackjackClose">←</div>
+            <div class="blackjack-title">🃏 BLACKJACK</div>
+        </div>
+
+        <div class="blackjack-video-container">
+            <video class="blackjack-video" id="blackjackVideo" autoplay loop muted playsinline>
+                <source src="https://assets.mixkit.co/videos/34613/34613-720.mp4" type="video/mp4">
+            </video>
+            <div class="blackjack-table-info">LAS VEGAS • BLACKJACK PAYS 3 TO 2</div>
+        </div>
+
+        <div class="blackjack-bet-panel">
+            <div class="blackjack-bet-label">💰 СТАВКА</div>
+            <div class="blackjack-bet-controls">
+                <button class="blackjack-bet-btn" data-bet="100">100</button>
+                <button class="blackjack-bet-btn" data-bet="250">250</button>
+                <button class="blackjack-bet-btn" data-bet="500">500</button>
+                <button class="blackjack-bet-btn" data-bet="1000">1000</button>
+            </div>
+            <input type="number" class="blackjack-bet-input" id="blackjackBet" value="100" min="10" step="10">
+        </div>
+
+        <div class="blackjack-actions">
+            <button class="blackjack-action-btn hit" id="blackjackHit" disabled>➕ ВЗЯТЬ</button>
+            <button class="blackjack-action-btn stand" id="blackjackStand" disabled>✋ СТОП</button>
+            <button class="blackjack-action-btn double" id="blackjackDouble" disabled>💸 УДВОИТЬ</button>
+            <button class="blackjack-action-btn new" id="blackjackNew">🔄 НОВАЯ ИГРА</button>
+        </div>
+
+        <div class="blackjack-message" id="blackjackMessage">Начните новую игру</div>
+    </div>
+
     <!-- Модальное окно монетки -->
     <div class="coinflip-modal" id="coinflipModal">
         <div class="coinflip-header">
@@ -1318,6 +1917,23 @@
                 <button class="sell-btn sell-btn-keep" id="sellCancel">ОСТАВИТЬ</button>
             </div>
         </div>
+    </div>
+
+    <!-- Селектор подарков -->
+    <div class="gift-selector" id="giftSelector">
+        <div class="selector-header">
+            <div class="selector-back" id="giftSelectorBack">←</div>
+            <div class="selector-title" id="giftSelectorTitle">Выберите подарок из инвентаря</div>
+        </div>
+        <div class="selector-grid" id="giftSelectorGrid"></div>
+    </div>
+
+    <div class="gift-selector" id="targetSelector">
+        <div class="selector-header">
+            <div class="selector-back" id="targetSelectorBack">←</div>
+            <div class="selector-title" id="targetSelectorTitle">Выберите желаемый подарок</div>
+        </div>
+        <div class="selector-grid" id="targetSelectorGrid"></div>
     </div>
 
     <script>
@@ -1499,15 +2115,15 @@
 
             const sound = new SoundManager();
 
-            // Заставка
+            // Кинематографичная заставка
             setTimeout(() => {
                 document.getElementById('splash').classList.add('hidden');
                 setTimeout(() => {
                     document.getElementById('app').classList.add('visible');
-                }, 500);
-            }, 2500);
+                }, 1000);
+            }, 3500);
 
-            // Новый звездный фон с медленными звездами
+            // Звездный фон
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -1546,7 +2162,6 @@
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, width, height);
                 
-                // Медленные звезды
                 for (let s of stars) {
                     s.x += s.speed;
                     if (s.x > width) {
@@ -1563,7 +2178,6 @@
                     ctx.fill();
                 }
                 
-                // Очень медленные падающие звезды
                 if (Math.random() < 0.0001) {
                     shootingStars.push({
                         x: Math.random() * width,
@@ -1717,6 +2331,17 @@
                 multipleResults: [],
                 caseRows: [],
                 
+                // Blackjack state
+                blackjack: {
+                    deck: [],
+                    playerCards: [],
+                    dealerCards: [],
+                    playerScore: 0,
+                    dealerScore: 0,
+                    gameActive: false,
+                    bet: 100
+                },
+                
                 // Coinflip state
                 coinflip: {
                     bet: 100,
@@ -1756,6 +2381,18 @@
                 targetGiftDisplay: document.getElementById('targetGiftDisplay'),
                 upgradeActionBtn: document.getElementById('upgradeActionBtn'),
                 
+                openBlackjackBtn: document.getElementById('openBlackjackBtn'),
+                blackjackModal: document.getElementById('blackjackModal'),
+                blackjackClose: document.getElementById('blackjackClose'),
+                blackjackBet: document.getElementById('blackjackBet'),
+                blackjackHit: document.getElementById('blackjackHit'),
+                blackjackStand: document.getElementById('blackjackStand'),
+                blackjackDouble: document.getElementById('blackjackDouble'),
+                blackjackNew: document.getElementById('blackjackNew'),
+                blackjackMessage: document.getElementById('blackjackMessage'),
+                blackjackVideo: document.getElementById('blackjackVideo'),
+                blackjackBetBtns: document.querySelectorAll('.blackjack-bet-btn'),
+                
                 openCoinflipBtn: document.getElementById('openCoinflipBtn'),
                 coinflipModal: document.getElementById('coinflipModal'),
                 coinflipClose: document.getElementById('coinflipClose'),
@@ -1780,7 +2417,17 @@
                 sellName: document.getElementById('sellName'),
                 sellPrice: document.getElementById('sellPrice'),
                 sellConfirm: document.getElementById('sellConfirm'),
-                sellCancel: document.getElementById('sellCancel')
+                sellCancel: document.getElementById('sellCancel'),
+                
+                giftSelector: document.getElementById('giftSelector'),
+                giftSelectorBack: document.getElementById('giftSelectorBack'),
+                giftSelectorTitle: document.getElementById('giftSelectorTitle'),
+                giftSelectorGrid: document.getElementById('giftSelectorGrid'),
+                
+                targetSelector: document.getElementById('targetSelector'),
+                targetSelectorBack: document.getElementById('targetSelectorBack'),
+                targetSelectorTitle: document.getElementById('targetSelectorTitle'),
+                targetSelectorGrid: document.getElementById('targetSelectorGrid')
             };
 
             function saveGame() {
@@ -1812,6 +2459,7 @@
             function updateUI() {
                 el.balance.textContent = state.balance || 0;
                 updateInventory();
+                updateUpgradeUI();
             }
 
             function updateInventory() {
@@ -1886,7 +2534,7 @@
                 }
             };
 
-            // Ракета с новыми шансами
+            // Ракета
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
@@ -1940,7 +2588,6 @@
                     
                     if (state.multiplier >= state.selectedAuto) stopFlight();
                     
-                    // Новые шансы: часто до 2-3x, редко до 5x, очень редко до 20x
                     let crashChance = 0.015;
                     
                     if (state.multiplier < 2) crashChance = 0.01;
@@ -2035,7 +2682,6 @@
                 
                 el.caseTitle.textContent = `КЕЙС: ${c.name}`;
                 
-                // Активируем кнопку 1x
                 el.quantityBtns.forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.dataset.qty === '1') btn.classList.add('active');
@@ -2303,6 +2949,191 @@
                 };
             });
 
+            // ========== BLACKJACK ==========
+            function createDeck() {
+                const suits = ['♠️', '♥️', '♦️', '♣️'];
+                const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+                const deck = [];
+                
+                for (let suit of suits) {
+                    for (let value of values) {
+                        deck.push({ suit, value });
+                    }
+                }
+                
+                return shuffle(deck);
+            }
+
+            function shuffle(deck) {
+                for (let i = deck.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [deck[i], deck[j]] = [deck[j], deck[i]];
+                }
+                return deck;
+            }
+
+            function getCardValue(card) {
+                if (card.value === 'A') return 11;
+                if (['K', 'Q', 'J'].includes(card.value)) return 10;
+                return parseInt(card.value);
+            }
+
+            function calculateScore(cards) {
+                let score = 0;
+                let aces = 0;
+                
+                for (let card of cards) {
+                    const value = getCardValue(card);
+                    if (value === 11) aces++;
+                    score += value;
+                }
+                
+                while (score > 21 && aces > 0) {
+                    score -= 10;
+                    aces--;
+                }
+                
+                return score;
+            }
+
+            function startBlackjack() {
+                const bet = parseInt(el.blackjackBet.value) || 100;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                state.blackjack.deck = createDeck();
+                state.blackjack.playerCards = [];
+                state.blackjack.dealerCards = [];
+                
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                
+                state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                state.blackjack.dealerScore = calculateScore([state.blackjack.dealerCards[0]]);
+                state.blackjack.gameActive = true;
+                state.blackjack.bet = bet;
+                
+                updateBlackjackUI();
+                
+                el.blackjackHit.disabled = false;
+                el.blackjackStand.disabled = false;
+                el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
+                el.blackjackNew.disabled = false;
+                el.blackjackMessage.textContent = 'Ваш ход';
+                
+                // Запускаем видео при начале игры
+                if (el.blackjackVideo) {
+                    el.blackjackVideo.play().catch(e => console.log('Video autoplay failed:', e));
+                }
+            }
+
+            function updateBlackjackUI(showDealerAll = false) {
+                // Здесь можно обновлять интерфейс, если добавить карты
+                // Пока просто меняем сообщение
+                if (state.blackjack.playerScore > 21) {
+                    el.blackjackMessage.textContent = '💥 ПЕРЕБОР!';
+                }
+            }
+
+            function blackjackHit() {
+                if (!state.blackjack.gameActive) return;
+                
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                
+                if (state.blackjack.playerScore > 21) {
+                    state.balance -= state.blackjack.bet;
+                    state.blackjack.gameActive = false;
+                    el.blackjackHit.disabled = true;
+                    el.blackjackStand.disabled = true;
+                    el.blackjackDouble.disabled = true;
+                    el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
+                    sound.playLoseSound();
+                    updateUI();
+                    saveGame();
+                }
+            }
+
+            function blackjackStand() {
+                if (!state.blackjack.gameActive) return;
+                
+                state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
+                
+                while (state.blackjack.dealerScore < 17) {
+                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
+                }
+                
+                let message = '';
+                let win = false;
+                
+                if (state.blackjack.dealerScore > 21) {
+                    message = '🎉 Дилер перебрал! Вы выиграли!';
+                    win = true;
+                } else if (state.blackjack.playerScore > state.blackjack.dealerScore) {
+                    message = '🎉 Вы выиграли!';
+                    win = true;
+                } else if (state.blackjack.playerScore < state.blackjack.dealerScore) {
+                    message = '😞 Вы проиграли';
+                } else {
+                    message = '🤝 Ничья (ставка возвращена)';
+                }
+                
+                if (win) {
+                    state.balance += state.blackjack.bet;
+                    sound.playWinSound();
+                } else if (state.blackjack.playerScore !== state.blackjack.dealerScore) {
+                    state.balance -= state.blackjack.bet;
+                    sound.playLoseSound();
+                }
+                
+                state.blackjack.gameActive = false;
+                el.blackjackHit.disabled = true;
+                el.blackjackStand.disabled = true;
+                el.blackjackDouble.disabled = true;
+                el.blackjackMessage.textContent = message;
+                
+                updateUI();
+                saveGame();
+            }
+
+            function blackjackDouble() {
+                if (!state.blackjack.gameActive || state.blackjack.playerCards.length > 2) return;
+                
+                state.blackjack.bet *= 2;
+                blackjackHit();
+                
+                if (state.blackjack.playerScore <= 21) {
+                    blackjackStand();
+                }
+            }
+
+            // Blackjack обработчики
+            el.openBlackjackBtn.onclick = () => {
+                el.blackjackModal.classList.add('active');
+                startBlackjack();
+            };
+            
+            el.blackjackClose.onclick = () => {
+                el.blackjackModal.classList.remove('active');
+            };
+            
+            el.blackjackBetBtns.forEach(btn => {
+                btn.onclick = () => {
+                    el.blackjackBet.value = btn.dataset.bet;
+                };
+            });
+            
+            el.blackjackHit.onclick = blackjackHit;
+            el.blackjackStand.onclick = blackjackStand;
+            el.blackjackDouble.onclick = blackjackDouble;
+            el.blackjackNew.onclick = startBlackjack;
+
             // ========== МОНЕТКА ==========
             function playCoinflip(choice) {
                 const bet = parseInt(el.coinflipBet.value) || 100;
@@ -2318,17 +3149,14 @@
                 state.coinflip.bet = bet;
                 state.coinflip.choice = choice;
                 
-                // Запускаем анимацию монетки
                 el.coin.classList.add('spinning');
                 
-                // Случайный результат
                 const result = Math.random() < 0.5 ? 'heads' : 'tails';
                 const win = (choice === 'heads' && result === 'heads') || (choice === 'tails' && result === 'tails');
                 
                 setTimeout(() => {
                     el.coin.classList.remove('spinning');
                     
-                    // Показываем результат
                     if (win) {
                         state.balance += bet;
                         sound.playWinSound();
@@ -2342,8 +3170,6 @@
                     updateUI();
                     saveGame();
                     state.coinflip.isPlaying = false;
-                    
-                    // Небольшая пауза перед следующей игрой
                 }, 1000);
             }
 
@@ -2371,36 +3197,7 @@
                 playCoinflip('tails');
             };
 
-            // Промокоды
-            function applyPromo() {
-                const code = el.promoField.value.toUpperCase().trim();
-                
-                if (!code) {
-                    showToast('❌ Введите промокод');
-                    return;
-                }
-                
-                if (usedPromos.includes(code)) {
-                    showToast('❌ Промокод уже использован');
-                    return;
-                }
-                
-                const amount = PROMO_CODES[code];
-                
-                if (!amount) {
-                    showToast('❌ Недействительный промокод');
-                    return;
-                }
-                
-                state.balance = (state.balance || 0) + amount;
-                usedPromos.push(code);
-                updateUI();
-                saveGame();
-                el.promoField.value = '';
-                showToast(`✅ +${amount}⭐ получено!`);
-            }
-
-            // Апгрейд
+            // ========== АПГРЕЙД ==========
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
@@ -2475,6 +3272,74 @@
                 }
             }
 
+            el.upgradeActionBtn.onclick = () => {
+                if (!state.upgradeBetGift || !state.upgradeTargetGift) {
+                    showToast('❌ Выберите подарки!');
+                    return;
+                }
+                
+                const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
+                
+                const spins = 5 + Math.floor(Math.random() * 5);
+                const win = Math.random() * 100 < chance;
+                
+                const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
+                
+                el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
+                
+                el.upgradeActionBtn.disabled = true;
+                
+                setTimeout(() => {
+                    if (win) {
+                        const winGift = { ...state.upgradeTargetGift };
+                        state.inventory.push(winGift);
+                        sound.playWinSound();
+                        showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
+                    } else {
+                        sound.playLoseSound();
+                        showToast('💥 ПРОВАЛ! Подарок сгорел');
+                    }
+                    
+                    state.upgradeBetGift = null;
+                    state.upgradeTargetGift = null;
+                    updateUpgradeUI();
+                    updateUI();
+                    saveGame();
+                    el.upgradeActionBtn.disabled = false;
+                    
+                    el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
+                }, 4000);
+            };
+
+            // Промокоды
+            function applyPromo() {
+                const code = el.promoField.value.toUpperCase().trim();
+                
+                if (!code) {
+                    showToast('❌ Введите промокод');
+                    return;
+                }
+                
+                if (usedPromos.includes(code)) {
+                    showToast('❌ Промокод уже использован');
+                    return;
+                }
+                
+                const amount = PROMO_CODES[code];
+                
+                if (!amount) {
+                    showToast('❌ Недействительный промокод');
+                    return;
+                }
+                
+                state.balance = (state.balance || 0) + amount;
+                usedPromos.push(code);
+                updateUI();
+                saveGame();
+                el.promoField.value = '';
+                showToast(`✅ +${amount}⭐ получено!`);
+            }
+
             // Инициализация
             function init() {
                 resizeCanvas();
@@ -2495,6 +3360,14 @@
                         showToast('❌ Нельзя пополнить во время полета!');
                     }
                 };
+
+                document.querySelectorAll('.auto-btn').forEach(b => {
+                    b.onclick = () => {
+                        document.querySelectorAll('.auto-btn').forEach(x => x.classList.remove('active'));
+                        b.classList.add('active');
+                        state.selectedAuto = parseFloat(b.dataset.mult);
+                    };
+                });
 
                 el.startBtn.onclick = startFlight;
                 el.stopBtn.onclick = stopFlight;
@@ -2517,6 +3390,14 @@
                 
                 el.selectBetGift.onclick = () => openGiftSelector('bet');
                 el.selectTargetGift.onclick = () => openGiftSelector('target');
+                
+                el.giftSelectorBack.onclick = () => {
+                    el.giftSelector.classList.remove('active');
+                };
+                
+                el.targetSelectorBack.onclick = () => {
+                    el.targetSelector.classList.remove('active');
+                };
 
                 window.onresize = () => {
                     resizeCanvas();
