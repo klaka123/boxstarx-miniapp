@@ -50,41 +50,18 @@
         .splash-title {
             font-size: clamp(3rem, 12vw, 6rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #fff, #ffd700, #ff9933, #ff6b6b);
+            background: linear-gradient(135deg, #fff, #ffd700, #ff9933);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 50px rgba(255,215,0,0.8), 0 0 100px rgba(255,153,51,0.5);
+            text-shadow: 0 0 50px rgba(255,153,51,0.8);
             letter-spacing: 8px;
             animation: titlePulse 2s infinite alternate;
-            transform: scale(1);
-            opacity: 1;
         }
 
-        .splash-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.7);
-            margin-top: 20px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            animation: subtitleFade 2s infinite alternate;
-        }
-
-        @keyframes cinematicReveal {
-            0% { transform: scale(0.8) translateY(30px); opacity: 0; filter: blur(10px); }
-            30% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
-            70% { transform: scale(1) translateY(0); opacity: 1; }
-            100% { transform: scale(1.2) translateY(-30px); opacity: 0; filter: blur(10px); }
-        }
-
-        @keyframes titlePulse {
-            from { text-shadow: 0 0 50px rgba(255,215,0,0.8), 0 0 100px rgba(255,153,51,0.5); }
-            to { text-shadow: 0 0 80px rgba(255,215,0,1), 0 0 150px rgba(255,153,51,0.8); }
-        }
-
-        @keyframes subtitleFade {
-            from { opacity: 0.5; }
-            to { opacity: 1; }
+        @keyframes splashPulse {
+            from { transform: scale(1); opacity: 1; text-shadow: 0 0 30px #ff9933; }
+            to { transform: scale(1.1); opacity: 0.9; text-shadow: 0 0 60px #ff9933, 0 0 120px #ff6600; }
         }
 
         /* Эффект нажатия */
@@ -117,7 +94,7 @@
             }
         }
 
-        /* Черный фон с медленными звездами */
+        /* Космический фон с туманностью */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -125,9 +102,23 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: radial-gradient(ellipse at 30% 40%, #0a0c1a 0%, #030514 100%);
+            background: radial-gradient(ellipse at 30% 40%, #1a1f35 0%, #0a0c1a 50%, #030514 100%);
             display: block;
             pointer-events: none;
+        }
+
+        /* Туманность */
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,153,51,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255,102,0,0.1) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen;
         }
 
         #app {
@@ -207,7 +198,7 @@
 
         /* Кнопки на главном */
         .upgrade-main-btn {
-            background: #ff9933;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
             border: none;
             border-radius: 60px;
             padding: 15px;
@@ -232,32 +223,7 @@
         }
 
         .blackjack-main-btn {
-            background: linear-gradient(135deg, #0a3d2e, #1a5a40);
-            border: 2px solid gold;
-            border-radius: 60px;
-            padding: 15px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: gold;
-            cursor: pointer;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 30px gold;
-            transition: all 0.3s;
-        }
-
-        .blackjack-main-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 50px gold;
-        }
-
-        .blackjack-main-btn:active {
-            transform: scale(0.98);
-        }
-
-        .coinflip-main-btn {
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            background: linear-gradient(135deg, #ff9933, #ff6600);
             border: none;
             border-radius: 60px;
             padding: 15px;
@@ -268,13 +234,38 @@
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 30px gold;
+            box-shadow: 0 0 30px #ff9933;
+            transition: all 0.3s;
+        }
+
+        .blackjack-main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px #ff9933;
+        }
+
+        .blackjack-main-btn:active {
+            transform: scale(0.98);
+        }
+
+        .coinflip-main-btn {
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            border: none;
+            border-radius: 60px;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: black;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px #ff9933;
             transition: all 0.3s;
         }
 
         .coinflip-main-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px gold;
+            box-shadow: 0 0 50px #ff9933;
         }
 
         .coinflip-main-btn:active {
@@ -992,7 +983,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a3d2e, #0a2a20);
+            background: linear-gradient(135deg, #0a0c1a, #1a1f35);
             display: none;
             flex-direction: column;
             z-index: 10000;
@@ -1014,8 +1005,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,215,0,0.2);
-            border: 2px solid gold;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -1032,57 +1023,83 @@
         .blackjack-title {
             font-size: 2rem;
             font-weight: 900;
-            color: gold;
+            color: #ff9933;
             text-transform: uppercase;
             letter-spacing: 4px;
         }
 
-        .blackjack-video-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            border-radius: 40px;
-            overflow: hidden;
-            border: 3px solid gold;
-            box-shadow: 0 0 50px gold;
-            position: relative;
-            background: #000;
-        }
-
-        .blackjack-video {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: brightness(1.1) contrast(1.1);
-        }
-
-        .blackjack-table-info {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
+        .blackjack-table {
+            background: rgba(0, 100, 0, 0.3);
+            border-radius: 60px;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #ff9933;
             backdrop-filter: blur(10px);
-            border: 2px solid gold;
-            border-radius: 40px;
-            padding: 10px 20px;
-            color: gold;
-            font-size: 1rem;
+        }
+
+        .blackjack-dealer, .blackjack-player {
+            margin-bottom: 30px;
+        }
+
+        .blackjack-label {
+            font-size: 1.2rem;
+            color: #ff9933;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
+        .blackjack-cards {
+            display: flex;
+            gap: 15px;
+            min-height: 120px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .blackjack-card {
+            width: 80px;
+            height: 120px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: black;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            animation: cardDeal 0.3s ease-out;
+            border: 2px solid #ff9933;
+        }
+
+        @keyframes cardDeal {
+            from { transform: translateY(-50px) rotate(10deg); opacity: 0; }
+            to { transform: translateY(0) rotate(0deg); opacity: 1; }
+        }
+
+        .blackjack-card.red {
+            color: red;
+        }
+
+        .blackjack-score {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #ff9933;
+            font-weight: 700;
+        }
+
         .blackjack-bet-panel {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             border-radius: 40px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
         }
 
         .blackjack-bet-label {
             font-size: 1.1rem;
-            color: gold;
+            color: #ff9933;
             margin-bottom: 10px;
         }
 
@@ -1097,9 +1114,9 @@
             flex: 1;
             min-width: 60px;
             padding: 12px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 40px;
-            background: rgba(255,215,0,0.1);
+            background: rgba(255,153,51,0.1);
             color: white;
             font-weight: 700;
             cursor: pointer;
@@ -1107,21 +1124,21 @@
         }
 
         .blackjack-bet-btn:hover {
-            background: rgba(255,215,0,0.2);
+            background: rgba(255,153,51,0.2);
         }
 
         .blackjack-bet-btn.active {
-            background: gold;
+            background: #ff9933;
             color: black;
         }
 
         .blackjack-bet-input {
             width: 100%;
             padding: 15px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 40px;
             background: rgba(0,0,0,0.5);
-            color: gold;
+            color: #ff9933;
             font-size: 1.2rem;
             text-align: center;
             outline: none;
@@ -1171,9 +1188,9 @@
         }
 
         .blackjack-action-btn.new {
-            background: linear-gradient(135deg, #2196f3, #1976d2);
-            color: white;
-            box-shadow: 0 0 30px #2196f3;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            color: black;
+            box-shadow: 0 0 30px #ff9933;
         }
 
         .blackjack-action-btn:disabled {
@@ -1184,10 +1201,10 @@
         .blackjack-message {
             text-align: center;
             font-size: 1.5rem;
-            color: gold;
+            color: #ff9933;
             margin-top: 20px;
             padding: 15px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 60px;
             background: rgba(0,0,0,0.5);
         }
@@ -1221,8 +1238,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255,215,0,0.2);
-            border: 2px solid gold;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -1239,17 +1256,24 @@
         .coinflip-title {
             font-size: 2rem;
             font-weight: 900;
-            color: gold;
+            color: #ff9933;
             text-transform: uppercase;
             letter-spacing: 4px;
         }
 
-        .coinflip-coin {
+        .coinflip-coin-container {
+            perspective: 1000px;
+            margin: 30px auto;
             width: 200px;
             height: 200px;
-            margin: 30px auto;
+        }
+
+        .coinflip-coin {
+            width: 100%;
+            height: 100%;
             position: relative;
             transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
         }
 
         .coinflip-coin.spinning {
@@ -1259,6 +1283,14 @@
         @keyframes coinFlipSpin {
             from { transform: rotateY(0); }
             to { transform: rotateY(360deg); }
+        }
+
+        .coinflip-coin.heads {
+            transform: rotateY(0deg);
+        }
+
+        .coinflip-coin.tails {
+            transform: rotateY(180deg);
         }
 
         .coin-side {
@@ -1272,8 +1304,8 @@
             justify-content: center;
             font-size: 3rem;
             font-weight: 900;
-            border: 4px solid gold;
-            box-shadow: 0 0 50px gold;
+            border: 4px solid #ff9933;
+            box-shadow: 0 0 50px #ff9933;
         }
 
         .coin-heads {
@@ -1289,16 +1321,16 @@
         }
 
         .coinflip-bet-panel {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             border-radius: 40px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
         }
 
         .coinflip-bet-label {
             font-size: 1.1rem;
-            color: gold;
+            color: #ff9933;
             margin-bottom: 10px;
         }
 
@@ -1313,9 +1345,9 @@
             flex: 1;
             min-width: 60px;
             padding: 12px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 40px;
-            background: rgba(255,215,0,0.1);
+            background: rgba(255,153,51,0.1);
             color: white;
             font-weight: 700;
             cursor: pointer;
@@ -1323,21 +1355,21 @@
         }
 
         .coinflip-bet-btn:hover {
-            background: rgba(255,215,0,0.2);
+            background: rgba(255,153,51,0.2);
         }
 
         .coinflip-bet-btn.active {
-            background: gold;
+            background: #ff9933;
             color: black;
         }
 
         .coinflip-bet-input {
             width: 100%;
             padding: 15px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 40px;
             background: rgba(0,0,0,0.5);
-            color: gold;
+            color: #ff9933;
             font-size: 1.2rem;
             text-align: center;
             outline: none;
@@ -1352,7 +1384,7 @@
         .coinflip-choice-btn {
             flex: 1;
             padding: 25px;
-            border: 3px solid gold;
+            border: 3px solid #ff9933;
             border-radius: 60px;
             background: rgba(0,0,0,0.5);
             color: white;
@@ -1365,7 +1397,7 @@
         }
 
         .coinflip-choice-btn:hover {
-            background: rgba(255,215,0,0.2);
+            background: rgba(255,153,51,0.2);
             transform: scale(1.02);
         }
 
@@ -1374,20 +1406,20 @@
         }
 
         .coinflip-choice-btn.choose-heads {
-            border-color: gold;
+            border-color: #ffd700;
         }
 
         .coinflip-choice-btn.choose-tails {
-            border-color: silver;
+            border-color: #c0c0c0;
         }
 
         .coinflip-result {
             text-align: center;
             font-size: 1.5rem;
-            color: gold;
+            color: #ff9933;
             margin-top: 20px;
             padding: 15px;
-            border: 2px solid gold;
+            border: 2px solid #ff9933;
             border-radius: 60px;
             background: rgba(0,0,0,0.5);
         }
@@ -1708,7 +1740,6 @@
     <div class="splash-screen" id="splash">
         <div class="splash-content">
             <div class="splash-title">BOXSTARX</div>
-            <div class="splash-subtitle">🚀 КОСМИЧЕСКОЕ КАЗИНО</div>
         </div>
     </div>
 
@@ -1716,6 +1747,7 @@
     <div class="click-effect" id="clickEffect"></div>
 
     <canvas id="starCanvas"></canvas>
+    <div class="nebula"></div>
 
     <div id="app">
         <div class="container">
@@ -1848,11 +1880,18 @@
             <div class="blackjack-title">🃏 BLACKJACK</div>
         </div>
 
-        <div class="blackjack-video-container">
-            <video class="blackjack-video" id="blackjackVideo" autoplay loop muted playsinline>
-                <source src="https://assets.mixkit.co/videos/34613/34613-720.mp4" type="video/mp4">
-            </video>
-            <div class="blackjack-table-info">LAS VEGAS • BLACKJACK PAYS 3 TO 2</div>
+        <div class="blackjack-table">
+            <div class="blackjack-dealer">
+                <div class="blackjack-label">🤖 ДИЛЕР</div>
+                <div class="blackjack-cards" id="dealerCards"></div>
+                <div class="blackjack-score" id="dealerScore">0</div>
+            </div>
+
+            <div class="blackjack-player">
+                <div class="blackjack-label">👤 ТЫ</div>
+                <div class="blackjack-cards" id="playerCards"></div>
+                <div class="blackjack-score" id="playerScore">0</div>
+            </div>
         </div>
 
         <div class="blackjack-bet-panel">
@@ -1883,9 +1922,11 @@
             <div class="coinflip-title">🪙 МОНЕТКА</div>
         </div>
 
-        <div class="coinflip-coin" id="coin">
-            <div class="coin-side coin-heads">🦅</div>
-            <div class="coin-side coin-tails">👑</div>
+        <div class="coinflip-coin-container">
+            <div class="coinflip-coin" id="coin">
+                <div class="coin-side coin-heads">🦅</div>
+                <div class="coin-side coin-tails">👑</div>
+            </div>
         </div>
 
         <div class="coinflip-bet-panel">
@@ -2121,7 +2162,7 @@
                 setTimeout(() => {
                     document.getElementById('app').classList.add('visible');
                 }, 1000);
-            }, 3500);
+            }, 3000);
 
             // Звездный фон
             const canvas = document.getElementById('starCanvas');
@@ -2132,14 +2173,14 @@
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 80; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        size: Math.random() * 2 + 0.5,
-                        speed: Math.random() * 0.2 + 0.05,
+                        size: Math.random() * 3 + 1,
+                        speed: Math.random() * 0.15 + 0.05,
                         brightness: Math.random() * 0.5 + 0.3,
-                        color: `hsl(${Math.random() * 60 + 200}, 70%, 70%)`
+                        color: `hsl(${Math.random() * 60 + 200}, 80%, 70%)`
                     });
                 }
             }
@@ -2156,8 +2197,9 @@
                 ctx.clearRect(0, 0, width, height);
                 
                 const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
-                gradient.addColorStop(0, '#0a0c1a');
-                gradient.addColorStop(0.5, '#050714');
+                gradient.addColorStop(0, '#1a1f35');
+                gradient.addColorStop(0.3, '#0a0c1a');
+                gradient.addColorStop(0.6, '#030514');
                 gradient.addColorStop(1, '#000000');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, width, height);
@@ -2172,20 +2214,20 @@
                     ctx.globalAlpha = s.brightness;
                     ctx.fillStyle = s.color;
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 15;
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 
-                if (Math.random() < 0.0001) {
+                if (Math.random() < 0.0002) {
                     shootingStars.push({
                         x: Math.random() * width,
                         y: Math.random() * height * 0.2,
-                        length: Math.random() * 150 + 100,
-                        speed: Math.random() * 2 + 1,
+                        length: Math.random() * 200 + 150,
+                        speed: Math.random() * 4 + 2,
                         angle: Math.random() * 0.3 + 0.35,
-                        life: 400
+                        life: 300
                     });
                 }
                 
@@ -2201,11 +2243,11 @@
                         continue;
                     }
                     
-                    ctx.globalAlpha = s.life / 400;
+                    ctx.globalAlpha = s.life / 300;
                     ctx.strokeStyle = '#ff9933';
                     ctx.lineWidth = 3;
                     ctx.shadowColor = '#ff9933';
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 20;
                     
                     ctx.beginPath();
                     ctx.moveTo(s.x, s.y);
@@ -2213,7 +2255,7 @@
                     ctx.stroke();
                     
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
+                    ctx.arc(s.x, s.y, 5, 0, Math.PI * 2);
                     ctx.fillStyle = '#ff9933';
                     ctx.fill();
                 }
@@ -2236,8 +2278,9 @@
                 }
             }
 
-            // Подарки
+            // Подарки (МНОГО ДОРОГИХ)
             const GIFTS = [
+                // Очень дешевые
                 { id: 'common1', name: 'TOY', price: 1, emoji: '🧸', color: '#8b4513' },
                 { id: 'common2', name: 'BALLOON', price: 2, emoji: '🎈', color: '#ff69b4' },
                 { id: 'common3', name: 'CANDY', price: 3, emoji: '🍬', color: '#ff1493' },
@@ -2248,29 +2291,28 @@
                 { id: 'common8', name: 'BADGE', price: 8, emoji: '📛', color: '#dc143c' },
                 { id: 'common9', name: 'PIN', price: 9, emoji: '📌', color: '#b8860b' },
                 { id: 'common10', name: 'COIN', price: 10, emoji: '🪙', color: '#ffd700' },
+                
+                // Дешевые
                 { id: 'common11', name: 'TOY CAR', price: 11, emoji: '🚗', color: '#8b4513' },
                 { id: 'common12', name: 'BALL', price: 12, emoji: '⚽', color: '#ff69b4' },
                 { id: 'common13', name: 'BOOK', price: 13, emoji: '📚', color: '#ff1493' },
                 { id: 'common14', name: 'PEN', price: 14, emoji: '✒️', color: '#32cd32' },
                 { id: 'common15', name: 'PENCIL', price: 15, emoji: '✏️', color: '#ff4500' },
-                { id: 'common16', name: 'ERASER', price: 16, emoji: '🧼', color: '#cd853f' },
-                { id: 'common17', name: 'RULER', price: 17, emoji: '📏', color: '#1e90ff' },
-                { id: 'common18', name: 'NOTEBOOK', price: 18, emoji: '📓', color: '#dc143c' },
-                { id: 'common19', name: 'BAG', price: 19, emoji: '👜', color: '#b8860b' },
-                { id: 'common20', name: 'HAT', price: 20, emoji: '🧢', color: '#ffd700' },
-                { id: 'common21', name: 'SCARF', price: 22, emoji: '🧣', color: '#8b4513' },
-                { id: 'common22', name: 'GLOVES', price: 24, emoji: '🧤', color: '#ff69b4' },
-                { id: 'common23', name: 'SOCKS', price: 26, emoji: '🧦', color: '#ff1493' },
-                { id: 'common24', name: 'SHOES', price: 28, emoji: '👟', color: '#32cd32' },
-                { id: 'common25', name: 'WATCH', price: 30, emoji: '⌚', color: '#ff4500' },
+                
+                // Средние
+                { id: 'common16', name: 'WATCH', price: 30, emoji: '⌚', color: '#ff4500' },
                 { id: 'rare1', name: 'RING', price: 50, emoji: '💍', color: '#cd853f' },
                 { id: 'rare2', name: 'NECKLACE', price: 75, emoji: '📿', color: '#1e90ff' },
                 { id: 'rare3', name: 'BRACELET', price: 100, emoji: '🔗', color: '#dc143c' },
                 { id: 'rare4', name: 'EARRINGS', price: 125, emoji: '💎', color: '#b8860b' },
+                
+                // Дорогие
                 { id: 'epic1', name: 'HEADPHONES', price: 200, emoji: '🎧', color: '#8b4513' },
                 { id: 'epic2', name: 'SPEAKER', price: 250, emoji: '🔊', color: '#ff69b4' },
                 { id: 'epic3', name: 'KEYBOARD', price: 300, emoji: '⌨️', color: '#ff1493' },
                 { id: 'epic4', name: 'MOUSE', price: 350, emoji: '🖱️', color: '#32cd32' },
+                
+                // Очень дорогие
                 { id: 'legend1', name: 'RIP', price: 500, emoji: '💀', color: '#333' },
                 { id: 'legend2', name: 'SKULL', price: 750, emoji: '💀', color: '#444' },
                 { id: 'legend3', name: 'HEART', price: 1000, emoji: '❤️', color: '#ff6b6b' },
@@ -2285,7 +2327,10 @@
                 { id: 'legend12', name: 'ANGEL', price: 5500, emoji: '👼', color: '#ffd700' },
                 { id: 'legend13', name: 'DEVIL', price: 6000, emoji: '😈', color: '#ff4444' },
                 { id: 'legend14', name: 'GODLY', price: 6500, emoji: '👁️', color: '#00ffff' },
-                { id: 'legend15', name: 'COSMIC', price: 7000, emoji: '🌠', color: '#9932cc' }
+                { id: 'legend15', name: 'COSMIC', price: 7000, emoji: '🌠', color: '#9932cc' },
+                { id: 'legend16', name: 'UNIVERSE', price: 8000, emoji: '🌌', color: '#4b0082' },
+                { id: 'legend17', name: 'INFINITY', price: 9000, emoji: '∞', color: '#ff1493' },
+                { id: 'legend18', name: 'ETERNITY', price: 10000, emoji: '⏳', color: '#daa520' }
             ];
 
             function getGiftSVG(gift) {
@@ -2346,7 +2391,8 @@
                 coinflip: {
                     bet: 100,
                     choice: null,
-                    isPlaying: false
+                    isPlaying: false,
+                    result: null
                 }
             };
 
@@ -2390,7 +2436,10 @@
                 blackjackDouble: document.getElementById('blackjackDouble'),
                 blackjackNew: document.getElementById('blackjackNew'),
                 blackjackMessage: document.getElementById('blackjackMessage'),
-                blackjackVideo: document.getElementById('blackjackVideo'),
+                dealerCards: document.getElementById('dealerCards'),
+                playerCards: document.getElementById('playerCards'),
+                dealerScore: document.getElementById('dealerScore'),
+                playerScore: document.getElementById('playerScore'),
                 blackjackBetBtns: document.querySelectorAll('.blackjack-bet-btn'),
                 
                 openCoinflipBtn: document.getElementById('openCoinflipBtn'),
@@ -2996,6 +3045,39 @@
                 return score;
             }
 
+            function updateBlackjackUI(showDealerAll = false) {
+                // Карты игрока
+                el.playerCards.innerHTML = '';
+                state.blackjack.playerCards.forEach(card => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
+                    cardEl.textContent = `${card.value}${card.suit}`;
+                    el.playerCards.appendChild(cardEl);
+                });
+                
+                // Карты дилера
+                el.dealerCards.innerHTML = '';
+                state.blackjack.dealerCards.forEach((card, index) => {
+                    const cardEl = document.createElement('div');
+                    if (index === 1 && !showDealerAll && state.blackjack.gameActive) {
+                        cardEl.className = 'blackjack-card';
+                        cardEl.textContent = '?';
+                    } else {
+                        cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
+                        cardEl.textContent = `${card.value}${card.suit}`;
+                    }
+                    el.dealerCards.appendChild(cardEl);
+                });
+                
+                el.playerScore.textContent = state.blackjack.playerScore;
+                
+                if (showDealerAll || !state.blackjack.gameActive) {
+                    el.dealerScore.textContent = state.blackjack.dealerScore;
+                } else {
+                    el.dealerScore.textContent = getCardValue(state.blackjack.dealerCards[0]);
+                }
+            }
+
             function startBlackjack() {
                 const bet = parseInt(el.blackjackBet.value) || 100;
                 
@@ -3008,6 +3090,7 @@
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
                 
+                // Раздаем карты
                 state.blackjack.playerCards.push(state.blackjack.deck.pop());
                 state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                 state.blackjack.playerCards.push(state.blackjack.deck.pop());
@@ -3025,19 +3108,6 @@
                 el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
                 el.blackjackNew.disabled = false;
                 el.blackjackMessage.textContent = 'Ваш ход';
-                
-                // Запускаем видео при начале игры
-                if (el.blackjackVideo) {
-                    el.blackjackVideo.play().catch(e => console.log('Video autoplay failed:', e));
-                }
-            }
-
-            function updateBlackjackUI(showDealerAll = false) {
-                // Здесь можно обновлять интерфейс, если добавить карты
-                // Пока просто меняем сообщение
-                if (state.blackjack.playerScore > 21) {
-                    el.blackjackMessage.textContent = '💥 ПЕРЕБОР!';
-                }
             }
 
             function blackjackHit() {
@@ -3046,7 +3116,10 @@
                 state.blackjack.playerCards.push(state.blackjack.deck.pop());
                 state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
                 
+                updateBlackjackUI();
+                
                 if (state.blackjack.playerScore > 21) {
+                    // Перебор - проигрыш
                     state.balance -= state.blackjack.bet;
                     state.blackjack.gameActive = false;
                     el.blackjackHit.disabled = true;
@@ -3057,6 +3130,8 @@
                     updateUI();
                     saveGame();
                 }
+                
+                el.blackjackDouble.disabled = true;
             }
 
             function blackjackStand() {
@@ -3068,6 +3143,8 @@
                     state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                     state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
                 }
+                
+                updateBlackjackUI(true);
                 
                 let message = '';
                 let win = false;
@@ -3149,34 +3226,46 @@
                 state.coinflip.bet = bet;
                 state.coinflip.choice = choice;
                 
+                // Запускаем анимацию
                 el.coin.classList.add('spinning');
                 
+                // Случайный результат (50/50)
                 const result = Math.random() < 0.5 ? 'heads' : 'tails';
+                
+                // Определяем победу
                 const win = (choice === 'heads' && result === 'heads') || (choice === 'tails' && result === 'tails');
                 
                 setTimeout(() => {
                     el.coin.classList.remove('spinning');
                     
+                    // Показываем результат
+                    if (result === 'heads') {
+                        el.coin.className = 'coinflip-coin heads';
+                    } else {
+                        el.coin.className = 'coinflip-coin tails';
+                    }
+                    
                     if (win) {
                         state.balance += bet;
                         sound.playWinSound();
-                        el.coinflipResult.textContent = `🎉 ВЫ ВЫИГРАЛИ! +${bet}⭐`;
+                        el.coinflipResult.textContent = `🎉 ВЫ ВЫИГРАЛИ! +${bet}⭐ (${result === 'heads' ? 'ОРЁЛ' : 'РЕШКА'})`;
                     } else {
                         state.balance -= bet;
                         sound.playLoseSound();
-                        el.coinflipResult.textContent = `😞 ВЫ ПРОИГРАЛИ! -${bet}⭐`;
+                        el.coinflipResult.textContent = `😞 ВЫ ПРОИГРАЛИ! -${bet}⭐ (выпал ${result === 'heads' ? 'ОРЁЛ' : 'РЕШКА'})`;
                     }
                     
                     updateUI();
                     saveGame();
                     state.coinflip.isPlaying = false;
-                }, 1000);
+                }, 1500);
             }
 
             // Coinflip обработчики
             el.openCoinflipBtn.onclick = () => {
                 el.coinflipModal.classList.add('active');
                 el.coinflipResult.textContent = 'Сделайте ставку и выберите сторону';
+                el.coin.className = 'coinflip-coin';
             };
             
             el.coinflipClose.onclick = () => {
