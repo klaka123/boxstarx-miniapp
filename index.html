@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 ОПТИМИЗИРОВАННАЯ СТРЕЛКА</title>
+    <title>BOXSTARX 🚀 ПРЕМИУМ ДИЗАЙН</title>
     <style>
         * {
             margin: 0;
@@ -20,6 +20,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        /* Заставка */
         .splash-screen {
             position: fixed;
             top: 0;
@@ -42,14 +43,15 @@
         .splash-title {
             font-size: clamp(2rem, 10vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #fff, #cccccc);
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px #cccccc;
+            text-shadow: 0 0 30px rgba(102,126,234,0.5);
             letter-spacing: 4px;
         }
 
+        /* Звездный фон */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -62,12 +64,7 @@
             pointer-events: none;
         }
 
-        @keyframes grayPulse {
-            0% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
-            50% { border-color: #999999; box-shadow: 0 0 35px #999999; }
-            100% { border-color: #cccccc; box-shadow: 0 0 20px #cccccc; }
-        }
-
+        /* Основной контейнер */
         #app {
             position: relative;
             z-index: 10;
@@ -94,16 +91,15 @@
             padding-bottom: 30px;
         }
 
+        /* Хедер с градиентом */
         .header {
-            background: rgba(20, 20, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 60px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: grayPulse 3s infinite;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
             position: sticky;
             top: 16px;
             z-index: 100;
@@ -117,44 +113,50 @@
 
         .balance-icon {
             font-size: 2rem;
-            filter: drop-shadow(0 0 10px #cccccc);
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
 
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
-            color: #cccccc;
+            color: white;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
         }
 
         .add-btn {
-            background: #2e7d32;
-            border: none;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
             color: white;
             padding: 10px 24px;
             border-radius: 40px;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            border: 1px solid #81c784;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
         }
 
+        .add-btn:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Ракета с градиентом */
         .rocket-section {
-            background: rgba(20, 20, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 60px;
             padding: 20px;
-            animation: grayPulse 3s infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .rocket-window {
             position: relative;
             height: 200px;
             background: #000;
-            border: 2px solid #cccccc;
             border-radius: 50px;
             overflow: hidden;
             margin-bottom: 15px;
+            border: 2px solid rgba(102,126,234,0.3);
         }
 
         .window-star {
@@ -176,7 +178,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 5rem;
-            filter: drop-shadow(0 0 30px #cccccc);
+            filter: drop-shadow(0 0 30px #667eea);
             z-index: 20;
         }
 
@@ -204,7 +206,7 @@
             font-size: 5rem;
             opacity: 0;
             z-index: 30;
-            text-shadow: 0 0 50px #ff6600;
+            text-shadow: 0 0 50px #ff6b6b;
             transition: transform 0.5s;
         }
 
@@ -219,12 +221,13 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
-            border: 2px solid #cccccc;
+            border: 2px solid #667eea;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.3rem;
             z-index: 25;
-            color: #cccccc;
+            color: #667eea;
+            backdrop-filter: blur(5px);
         }
 
         .timer {
@@ -232,11 +235,12 @@
             top: 20px;
             left: 20px;
             background: rgba(0,0,0,0.8);
-            border: 2px solid #cccccc;
+            border: 2px solid #667eea;
             padding: 8px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
             z-index: 25;
+            color: #667eea;
         }
 
         .auto-buttons {
@@ -247,19 +251,22 @@
         }
 
         .auto-btn {
-            background: rgba(200, 200, 200, 0.2);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             color: white;
             padding: 10px 5px;
             border-radius: 40px;
             font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s;
         }
 
         .auto-btn.active {
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: white;
+            color: white;
+            font-weight: bold;
         }
 
         .bet-control {
@@ -271,8 +278,8 @@
         .bet-input {
             flex: 1;
             background: rgba(0,0,0,0.5);
-            border: 2px solid #cccccc;
-            color: #cccccc;
+            border: 2px solid #667eea;
+            color: #667eea;
             padding: 15px;
             border-radius: 40px;
             font-size: 1.2rem;
@@ -293,28 +300,38 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .flight-btn:active {
+            transform: scale(0.95);
         }
 
         .btn-start {
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
         }
 
         .btn-stop {
-            background: #333333;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #667eea;
             color: white;
         }
 
         .btn-stop:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
+        /* Кейсы */
         .section-title {
             font-size: 1.5rem;
             text-align: center;
             margin: 20px 0 15px;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .cases-grid {
@@ -324,12 +341,14 @@
         }
 
         .case-card {
-            background: #1a1f35;
-            border: 3px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #667eea;
             border-radius: 70px;
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .case-card:active {
@@ -339,39 +358,60 @@
         .case-icon {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px #cccccc);
+            filter: drop-shadow(0 0 15px #667eea);
         }
 
         .case-name {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 5px;
+            color: white;
         }
 
         .case-price {
             font-size: 1.4rem;
-            color: #cccccc;
+            color: #667eea;
             font-weight: 700;
         }
 
-        /* ========== ОПТИМИЗИРОВАННЫЙ АПГРЕЙД ========== */
+        /* ========== НОВЫЙ ПРЕМИУМ ДИЗАЙН АПГРЕЙДА ========== */
         .upgrade-section {
-            background: rgba(20, 20, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
-            animation: grayPulse 3s infinite;
-            transform: translateZ(0);
-            backface-visibility: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upgrade-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102,126,234,0.1), transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .upgrade-title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             text-align: center;
             margin-bottom: 20px;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
         }
 
         .wheel-container {
@@ -379,8 +419,9 @@
             width: 280px;
             height: 280px;
             margin: 0 auto 20px;
-            filter: drop-shadow(0 0 30px #cccccc);
-            transform: translateZ(0);
+            filter: drop-shadow(0 0 30px #667eea);
+            position: relative;
+            z-index: 1;
         }
 
         .wheel-canvas {
@@ -390,10 +431,9 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #1a1f35;
-            border: 4px solid #cccccc;
-            box-shadow: inset 0 0 30px rgba(200,200,200,0.3);
-            will-change: transform;
+            background: #1a1a2e;
+            border: 4px solid #667eea;
+            box-shadow: 0 0 50px rgba(102,126,234,0.3);
         }
 
         .wheel-arrow-container {
@@ -404,7 +444,6 @@
             height: 100%;
             pointer-events: none;
             z-index: 30;
-            transform: translateZ(0);
         }
 
         .wheel-arrow {
@@ -414,48 +453,46 @@
             transform: translate(-50%, -50%) rotate(0deg);
             width: 0;
             height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-bottom: 90px solid #cccccc;
-            filter: drop-shadow(0 0 20px #cccccc);
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 100px solid #667eea;
+            filter: drop-shadow(0 0 30px #667eea);
             transform-origin: center;
             transition: transform 4s cubic-bezier(0.1, 0.9, 0.2, 1);
-            will-change: transform;
-            backface-visibility: hidden;
         }
 
         .wheel-arrow::before {
             content: '';
             position: absolute;
             top: 15px;
-            left: -18px;
-            width: 36px;
-            height: 36px;
-            background: radial-gradient(circle, #ffffff, #cccccc);
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #f093fb, #667eea);
             border-radius: 50%;
-            box-shadow: 0 0 30px #ffffff;
-            border: 2px solid #999999;
+            box-shadow: 0 0 40px #f093fb;
+            border: 2px solid white;
         }
 
         .wheel-arrow::after {
             content: '';
             position: absolute;
             top: 25px;
-            left: -8px;
-            width: 16px;
-            height: 16px;
-            background: #ffffff;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: white;
             border-radius: 50%;
             box-shadow: 0 0 20px white;
         }
 
         .wheel-arrow.spinning {
-            animation: arrowGlow 0.3s infinite alternate;
+            animation: arrowPulse 0.3s infinite alternate;
         }
 
-        @keyframes arrowGlow {
-            from { filter: drop-shadow(0 0 20px #cccccc); }
-            to { filter: drop-shadow(0 0 50px #cccccc) drop-shadow(0 0 100px #999999); }
+        @keyframes arrowPulse {
+            from { filter: drop-shadow(0 0 30px #667eea); }
+            to { filter: drop-shadow(0 0 60px #f093fb) drop-shadow(0 0 90px #667eea); }
         }
 
         .wheel-center {
@@ -463,17 +500,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(145deg, #2a2f45, #1a1f35);
-            border: 4px solid #cccccc;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 4px solid white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             z-index: 25;
-            box-shadow: 0 0 50px #cccccc;
+            box-shadow: 0 0 50px #667eea;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -482,26 +519,31 @@
             transform: translate(-50%, -50%) scale(0.95);
         }
 
+        /* Слоты для ставок */
         .slots-container {
             margin: 20px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .slots-title {
             text-align: center;
-            color: #aaa;
+            color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .slots-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
         .slot-item {
-            background: #0f1428;
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(102,126,234,0.3);
             border-radius: 40px;
             padding: 15px 5px;
             text-align: center;
@@ -511,16 +553,19 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
         }
 
-        .slot-item:active {
-            transform: scale(0.95);
+        .slot-item:hover {
+            border-color: #667eea;
+            transform: scale(1.02);
         }
 
         .slot-item.filled {
-            background: rgba(200, 200, 200, 0.3);
-            border-color: #cccccc;
+            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
+            border-color: #667eea;
+            box-shadow: 0 0 30px rgba(102,126,234,0.3);
         }
 
         .slot-emoji {
@@ -530,28 +575,34 @@
 
         .slot-price {
             font-size: 0.8rem;
-            color: #cccccc;
+            color: #667eea;
+            font-weight: 700;
         }
 
+        /* Желаемый подарок */
         .desired-container {
-            background: rgba(0,0,0,0.5);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(102,126,234,0.3);
             border-radius: 60px;
             padding: 20px;
             margin: 20px 0;
             text-align: center;
             cursor: pointer;
-            transition: box-shadow 0.2s;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
         }
 
         .desired-container:hover {
-            box-shadow: 0 0 30px #cccccc;
+            border-color: #667eea;
+            box-shadow: 0 0 30px rgba(102,126,234,0.3);
         }
 
         .desired-label {
-            color: #aaa;
+            color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
             margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .desired-gift {
@@ -563,52 +614,63 @@
 
         .desired-emoji {
             font-size: 3rem;
-            filter: drop-shadow(0 0 20px #cccccc);
+            filter: drop-shadow(0 0 20px #667eea);
+        }
+
+        .desired-info {
+            text-align: left;
         }
 
         .desired-name {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #cccccc;
+            color: white;
         }
 
         .desired-price {
             font-size: 1.1rem;
-            color: #cccccc;
+            color: #667eea;
         }
 
         .desired-empty {
-            color: #666;
+            color: rgba(255,255,255,0.3);
             font-size: 1.1rem;
             padding: 20px;
         }
 
+        /* Статистика */
         .upgrade-stats {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin: 20px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item {
             flex: 1;
-            background: rgba(0,0,0,0.5);
-            padding: 10px;
+            background: rgba(255,255,255,0.03);
+            padding: 12px;
             border-radius: 40px;
-            border: 2px solid #cccccc;
+            border: 2px solid rgba(102,126,234,0.3);
             text-align: center;
+            backdrop-filter: blur(5px);
         }
 
         .stat-label {
             font-size: 0.8rem;
-            color: #aaa;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         .stat-value {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #cccccc;
+            color: #667eea;
         }
 
+        /* Кнопка апгрейда */
         .upgrade-btn {
             width: 100%;
             padding: 18px;
@@ -616,11 +678,15 @@
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
             cursor: pointer;
-            border: 2px solid #cccccc;
-            transition: transform 0.2s;
+            transition: all 0.2s;
+            border: 2px solid rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
         }
 
         .upgrade-btn:active:not(:disabled) {
@@ -628,17 +694,16 @@
         }
 
         .upgrade-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
+        /* Инвентарь */
         .inventory-section {
-            background: rgba(20, 20, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 60px;
             padding: 20px;
-            animation: grayPulse 3s infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .inventory-header {
@@ -651,15 +716,19 @@
         .inventory-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .inventory-count {
-            background: rgba(200,200,200,0.2);
-            border: 1px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             padding: 5px 15px;
             border-radius: 40px;
             font-size: 0.9rem;
+            color: #667eea;
         }
 
         .inventory-grid {
@@ -669,8 +738,8 @@
         }
 
         .inventory-slot {
-            background: #0f1428;
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(102,126,234,0.3);
             border-radius: 30px;
             padding: 10px 4px;
             text-align: center;
@@ -696,11 +765,12 @@
         .slot-name {
             font-size: 0.6rem;
             font-weight: 600;
+            color: rgba(255,255,255,0.8);
         }
 
         .slot-price {
             font-size: 0.7rem;
-            color: #cccccc;
+            color: #667eea;
             position: absolute;
             bottom: 5px;
             right: 5px;
@@ -710,24 +780,26 @@
         }
 
         .empty-slot {
-            background: #0f1428;
-            border: 2px dashed #cccccc;
+            background: rgba(255,255,255,0.03);
+            border: 2px dashed rgba(102,126,234,0.3);
             border-radius: 30px;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            color: rgba(255,255,255,0.2);
             font-size: 0.7rem;
         }
 
+        /* Модальные окна */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             padding: 20px;
@@ -749,8 +821,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(200,200,200,0.2);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #667eea;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -760,7 +832,10 @@
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .quantity-buttons {
@@ -771,8 +846,8 @@
         }
 
         .quantity-btn {
-            background: rgba(200,200,200,0.2);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             color: white;
             padding: 15px;
             border-radius: 40px;
@@ -782,8 +857,9 @@
         }
 
         .quantity-btn.active {
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: white;
+            font-weight: bold;
         }
 
         .open-btn {
@@ -793,15 +869,15 @@
             border-radius: 60px;
             font-size: 1.5rem;
             font-weight: 700;
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
             margin: 20px 0;
             cursor: pointer;
         }
 
         .contents-title {
             font-size: 1.2rem;
-            color: #cccccc;
+            color: #667eea;
             margin: 20px 0 15px;
         }
 
@@ -812,8 +888,8 @@
         }
 
         .content-item {
-            background: rgba(200,200,200,0.1);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             border-radius: 40px;
             padding: 15px;
             display: flex;
@@ -831,10 +907,11 @@
         }
 
         .content-price {
-            color: #cccccc;
+            color: #667eea;
             font-size: 0.9rem;
         }
 
+        /* Селектор подарков */
         .gift-selector {
             position: fixed;
             top: 0;
@@ -842,6 +919,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(20px);
             display: none;
             flex-direction: column;
             padding: 20px;
@@ -863,8 +941,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(200,200,200,0.2);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #667eea;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
@@ -874,7 +952,10 @@
         .selector-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .gift-categories {
@@ -886,8 +967,8 @@
         }
 
         .category-btn {
-            background: rgba(200,200,200,0.2);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             color: white;
             padding: 12px 20px;
             border-radius: 40px;
@@ -897,8 +978,9 @@
         }
 
         .category-btn.active {
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: white;
+            font-weight: bold;
         }
 
         .gifts-grid {
@@ -909,8 +991,8 @@
         }
 
         .gift-option {
-            background: #1a1f35;
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             border-radius: 40px;
             padding: 20px 10px;
             text-align: center;
@@ -935,9 +1017,10 @@
 
         .gift-option-price {
             font-size: 1.2rem;
-            color: #cccccc;
+            color: #667eea;
         }
 
+        /* Модальное окно выигрыша */
         .win-modal {
             position: fixed;
             top: 0;
@@ -945,6 +1028,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -956,13 +1040,14 @@
         }
 
         .win-content {
-            background: #1a1f35;
-            border: 3px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 3px solid #667eea;
             border-radius: 100px;
             padding: 40px 30px;
             text-align: center;
             width: 80%;
             max-width: 350px;
+            box-shadow: 0 0 50px rgba(102,126,234,0.5);
         }
 
         .win-emoji {
@@ -973,41 +1058,46 @@
         .win-title {
             font-size: 2rem;
             font-weight: 900;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 15px;
         }
 
         .win-amount {
             font-size: 2rem;
-            color: #cccccc;
+            color: #667eea;
             margin-bottom: 20px;
         }
 
         .win-btn {
-            background: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             padding: 12px 30px;
             border-radius: 60px;
             font-size: 1.1rem;
             font-weight: 700;
-            color: black;
+            color: white;
             cursor: pointer;
         }
 
+        /* Промокоды */
         .promo-section {
-            background: rgba(20, 20, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #cccccc;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 60px;
             padding: 16px;
-            animation: grayPulse 3s infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin-top: 20px;
         }
 
         .promo-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 12px;
             text-align: center;
         }
@@ -1019,8 +1109,8 @@
 
         .promo-field {
             flex: 1;
-            background: rgba(0,0,0,0.5);
-            border: 2px solid #cccccc;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #667eea;
             border-radius: 40px;
             padding: 12px 15px;
             color: white;
@@ -1029,11 +1119,11 @@
         }
 
         .promo-apply {
-            background: #cccccc;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             border-radius: 40px;
             padding: 12px 25px;
-            color: black;
+            color: white;
             font-weight: 700;
             cursor: pointer;
         }
@@ -1043,13 +1133,14 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: #cccccc;
-            color: black;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
             padding: 12px 30px;
             border-radius: 60px;
             font-weight: 700;
             z-index: 5000;
-            border: 1px solid white;
+            border: 2px solid white;
+            box-shadow: 0 0 30px #667eea;
             animation: toastIn 0.3s;
         }
 
@@ -1108,7 +1199,7 @@
             <div class="cases-grid" id="casesGrid"></div>
 
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ ДЛИННАЯ СТРЕЛКА ⚡</div>
+                <div class="upgrade-title">⚡ ПРЕМИУМ АПГРЕЙД ⚡</div>
                 
                 <div class="wheel-container">
                     <canvas id="wheelCanvas" class="wheel-canvas" width="280" height="280"></canvas>
@@ -1119,7 +1210,7 @@
                 </div>
 
                 <div class="slots-container">
-                    <div class="slots-title">ВАШИ СТАВКИ (ИЗ ИНВЕНТАРЯ)</div>
+                    <div class="slots-title">ВАШИ СТАВКИ</div>
                     <div class="slots-grid" id="slotsGrid">
                         <div class="slot-item" data-slot="0"></div>
                         <div class="slot-item" data-slot="1"></div>
@@ -1131,7 +1222,7 @@
                 </div>
 
                 <div class="desired-container" id="desiredContainer">
-                    <div class="desired-label">ЖЕЛАЕМЫЙ ПОДАРОК (ЛЮБОЙ)</div>
+                    <div class="desired-label">ЖЕЛАЕМЫЙ ПОДАРОК</div>
                     <div id="desiredContent">
                         <div class="desired-empty">Нажмите чтобы выбрать</div>
                     </div>
@@ -1227,16 +1318,15 @@
                 }, 500);
             }, 2000);
 
-            // Звездный фон (оптимизированный)
+            // Звездный фон
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let stars = [];
-            let animationId;
 
             function initStars() {
                 stars = [];
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < 30; i++) {
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
@@ -1273,7 +1363,7 @@
                     ctx.fill();
                 }
                 
-                animationId = requestAnimationFrame(drawStars);
+                requestAnimationFrame(drawStars);
             }
 
             function initWindowStars() {
@@ -1433,7 +1523,7 @@
                 // Контур
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-                wheelCtx.strokeStyle = '#cccccc';
+                wheelCtx.strokeStyle = '#667eea';
                 wheelCtx.lineWidth = 6;
                 wheelCtx.stroke();
             }
