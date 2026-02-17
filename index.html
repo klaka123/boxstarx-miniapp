@@ -3,21 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX ULTRA 🚀 СИСТЕМА АПГРЕЙДА</title>
+    <title>BOXSTARX PREMIUM 🚀 НОВАЯ ВЕРСИЯ</title>
     <style>
-        /* ========== ОПТИМИЗИРОВАННЫЙ СБРОС ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            /* Оптимизированные переменные для производительности */
-            --gold: #ffd700;
-            --rgb-speed: 8s;
-            --glow-intensity: 20px;
-            --transition-speed: 0.2s;
         }
 
         body {
@@ -25,10 +16,9 @@
             background: #000;
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ========== ОПТИМИЗИРОВАННЫЙ ЗВЕЗДНЫЙ ФОН ========== */
+        /* ========== ЗВЕЗДНЫЙ ФОН ========== */
         #starCanvas {
             position: fixed;
             top: 0;
@@ -39,32 +29,21 @@
             background: #000;
             display: block;
             pointer-events: none;
-            will-change: transform;
         }
 
-        /* ========== ОПТИМИЗИРОВАННЫЕ RGB АНИМАЦИИ ========== */
-        @keyframes rgbText {
-            0% { text-shadow: 0 0 var(--glow-intensity) #ff0000; }
-            25% { text-shadow: 0 0 var(--glow-intensity) #00ff00; }
-            50% { text-shadow: 0 0 var(--glow-intensity) #0000ff; }
-            75% { text-shadow: 0 0 var(--glow-intensity) #ff00ff; }
-            100% { text-shadow: 0 0 var(--glow-intensity) #ff0000; }
+        /* ========== МЕДЛЕННАЯ RGB АНИМАЦИЯ ДЛЯ ВСЕХ ГРАНИЦ ========== */
+        @keyframes slowRGB {
+            0% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
+            16% { border-color: #ff8800; box-shadow: 0 0 20px #ff8800; }
+            33% { border-color: #ffff00; box-shadow: 0 0 20px #ffff00; }
+            50% { border-color: #00ff00; box-shadow: 0 0 20px #00ff00; }
+            66% { border-color: #0088ff; box-shadow: 0 0 20px #0088ff; }
+            83% { border-color: #8800ff; box-shadow: 0 0 20px #8800ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
         }
 
-        @keyframes rgbBorder {
-            0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
-            25% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
-            50% { border-color: #0000ff; box-shadow: 0 0 15px #0000ff; }
-            75% { border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
-            100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
-        }
-
-        .rgb-text {
-            animation: rgbText var(--rgb-speed) infinite;
-        }
-
-        .rgb-border {
-            animation: rgbBorder var(--rgb-speed) infinite;
+        .rgb-slow {
+            animation: slowRGB 10s infinite;
         }
 
         /* ========== ОСНОВНОЙ КОНТЕЙНЕР ========== */
@@ -76,11 +55,6 @@
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        #app::-webkit-scrollbar {
-            display: none;
         }
 
         .container {
@@ -93,17 +67,17 @@
             gap: 16px;
         }
 
-        /* ========== ОПТИМИЗИРОВАННЫЙ ХЕДЕР ========== */
+        /* ========== ХЕДЕР ========== */
         .header {
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 2px solid;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            animation: slowRGB 10s infinite;
         }
 
         .balance-wrap {
@@ -114,109 +88,112 @@
 
         .balance-icon {
             font-size: 1.8rem;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .balance-value {
             font-size: 1.8rem;
             font-weight: 800;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .add-btn {
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            background-size: 200% 200%;
-            animation: gradientMove 5s infinite;
-            border: none;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
             padding: 10px 24px;
             border-radius: 40px;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            border: 2px solid white;
-            transition: transform var(--transition-speed);
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            transition: transform 0.2s;
         }
 
         .add-btn:active {
             transform: scale(0.95);
         }
 
-        /* ========== ОПТИМИЗИРОВАННЫЙ САМОЛЕТ ========== */
+        /* ========== УЛУЧШЕННЫЙ САМОЛЕТ С ОКНОМ ========== */
         .flight-section {
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 2px solid;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 16px;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            animation: slowRGB 10s infinite;
         }
 
-        .flight-stage {
+        .flight-window {
             position: relative;
-            height: 160px;
-            background: rgba(0, 0, 0, 0.9);
+            height: 200px;
+            background: linear-gradient(180deg, #0a1a2a 0%, #000 100%);
             border: 2px solid;
-            border-radius: 30px;
+            border-radius: 40px;
             overflow: hidden;
             margin-bottom: 12px;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            animation: slowRGB 10s infinite;
         }
 
-        /* Оптимизированные облака */
+        /* Горизонт */
+        .horizon {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%);
+        }
+
+        /* Облака для движения */
         .cloud {
             position: absolute;
-            width: 80px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            filter: blur(5px);
-            animation: cloudMove 6s linear infinite;
-            will-change: transform;
+            width: 100px;
+            height: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            filter: blur(8px);
+            animation: cloudMove 8s linear infinite;
         }
 
-        .cloud1 { top: 30px; left: -80px; }
-        .cloud2 { top: 80px; left: -120px; animation-delay: 2s; }
-        .cloud3 { top: 120px; left: -160px; animation-delay: 4s; }
+        .cloud1 { top: 40px; left: -120px; }
+        .cloud2 { top: 100px; left: -180px; animation-delay: 3s; }
+        .cloud3 { top: 160px; left: -240px; animation-delay: 6s; }
 
         @keyframes cloudMove {
             from { transform: translateX(0); }
-            to { transform: translateX(600px); }
+            to { transform: translateX(700px); }
         }
 
-        .plane-model {
+        /* Самолет */
+        .plane {
             position: absolute;
             left: -100px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 4rem;
-            filter: drop-shadow(0 0 15px cyan) drop-shadow(0 0 30px magenta);
+            filter: drop-shadow(0 0 20px cyan) drop-shadow(0 0 40px magenta);
             transition: left 0.02s linear;
             z-index: 10;
             will-change: left;
         }
 
-        .plane-trail {
+        /* След */
+        .trail {
             position: absolute;
-            height: 12px;
+            height: 15px;
             background: linear-gradient(90deg, cyan, magenta, yellow);
             top: 50%;
             transform: translateY(-50%);
             right: 0;
-            border-radius: 6px;
+            border-radius: 8px;
             opacity: 0.8;
-            filter: blur(4px);
+            filter: blur(5px);
             transition: width 0.02s linear;
-            will-change: width;
+            box-shadow: 0 0 20px cyan;
         }
 
-        .crash-animation {
+        /* Эффект падения */
+        .crash {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -229,7 +206,21 @@
             pointer-events: none;
         }
 
-        /* Элементы управления */
+        /* Высота */
+        .altitude {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid;
+            animation: slowRGB 10s infinite;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 15;
+        }
+
+        /* Кнопки управления (не за границей) */
         .control-group {
             display: flex;
             gap: 8px;
@@ -237,76 +228,71 @@
         }
 
         .bet-input {
-            flex: 1;
+            flex: 2;
             background: rgba(0, 0, 0, 0.9);
             border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
             padding: 12px;
-            border-radius: 30px;
+            border-radius: 40px;
             font-size: 1rem;
             text-align: center;
             outline: none;
-            animation: rgbBorder var(--rgb-speed) infinite;
         }
 
-        .flight-button {
+        .flight-btn {
             flex: 1;
             padding: 12px;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform var(--transition-speed);
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            background-size: 200% 200%;
-            animation: gradientMove 5s infinite;
+            transition: transform 0.2s;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
-            border: 2px solid white;
         }
 
-        .flight-button:active {
+        .flight-btn:active {
             transform: scale(0.95);
         }
 
-        .flight-button:disabled {
+        .flight-btn:disabled {
             opacity: 0.3;
             pointer-events: none;
-            animation: none;
         }
 
         .multiplier-panel {
             text-align: center;
             padding: 12px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0,0,0,0.7);
             border: 2px solid;
-            border-radius: 30px;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            border-radius: 40px;
+            animation: slowRGB 10s infinite;
         }
 
         .multiplier-number {
             font-size: 2rem;
             font-weight: 900;
             margin-left: 8px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
-        /* ========== СИСТЕМА АПГРЕЙДА ========== */
+        /* ========== НОВАЯ СИСТЕМА АПГРЕЙДА ========== */
         .upgrade-section {
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 2px solid;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 16px;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            animation: slowRGB 10s infinite;
         }
 
         .upgrade-title {
             font-size: 1.4rem;
             text-align: center;
             margin-bottom: 16px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .upgrade-grid {
@@ -319,12 +305,17 @@
         .upgrade-card {
             background: rgba(0, 0, 0, 0.9);
             border: 2px solid;
-            border-radius: 30px;
+            animation: slowRGB 10s infinite;
+            border-radius: 40px;
             padding: 16px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform var(--transition-speed);
-            animation: rgbBorder var(--rgb-speed) infinite;
+            transition: transform 0.2s;
+        }
+
+        .upgrade-card.selected {
+            transform: scale(1.05);
+            filter: brightness(1.2);
         }
 
         .upgrade-card:active {
@@ -334,51 +325,39 @@
         .upgrade-emoji {
             font-size: 2.5rem;
             margin-bottom: 8px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .upgrade-name {
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 4px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
-        .upgrade-level {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 8px;
+        .upgrade-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: gold;
         }
 
         .upgrade-chance {
-            font-size: 1.2rem;
-            font-weight: 800;
-            animation: rgbText var(--rgb-speed) infinite;
-        }
-
-        .upgrade-cost {
-            font-size: 1rem;
+            font-size: 0.9rem;
+            color: #aaa;
             margin-top: 8px;
-            padding: 4px 12px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            display: inline-block;
         }
 
         .upgrade-button {
             width: 100%;
             padding: 14px;
             border: none;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            background-size: 200% 200%;
-            animation: gradientMove 5s infinite;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
-            border: 2px solid white;
-            transition: transform var(--transition-speed);
+            transition: transform 0.2s;
         }
 
         .upgrade-button:active {
@@ -392,11 +371,9 @@
 
         /* ========== NFT ГАЛЕРЕЯ ========== */
         .section-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
             margin: 16px 0 12px;
-            animation: rgbText var(--rgb-speed) infinite;
-            letter-spacing: 2px;
         }
 
         .nft-grid {
@@ -408,12 +385,12 @@
         .nft-card {
             background: rgba(0, 0, 0, 0.8);
             border: 2px solid;
-            border-radius: 25px;
+            animation: slowRGB 10s infinite;
+            border-radius: 30px;
             padding: 12px 4px;
             text-align: center;
             cursor: pointer;
-            transition: transform var(--transition-speed);
-            animation: rgbBorder var(--rgb-speed) infinite;
+            transition: transform 0.2s;
         }
 
         .nft-card:active {
@@ -423,14 +400,12 @@
         .nft-emoji {
             font-size: 2rem;
             margin-bottom: 4px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .nft-name {
             font-size: 0.7rem;
             font-weight: 600;
             margin-bottom: 2px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .nft-price {
@@ -441,7 +416,7 @@
             display: inline-block;
         }
 
-        /* ========== КЕЙСЫ ========== */
+        /* ========== КЕЙСЫ С КАРТИНКАМИ ========== */
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -451,12 +426,12 @@
         .case-card {
             background: rgba(0, 0, 0, 0.8);
             border: 3px solid;
-            border-radius: 40px;
+            animation: slowRGB 10s infinite;
+            border-radius: 50px;
             padding: 16px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform var(--transition-speed);
-            animation: rgbBorder var(--rgb-speed) infinite;
+            transition: transform 0.2s;
         }
 
         .case-card:active {
@@ -464,37 +439,34 @@
         }
 
         .case-icon {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 10px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            filter: drop-shadow(0 0 10px currentColor);
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .case-name {
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 4px;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .case-price {
             font-size: 1.4rem;
             font-weight: 900;
-            animation: rgbText var(--rgb-speed) infinite;
+            color: gold;
         }
 
         /* ========== ИНВЕНТАРЬ ========== */
         .inventory-section {
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 2px solid;
-            border-radius: 40px;
+            animation: slowRGB 10s infinite;
+            border-radius: 50px;
             padding: 16px;
-            animation: rgbBorder var(--rgb-speed) infinite;
         }
 
         .inventory-header {
@@ -507,15 +479,14 @@
         .inventory-title {
             font-size: 1.4rem;
             font-weight: 700;
-            animation: rgbText var(--rgb-speed) infinite;
         }
 
         .inventory-counter {
             background: rgba(0,0,0,0.7);
-            padding: 6px 16px;
-            border-radius: 30px;
             border: 2px solid;
-            animation: rgbBorder var(--rgb-speed) infinite;
+            animation: slowRGB 10s infinite;
+            padding: 6px 16px;
+            border-radius: 40px;
             font-size: 1rem;
         }
 
@@ -528,7 +499,8 @@
         .inventory-slot {
             background: rgba(0, 0, 0, 0.9);
             border: 2px solid;
-            border-radius: 25px;
+            animation: slowRGB 10s infinite;
+            border-radius: 30px;
             padding: 10px 4px;
             text-align: center;
             aspect-ratio: 1;
@@ -537,35 +509,57 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform var(--transition-speed);
-            animation: rgbBorder var(--rgb-speed) infinite;
+            transition: transform 0.2s;
+            position: relative;
         }
 
-        .inventory-slot:active {
-            transform: scale(0.95);
+        .inventory-slot:hover {
+            transform: scale(1.05);
         }
 
         .slot-emoji {
-            font-size: 1.8rem;
-            margin-bottom: 2px;
+            font-size: 2rem;
+            margin-bottom: 4px;
         }
 
         .slot-name {
             font-size: 0.6rem;
-            animation: rgbText var(--rgb-speed) infinite;
+            font-weight: 600;
+        }
+
+        .slot-price {
+            font-size: 0.7rem;
+            color: gold;
+            margin-top: 4px;
+        }
+
+        .sell-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: gold;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
         }
 
         .empty-slot {
             background: rgba(0, 0, 0, 0.5);
             border: 2px dashed;
-            border-radius: 25px;
+            animation: slowRGB 10s infinite;
+            border-radius: 30px;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #666;
             font-size: 0.7rem;
-            animation: rgbBorder var(--rgb-speed) infinite;
         }
 
         /* ========== МОДАЛЬНОЕ ОКНО ========== */
@@ -580,85 +574,58 @@
             z-index: 2000;
             display: none;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            overflow-y: auto;
         }
 
         .modal.active {
             display: flex;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .modal-content {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid;
+            animation: slowRGB 10s infinite;
+            border-radius: 60px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
 
-        .modal-close {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid;
-            font-size: 1.8rem;
-            cursor: pointer;
-            animation: rgbBorder var(--rgb-speed) infinite;
-            color: white;
+        .modal-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
         }
 
         .modal-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            animation: rgbText var(--rgb-speed) infinite;
+            margin-bottom: 10px;
         }
 
-        .modal-preview {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: drop-shadow(0 0 20px currentColor);
-            animation: rgbText var(--rgb-speed) infinite;
-        }
-
-        .modal-name {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            animation: rgbText var(--rgb-speed) infinite;
-        }
-
-        .modal-price {
+        .modal-subtitle {
             font-size: 1.8rem;
-            animation: rgbText var(--rgb-speed) infinite;
+            color: gold;
+            margin-bottom: 30px;
         }
 
         .modal-button {
-            width: 100%;
-            padding: 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: 900;
-            cursor: pointer;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            background-size: 200% 200%;
-            animation: gradientMove 5s infinite;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
-            border: 2px solid white;
-            transition: transform var(--transition-speed);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .modal-button:active {
-            transform: scale(0.98);
+            transform: scale(0.95);
         }
 
         /* ========== УВЕДОМЛЕНИЯ ========== */
@@ -667,16 +634,15 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+            background: rgba(0,0,0,0.9);
+            border: 2px solid;
+            animation: slowRGB 10s infinite;
             color: white;
             padding: 12px 30px;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: 700;
             z-index: 3000;
-            border: 2px solid white;
             animation: toastIn 0.3s;
-            text-align: center;
-            min-width: 200px;
         }
 
         @keyframes toastIn {
@@ -699,21 +665,23 @@
                 <button class="add-btn" id="addFunds">+100 ⭐</button>
             </header>
 
-            <!-- Самолет -->
+            <!-- Самолет с окном -->
             <section class="flight-section">
-                <div class="flight-stage">
+                <div class="flight-window">
+                    <div class="horizon"></div>
                     <div class="cloud cloud1"></div>
                     <div class="cloud cloud2"></div>
                     <div class="cloud cloud3"></div>
-                    <div class="plane-model" id="plane">✈️</div>
-                    <div class="plane-trail" id="trail" style="width: 0px;"></div>
-                    <div class="crash-animation" id="crash">💥</div>
+                    <div class="plane" id="plane">✈️</div>
+                    <div class="trail" id="trail" style="width: 0px;"></div>
+                    <div class="crash" id="crash">💥</div>
+                    <div class="altitude" id="altitude">Высота: 0 м</div>
                 </div>
                 
                 <div class="control-group">
                     <input type="number" class="bet-input" id="bet" min="10" value="149" step="10">
-                    <button class="flight-button" id="startBtn">🚀 СТАРТ</button>
-                    <button class="flight-button" id="stopBtn" disabled>⏹️ СТОП</button>
+                    <button class="flight-btn" id="startBtn">🚀 СТАРТ</button>
+                    <button class="flight-btn" id="stopBtn" disabled>⏹️ СТОП</button>
                 </div>
                 
                 <div class="multiplier-panel">
@@ -722,19 +690,19 @@
                 </div>
             </section>
 
-            <!-- Система апгрейда -->
+            <!-- Новая система апгрейда -->
             <section class="upgrade-section">
-                <div class="upgrade-title">⚡ СИСТЕМА АПГРЕЙДА ⚡</div>
+                <div class="upgrade-title">⚡ АПГРЕЙД ПОДАРКА ⚡</div>
                 <div class="upgrade-grid" id="upgradeGrid"></div>
-                <button class="upgrade-button" id="upgradeBtn">УЛУЧШИТЬ С 50% ШАНСОМ</button>
+                <button class="upgrade-button" id="upgradeBtn" disabled>ВЫБЕРИТЕ ПОДАРОК</button>
             </section>
 
             <!-- NFT галерея -->
-            <h2 class="section-title">🎁 NFT ПОДАРКИ</h2>
+            <h2 class="section-title">🎁 ПОДАРКИ</h2>
             <div class="nft-grid" id="nftGrid"></div>
 
             <!-- Кейсы -->
-            <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
+            <h2 class="section-title">📦 КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
             <!-- Инвентарь -->
@@ -748,31 +716,21 @@
         </div>
     </div>
 
-    <!-- Модальное окно -->
-    <div class="modal" id="caseModal">
-        <div class="modal-header">
-            <button class="modal-close" id="closeModal">←</button>
-            <div class="modal-title" id="modalTitle">КЕЙС</div>
-            <div style="width: 50px;"></div>
+    <!-- Модальное окно для выигрыша -->
+    <div class="modal" id="winModal">
+        <div class="modal-content">
+            <div class="modal-emoji">🎉</div>
+            <div class="modal-title" id="winTitle">ПОБЕДА!</div>
+            <div class="modal-subtitle" id="winAmount">0 ⭐</div>
+            <button class="modal-button" id="closeWinModal">ОТЛИЧНО</button>
         </div>
-        
-        <div class="modal-preview">
-            <div class="modal-icon" id="modalIcon"></div>
-            <div class="modal-name" id="modalName">НАЗВАНИЕ</div>
-            <div class="modal-price" id="modalPrice">★ 0</div>
-        </div>
-        
-        <h2 class="section-title">ВОЗМОЖНЫЕ ПРИЗЫ</h2>
-        <div class="nft-grid" id="modalPrizes" style="margin-bottom: 20px;"></div>
-        
-        <button class="modal-button" id="openCase">ОТКРЫТЬ ЗА ★ 0</button>
     </div>
 
     <script>
         (function() {
             'use strict';
 
-            // ========== ОПТИМИЗИРОВАННЫЙ ЗВЕЗДНЫЙ ФОН ==========
+            // ========== ЗВЕЗДНЫЙ ФОН ==========
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -825,27 +783,28 @@
 
             // ========== ДАННЫЕ ==========
             const NFT_GIFTS = [
-                { emoji: "🎂", name: "ТОРТ", price: 15, level: 1 },
-                { emoji: "❤️", name: "СЕРДЦЕ", price: 25, level: 1 },
-                { emoji: "🔥", name: "ОГОНЬ", price: 50, level: 1 },
-                { emoji: "🎁", name: "ПОДАРОК", price: 50, level: 1 },
-                { emoji: "🎉", name: "ПРАЗДНИК", price: 100, level: 1 },
-                { emoji: "💎", name: "АЛМАЗ", price: 100, level: 1 },
-                { emoji: "👑", name: "КОРОНА", price: 150, level: 2 },
-                { emoji: "🚀", name: "РАКЕТА", price: 150, level: 2 },
-                { emoji: "⭐", name: "ЗВЕЗДА", price: 250, level: 2 },
-                { emoji: "🌟", name: "СУПЕРЗВЕЗДА", price: 300, level: 2 },
-                { emoji: "💫", name: "КОМЕТА", price: 500, level: 3 },
-                { emoji: "⚡", name: "МОЛНИЯ", price: 500, level: 3 }
+                { emoji: "🎂", name: "ТОРТ", price: 15 },
+                { emoji: "❤️", name: "СЕРДЦЕ", price: 25 },
+                { emoji: "🔥", name: "ОГОНЬ", price: 50 },
+                { emoji: "🎁", name: "ПОДАРОК", price: 50 },
+                { emoji: "🎉", name: "ПРАЗДНИК", price: 100 },
+                { emoji: "💎", name: "АЛМАЗ", price: 100 },
+                { emoji: "👑", name: "КОРОНА", price: 150 },
+                { emoji: "🚀", name: "РАКЕТА", price: 150 },
+                { emoji: "⭐", name: "ЗВЕЗДА", price: 250 },
+                { emoji: "🌟", name: "СУПЕРЗВЕЗДА", price: 300 },
+                { emoji: "💫", name: "КОМЕТА", price: 500 },
+                { emoji: "⚡", name: "МОЛНИЯ", price: 500 }
             ];
 
+            // Кейсы с новыми картинками
             const CASES = [
-                { name: "PLAYER", icon: "PLAYER", price: 149, gifts: [0,1,2,3] },
-                { name: "BEAR", icon: "BEAR", price: 199, gifts: [1,2,3,4] },
-                { name: "LAMP", icon: "LAMP", price: 249, gifts: [2,3,4,5] },
-                { name: "SKULL", icon: "SKULL", price: 499, gifts: [3,4,5,6] },
-                { name: "NEKO", icon: "NEKO", price: 999, gifts: [4,5,6,7] },
-                { name: "BRICK", icon: "BRICK", price: 1499, gifts: [5,6,7,8] }
+                { name: "КОСМИЧЕСКИЙ", icon: "🚀", price: 149, gifts: [0,1,2,3] },
+                { name: "ЗОЛОТОЙ", icon: "👑", price: 299, gifts: [2,3,4,5] },
+                { name: "АЛМАЗНЫЙ", icon: "💎", price: 499, gifts: [4,5,6,7] },
+                { name: "ЛЕГЕНДАРНЫЙ", icon: "⭐", price: 999, gifts: [6,7,8,9] },
+                { name: "МИФИЧЕСКИЙ", icon: "✨", price: 1999, gifts: [8,9,10,11] },
+                { name: "БОЖЕСТВЕННЫЙ", icon: "🌈", price: 3999, gifts: [10,11,0,1] }
             ];
 
             // ========== СОСТОЯНИЕ ==========
@@ -857,7 +816,8 @@
                 isFlying: false,
                 multiplier: 1,
                 intervalId: null,
-                planePos: -100
+                planePos: -100,
+                altitude: 0
             };
 
             // ========== DOM ЭЛЕМЕНТЫ ==========
@@ -871,37 +831,34 @@
                 plane: document.getElementById('plane'),
                 trail: document.getElementById('trail'),
                 crash: document.getElementById('crash'),
+                altitude: document.getElementById('altitude'),
                 nftGrid: document.getElementById('nftGrid'),
                 casesGrid: document.getElementById('casesGrid'),
                 inventoryGrid: document.getElementById('inventoryGrid'),
                 inventoryCount: document.getElementById('inventoryCount'),
                 upgradeGrid: document.getElementById('upgradeGrid'),
                 upgradeBtn: document.getElementById('upgradeBtn'),
-                modal: document.getElementById('caseModal'),
-                closeModal: document.getElementById('closeModal'),
-                modalTitle: document.getElementById('modalTitle'),
-                modalIcon: document.getElementById('modalIcon'),
-                modalName: document.getElementById('modalName'),
-                modalPrice: document.getElementById('modalPrice'),
-                modalPrizes: document.getElementById('modalPrizes'),
-                openCase: document.getElementById('openCase')
+                winModal: document.getElementById('winModal'),
+                winTitle: document.getElementById('winTitle'),
+                winAmount: document.getElementById('winAmount'),
+                closeWinModal: document.getElementById('closeWinModal')
             };
 
             // ========== СОХРАНЕНИЕ ==========
             function saveGame() {
-                localStorage.setItem('bsx_ultra_balance', state.balance);
-                localStorage.setItem('bsx_ultra_inventory', JSON.stringify(state.inventory));
+                localStorage.setItem('bsx_premium_balance', state.balance);
+                localStorage.setItem('bsx_premium_inventory', JSON.stringify(state.inventory));
             }
 
             function loadGame() {
-                const b = localStorage.getItem('bsx_ultra_balance');
-                const i = localStorage.getItem('bsx_ultra_inventory');
+                const b = localStorage.getItem('bsx_premium_balance');
+                const i = localStorage.getItem('bsx_premium_inventory');
                 if (b) state.balance = parseInt(b) || 5000;
                 if (i) state.inventory = JSON.parse(i) || [];
                 updateUI();
             }
 
-            function showToast(msg, isWin = true) {
+            function showToast(msg) {
                 const toast = document.createElement('div');
                 toast.className = 'toast';
                 toast.textContent = msg;
@@ -909,11 +866,19 @@
                 setTimeout(() => toast.remove(), 2000);
             }
 
+            function showWinModal(title, amount) {
+                el.winTitle.textContent = title;
+                el.winAmount.textContent = `${amount} ⭐`;
+                el.winModal.classList.add('active');
+            }
+
             function updateUI() {
                 el.balance.textContent = state.balance;
                 updateInventory();
+                updateUpgradeGrid();
             }
 
+            // ========== ИНВЕНТАРЬ ==========
             function updateInventory() {
                 el.inventoryGrid.innerHTML = '';
                 el.inventoryCount.textContent = `${state.inventory.length}/20`;
@@ -924,9 +889,14 @@
                     slot.className = 'inventory-slot';
                     slot.innerHTML = `
                         <div class="slot-emoji">${item.emoji}</div>
-                        <div class="slot-name">${item.name} Lv.${item.level || 1}</div>
+                        <div class="slot-name">${item.name}</div>
+                        <div class="slot-price">${item.price}⭐</div>
+                        <div class="sell-badge">80%</div>
                     `;
-                    slot.addEventListener('click', () => selectForUpgrade(i));
+                    slot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        sellItem(i);
+                    });
                     el.inventoryGrid.appendChild(slot);
                 }
                 
@@ -938,76 +908,70 @@
                 }
             }
 
-            // ========== СИСТЕМА АПГРЕЙДА ==========
-            function selectForUpgrade(index) {
+            // Продажа за 80%
+            function sellItem(index) {
                 const item = state.inventory[index];
-                if (item.level >= 3) {
-                    showToast('❌ Максимальный уровень!');
-                    return;
-                }
-                state.selectedUpgrade = { ...item, index };
-                renderUpgradeGrid();
+                const price = Math.floor(item.price * 0.8);
+                state.balance += price;
+                state.inventory.splice(index, 1);
+                updateUI();
+                saveGame();
+                showToast(`✅ ${item.name} продан за ${price}⭐`);
             }
 
-            function renderUpgradeGrid() {
+            // ========== СИСТЕМА АПГРЕЙДА ==========
+            function updateUpgradeGrid() {
                 el.upgradeGrid.innerHTML = '';
-                const upgradable = state.inventory.filter(item => item.level < 3);
+                
+                const upgradable = state.inventory.filter(item => item.price <= 200);
                 
                 if (upgradable.length === 0) {
-                    el.upgradeGrid.innerHTML = '<div style="grid-column:span 2; text-align:center; padding:20px;">Нет доступных подарков</div>';
+                    el.upgradeGrid.innerHTML = '<div style="grid-column:span 2; text-align:center; padding:20px;">Нет подарков для апгрейда</div>';
+                    el.upgradeBtn.disabled = true;
+                    el.upgradeBtn.textContent = 'НЕТ ПОДАРКОВ';
                     return;
                 }
                 
                 upgradable.slice(0, 4).forEach(item => {
-                    const nextPrice = Math.floor(item.price * 1.5);
                     const card = document.createElement('div');
-                    card.className = 'upgrade-card';
+                    card.className = `upgrade-card ${state.selectedUpgrade === item ? 'selected' : ''}`;
                     card.innerHTML = `
                         <div class="upgrade-emoji">${item.emoji}</div>
                         <div class="upgrade-name">${item.name}</div>
-                        <div class="upgrade-level">Уровень ${item.level} → ${item.level + 1}</div>
-                        <div class="upgrade-chance">50%</div>
-                        <div class="upgrade-cost">${nextPrice}⭐</div>
+                        <div class="upgrade-price">${item.price}⭐</div>
+                        <div class="upgrade-chance">50% → x2</div>
                     `;
                     card.addEventListener('click', () => {
-                        const idx = state.inventory.findIndex(i => i.emoji === item.emoji && i.level === item.level);
-                        if (idx !== -1) selectForUpgrade(idx);
+                        state.selectedUpgrade = item;
+                        updateUpgradeGrid();
+                        el.upgradeBtn.disabled = false;
+                        el.upgradeBtn.textContent = `УЛУЧШИТЬ ЗА 50%`;
                     });
                     el.upgradeGrid.appendChild(card);
                 });
             }
 
             function upgradeItem() {
-                if (!state.selectedUpgrade) {
-                    showToast('❌ Выберите подарок');
-                    return;
-                }
+                if (!state.selectedUpgrade) return;
                 
-                const item = state.inventory[state.selectedUpgrade.index];
-                const cost = Math.floor(item.price * 1.5);
+                const index = state.inventory.findIndex(i => i.emoji === state.selectedUpgrade.emoji && i.price === state.selectedUpgrade.price);
+                if (index === -1) return;
                 
-                if (state.balance < cost) {
-                    showToast('❌ Недостаточно звезд');
-                    return;
-                }
-                
-                state.balance -= cost;
-                
-                // 50% шанс на успех
+                // 50% шанс
                 if (Math.random() < 0.5) {
-                    item.level = (item.level || 1) + 1;
-                    item.price = Math.floor(item.price * 2);
-                    showToast('✅ УСПЕХ! Уровень повышен!');
+                    // Успех - x2 цена
+                    const newPrice = state.selectedUpgrade.price * 2;
+                    state.inventory[index].price = newPrice;
+                    showWinModal('🎉 УСПЕХ!', newPrice);
                 } else {
-                    // При провале подарок сгорает
-                    state.inventory.splice(state.selectedUpgrade.index, 1);
-                    showToast('💥 ПРОВАЛ! Подарок сгорел');
+                    // Провал - подарок сгорает
+                    state.inventory.splice(index, 1);
+                    showWinModal('💥 ПРОВАЛ', 0);
                 }
                 
                 state.selectedUpgrade = null;
                 updateUI();
                 saveGame();
-                renderUpgradeGrid();
             }
 
             // ========== САМОЛЕТ ==========
@@ -1025,9 +989,11 @@
                 state.isFlying = true;
                 state.multiplier = 1;
                 state.planePos = -100;
+                state.altitude = 0;
                 el.startBtn.disabled = true;
                 el.stopBtn.disabled = false;
                 el.crash.style.opacity = '0';
+                el.altitude.textContent = 'Высота: 0 м';
                 
                 if (state.intervalId) clearInterval(state.intervalId);
                 
@@ -1035,8 +1001,10 @@
                     if (!state.isFlying) return;
                     
                     state.planePos += 2;
+                    state.altitude += 50;
                     el.plane.style.left = state.planePos + 'px';
                     el.trail.style.width = (state.planePos + 100) + 'px';
+                    el.altitude.textContent = `Высота: ${state.altitude} м`;
                     
                     state.multiplier += 0.02 + Math.random() * 0.03;
                     el.multiplier.textContent = state.multiplier.toFixed(2) + 'x';
@@ -1063,11 +1031,13 @@
                 
                 setTimeout(() => {
                     state.planePos = -100;
+                    state.altitude = 0;
                     el.plane.style.left = '-100px';
                     el.trail.style.width = '0px';
                     el.crash.style.opacity = '0';
                     el.multiplier.textContent = '1.00x';
-                }, 800);
+                    el.altitude.textContent = 'Высота: 0 м';
+                }, 1000);
                 
                 showToast(`💥 Проигрыш: ${bet}⭐`);
             }
@@ -1090,65 +1060,41 @@
                 el.stopBtn.disabled = true;
                 
                 state.planePos = -100;
+                state.altitude = 0;
                 el.plane.style.left = '-100px';
                 el.trail.style.width = '0px';
                 el.multiplier.textContent = '1.00x';
+                el.altitude.textContent = 'Высота: 0 м';
                 
-                showToast(`✨ ВЫИГРЫШ: ${win}⭐`);
+                showWinModal('🎉 ПОБЕДА!', win);
             }
 
             // ========== КЕЙСЫ ==========
             function openCaseModal(c) {
                 state.currentCase = c;
-                el.modalTitle.textContent = c.name;
-                el.modalIcon.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23${Math.floor(Math.random()*16777215).toString(16)}" opacity="0.8"/><text x="50" y="70" font-size="50" text-anchor="middle" fill="white">${c.icon}</text></svg>')`;
-                el.modalName.textContent = c.name;
-                el.modalPrice.textContent = `★ ${c.price}`;
-                el.openCase.textContent = `ОТКРЫТЬ ЗА ★ ${c.price}`;
                 
-                el.modalPrizes.innerHTML = '';
-                c.gifts.forEach(idx => {
-                    const g = NFT_GIFTS[idx];
-                    const card = document.createElement('div');
-                    card.className = 'nft-card';
-                    card.innerHTML = `
-                        <div class="nft-emoji">${g.emoji}</div>
-                        <div class="nft-name">${g.name}</div>
-                        <div>Lv.${g.level}</div>
-                    `;
-                    el.modalPrizes.appendChild(card);
-                });
-                
-                el.modal.classList.add('active');
-            }
-
-            function openCase() {
-                if (!state.currentCase) return;
-                
-                if (state.balance < state.currentCase.price) {
+                if (state.balance < c.price) {
                     showToast('❌ Недостаточно звезд!');
                     return;
                 }
                 
-                state.balance -= state.currentCase.price;
+                state.balance -= c.price;
                 
                 if (Math.random() < 0.3) {
                     const mult = 1.5 + Math.random() * 0.5;
-                    const idx = state.currentCase.gifts[Math.floor(Math.random() * state.currentCase.gifts.length)];
+                    const idx = c.gifts[Math.floor(Math.random() * c.gifts.length)];
                     const gift = { ...NFT_GIFTS[idx] };
                     gift.price = Math.floor(gift.price * mult);
-                    gift.level = 1;
                     state.inventory.push(gift);
-                    showToast(`🎉 ПОБЕДА! x${mult.toFixed(2)}`);
+                    showWinModal('🎉 ВЫ ВЫИГРАЛИ!', gift.price);
                 } else {
-                    const stars = Math.floor(state.currentCase.price * 0.3);
+                    const stars = Math.floor(c.price * 0.3);
                     state.balance += stars;
-                    showToast(`⭐ Утешение: ${stars}⭐`);
+                    showWinModal('⭐ ВЫ ВЫИГРАЛИ!', stars);
                 }
                 
                 updateUI();
                 saveGame();
-                renderUpgradeGrid();
             }
 
             // ========== NFT ГАЛЕРЕЯ ==========
@@ -1165,10 +1111,9 @@
                     card.addEventListener('click', () => {
                         if (state.balance >= g.price) {
                             state.balance -= g.price;
-                            state.inventory.push({ ...g, level: 1 });
+                            state.inventory.push({ ...g });
                             updateUI();
                             saveGame();
-                            renderUpgradeGrid();
                             showToast(`🎁 Куплен: ${g.name}`);
                         } else {
                             showToast('❌ Недостаточно звезд!');
@@ -1184,9 +1129,9 @@
                     const card = document.createElement('div');
                     card.className = 'case-card';
                     card.innerHTML = `
-                        <div class="case-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23${Math.floor(Math.random()*16777215).toString(16)}" opacity="0.8"/><text x="50" y="70" font-size="50" text-anchor="middle" fill="white">${c.icon}</text></svg>')"></div>
+                        <div class="case-icon" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><rect x=\\'10\\' y=\\'20\\' width=\\'80\\' height=\\'60\\' rx=\\'15\\' fill=\\'%23${Math.floor(Math.random()*16777215).toString(16)}\\' opacity=\\'0.8\\'/><text x=\\'50\\' y=\\'65\\' font-size=\\'40\\' text-anchor=\\'middle\\' fill=\\'white\\'>${c.icon}</text></svg>')"></div>
                         <div class="case-name">${c.name}</div>
-                        <div class="case-price">★ ${c.price}</div>
+                        <div class="case-price">${c.price}⭐</div>
                     `;
                     card.addEventListener('click', () => openCaseModal(c));
                     el.casesGrid.appendChild(card);
@@ -1201,7 +1146,6 @@
                 
                 renderNFTs();
                 renderCases();
-                renderUpgradeGrid();
                 loadGame();
 
                 el.addFunds.addEventListener('click', () => {
@@ -1214,12 +1158,8 @@
                 el.startBtn.addEventListener('click', startFlight);
                 el.stopBtn.addEventListener('click', stopFlight);
                 el.upgradeBtn.addEventListener('click', upgradeItem);
-                
-                el.closeModal.addEventListener('click', () => el.modal.classList.remove('active'));
-                el.openCase.addEventListener('click', openCase);
-                
-                el.modal.addEventListener('click', (e) => {
-                    if (e.target === el.modal) el.modal.classList.remove('active');
+                el.closeWinModal.addEventListener('click', () => {
+                    el.winModal.classList.remove('active');
                 });
 
                 window.addEventListener('resize', () => {
