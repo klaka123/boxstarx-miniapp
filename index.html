@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 КОСМИЧЕСКИЕ КЕЙСЫ</title>
+    <title>BOXSTARX 🚀 КОСМИЧЕСКИЕ КЕЙСЫ + BLACKJACK</title>
     <style>
         * {
             margin: 0;
@@ -200,6 +200,32 @@
             transform: scale(0.98);
         }
 
+        /* Кнопка Blackjack */
+        .blackjack-main-btn {
+            background: linear-gradient(135deg, #0a0c1a, #1a1f35);
+            border: 2px solid gold;
+            border-radius: 60px;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: gold;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px gold;
+            transition: all 0.3s;
+        }
+
+        .blackjack-main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px gold;
+        }
+
+        .blackjack-main-btn:active {
+            transform: scale(0.98);
+        }
+
         /* Ракета */
         .rocket-section {
             background: rgba(0, 0, 0, 0.8);
@@ -381,7 +407,7 @@
             cursor: not-allowed;
         }
 
-        /* Кейсы с эмодзи аватарками */
+        /* ========== КЕЙСЫ С УНИКАЛЬНЫМИ СТИЛЯМИ ========== */
         .section-title {
             font-size: 1.5rem;
             text-align: center;
@@ -395,10 +421,144 @@
             gap: 15px;
         }
 
+        /* Базовый кейс */
+        .case-card[data-case="base"] {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 3px solid #4caf50;
+            box-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
+            animation: baseGlow 3s infinite alternate;
+        }
+
+        @keyframes baseGlow {
+            from { box-shadow: 0 0 20px rgba(76, 175, 80, 0.3); }
+            to { box-shadow: 0 0 50px rgba(76, 175, 80, 0.6); }
+        }
+
+        .case-card[data-case="base"] .case-emoji {
+            animation: baseWink 4s infinite;
+        }
+
+        @keyframes baseWink {
+            0%, 90%, 100% { transform: scale(1); }
+            95% { transform: scale(1.2); }
+        }
+
+        /* Серебряный кейс */
+        .case-card[data-case="silver"] {
+            background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card[data-case="silver"]::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
+            animation: silverShine 4s linear infinite;
+        }
+
+        @keyframes silverShine {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Золотой кейс */
+        .case-card[data-case="gold"] {
+            background: linear-gradient(145deg, #ffd700, #ff8c00);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
+            animation: goldPulse 2s infinite alternate;
+        }
+
+        @keyframes goldPulse {
+            from { transform: scale(1); box-shadow: 0 0 30px gold; }
+            to { transform: scale(1.02); box-shadow: 0 0 80px gold; }
+        }
+
+        .case-card[data-case="gold"] .case-emoji {
+            animation: goldFire 3s infinite;
+        }
+
+        @keyframes goldFire {
+            0%, 100% { filter: drop-shadow(0 0 10px orange); }
+            50% { filter: drop-shadow(0 0 30px red); }
+        }
+
+        /* Платиновый кейс */
+        .case-card[data-case="platinum"] {
+            background: linear-gradient(145deg, #e5e4e2, #b0b0b0);
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .case-card[data-case="platinum"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(0,255,255,0.4), transparent 70%);
+            animation: platinumGlow 3s infinite alternate;
+        }
+
+        @keyframes platinumGlow {
+            from { opacity: 0.3; }
+            to { opacity: 0.8; }
+        }
+
+        /* Алмазный кейс */
+        .case-card[data-case="diamond"] {
+            background: linear-gradient(145deg, #b9f2ff, #87ceeb);
+            border: 3px solid #ff00ff;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card[data-case="diamond"] .case-emoji {
+            animation: diamondRainbow 4s linear infinite;
+        }
+
+        @keyframes diamondRainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Легендарный кейс */
+        .case-card[data-case="legendary"] {
+            background: linear-gradient(145deg, #8b0000, #ff4500);
+            border: 3px solid gold;
+            box-shadow: 0 0 70px rgba(255, 69, 0, 0.7);
+            position: relative;
+        }
+
+        .case-card[data-case="legendary"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3), transparent 70%);
+            animation: legendaryFlame 2s infinite alternate;
+        }
+
+        @keyframes legendaryFlame {
+            from { opacity: 0.3; transform: scale(1); }
+            to { opacity: 0.8; transform: scale(1.05); }
+        }
+
         .case-card {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 3px solid #ff9933;
             border-radius: 30px;
             padding: 20px 10px;
             text-align: center;
@@ -408,22 +568,6 @@
             overflow: hidden;
         }
 
-        .case-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,153,51,0.2), transparent 70%);
-            animation: rotateGlow 10s linear infinite;
-        }
-
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         .case-card:active {
             transform: scale(0.97);
         }
@@ -431,7 +575,7 @@
         .case-emoji {
             font-size: 4rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px #ff9933);
+            filter: drop-shadow(0 0 15px currentColor);
             position: relative;
             z-index: 5;
         }
@@ -439,6 +583,14 @@
         .case-name {
             font-size: 1.1rem;
             font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .case-sub {
+            font-size: 0.8rem;
+            color: #aaa;
             margin-bottom: 5px;
             position: relative;
             z-index: 5;
@@ -581,27 +733,7 @@
             transition: background 0.3s;
         }
 
-        /* ЦЕНТРАЛЬНЫЙ ЧЕРНЫЙ КРУГ С МОЛНИЕЙ */
-        .upgrade-center-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: #000;
-            border: 4px solid #ff9933;
-            border-radius: 50%;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #ff9933;
-            box-shadow: 0 0 30px #ff9933;
-        }
-
-        /* СТРЕЛКА КАК В ЧАСАХ - ВРАЩАЕТСЯ ВОКРУГ ЦЕНТРАЛЬНОГО КРУГА */
+        /* Стрелка как в часах */
         .upgrade-arrow-clock {
             position: absolute;
             top: 50%;
@@ -639,6 +771,25 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 0 10px #fff;
+        }
+
+        .upgrade-center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #000;
+            border: 4px solid #ff9933;
+            border-radius: 50%;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ff9933;
+            box-shadow: 0 0 30px #ff9933;
         }
 
         .upgrade-percent {
@@ -701,7 +852,6 @@
             font-weight: 700;
         }
 
-        /* Кнопка улучшить */
         .upgrade-action-btn {
             width: 100%;
             padding: 18px;
@@ -786,7 +936,6 @@
             transform: scale(0.95);
         }
 
-        /* Множественные полосы для кейсов */
         .case-multiple-container {
             width: 100%;
             max-width: 800px;
@@ -980,88 +1129,232 @@
             transform: scale(0.95);
         }
 
-        /* Окно продажи предмета */
-        .sell-modal {
+        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK ========== */
+        .blackjack-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
+            background: #0a3d2e; /* Зеленый стол как в казино */
             display: none;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px;
         }
 
-        .sell-modal.active {
+        .blackjack-modal.active {
             display: flex;
         }
 
-        .sell-content {
-            background: #1a1f35;
-            border: 3px solid #ff9933;
-            border-radius: 80px;
-            padding: 40px;
-            text-align: center;
-            max-width: 350px;
-            width: 90%;
-        }
-
-        .sell-image {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: drop-shadow(0 0 30px #ff9933);
-        }
-
-        .sell-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .sell-price {
-            font-size: 2rem;
-            color: #ff9933;
-            font-weight: 900;
+        .blackjack-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 30px;
         }
 
-        .sell-buttons {
+        .blackjack-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,215,0,0.2);
+            border: 2px solid gold;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .sell-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 40px;
+        .blackjack-back:active {
+            transform: scale(0.95);
+        }
+
+        .blackjack-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: gold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .blackjack-table {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 60px;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            border: 2px solid gold;
+        }
+
+        .blackjack-dealer, .blackjack-player {
+            margin-bottom: 30px;
+        }
+
+        .blackjack-label {
             font-size: 1.2rem;
+            color: gold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .blackjack-cards {
+            display: flex;
+            gap: 15px;
+            min-height: 120px;
+            flex-wrap: wrap;
+        }
+
+        .blackjack-card {
+            width: 80px;
+            height: 120px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: black;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            animation: cardDeal 0.3s ease-out;
+        }
+
+        @keyframes cardDeal {
+            from { transform: translateY(-50px) rotate(10deg); opacity: 0; }
+            to { transform: translateY(0) rotate(0deg); opacity: 1; }
+        }
+
+        .blackjack-card.red {
+            color: red;
+        }
+
+        .blackjack-score {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .blackjack-bet-panel {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid gold;
+        }
+
+        .blackjack-bet-label {
+            font-size: 1.1rem;
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .blackjack-bet-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .blackjack-bet-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 12px;
+            border: 2px solid gold;
+            border-radius: 40px;
+            background: rgba(255,215,0,0.1);
+            color: white;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
         }
 
-        .sell-btn:active {
-            transform: scale(0.95);
+        .blackjack-bet-btn:hover {
+            background: rgba(255,215,0,0.2);
         }
 
-        .sell-btn-sell {
-            background: #ff9933;
+        .blackjack-bet-btn.active {
+            background: gold;
             color: black;
         }
 
-        .sell-btn-keep {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid #ff9933;
+        .blackjack-bet-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid gold;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.5);
+            color: gold;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+        }
+
+        .blackjack-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .blackjack-action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blackjack-action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .blackjack-action-btn.hit {
+            background: linear-gradient(135deg, #4caf50, #45a049);
             color: white;
+            box-shadow: 0 0 30px #4caf50;
+        }
+
+        .blackjack-action-btn.stand {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            box-shadow: 0 0 30px #f44336;
+        }
+
+        .blackjack-action-btn.double {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            box-shadow: 0 0 30px #ff9800;
+        }
+
+        .blackjack-action-btn.new {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+            box-shadow: 0 0 30px #2196f3;
+        }
+
+        .blackjack-action-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .blackjack-message {
+            text-align: center;
+            font-size: 1.5rem;
+            color: gold;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid gold;
+            border-radius: 60px;
+            background: rgba(0,0,0,0.5);
         }
 
         /* ========== ИНВЕНТАРЬ ========== */
@@ -1396,8 +1689,9 @@
                 <button class="add-btn" id="addFunds">+100 ⭐</button>
             </header>
 
-            <!-- Кнопка апгрейда на главном -->
+            <!-- Кнопки на главном -->
             <button class="upgrade-main-btn" id="openUpgradeBtn">⚡ UPGRADE ⚡</button>
+            <button class="blackjack-main-btn" id="openBlackjackBtn">🃏 BLACKJACK 🃏</button>
 
             <section class="rocket-section">
                 <div class="rocket-window" id="rocketWindow">
@@ -1468,9 +1762,7 @@
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
-            <!-- СТРЕЛКА КАК В ЧАСАХ - ВРАЩАЕТСЯ ВОКРУГ ЦЕНТРАЛЬНОГО КРУГА -->
             <div class="upgrade-arrow-clock" id="upgradeArrow"></div>
-            <!-- ЦЕНТРАЛЬНЫЙ ЧЕРНЫЙ КРУГ С МОЛНИЕЙ -->
             <div class="upgrade-center-circle" id="upgradeCenter">⚡</div>
         </div>
 
@@ -1489,6 +1781,48 @@
         </div>
 
         <button class="upgrade-action-btn" id="upgradeActionBtn" disabled>УЛУЧШИТЬ</button>
+    </div>
+
+    <!-- Модальное окно Blackjack -->
+    <div class="blackjack-modal" id="blackjackModal">
+        <div class="blackjack-header">
+            <div class="blackjack-back" id="blackjackClose">←</div>
+            <div class="blackjack-title">🃏 BLACKJACK</div>
+        </div>
+
+        <div class="blackjack-table">
+            <div class="blackjack-dealer">
+                <div class="blackjack-label">🤖 ДИЛЕР</div>
+                <div class="blackjack-cards" id="dealerCards"></div>
+                <div class="blackjack-score" id="dealerScore">0</div>
+            </div>
+
+            <div class="blackjack-player">
+                <div class="blackjack-label">👤 ТЫ</div>
+                <div class="blackjack-cards" id="playerCards"></div>
+                <div class="blackjack-score" id="playerScore">0</div>
+            </div>
+        </div>
+
+        <div class="blackjack-bet-panel">
+            <div class="blackjack-bet-label">💰 СТАВКА</div>
+            <div class="blackjack-bet-controls">
+                <button class="blackjack-bet-btn" data-bet="10">10</button>
+                <button class="blackjack-bet-btn" data-bet="50">50</button>
+                <button class="blackjack-bet-btn" data-bet="100">100</button>
+                <button class="blackjack-bet-btn" data-bet="500">500</button>
+            </div>
+            <input type="number" class="blackjack-bet-input" id="blackjackBet" value="100" min="10" step="10">
+        </div>
+
+        <div class="blackjack-actions">
+            <button class="blackjack-action-btn hit" id="blackjackHit" disabled>➕ ВЗЯТЬ</button>
+            <button class="blackjack-action-btn stand" id="blackjackStand" disabled>✋ СТОП</button>
+            <button class="blackjack-action-btn double" id="blackjackDouble" disabled>💸 УДВОИТЬ</button>
+            <button class="blackjack-action-btn new" id="blackjackNew">🔄 НОВАЯ ИГРА</button>
+        </div>
+
+        <div class="blackjack-message" id="blackjackMessage">Начните новую игру</div>
     </div>
 
     <!-- Модальное окно кейса -->
@@ -1527,7 +1861,7 @@
         </div>
     </div>
 
-    <!-- Селектор подарков для ставки -->
+    <!-- Селектор подарков -->
     <div class="gift-selector" id="giftSelector">
         <div class="selector-header">
             <div class="selector-back" id="giftSelectorBack">←</div>
@@ -1536,7 +1870,6 @@
         <div class="selector-grid" id="giftSelectorGrid"></div>
     </div>
 
-    <!-- Селектор желаемого подарка -->
     <div class="gift-selector" id="targetSelector">
         <div class="selector-header">
             <div class="selector-back" id="targetSelectorBack">←</div>
@@ -1896,12 +2229,12 @@
             }
 
             const CASES = [
-                { name: "Базовый", emoji: "📦", price: 25 },
-                { name: "Серебряный", emoji: "🥈", price: 50 },
-                { name: "Золотой", emoji: "🥇", price: 100 },
-                { name: "Платиновый", emoji: "💎", price: 500 },
-                { name: "Алмазный", emoji: "💠", price: 1000 },
-                { name: "Легендарный", emoji: "👑", price: 5000 }
+                { id: 'base', name: "БАЗОВЫЙ", emoji: "📦", price: 25, sub: "Стартуем!" },
+                { id: 'silver', name: "СЕРЕБРЯНЫЙ", emoji: "🥈", price: 50, sub: "Уже интереснее" },
+                { id: 'gold', name: "ЗОЛОТОЙ", emoji: "🥇", price: 100, sub: "Горячо 🔥" },
+                { id: 'platinum', name: "ПЛАТИНОВЫЙ", emoji: "💎", price: 500, sub: "Элитка" },
+                { id: 'diamond', name: "АЛМАЗНЫЙ", emoji: "💠", price: 1000, sub: "Сияем!" },
+                { id: 'legendary', name: "ЛЕГЕНДАРНЫЙ", emoji: "👑", price: 5000, sub: "Только для смелых" }
             ];
 
             const PROMO_CODES = {
@@ -1932,7 +2265,18 @@
                 upgradeTargetGift: null,
                 inventoryPage: 1,
                 multipleResults: [],
-                caseRows: []
+                caseRows: [],
+                
+                // Blackjack state
+                blackjack: {
+                    deck: [],
+                    playerCards: [],
+                    dealerCards: [],
+                    playerScore: 0,
+                    dealerScore: 0,
+                    gameActive: false,
+                    bet: 100
+                }
             };
 
             const el = {
@@ -1965,6 +2309,21 @@
                 betGiftDisplay: document.getElementById('betGiftDisplay'),
                 targetGiftDisplay: document.getElementById('targetGiftDisplay'),
                 upgradeActionBtn: document.getElementById('upgradeActionBtn'),
+                
+                openBlackjackBtn: document.getElementById('openBlackjackBtn'),
+                blackjackModal: document.getElementById('blackjackModal'),
+                blackjackClose: document.getElementById('blackjackClose'),
+                blackjackBet: document.getElementById('blackjackBet'),
+                blackjackHit: document.getElementById('blackjackHit'),
+                blackjackStand: document.getElementById('blackjackStand'),
+                blackjackDouble: document.getElementById('blackjackDouble'),
+                blackjackNew: document.getElementById('blackjackNew'),
+                blackjackMessage: document.getElementById('blackjackMessage'),
+                dealerCards: document.getElementById('dealerCards'),
+                playerCards: document.getElementById('playerCards'),
+                dealerScore: document.getElementById('dealerScore'),
+                playerScore: document.getElementById('playerScore'),
+                blackjackBetBtns: document.querySelectorAll('.blackjack-bet-btn'),
                 
                 caseModal: document.getElementById('caseModal'),
                 caseTitle: document.getElementById('caseTitle'),
@@ -2224,16 +2583,18 @@
                 }, 500);
             }
 
-            // Рендер кейсов с эмодзи
+            // Рендер кейсов
             function renderCases() {
                 el.casesGrid.innerHTML = '';
                 CASES.forEach(c => {
                     const card = document.createElement('div');
                     card.className = 'case-card';
+                    card.setAttribute('data-case', c.id);
                     
                     card.innerHTML = `
                         <div class="case-emoji">${c.emoji}</div>
                         <div class="case-name">${c.name}</div>
+                        <div class="case-sub">${c.sub}</div>
                         <div class="case-price">${c.price} ⭐</div>
                     `;
                     card.onclick = () => openCaseModal(c);
@@ -2618,6 +2979,257 @@
                 showToast(`✅ +${amount}⭐ получено!`);
             }
 
+            // ========== BLACKJACK ==========
+            function createDeck() {
+                const suits = ['♠️', '♥️', '♦️', '♣️'];
+                const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+                const deck = [];
+                
+                for (let suit of suits) {
+                    for (let value of values) {
+                        deck.push({ suit, value });
+                    }
+                }
+                
+                return shuffle(deck);
+            }
+
+            function shuffle(deck) {
+                for (let i = deck.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [deck[i], deck[j]] = [deck[j], deck[i]];
+                }
+                return deck;
+            }
+
+            function getCardValue(card) {
+                if (card.value === 'A') return 11;
+                if (['K', 'Q', 'J'].includes(card.value)) return 10;
+                return parseInt(card.value);
+            }
+
+            function calculateScore(cards) {
+                let score = 0;
+                let aces = 0;
+                
+                for (let card of cards) {
+                    const value = getCardValue(card);
+                    if (value === 11) aces++;
+                    score += value;
+                }
+                
+                while (score > 21 && aces > 0) {
+                    score -= 10;
+                    aces--;
+                }
+                
+                return score;
+            }
+
+            function startBlackjack() {
+                const bet = parseInt(el.blackjackBet.value) || 100;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                state.blackjack.deck = createDeck();
+                state.blackjack.playerCards = [];
+                state.blackjack.dealerCards = [];
+                
+                // Раздаем карты
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                
+                state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                state.blackjack.dealerScore = calculateScore([state.blackjack.dealerCards[0]]);
+                state.blackjack.gameActive = true;
+                state.blackjack.bet = bet;
+                
+                updateBlackjackUI();
+                
+                el.blackjackHit.disabled = false;
+                el.blackjackStand.disabled = false;
+                el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
+                el.blackjackNew.disabled = false;
+                el.blackjackMessage.textContent = 'Ваш ход';
+            }
+
+            function blackjackHit() {
+                if (!state.blackjack.gameActive) return;
+                
+                state.blackjack.playerCards.push(state.blackjack.deck.pop());
+                state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                
+                updateBlackjackUI();
+                
+                if (state.blackjack.playerScore > 21) {
+                    // Перебор - проигрыш
+                    state.balance -= state.blackjack.bet;
+                    state.blackjack.gameActive = false;
+                    el.blackjackHit.disabled = true;
+                    el.blackjackStand.disabled = true;
+                    el.blackjackDouble.disabled = true;
+                    el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
+                    sound.playLoseSound();
+                    updateUI();
+                    saveGame();
+                }
+            }
+
+            function blackjackStand() {
+                if (!state.blackjack.gameActive) return;
+                
+                state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
+                
+                while (state.blackjack.dealerScore < 17) {
+                    state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
+                }
+                
+                updateBlackjackUI(true);
+                
+                let message = '';
+                let win = false;
+                
+                if (state.blackjack.dealerScore > 21) {
+                    message = '🎉 Дилер перебрал! Вы выиграли!';
+                    win = true;
+                } else if (state.blackjack.playerScore > state.blackjack.dealerScore) {
+                    message = '🎉 Вы выиграли!';
+                    win = true;
+                } else if (state.blackjack.playerScore < state.blackjack.dealerScore) {
+                    message = '😞 Вы проиграли';
+                } else {
+                    message = '🤝 Ничья (ставка возвращена)';
+                }
+                
+                if (win) {
+                    state.balance += state.blackjack.bet;
+                    sound.playWinSound();
+                } else if (state.blackjack.playerScore !== state.blackjack.dealerScore) {
+                    state.balance -= state.blackjack.bet;
+                    sound.playLoseSound();
+                }
+                
+                state.blackjack.gameActive = false;
+                el.blackjackHit.disabled = true;
+                el.blackjackStand.disabled = true;
+                el.blackjackDouble.disabled = true;
+                el.blackjackMessage.textContent = message;
+                
+                updateUI();
+                saveGame();
+            }
+
+            function blackjackDouble() {
+                if (!state.blackjack.gameActive || state.blackjack.playerCards.length > 2) return;
+                
+                state.blackjack.bet *= 2;
+                blackjackHit();
+                
+                if (state.blackjack.playerScore <= 21) {
+                    blackjackStand();
+                }
+            }
+
+            function updateBlackjackUI(showDealerAll = false) {
+                // Карты игрока
+                el.playerCards.innerHTML = '';
+                state.blackjack.playerCards.forEach(card => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
+                    cardEl.textContent = `${card.value}${card.suit}`;
+                    el.playerCards.appendChild(cardEl);
+                });
+                
+                // Карты дилера
+                el.dealerCards.innerHTML = '';
+                state.blackjack.dealerCards.forEach((card, index) => {
+                    const cardEl = document.createElement('div');
+                    if (index === 1 && !showDealerAll && state.blackjack.gameActive) {
+                        cardEl.className = 'blackjack-card';
+                        cardEl.textContent = '?';
+                    } else {
+                        cardEl.className = `blackjack-card ${card.suit === '♥️' || card.suit === '♦️' ? 'red' : ''}`;
+                        cardEl.textContent = `${card.value}${card.suit}`;
+                    }
+                    el.dealerCards.appendChild(cardEl);
+                });
+                
+                el.playerScore.textContent = state.blackjack.playerScore;
+                
+                if (showDealerAll || !state.blackjack.gameActive) {
+                    el.dealerScore.textContent = state.blackjack.dealerScore;
+                } else {
+                    el.dealerScore.textContent = getCardValue(state.blackjack.dealerCards[0]);
+                }
+            }
+
+            // Blackjack обработчики
+            el.openBlackjackBtn.onclick = () => {
+                el.blackjackModal.classList.add('active');
+                startBlackjack();
+            };
+            
+            el.blackjackClose.onclick = () => {
+                el.blackjackModal.classList.remove('active');
+            };
+            
+            el.blackjackBetBtns.forEach(btn => {
+                btn.onclick = () => {
+                    el.blackjackBet.value = btn.dataset.bet;
+                };
+            });
+            
+            el.blackjackHit.onclick = blackjackHit;
+            el.blackjackStand.onclick = blackjackStand;
+            el.blackjackDouble.onclick = blackjackDouble;
+            el.blackjackNew.onclick = startBlackjack;
+
+            // Апгрейд
+            el.upgradeActionBtn.onclick = () => {
+                if (!state.upgradeBetGift || !state.upgradeTargetGift) {
+                    showToast('❌ Выберите подарки!');
+                    return;
+                }
+                
+                const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
+                
+                const spins = 5 + Math.floor(Math.random() * 5);
+                const win = Math.random() * 100 < chance;
+                
+                const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
+                
+                el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
+                
+                el.upgradeActionBtn.disabled = true;
+                
+                setTimeout(() => {
+                    if (win) {
+                        const winGift = { ...state.upgradeTargetGift };
+                        state.inventory.push(winGift);
+                        sound.playWinSound();
+                        showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
+                    } else {
+                        sound.playLoseSound();
+                        showToast('💥 ПРОВАЛ! Подарок сгорел');
+                    }
+                    
+                    state.upgradeBetGift = null;
+                    state.upgradeTargetGift = null;
+                    updateUpgradeUI();
+                    updateUI();
+                    saveGame();
+                    el.upgradeActionBtn.disabled = false;
+                    
+                    el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
+                }, 4000);
+            };
+
             function init() {
                 resizeCanvas();
                 initStars();
@@ -2687,45 +3299,6 @@
                 
                 el.targetSelectorBack.onclick = () => {
                     el.targetSelector.classList.remove('active');
-                };
-                
-                el.upgradeActionBtn.onclick = () => {
-                    if (!state.upgradeBetGift || !state.upgradeTargetGift) {
-                        showToast('❌ Выберите подарки!');
-                        return;
-                    }
-                    
-                    const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
-                    
-                    const spins = 5 + Math.floor(Math.random() * 5);
-                    const win = Math.random() * 100 < chance;
-                    
-                    const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
-                    
-                    el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
-                    
-                    el.upgradeActionBtn.disabled = true;
-                    
-                    setTimeout(() => {
-                        if (win) {
-                            const winGift = { ...state.upgradeTargetGift };
-                            state.inventory.push(winGift);
-                            sound.playWinSound();
-                            showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
-                        } else {
-                            sound.playLoseSound();
-                            showToast('💥 ПРОВАЛ! Подарок сгорел');
-                        }
-                        
-                        state.upgradeBetGift = null;
-                        state.upgradeTargetGift = null;
-                        updateUpgradeUI();
-                        updateUI();
-                        saveGame();
-                        el.upgradeActionBtn.disabled = false;
-                        
-                        el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
-                    }, 4000);
                 };
 
                 window.onresize = () => {
