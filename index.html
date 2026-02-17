@@ -447,22 +447,30 @@
             border-radius: 50%;
             background: #1a1f35;
             box-shadow: 0 0 30px #ff9933;
+            transition: all 0.3s ease;
         }
 
         .wheel-arrow {
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3rem;
-            filter: drop-shadow(0 0 15px #ff9933);
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 20px #ff9933);
             z-index: 30;
             text-shadow: 0 0 10px rgba(0,0,0,0.5);
-            transition: transform 2s cubic-bezier(0.17, 0.67, 0.2, 1);
+            transition: transform 2.5s cubic-bezier(0.17, 0.67, 0.1, 1);
+            transform-origin: bottom center;
+            pointer-events: none;
         }
 
         .wheel-arrow.spinning {
-            transform: translateX(-50%) rotate(720deg);
+            animation: arrowGlow 0.5s infinite alternate;
+        }
+
+        @keyframes arrowGlow {
+            from { filter: drop-shadow(0 0 20px #ff9933); }
+            to { filter: drop-shadow(0 0 40px #ff6600); }
         }
 
         .wheel-center {
@@ -470,17 +478,28 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: #0f1428;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #1a1f35, #0f1428);
             border: 3px solid #ff9933;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             z-index: 25;
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 30px #ff9933;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wheel-center:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 50px #ff9933;
+        }
+
+        .wheel-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
         }
 
         .wheel-stats {
@@ -533,6 +552,7 @@
         .slot-item.filled {
             background: rgba(255, 153, 51, 0.3);
             border-color: #ff9933;
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .slot-emoji {
@@ -561,7 +581,7 @@
             background: linear-gradient(135deg, #ff9933, #ff6600);
             color: white;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .upgrade-btn:active:not(:disabled) {
@@ -839,6 +859,13 @@
         .win-emoji {
             font-size: 4rem;
             margin-bottom: 15px;
+            animation: winEmoji 2s infinite ease-in-out;
+        }
+
+        @keyframes winEmoji {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         .win-title {
@@ -1083,6 +1110,16 @@
         <div class="inventory-grid" id="desireGiftsGrid" style="margin-top: 20px;"></div>
     </div>
 
+    <!-- Модальное окно выбора подарка для слота -->
+    <div class="modal" id="slotModal">
+        <div class="modal-header">
+            <button class="modal-back" id="closeSlotModal">←</button>
+            <div class="modal-title">Выберите подарок для слота</div>
+        </div>
+
+        <div class="inventory-grid" id="slotGiftsGrid" style="margin-top: 20px;"></div>
+    </div>
+
     <!-- Модальное окно выигрыша -->
     <div class="win-modal" id="winModal">
         <div class="win-content">
@@ -1200,7 +1237,7 @@
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
                 wheelCtx.strokeStyle = '#ff9933';
-                wheelCtx.lineWidth = 3;
+                wheelCtx.lineWidth = 4;
                 wheelCtx.stroke();
                 
                 // Разделительная линия
@@ -1208,12 +1245,24 @@
                 wheelCtx.moveTo(centerX, centerY);
                 wheelCtx.lineTo(centerX + radius * Math.cos((winChance / 100) * Math.PI * 2), centerY + radius * Math.sin((winChance / 100) * Math.PI * 2));
                 wheelCtx.strokeStyle = '#fff';
-                wheelCtx.lineWidth = 2;
+                wheelCtx.lineWidth = 3;
                 wheelCtx.stroke();
+                
+                // Добавляем градиент для объема
+                const gradient = wheelCtx.createRadialGradient(centerX - 30, centerY - 30, 20, centerX, centerY, radius);
+                gradient.addColorStop(0, 'rgba(255,255,255,0.2)');
+                gradient.addColorStop(1, 'rgba(0,0,0,0.2)');
+                wheelCtx.fillStyle = gradient;
+                wheelCtx.globalCompositeOperation = 'overlay';
+                wheelCtx.beginPath();
+                wheelCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                wheelCtx.fill();
+                wheelCtx.globalCompositeOperation = 'source-over';
             }
 
             // ========== ДАННЫЕ ==========
             const GIFTS = [
+                // Дешевые подарки (1-50⭐)
                 { emoji: "🧸", name: "Мишка", price: 5 },
                 { emoji: "🎈", name: "Шар", price: 8 },
                 { emoji: "🍬", name: "Конфета", price: 10 },
@@ -1229,17 +1278,27 @@
                 { emoji: "👕", name: "Футболка", price: 40 },
                 { emoji: "👖", name: "Джинсы", price: 45 },
                 { emoji: "👟", name: "Кроссовки", price: 50 },
+                
+                // Средние подарки (100-300⭐)
                 { emoji: "⌚", name: "Часы", price: 100 },
                 { emoji: "💍", name: "Кольцо", price: 150 },
                 { emoji: "📱", name: "Телефон", price: 200 },
                 { emoji: "💻", name: "Ноутбук", price: 300 },
                 { emoji: "🎧", name: "Наушники", price: 120 },
                 { emoji: "🎮", name: "Приставка", price: 250 },
+                
+                // Дорогие подарки (500-2000⭐)
                 { emoji: "💎", name: "Алмаз", price: 500 },
                 { emoji: "👑", name: "Корона", price: 750 },
                 { emoji: "🚗", name: "Машина", price: 1000 },
                 { emoji: "✈️", name: "Самолет", price: 1500 },
-                { emoji: "🦄", name: "Единорог", price: 2000 }
+                { emoji: "🦄", name: "Единорог", price: 2000 },
+                
+                // Очень дорогие (2500-5000⭐)
+                { emoji: "🏰", name: "Замок", price: 2500 },
+                { emoji: "🚁", name: "Вертолет", price: 3000 },
+                { emoji: "🛳️", name: "Яхта", price: 4000 },
+                { emoji: "🚀", name: "Шаттл", price: 5000 }
             ];
 
             const CASES = [
@@ -1247,8 +1306,8 @@
                 { name: "Серебряный", icon: "🥈", price: 50, gifts: [5,6,7,8,9,10,11,12,13,14,15,16,17] },
                 { name: "Золотой", icon: "🥇", price: 100, gifts: [10,11,12,13,14,15,16,17,18,19,20] },
                 { name: "Платиновый", icon: "💎", price: 500, gifts: [15,16,17,18,19,20,21,22,23] },
-                { name: "Алмазный", icon: "💠", price: 1000, gifts: [18,19,20,21,22,23,24] },
-                { name: "Легендарный", icon: "👑", price: 5000, gifts: [21,22,23,24,25,26] }
+                { name: "Алмазный", icon: "💠", price: 1000, gifts: [18,19,20,21,22,23,24,25,26] },
+                { name: "Легендарный", icon: "👑", price: 5000, gifts: [21,22,23,24,25,26,27,28,29] }
             ];
 
             const PROMO_CODES = {
@@ -1308,7 +1367,10 @@
                 betsCount: document.getElementById('betsCount'),
                 desireModal: document.getElementById('desireModal'),
                 closeDesireModal: document.getElementById('closeDesireModal'),
-                desireGiftsGrid: document.getElementById('desireGiftsGrid')
+                desireGiftsGrid: document.getElementById('desireGiftsGrid'),
+                slotModal: document.getElementById('slotModal'),
+                closeSlotModal: document.getElementById('closeSlotModal'),
+                slotGiftsGrid: document.getElementById('slotGiftsGrid')
             };
 
             const slotItems = document.querySelectorAll('.slot-item');
@@ -1543,7 +1605,15 @@
                 let totalWin = 0;
                 
                 for (let i = 0; i < state.selectedQty; i++) {
-                    let max = state.currentCase.price <= 100 ? state.currentCase.price * 1.2 : state.currentCase.price * 0.3;
+                    let max;
+                    if (state.currentCase.price <= 100) {
+                        max = state.currentCase.price * 1.2;
+                    } else if (state.currentCase.price === 5000) {
+                        max = state.currentCase.price * 0.5; // Повысил шансы для легендарного
+                    } else {
+                        max = state.currentCase.price * 0.3;
+                    }
+                    
                     const available = GIFTS.filter(g => g.price <= max);
                     const gift = { ...available[Math.floor(Math.random() * available.length)] };
                     gift.price = Math.floor(gift.price * (0.3 + Math.random() * 0.7));
@@ -1598,6 +1668,8 @@
             }
 
             // ========== АПГРЕЙД ==========
+            let currentSlotIndex = null;
+
             function initUpgradeSlots() {
                 slotItems.forEach((slot, index) => {
                     slot.onclick = () => {
@@ -1607,19 +1679,20 @@
                             updateUpgradeUI();
                             updateInventory();
                         } else {
-                            openGiftSelection(index);
+                            currentSlotIndex = index;
+                            openSlotSelection();
                         }
                     };
                 });
             }
 
-            function openGiftSelection(slotIndex) {
+            function openSlotSelection() {
                 if (state.inventory.length === 0) {
                     showToast('❌ Инвентарь пуст');
                     return;
                 }
                 
-                el.desireGiftsGrid.innerHTML = '';
+                el.slotGiftsGrid.innerHTML = '';
                 
                 state.inventory.forEach((g, idx) => {
                     const s = document.createElement('div');
@@ -1630,16 +1703,16 @@
                         <div class="slot-price">${g.price}⭐</div>
                     `;
                     s.onclick = () => {
-                        state.upgradeSlots[slotIndex] = { ...g, inventoryIndex: idx };
+                        state.upgradeSlots[currentSlotIndex] = { ...g, inventoryIndex: idx };
                         state.inventory.splice(idx, 1);
                         updateUpgradeUI();
                         updateInventory();
-                        el.desireModal.classList.remove('active');
+                        el.slotModal.classList.remove('active');
                     };
-                    el.desireGiftsGrid.appendChild(s);
+                    el.slotGiftsGrid.appendChild(s);
                 });
                 
-                el.desireModal.classList.add('active');
+                el.slotModal.classList.add('active');
             }
 
             function selectDesired() {
@@ -1689,11 +1762,11 @@
 
                 if (state.desiredGift && filled > 0) {
                     const total = state.upgradeSlots.reduce((sum, s) => sum + (s ? s.price : 0), 0);
-                    const chance = Math.min(filled * 10, 70);
+                    const chance = Math.min(filled * 12, 75); // Увеличил шансы
                     el.winChance.textContent = chance + '%';
                     drawWheel(chance);
                     
-                    const min = Math.floor(total * 1.4);
+                    const min = Math.floor(total * 1.3); // Снизил требования
                     if (state.desiredGift.price >= min) {
                         el.upgradeBtn.disabled = false;
                         el.upgradeBtn.textContent = 'КРУТИТЬ КОЛЕСО';
@@ -1713,15 +1786,15 @@
                 if (state.isSpinning) return;
                 
                 const filled = state.upgradeSlots.filter(s => s !== null).length;
-                const chance = Math.min(filled * 10, 70);
+                const chance = Math.min(filled * 12, 75);
                 
                 state.isSpinning = true;
                 el.upgradeBtn.disabled = true;
                 
-                const spins = 5 + Math.floor(Math.random() * 3);
+                const spins = 8 + Math.floor(Math.random() * 5);
                 const win = Math.random() * 100 < chance;
                 
-                const targetRotation = win ? 360 * spins + 90 : 360 * spins + 270;
+                const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                 
                 wheelArrow.style.transform = `translateX(-50%) rotate(${targetRotation}deg)`;
                 wheelArrow.classList.add('spinning');
@@ -1744,7 +1817,7 @@
                     saveGame();
                     
                     state.isSpinning = false;
-                }, 2000);
+                }, 2500);
             }
 
             // ========== ИНИЦИАЛИЗАЦИЯ ==========
@@ -1796,6 +1869,7 @@
                 
                 wheelCenter.onclick = selectDesired;
                 el.closeDesireModal.onclick = () => el.desireModal.classList.remove('active');
+                el.closeSlotModal.onclick = () => el.slotModal.classList.remove('active');
                 el.upgradeBtn.onclick = spinWheel;
 
                 window.onresize = () => {
