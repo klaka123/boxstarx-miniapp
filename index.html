@@ -500,31 +500,32 @@
             transition: background 0.3s;
         }
 
-        /* Стрелка внутри круга, вращается от центра */
-        .upgrade-arrow-wrapper {
+        /* Стрелка в центре круга */
+        .upgrade-arrow-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
             z-index: 20;
+            pointer-events: none;
         }
 
         .upgrade-arrow {
             position: relative;
             width: 0;
             height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-bottom: 120px solid #ff9933;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-bottom: 130px solid #ff9933;
             transform-origin: center center;
-            transition: transform 3s cubic-bezier(0.1, 0.8, 0.2, 1);
+            transform: rotate(0deg) translateY(-65px);
             filter: drop-shadow(0 0 20px #ff9933);
-            margin-top: -60px; /* Смещаем вверх, чтобы центр был в середине */
+            transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
         }
 
         .upgrade-center {
@@ -532,17 +533,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: #000;
-            border: 3px solid #ff9933;
+            border: 4px solid #ff9933;
             border-radius: 50%;
             z-index: 30;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: #ff9933;
+            box-shadow: 0 0 30px #ff9933;
         }
 
         .upgrade-percent {
@@ -615,6 +617,7 @@
             color: black;
             cursor: pointer;
             transition: all 0.2s;
+            margin-top: 20px;
         }
 
         .upgrade-action-btn:active {
@@ -939,7 +942,7 @@
             transform: scale(0.95);
         }
 
-        /* Инвентарь */
+        /* ========== ИНВЕНТАРЬ С ДВУМЯ СТРАНИЦАМИ ========== */
         .inventory-section {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -962,6 +965,48 @@
             color: #ff9933;
         }
 
+        .inventory-pagination {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .inventory-page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.1);
+            border: 2px solid #ff9933;
+            color: #ff9933;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .inventory-page-btn:hover {
+            background: rgba(255,153,51,0.2);
+        }
+
+        .inventory-page-btn:active {
+            transform: scale(0.95);
+        }
+
+        .inventory-page-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .inventory-page-indicator {
+            color: #ff9933;
+            font-size: 1rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
         .inventory-count {
             background: rgba(255,153,51,0.1);
             border: 2px solid #ff9933;
@@ -975,6 +1020,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
+            min-height: 200px;
         }
 
         .inventory-slot {
@@ -990,6 +1036,12 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
+            transition: all 0.2s;
+        }
+
+        .inventory-slot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .inventory-slot:active {
@@ -1010,6 +1062,9 @@
             font-size: 0.6rem;
             font-weight: 600;
             color: #ff9933;
+            text-align: center;
+            word-break: break-word;
+            max-width: 100%;
         }
 
         .inv-price {
@@ -1239,10 +1294,16 @@
             <h2 class="section-title">📦 КОСМИЧЕСКИЕ КЕЙСЫ</h2>
             <div class="cases-grid" id="casesGrid"></div>
 
+            <!-- Инвентарь с двумя страницами -->
             <section class="inventory-section">
                 <div class="inventory-header">
                     <span class="inventory-title">📦 ИНВЕНТАРЬ</span>
-                    <span class="inventory-count" id="inventoryCount">0/20</span>
+                    <div class="inventory-pagination">
+                        <button class="inventory-page-btn" id="inventoryPrevPage">←</button>
+                        <span class="inventory-page-indicator" id="inventoryPageIndicator">1/2</span>
+                        <button class="inventory-page-btn" id="inventoryNextPage">→</button>
+                    </div>
+                    <span class="inventory-count" id="inventoryCount">0/40</span>
                 </div>
                 <div class="inventory-grid" id="inventoryGrid"></div>
             </section>
@@ -1268,7 +1329,7 @@
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
-            <div class="upgrade-arrow-wrapper">
+            <div class="upgrade-arrow-container">
                 <div class="upgrade-arrow" id="upgradeArrow"></div>
             </div>
             <div class="upgrade-center" id="upgradeCenter">⚡</div>
@@ -1382,7 +1443,6 @@
 
             function initShootingStars() {
                 shootingStars = [];
-                // Будем добавлять по мере необходимости
             }
 
             function resizeCanvas() {
@@ -1399,7 +1459,6 @@
                 ctx.fillStyle = '#000';
                 ctx.fillRect(0, 0, width, height);
                 
-                // Обычные звезды
                 for (let s of stars) {
                     s.x += s.speed;
                     if (s.x > width) {
@@ -1416,13 +1475,13 @@
                     ctx.fill();
                 }
                 
-                // Медленные падающие звезды (каждые 10 секунд)
-                if (Math.random() < 0.0005) { // Раз в ~10 секунд при 60fps
+                // Медленные падающие звезды
+                if (Math.random() < 0.0005) {
                     shootingStars.push({
                         x: Math.random() * width,
                         y: Math.random() * height * 0.2,
                         length: Math.random() * 200 + 150,
-                        speed: Math.random() * 8 + 5, // Медленнее
+                        speed: Math.random() * 8 + 5,
                         angle: Math.random() * 0.3 + 0.35,
                         life: 200
                     });
@@ -1475,7 +1534,7 @@
                 }
             }
 
-            // РЕАЛЬНЫЕ ПОДАРКИ С КАРТИНКАМИ
+            // Подарки
             const GIFTS = [
                 { id: 'rip', name: 'RIP', price: 15000, emoji: '💀', color: '#333' },
                 { id: 'skull', name: 'SKULL', price: 5000, emoji: '💀', color: '#444' },
@@ -1492,14 +1551,10 @@
                 { id: 'meteor', name: 'METEOR', price: 500, emoji: '🌠', color: '#ff8c00' },
                 { id: 'planet', name: 'PLANET', price: 300, emoji: '🪐', color: '#4a90e2' },
                 { id: 'galaxy', name: 'GALAXY', price: 150, emoji: '🌌', color: '#9b59b6' },
-                
-                // Для кейса 5000
                 { id: 'legend1', name: 'LEGEND', price: 6500, emoji: '👾', color: '#ff00ff' },
                 { id: 'legend2', name: 'MYTHIC', price: 7000, emoji: '🐉', color: '#ff4500' },
                 { id: 'legend3', name: 'GODLY', price: 7500, emoji: '👁️', color: '#00ffff' },
                 { id: 'legend4', name: 'COSMIC', price: 8000, emoji: '🌠', color: '#9932cc' },
-                
-                // Дешевые подарки для маленьких кейсов
                 { id: 'common1', name: 'TOY', price: 5, emoji: '🧸', color: '#8b4513' },
                 { id: 'common2', name: 'BALLOON', price: 8, emoji: '🎈', color: '#ff69b4' },
                 { id: 'common3', name: 'CANDY', price: 10, emoji: '🍬', color: '#ff1493' },
@@ -1511,12 +1566,10 @@
                 { id: 'common9', name: 'GLOVES', price: 30, emoji: '🧤', color: '#b8860b' }
             ];
 
-            // SVG для подарков
             function getGiftSVG(gift) {
                 return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${gift.color}" rx="20"/><text x="50" y="70" font-size="50" text-anchor="middle" fill="#fff">${gift.emoji}</text></svg>`;
             }
 
-            // Красивые аватарки для кейсов
             const CASE_AVATARS = {
                 'Базовый': '<svg width="80" height="80" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#1a1f35" stroke="#ff9933" stroke-width="3"/><rect x="35" y="35" width="30" height="30" fill="#ff9933" rx="5"/><text x="50" y="70" font-size="30" text-anchor="middle" fill="#fff">📦</text></svg>',
                 'Серебряный': '<svg width="80" height="80" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#1a1f35" stroke="#ff9933" stroke-width="3"/><circle cx="50" cy="50" r="25" fill="#c0c0c0"/><text x="50" y="70" font-size="30" text-anchor="middle" fill="#000">🥈</text></svg>',
@@ -1544,7 +1597,7 @@
                 'ROCKET': 200,
                 'BOXSTAR': 750,
                 'HAPPY2026': 400,
-                'GDB': 20000 // Новый промокод на 20000 звезд
+                'GDB': 20000
             };
 
             let usedPromos = JSON.parse(localStorage.getItem('usedPromos')) || [];
@@ -1562,10 +1615,11 @@
                 upgradeBetGift: null,
                 upgradeTargetGift: null,
                 currentSelector: null,
-                pendingSellItem: null
+                pendingSellItem: null,
+                inventoryPage: 1,
+                maxInventoryPages: 2
             };
 
-            // DOM элементы
             const el = {
                 balance: document.getElementById('balance'),
                 addFunds: document.getElementById('addFunds'),
@@ -1579,10 +1633,12 @@
                 casesGrid: document.getElementById('casesGrid'),
                 inventoryGrid: document.getElementById('inventoryGrid'),
                 inventoryCount: document.getElementById('inventoryCount'),
+                inventoryPrevPage: document.getElementById('inventoryPrevPage'),
+                inventoryNextPage: document.getElementById('inventoryNextPage'),
+                inventoryPageIndicator: document.getElementById('inventoryPageIndicator'),
                 promoField: document.getElementById('promoField'),
                 applyPromo: document.getElementById('applyPromo'),
                 
-                // Апгрейд
                 openUpgradeBtn: document.getElementById('openUpgradeBtn'),
                 upgradeModal: document.getElementById('upgradeModal'),
                 upgradeClose: document.getElementById('upgradeClose'),
@@ -1595,7 +1651,6 @@
                 targetGiftDisplay: document.getElementById('targetGiftDisplay'),
                 upgradeActionBtn: document.getElementById('upgradeActionBtn'),
                 
-                // Кейсы
                 caseModal: document.getElementById('caseModal'),
                 caseTitle: document.getElementById('caseTitle'),
                 caseItems: document.getElementById('caseItems'),
@@ -1605,7 +1660,6 @@
                 quantityBtns: document.querySelectorAll('.case-quantity .quantity-btn'),
                 multipleButtons: document.getElementById('multipleButtons'),
                 
-                // Продажа
                 sellModal: document.getElementById('sellModal'),
                 sellImage: document.getElementById('sellImage'),
                 sellName: document.getElementById('sellName'),
@@ -1613,7 +1667,6 @@
                 sellConfirm: document.getElementById('sellConfirm'),
                 sellCancel: document.getElementById('sellCancel'),
                 
-                // Селекторы
                 giftSelector: document.getElementById('giftSelector'),
                 giftSelectorBack: document.getElementById('giftSelectorBack'),
                 giftSelectorTitle: document.getElementById('giftSelectorTitle'),
@@ -1674,11 +1727,14 @@
 
             function updateInventory() {
                 el.inventoryGrid.innerHTML = '';
-                el.inventoryCount.textContent = (state.inventory ? state.inventory.length : 0) + '/20';
+                el.inventoryCount.textContent = (state.inventory ? state.inventory.length : 0) + '/40';
                 
                 if (!state.inventory) state.inventory = [];
                 
-                for (let i = 0; i < Math.min(state.inventory.length, 20); i++) {
+                const startIndex = (state.inventoryPage - 1) * 20;
+                const endIndex = Math.min(startIndex + 20, state.inventory.length);
+                
+                for (let i = startIndex; i < endIndex; i++) {
                     const item = state.inventory[i];
                     if (!item) continue;
                     
@@ -1696,12 +1752,20 @@
                     el.inventoryGrid.appendChild(slot);
                 }
                 
-                for (let i = (state.inventory ? state.inventory.length : 0); i < 20; i++) {
+                for (let i = endIndex; i < startIndex + 20; i++) {
                     const e = document.createElement('div');
                     e.className = 'empty-slot';
                     e.textContent = 'пусто';
                     el.inventoryGrid.appendChild(e);
                 }
+                
+                // Обновляем пагинацию
+                const maxPage = Math.max(1, Math.ceil((state.inventory.length || 0) / 20));
+                state.maxInventoryPages = maxPage;
+                el.inventoryPageIndicator.textContent = `${state.inventoryPage}/${maxPage}`;
+                
+                el.inventoryPrevPage.classList.toggle('disabled', state.inventoryPage === 1);
+                el.inventoryNextPage.classList.toggle('disabled', state.inventoryPage === maxPage);
             }
 
             function sellItem(index) {
@@ -1711,12 +1775,35 @@
                 const price = Math.floor((item.price || 0) * 0.8);
                 state.balance = (state.balance || 0) + price;
                 state.inventory.splice(index, 1);
+                
+                // Корректируем страницу если нужно
+                const maxPage = Math.max(1, Math.ceil(state.inventory.length / 20));
+                if (state.inventoryPage > maxPage) {
+                    state.inventoryPage = maxPage;
+                }
+                
                 updateUI();
                 saveGame();
                 showToast(`✅ ${item.name || 'Подарок'} продан за ${price}⭐`);
             }
 
-            // Ракета с фиксом ставки
+            // Пагинация
+            el.inventoryPrevPage.onclick = () => {
+                if (state.inventoryPage > 1) {
+                    state.inventoryPage--;
+                    updateInventory();
+                }
+            };
+
+            el.inventoryNextPage.onclick = () => {
+                const maxPage = Math.max(1, Math.ceil((state.inventory.length || 0) / 20));
+                if (state.inventoryPage < maxPage) {
+                    state.inventoryPage++;
+                    updateInventory();
+                }
+            };
+
+            // Ракета
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
@@ -1730,7 +1817,6 @@
                     return;
                 }
                 
-                // Блокируем поле ввода
                 el.bet.disabled = true;
                 
                 let timeLeft = 3;
@@ -1787,7 +1873,7 @@
                 el.startBtn.disabled = false;
                 el.stopBtn.disabled = true;
                 el.rocket.classList.remove('shaking');
-                el.bet.disabled = false; // Разблокируем поле
+                el.bet.disabled = false;
                 
                 el.explosion.classList.add('show');
                 el.rocket.classList.add('explode');
@@ -1817,7 +1903,7 @@
                 el.startBtn.disabled = false;
                 el.stopBtn.disabled = true;
                 el.rocket.classList.remove('shaking');
-                el.bet.disabled = false; // Разблокируем поле
+                el.bet.disabled = false;
                 
                 setTimeout(() => {
                     el.explosion.classList.add('show');
@@ -1830,7 +1916,7 @@
                 }, 500);
             }
 
-            // Рендер кейсов с аватарками
+            // Рендер кейсов
             function renderCases() {
                 el.casesGrid.innerHTML = '';
                 CASES.forEach(c => {
@@ -1859,7 +1945,6 @@
                 state.currentCase = c;
                 el.caseTitle.textContent = `КЕЙС: ${c.name}`;
                 
-                // Создаем кнопки для множественного открытия
                 el.multipleButtons.innerHTML = '';
                 if (state.selectedQty > 1) {
                     const btn = document.createElement('div');
@@ -1869,7 +1954,6 @@
                     el.multipleButtons.appendChild(btn);
                 }
                 
-                // Создаем трек с 70 предметами для более длинной анимации
                 const items = [];
                 
                 for (let i = 0; i < 70; i++) {
@@ -1955,7 +2039,6 @@
                 updateUI();
                 saveGame();
                 
-                // Генерируем выигрыши для каждого открытия
                 const results = [];
                 
                 for (let q = 0; q < (state.selectedQty || 1); q++) {
@@ -2014,7 +2097,6 @@
                 const containerWidth = document.getElementById('caseDisplay').offsetWidth;
                 const centerPos = (containerWidth / 2) - (itemWidth / 2);
                 
-                // Выбираем позиции для выигрыша
                 const winIndices = [];
                 for (let q = 0; q < (state.selectedQty || 1); q++) {
                     let index = Math.floor(Math.random() * (itemCount - 20)) + 20;
@@ -2038,13 +2120,10 @@
                             if (items[index]) items[index].classList.add('win');
                         });
                         
-                        // Показываем результат
                         if (results.length === 1) {
                             const gift = results[0];
                             el.caseResult.style.display = 'block';
                             el.caseResult.textContent = `${gift.name} +${gift.price}⭐`;
-                            
-                            // Предлагаем продать сразу
                             showSellPrompt(gift);
                         } else {
                             let resultText = '';
@@ -2054,7 +2133,6 @@
                             el.caseResult.style.display = 'block';
                             el.caseResult.textContent = resultText;
                             
-                            // Добавляем все в инвентарь
                             results.forEach(gift => {
                                 if (!state.inventory) state.inventory = [];
                                 state.inventory.push(gift);
@@ -2074,13 +2152,11 @@
             function startMultipleOpening() {
                 const qty = state.selectedQty || 1;
                 
-                // Запускаем несколько открытий подряд
                 for (let i = 0; i < qty; i++) {
                     setTimeout(() => {
                         if (i === 0) {
                             startOpening();
                         } else {
-                            // Для последующих открытий создаем новые
                             const tempIsOpening = state.isOpening;
                             state.isOpening = false;
                             startOpening();
@@ -2090,7 +2166,6 @@
                 }
             }
 
-            // Окно продажи после выпадения
             function showSellPrompt(gift) {
                 const svg = getGiftSVG(gift);
                 el.sellImage.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
@@ -2124,31 +2199,26 @@
                 saveGame();
             };
 
-            // Система апгрейда (3 кнопки)
+            // Система апгрейда
             function updateUpgradeUI() {
-                // Обновляем проценты
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
                     el.upgradePercent.textContent = percent + '%';
                     
-                    // Обновляем круг
                     const fill = document.getElementById('circleFill');
                     fill.style.background = `conic-gradient(#00cc66 0deg, #00cc66 ${percent * 3.6}deg, #ff4444 ${percent * 3.6}deg)`;
                 } else {
                     el.upgradePercent.textContent = '0%';
                 }
                 
-                // Обновляем отображение выбранных подарков
                 el.betGiftDisplay.textContent = state.upgradeBetGift ? state.upgradeBetGift.name : 'Выбрать';
                 el.targetGiftDisplay.textContent = state.upgradeTargetGift ? state.upgradeTargetGift.name : 'Выбрать';
                 
-                // Активируем кнопку
                 el.upgradeActionBtn.disabled = !(state.upgradeBetGift && state.upgradeTargetGift);
             }
 
             function openGiftSelector(type) {
                 if (type === 'bet') {
-                    // Для ставки - только из инвентаря
                     if (!state.inventory || state.inventory.length === 0) {
                         showToast('❌ Инвентарь пуст!');
                         return;
@@ -2178,7 +2248,6 @@
                     
                     el.giftSelector.classList.add('active');
                 } else {
-                    // Для желаемого - все подарки
                     el.targetSelectorTitle.textContent = 'Выберите желаемый подарок';
                     el.targetSelectorGrid.innerHTML = '';
                     
@@ -2245,17 +2314,15 @@
                 
                 loadGame();
 
-                // Quantity buttons
                 el.quantityBtns.forEach(btn => {
                     btn.onclick = () => {
                         el.quantityBtns.forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         state.selectedQty = parseInt(btn.dataset.qty);
                         
-                        // Обновляем кнопку множественного открытия
-                        if (el.multipleButtons) {
+                        if (el.multipleButtons && state.currentCase) {
                             el.multipleButtons.innerHTML = '';
-                            if (state.selectedQty > 1 && state.currentCase) {
+                            if (state.selectedQty > 1) {
                                 const btn = document.createElement('div');
                                 btn.className = 'case-multiple-btn active';
                                 btn.textContent = `ОТКРЫТЬ ${state.selectedQty}x`;
@@ -2292,14 +2359,12 @@
                 el.stopBtn.onclick = stopFlight;
                 el.applyPromo.onclick = applyPromo;
                 
-                // Кейсы
                 el.caseOpenBtn.onclick = startOpening;
                 el.caseClose.onclick = () => {
                     el.caseModal.classList.remove('active');
                     state.isOpening = false;
                 };
 
-                // Апгрейд
                 el.openUpgradeBtn.onclick = () => {
                     el.upgradeModal.classList.add('active');
                 };
@@ -2325,38 +2390,35 @@
                         return;
                     }
                     
-                    // Рассчитываем шанс
                     const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
                     
-                    // Анимация стрелки
-                    const spins = 5 + Math.floor(Math.random() * 3);
+                    const spins = 5 + Math.floor(Math.random() * 5); // Больше оборотов
                     const win = Math.random() * 100 < chance;
                     
                     const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                     
-                    el.upgradeArrow.style.transform = `rotate(${targetRotation}deg)`;
+                    el.upgradeArrow.style.transform = `rotate(${targetRotation}deg) translateY(-65px)`;
                     
                     el.upgradeActionBtn.disabled = true;
                     
                     setTimeout(() => {
                         if (win) {
-                            // Успех - получаем желаемый подарок
                             const winGift = { ...state.upgradeTargetGift };
                             state.inventory.push(winGift);
                             showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
                         } else {
-                            // Провал - подарок для ставки сгорает
                             showToast('💥 ПРОВАЛ! Подарок сгорел');
                         }
                         
-                        // Сбрасываем
                         state.upgradeBetGift = null;
                         state.upgradeTargetGift = null;
                         updateUpgradeUI();
                         updateUI();
                         saveGame();
                         el.upgradeActionBtn.disabled = false;
-                    }, 3000);
+                        
+                        el.upgradeArrow.style.transform = `rotate(0deg) translateY(-65px)`;
+                    }, 4000); // Дольше анимация
                 };
 
                 window.onresize = () => {
