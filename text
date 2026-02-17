@@ -1,0 +1,17 @@
+boxstarx-project/
+├── index.html (главная страница)
+├── versions/
+│   ├── v1.0.html (базовая версия)
+│   ├── v2.0.html (кейсы и инвентарь)
+│   ├── v3.0.html (система апгрейда)
+│   ├── v4.0.html (звуки и анимации)
+│   ├── v5.0.html (финальная версия)
+│   └── v6.0.html (исправленная стрелка)
+├── assets/
+│   ├── style.css
+│   ├── script.js
+│   └── sounds/
+│       ├── win.mp3
+│       ├── lose.mp3
+│       └── explosion.mp3
+└── README.md
