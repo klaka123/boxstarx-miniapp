@@ -560,7 +560,7 @@
             z-index: 5;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (СУПЕР КРАСИВОЕ) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (ПОЛНОСТЬЮ НОВЫЙ ДИЗАЙН) ========== */
         .upgrade-modal {
             position: fixed;
             top: 0;
@@ -625,81 +625,57 @@
 
         .upgrade-circle-container {
             position: relative;
-            width: 340px;
-            height: 340px;
+            width: 320px;
+            height: 320px;
             margin: 0 auto 30px;
             z-index: 10;
         }
 
-        /* Плавающие частицы */
-        .upgrade-particle {
+        /* Внешнее неоновое кольцо */
+        .upgrade-outer-ring {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            animation: rotateParticle 20s linear infinite;
-        }
-
-        .upgrade-particle::before,
-        .upgrade-particle::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #ffdd88, #ff9933);
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid #00aaff;
             border-radius: 50%;
-            filter: blur(3px);
-            box-shadow: 0 0 30px #ffaa33;
+            box-shadow: 0 0 30px #00aaff, inset 0 0 20px #00aaff;
+            animation: rotateRing 10s linear infinite;
+            opacity: 0.7;
         }
 
-        .upgrade-particle::before {
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .upgrade-particle::after {
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .upgrade-particle-2 {
+        /* Среднее кольцо */
+        .upgrade-mid-ring {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            animation: rotateParticle2 25s linear infinite reverse;
-        }
-
-        .upgrade-particle-2::before,
-        .upgrade-particle-2::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: radial-gradient(circle, #fff, #ffaa33);
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px dashed #ff9933;
             border-radius: 50%;
-            filter: blur(2px);
-            box-shadow: 0 0 20px #ffaa33;
+            box-shadow: 0 0 25px #ff9933;
+            animation: rotateRingReverse 15s linear infinite;
         }
 
-        .upgrade-particle-2::before {
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
+        /* Внутреннее кольцо */
+        .upgrade-inner-ring {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            box-shadow: inset 0 0 30px rgba(255,255,255,0.3);
         }
 
-        .upgrade-particle-2::after {
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-        @keyframes rotateParticle {
+        @keyframes rotateRing {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        @keyframes rotateParticle2 {
+        @keyframes rotateRingReverse {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
         }
@@ -711,45 +687,27 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #4a4f6a, #0a0c1a);
-            border: 6px solid #ffaa33;
-            box-shadow: 0 0 100px rgba(255,170,51,0.9), inset 0 0 80px rgba(255,170,51,0.6);
+            background: radial-gradient(circle at 30% 30%, #2a2f45, #0a0c1a);
+            border: 4px solid #ff9933;
+            box-shadow: 0 0 60px #ff9933, inset 0 0 40px #ff9933;
             overflow: hidden;
-            animation: circlePulse 2s infinite alternate;
-        }
-
-        @keyframes circlePulse {
-            from { box-shadow: 0 0 100px rgba(255,170,51,0.9), inset 0 0 80px rgba(255,170,51,0.6); }
-            to { box-shadow: 0 0 150px rgba(255,170,51,1), inset 0 0 120px rgba(255,170,51,0.8); }
         }
 
         .upgrade-circle::before {
             content: '';
             position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255,215,0,0.5) 0%, transparent 70%);
-            animation: rotateBg 15s linear infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #ff9933, transparent, #00aaff, transparent);
+            animation: rotateBg 8s linear infinite;
+            opacity: 0.3;
         }
 
         @keyframes rotateBg {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
-        }
-
-        /* Внутреннее свечение */
-        .upgrade-glow {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 50% 50%, rgba(255,170,51,0.4), transparent 70%);
-            filter: blur(15px);
-            z-index: 5;
         }
 
         .upgrade-circle-fill {
@@ -762,94 +720,83 @@
             border-radius: 50%;
             transition: background 0.3s ease;
             mix-blend-mode: overlay;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
-        /* Красивая толстая стрелка */
+        /* Цифровые элементы */
+        .upgrade-digital-1 {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 1.2rem;
+            color: #00aaff;
+            text-shadow: 0 0 15px #00aaff;
+            font-family: monospace;
+            opacity: 0.6;
+            animation: digitalFloat 3s infinite alternate;
+        }
+
+        .upgrade-digital-2 {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            font-size: 1.2rem;
+            color: #ff9933;
+            text-shadow: 0 0 15px #ff9933;
+            font-family: monospace;
+            opacity: 0.6;
+            animation: digitalFloat 3s infinite alternate-reverse;
+        }
+
+        @keyframes digitalFloat {
+            from { transform: translateY(-5px); opacity: 0.4; }
+            to { transform: translateY(5px); opacity: 0.8; }
+        }
+
+        /* Стрелка (новая, тонкая, изящная) */
         .upgrade-arrow-container {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 14px;
-            height: 170px;
+            width: 4px;
+            height: 140px;
             transform-origin: bottom center;
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
             transition: transform 5s cubic-bezier(0.1, 0.8, 0.2, 1);
         }
 
-        /* Основная стрелка */
-        .upgrade-arrow-main {
+        .upgrade-arrow-shaft {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, #ffdd88, #ffaa33, #ff8800);
-            box-shadow: 0 0 30px #ffaa33, 0 0 60px #ff8800;
-            border-radius: 7px 7px 0 0;
+            background: linear-gradient(180deg, #00aaff, #ff9933);
+            box-shadow: 0 0 20px #00aaff, 0 0 40px #ff9933;
+            border-radius: 2px;
         }
 
-        /* Наконечник стрелки (внешний) */
-        .upgrade-arrow-tip-outer {
+        .upgrade-arrow-tip {
             position: absolute;
-            top: -30px;
-            left: -16px;
+            top: -18px;
+            left: -8px;
             width: 0;
             height: 0;
-            border-left: 23px solid transparent;
-            border-right: 23px solid transparent;
-            border-bottom: 45px solid #ffaa33;
-            filter: drop-shadow(0 -5px 25px #ffaa33) drop-shadow(0 -10px 40px #ff8800);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 25px solid #00aaff;
+            filter: drop-shadow(0 -5px 15px #00aaff) drop-shadow(0 -10px 20px #ff9933);
         }
 
-        /* Наконечник стрелки (средний) */
-        .upgrade-arrow-tip-middle {
-            position: absolute;
-            top: -25px;
-            left: -13px;
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 38px solid #ff8800;
-            filter: drop-shadow(0 -5px 20px #ff8800);
-        }
-
-        /* Наконечник стрелки (внутренний) */
-        .upgrade-arrow-tip-inner {
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            width: 0;
-            height: 0;
-            border-left: 17px solid transparent;
-            border-right: 17px solid transparent;
-            border-bottom: 32px solid #ffdd88;
-            filter: drop-shadow(0 -5px 15px #ffdd88);
-        }
-
-        /* Свечение вдоль стрелки */
         .upgrade-arrow-glow {
             position: absolute;
             top: 0;
-            left: -12px;
-            width: 38px;
+            left: -8px;
+            width: 20px;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(255,170,51,0.7), transparent 70%);
-            filter: blur(12px);
-            z-index: -1;
-        }
-
-        /* Дополнительное свечение на конце */
-        .upgrade-arrow-end-glow {
-            position: absolute;
-            bottom: -10px;
-            left: -25px;
-            width: 64px;
-            height: 40px;
-            background: radial-gradient(circle, rgba(255,170,51,0.8), transparent 70%);
-            filter: blur(15px);
+            background: radial-gradient(ellipse at center, rgba(0,170,255,0.5), transparent 70%);
+            filter: blur(8px);
             z-index: -1;
         }
 
@@ -858,61 +805,62 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 110px;
-            height: 110px;
-            background: radial-gradient(circle at 30% 30%, #ffdd88, #ffaa33, #ff8800);
-            border: 6px solid #fff;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 30%, #ffdd88, #ff9933, #ff6600);
+            border: 4px solid #fff;
             border-radius: 50%;
             z-index: 40;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: #000;
-            box-shadow: 0 0 70px #ffaa33, inset 0 0 40px rgba(255,255,255,0.9);
-            animation: centerGlow 2s infinite alternate;
+            box-shadow: 0 0 50px #ff9933, inset 0 0 30px rgba(255,255,255,0.8);
+            animation: centerPulse 2s infinite alternate;
         }
 
-        @keyframes centerGlow {
-            from { box-shadow: 0 0 70px #ffaa33; }
-            to { box-shadow: 0 0 120px #ffaa33; }
+        @keyframes centerPulse {
+            from { box-shadow: 0 0 50px #ff9933; }
+            to { box-shadow: 0 0 80px #ff9933; }
         }
 
-        /* Внутреннее свечение центра */
+        /* Внутренний центр */
         .upgrade-center-inner {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background: radial-gradient(circle, #fff, #ffdd88);
             border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0.7;
+            filter: blur(5px);
+            opacity: 0.5;
             z-index: 41;
         }
 
         .upgrade-percent {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            color: #ffaa33;
+            color: #ff9933;
             margin-bottom: 10px;
             z-index: 10;
             position: relative;
-            text-shadow: 0 0 20px rgba(255,170,51,0.7);
+            text-shadow: 0 0 20px #ff9933, 0 0 40px #00aaff;
+            letter-spacing: 2px;
         }
 
         .upgrade-binomial {
             text-align: center;
-            color: #aaa;
+            color: #888;
             margin-bottom: 30px;
             font-size: 1rem;
             z-index: 10;
             position: relative;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255,170,51,0.3);
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px #00aaff;
         }
 
         .upgrade-selectors {
@@ -925,20 +873,21 @@
         }
 
         .upgrade-selector {
-            background: rgba(255,170,51,0.1);
-            border: 2px solid #ffaa33;
+            background: rgba(0, 170, 255, 0.1);
+            border: 2px solid #00aaff;
             border-radius: 40px;
             padding: 15px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
             backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0,170,255,0.3);
         }
 
         .upgrade-selector:hover {
-            background: rgba(255,170,51,0.2);
+            background: rgba(0, 170, 255, 0.2);
             transform: scale(1.02);
-            box-shadow: 0 0 25px #ffaa33;
+            box-shadow: 0 0 30px #00aaff;
         }
 
         .upgrade-selector:active {
@@ -947,14 +896,16 @@
 
         .selector-label {
             font-size: 0.8rem;
-            color: #ddd;
+            color: #aaa;
             margin-bottom: 5px;
+            letter-spacing: 2px;
         }
 
         .selector-value {
             font-size: 1.3rem;
-            color: #ffaa33;
+            color: #00aaff;
             font-weight: 700;
+            text-shadow: 0 0 15px #00aaff;
         }
 
         .upgrade-action-btn {
@@ -964,19 +915,21 @@
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffaa33, #ff8800);
+            background: linear-gradient(135deg, #ff9933, #ff6600);
             color: black;
             cursor: pointer;
             transition: all 0.2s ease;
             margin-top: 20px;
             z-index: 10;
             position: relative;
-            box-shadow: 0 0 40px #ffaa33;
+            box-shadow: 0 0 40px #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .upgrade-action-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px #ffaa33;
+            box-shadow: 0 0 60px #ff9933;
         }
 
         .upgrade-action-btn:active {
@@ -2546,7 +2499,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда (СУПЕР КРАСИВОЕ) -->
+    <!-- Модальное окно апгрейда (ПОЛНОСТЬЮ НОВЫЙ ДИЗАЙН) -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -2554,26 +2507,25 @@
         </div>
 
         <div class="upgrade-circle-container">
-            <!-- Плавающие частицы -->
-            <div class="upgrade-particle"></div>
-            <div class="upgrade-particle-2"></div>
+            <!-- Внешние неоновые кольца -->
+            <div class="upgrade-outer-ring"></div>
+            <div class="upgrade-mid-ring"></div>
+            <div class="upgrade-inner-ring"></div>
             
             <!-- Основной круг -->
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
             
-            <!-- Внутреннее свечение -->
-            <div class="upgrade-glow"></div>
+            <!-- Цифровые элементы -->
+            <div class="upgrade-digital-1">0101</div>
+            <div class="upgrade-digital-2">1010</div>
             
-            <!-- Контейнер для толстой стрелки -->
+            <!-- Контейнер для стрелки -->
             <div class="upgrade-arrow-container" id="upgradeArrowContainer">
-                <div class="upgrade-arrow-main"></div>
-                <div class="upgrade-arrow-tip-outer"></div>
-                <div class="upgrade-arrow-tip-middle"></div>
-                <div class="upgrade-arrow-tip-inner"></div>
+                <div class="upgrade-arrow-shaft"></div>
+                <div class="upgrade-arrow-tip"></div>
                 <div class="upgrade-arrow-glow"></div>
-                <div class="upgrade-arrow-end-glow"></div>
             </div>
             
             <!-- Центр -->
@@ -4203,7 +4155,7 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд (КРАСИВАЯ АНИМАЦИЯ С ТОЛСТОЙ СТРЕЛКОЙ)
+            // Апгрейд (НОВЫЙ ДИЗАЙН)
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
@@ -4397,4 +4349,4 @@
         })();
     </script>
 </body>
-</html
+</html>
