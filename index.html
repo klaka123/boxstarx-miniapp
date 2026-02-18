@@ -1933,7 +1933,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== КОЛЕСО ФОРТУНЫ ========== */
+        /* ========== КОЛЕСО ФОРТУНЫ (НОВЫЙ ДИЗАЙН) ========== */
         .wheel-modal {
             position: fixed;
             top: 0;
@@ -1995,8 +1995,8 @@
 
         .wheel-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             margin: 20px auto;
         }
 
@@ -2009,6 +2009,7 @@
             box-shadow: 0 0 50px rgba(255,153,51,0.5);
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
             border: 4px solid #ff9933;
+            background: #1a1f35;
         }
 
         .wheel-sector {
@@ -2022,35 +2023,40 @@
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            text-shadow: 0 0 5px black;
             clip-path: polygon(0 0, 100% 0, 0 100%);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .wheel-sector:nth-child(1) { transform: rotate(0deg); background: #ff6b6b; }
-        .wheel-sector:nth-child(2) { transform: rotate(30deg); background: #4ecdc4; }
-        .wheel-sector:nth-child(3) { transform: rotate(60deg); background: #45b7d1; }
-        .wheel-sector:nth-child(4) { transform: rotate(90deg); background: #96ceb4; }
-        .wheel-sector:nth-child(5) { transform: rotate(120deg); background: #ffeead; color: #333; }
-        .wheel-sector:nth-child(6) { transform: rotate(150deg); background: #ffcc5c; color: #333; }
-        .wheel-sector:nth-child(7) { transform: rotate(180deg); background: #ff6f69; }
-        .wheel-sector:nth-child(8) { transform: rotate(210deg); background: #88d8b0; }
-        .wheel-sector:nth-child(9) { transform: rotate(240deg); background: #ffb347; }
-        .wheel-sector:nth-child(10) { transform: rotate(270deg); background: #5d9cec; }
-        .wheel-sector:nth-child(11) { transform: rotate(300deg); background: #ac92ec; }
-        .wheel-sector:nth-child(12) { transform: rotate(330deg); background: #ec87c0; }
+        .wheel-sector:nth-child(1) { transform: rotate(0deg); background: #ff4757; }
+        .wheel-sector:nth-child(2) { transform: rotate(45deg); background: #ffa502; }
+        .wheel-sector:nth-child(3) { transform: rotate(90deg); background: #ffcc00; color: black; }
+        .wheel-sector:nth-child(4) { transform: rotate(135deg); background: #2ed573; color: black; }
+        .wheel-sector:nth-child(5) { transform: rotate(180deg); background: #1e90ff; }
+        .wheel-sector:nth-child(6) { transform: rotate(225deg); background: #a55eea; }
+        .wheel-sector:nth-child(7) { transform: rotate(270deg); background: #ff6b81; }
+        .wheel-sector:nth-child(8) { transform: rotate(315deg); background: #ffb8b8; color: black; }
+
+        .wheel-sector span {
+            transform: rotate(45deg) translate(30%, 30%);
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
 
         .wheel-marker {
             position: absolute;
-            top: -10px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #ff9933;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #ff9933;
             filter: drop-shadow(0 0 10px #ff9933);
             z-index: 100;
         }
@@ -2060,19 +2066,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: #ff9933;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #ff9933, #ff6600);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 900;
             color: black;
-            border: 3px solid white;
-            box-shadow: 0 0 30px #ff9933;
+            border: 4px solid white;
+            box-shadow: 0 0 40px #ff9933;
             z-index: 50;
+        }
+
+        .wheel-highlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 30px #ffaa00;
+            animation: highlightPulse 1s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes highlightPulse {
+            0% { box-shadow: 0 0 20px #ffaa00; }
+            50% { box-shadow: 0 0 50px #ffaa00; }
+            100% { box-shadow: 0 0 20px #ffaa00; }
         }
 
         .wheel-bet-panel {
@@ -2187,7 +2209,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== ПЛИНКО (PLINKO) ========== */
+        /* ========== ПЛИНКО (PLINKO) - НОВАЯ ФИЗИКА ========== */
         .plinko-modal {
             position: fixed;
             top: 0;
@@ -2250,7 +2272,7 @@
         .plinko-container {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 500px;
             background: rgba(0, 0, 0, 0.5);
             border: 3px solid #ff9933;
             border-radius: 40px;
@@ -2263,39 +2285,39 @@
             top: 30px;
             left: 0;
             width: 100%;
-            height: 300px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
         }
 
         .plinko-row {
             display: flex;
-            gap: 15px;
+            gap: 30px;
             justify-content: center;
         }
 
         .plinko-peg {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #ff9933;
             border-radius: 50%;
-            box-shadow: 0 0 10px #ff9933;
+            box-shadow: 0 0 15px #ff9933;
         }
 
         .plinko-ball {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #fff, #ffd700);
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle at 30% 30%, #fff, #ffd700);
             border-radius: 50%;
             left: 50%;
             transform: translateX(-50%);
             top: 20px;
             z-index: 100;
             box-shadow: 0 0 20px #ffd700;
-            transition: top 2s ease-in, left 2s ease-in;
+            transition: top 2s ease-in, left 0.1s linear;
         }
 
         .plinko-slots {
@@ -2303,7 +2325,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px;
+            height: 60px;
             display: flex;
         }
 
@@ -2318,12 +2340,15 @@
             font-size: 1rem;
             font-weight: 700;
             color: #ff9933;
+            transition: all 0.3s ease;
         }
 
         .plinko-slot.highlight {
             background: #ff9933;
             color: black;
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 40px #ff9933;
+            transform: scale(1.05);
+            z-index: 10;
         }
 
         .plinko-bet-panel {
@@ -3088,7 +3113,7 @@
         <div class="coinflip-result" id="coinflipResult">Сделайте ставку и выберите сторону</div>
     </div>
 
-    <!-- Модальное окно Колеса Фортуны -->
+    <!-- Модальное окно Колеса Фортуны (НОВОЕ) -->
     <div class="wheel-modal" id="wheelModal">
         <div class="wheel-header">
             <div class="wheel-back" id="wheelClose">←</div>
@@ -3097,21 +3122,18 @@
 
         <div class="wheel-container">
             <div class="wheel" id="wheel">
-                <div class="wheel-sector">x1</div>
-                <div class="wheel-sector">x2</div>
-                <div class="wheel-sector">x3</div>
-                <div class="wheel-sector">x5</div>
-                <div class="wheel-sector">x10</div>
-                <div class="wheel-sector">JACK</div>
-                <div class="wheel-sector">x1</div>
-                <div class="wheel-sector">x2</div>
-                <div class="wheel-sector">x3</div>
-                <div class="wheel-sector">x5</div>
-                <div class="wheel-sector">x10</div>
-                <div class="wheel-sector">LOSE</div>
+                <div class="wheel-sector"><span>x2</span></div>
+                <div class="wheel-sector"><span>x3</span></div>
+                <div class="wheel-sector"><span>x5</span></div>
+                <div class="wheel-sector"><span>x10</span></div>
+                <div class="wheel-sector"><span>x20</span></div>
+                <div class="wheel-sector"><span>🎰</span></div>
+                <div class="wheel-sector"><span>LOSE</span></div>
+                <div class="wheel-sector"><span>x2</span></div>
             </div>
             <div class="wheel-marker"></div>
             <div class="wheel-center">🎡</div>
+            <div class="wheel-highlight" id="wheelHighlight" style="display: none;"></div>
         </div>
 
         <div class="wheel-bet-panel">
@@ -3130,7 +3152,7 @@
         <div class="wheel-result" id="wheelResult">Сделайте ставку и крутите колесо</div>
     </div>
 
-    <!-- Модальное окно Plinko -->
+    <!-- Модальное окно Plinko (НОВОЕ) -->
     <div class="plinko-modal" id="plinkoModal">
         <div class="plinko-header">
             <div class="plinko-back" id="plinkoClose">←</div>
@@ -3350,21 +3372,21 @@
                     const ctx = this.audioContext;
                     const now = ctx.currentTime;
                     
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 10; i++) {
                         const osc = ctx.createOscillator();
                         const gain = ctx.createGain();
                         
                         osc.type = 'sine';
-                        osc.frequency.setValueAtTime(300 + i * 50, now + i * 0.2);
+                        osc.frequency.setValueAtTime(300 + i * 30, now + i * 0.15);
                         
-                        gain.gain.setValueAtTime(0.05, now + i * 0.2);
-                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.2 + 0.1);
+                        gain.gain.setValueAtTime(0.03, now + i * 0.15);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 0.1);
                         
                         osc.connect(gain);
                         gain.connect(ctx.destination);
                         
-                        osc.start(now + i * 0.2);
-                        osc.stop(now + i * 0.2 + 0.1);
+                        osc.start(now + i * 0.15);
+                        osc.stop(now + i * 0.15 + 0.1);
                     }
                 }
             }
@@ -3626,7 +3648,7 @@
                 wheel: {
                     bet: 100,
                     isSpinning: false,
-                    sectors: ['x1', 'x2', 'x3', 'x5', 'x10', 'JACK', 'x1', 'x2', 'x3', 'x5', 'x10', 'LOSE']
+                    sectors: ['x2', 'x3', 'x5', 'x10', 'x20', 'JACK', 'LOSE', 'x2']
                 },
                 plinko: {
                     bet: 100,
@@ -3730,6 +3752,7 @@
                 wheelSpinBtn: document.getElementById('wheelSpinBtn'),
                 wheelResult: document.getElementById('wheelResult'),
                 wheel: document.getElementById('wheel'),
+                wheelHighlight: document.getElementById('wheelHighlight'),
                 wheelBetBtns: document.querySelectorAll('.wheel-bet-btn'),
                 openPlinkoBtn: document.getElementById('openPlinkoBtn'),
                 plinkoModal: document.getElementById('plinkoModal'),
@@ -4800,11 +4823,7 @@
                 showToast(`✅ +${amount}⭐ получено!`);
             }
 
-            // Колесо Фортуны
-            function initWheel() {
-                // Секторы уже созданы в HTML
-            }
-
+            // Колесо Фортуны (НОВОЕ)
             function spinWheel() {
                 if (state.wheel.isSpinning) return;
                 
@@ -4829,7 +4848,8 @@
                 const sectorIndex = Math.floor(Math.random() * state.wheel.sectors.length);
                 const result = state.wheel.sectors[sectorIndex];
                 
-                const targetRotation = 360 * spins + (sectorIndex * 30) + 15;
+                // Каждый сектор занимает 45 градусов (360/8)
+                const targetRotation = 360 * spins + (sectorIndex * 45) + 22.5;
                 
                 el.wheel.style.transform = `rotate(${targetRotation}deg)`;
                 
@@ -4849,11 +4869,6 @@
                     } else if (multiplier === 0) {
                         sound.playLoseSound();
                         el.wheelResult.textContent = `😞 Проигрыш! Выпал LOSE`;
-                    } else {
-                        const winAmount = Math.floor(bet * multiplier);
-                        state.balance += winAmount;
-                        sound.playWinSound();
-                        el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (${result})`;
                     }
                     
                     updateUI();
@@ -4883,11 +4898,11 @@
             
             el.wheelSpinBtn.onclick = spinWheel;
 
-            // Plinko
+            // Plinko (НОВОЕ С ФИЗИКОЙ)
             function initPlinko() {
-                // Создаем штырьки
+                // Создаем большую пирамиду из 10 рядов
                 el.plinkoPegs.innerHTML = '';
-                for (let row = 0; row < 8; row++) {
+                for (let row = 0; row < 10; row++) {
                     const rowDiv = document.createElement('div');
                     rowDiv.className = 'plinko-row';
                     const pegsCount = row + 3;
@@ -4935,24 +4950,50 @@
                     slot.classList.remove('highlight');
                 });
                 
-                // Случайное отклонение
-                const randomOffset = (Math.random() - 0.5) * 40;
-                el.plinkoBall.style.left = `calc(50% + ${randomOffset}px)`;
+                // Ставим шарик наверх по центру
+                el.plinkoBall.style.left = '50%';
                 el.plinkoBall.style.top = '20px';
+                el.plinkoBall.style.transition = 'none';
                 
-                // Анимация падения
+                // Симулируем падение с отскоками
                 setTimeout(() => {
-                    const slotIndex = Math.floor(Math.random() * state.plinko.slots.length);
-                    const multiplier = state.plinko.slots[slotIndex];
+                    let currentLeft = 50; // проценты
+                    const rows = 10;
                     
-                    const slotWidth = 100 / state.plinko.slots.length;
-                    const slotLeft = slotIndex * slotWidth + slotWidth / 2;
+                    // Анимация падения по рядам
+                    for (let row = 0; row < rows; row++) {
+                        setTimeout(() => {
+                            // На каждом ряду случайное отклонение влево или вправо
+                            const direction = Math.random() > 0.5 ? 1 : -1;
+                            const offset = (Math.random() * 3 + 1) * direction;
+                            currentLeft += offset;
+                            
+                            // Ограничиваем, чтобы не вылететь за пределы
+                            if (currentLeft < 20) currentLeft = 20;
+                            if (currentLeft > 80) currentLeft = 80;
+                            
+                            el.plinkoBall.style.transition = 'top 0.2s linear, left 0.2s linear';
+                            el.plinkoBall.style.left = currentLeft + '%';
+                            el.plinkoBall.style.top = (20 + row * 40) + 'px';
+                        }, row * 200);
+                    }
                     
-                    el.plinkoBall.style.left = slotLeft + '%';
-                    el.plinkoBall.style.top = '360px';
-                    
+                    // Финальный слот
                     setTimeout(() => {
+                        // Определяем слот на основе финальной позиции
+                        const slotWidth = 100 / state.plinko.slots.length;
+                        let slotIndex = Math.floor(currentLeft / slotWidth);
+                        if (slotIndex < 0) slotIndex = 0;
+                        if (slotIndex >= state.plinko.slots.length) slotIndex = state.plinko.slots.length - 1;
+                        
+                        const multiplier = state.plinko.slots[slotIndex];
+                        
+                        // Подсвечиваем слот
                         document.getElementById(`plinkoSlot${slotIndex}`).classList.add('highlight');
+                        
+                        // Финальная позиция
+                        el.plinkoBall.style.left = (slotIndex * slotWidth + slotWidth / 2) + '%';
+                        el.plinkoBall.style.top = '440px';
                         
                         if (multiplier > 0) {
                             const winAmount = Math.floor(bet * multiplier);
@@ -4972,11 +5013,13 @@
                         el.plinkoBet.disabled = false;
                         el.plinkoBetBtns.forEach(btn => btn.disabled = false);
                         
+                        // Возвращаем шарик наверх через секунду
                         setTimeout(() => {
+                            el.plinkoBall.style.transition = 'none';
                             el.plinkoBall.style.top = '20px';
                             el.plinkoBall.style.left = '50%';
                         }, 1000);
-                    }, 2000);
+                    }, rows * 200 + 100);
                 }, 100);
             }
 
@@ -5006,8 +5049,6 @@
                 initWindowStars();
                 renderCases();
                 loadGame();
-                initWheel();
-                initPlinko();
 
                 el.addFunds.onclick = () => {
                     if (!state.isFlying) {
