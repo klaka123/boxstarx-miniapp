@@ -560,7 +560,7 @@
             z-index: 5;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (НОВЫЙ ДИЗАЙН) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (КРАСИВЫЙ ДИЗАЙН) ========== */
         .upgrade-modal {
             position: fixed;
             top: 0;
@@ -633,8 +633,9 @@
 
         .upgrade-circle {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -2383,7 +2384,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда (НОВЫЙ ДИЗАЙН) -->
+    <!-- Модальное окно апгрейда (КРАСИВЫЙ ДИЗАЙН) -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -3435,7 +3436,7 @@
                     
                     const targetGift = results[r];
                     
-                    // Находим подарок с таким же именем (или создаем новый)
+                    // Находим подарок с таким же именем
                     let targetIndex = -1;
                     
                     for (let i = 0; i < items.length; i++) {
