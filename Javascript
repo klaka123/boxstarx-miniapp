@@ -560,7 +560,7 @@
             z-index: 5;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (СУПЕР КРАСИВОЕ) ========== */
         .upgrade-modal {
             position: fixed;
             top: 0;
@@ -625,10 +625,83 @@
 
         .upgrade-circle-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             margin: 0 auto 30px;
             z-index: 10;
+        }
+
+        /* Вращающиеся искры */
+        .upgrade-sparkle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateSparkle 8s linear infinite;
+        }
+
+        .upgrade-sparkle::before,
+        .upgrade-sparkle::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: radial-gradient(circle, #ffdd88, #ff9933);
+            border-radius: 50%;
+            filter: blur(2px);
+            box-shadow: 0 0 20px #ffaa33;
+        }
+
+        .upgrade-sparkle::before {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .upgrade-sparkle::after {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .upgrade-sparkle-2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateSparkle2 12s linear infinite reverse;
+        }
+
+        .upgrade-sparkle-2::before,
+        .upgrade-sparkle-2::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff, #ffaa33);
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 15px #ffaa33;
+        }
+
+        .upgrade-sparkle-2::before {
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .upgrade-sparkle-2::after {
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        @keyframes rotateSparkle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateSparkle2 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
         }
 
         .upgrade-circle {
@@ -638,16 +711,16 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #2a2f45, #0a0c1a);
+            background: radial-gradient(circle at 30% 30%, #3a3f55, #0a0c1a);
             border: 4px solid #ff9933;
-            box-shadow: 0 0 60px rgba(255,153,51,0.6), inset 0 0 40px rgba(255,153,51,0.4);
+            box-shadow: 0 0 80px rgba(255,153,51,0.8), inset 0 0 60px rgba(255,153,51,0.5);
             overflow: hidden;
             animation: circlePulse 2s infinite alternate;
         }
 
         @keyframes circlePulse {
-            from { box-shadow: 0 0 60px rgba(255,153,51,0.6), inset 0 0 40px rgba(255,153,51,0.4); }
-            to { box-shadow: 0 0 80px rgba(255,153,51,0.8), inset 0 0 60px rgba(255,153,51,0.6); }
+            from { box-shadow: 0 0 80px rgba(255,153,51,0.8), inset 0 0 60px rgba(255,153,51,0.5); }
+            to { box-shadow: 0 0 120px rgba(255,153,51,1), inset 0 0 80px rgba(255,153,51,0.7); }
         }
 
         .upgrade-circle::before {
@@ -657,13 +730,26 @@
             left: -10%;
             width: 120%;
             height: 120%;
-            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
+            background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+            animation: rotateBg 15s linear infinite;
         }
 
-        @keyframes rotate {
+        @keyframes rotateBg {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        /* Внутреннее свечение */
+        .upgrade-glow {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,153,51,0.3), transparent 70%);
+            filter: blur(10px);
+            z-index: 5;
         }
 
         .upgrade-circle-fill {
@@ -672,54 +758,74 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: conic-gradient(#00cc66 0deg, #ff4444 0deg);
+            background: conic-gradient(#00ff88 0deg, #ff4444 0deg);
             border-radius: 50%;
             transition: background 0.3s ease;
             mix-blend-mode: overlay;
+            opacity: 0.7;
         }
 
-        .upgrade-arrow-clock {
+        /* Красивая стрелка с несколькими слоями */
+        .upgrade-arrow-container {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 6px;
-            height: 130px;
-            background: linear-gradient(180deg, #ffaa33, #ff5500);
+            width: 8px;
+            height: 150px;
             transform-origin: bottom center;
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
-            box-shadow: 0 -5px 25px #ffaa33, 0 -10px 40px #ff5500;
             transition: transform 5s cubic-bezier(0.1, 0.8, 0.2, 1);
-            border-radius: 3px;
         }
 
-        .upgrade-arrow-clock::before {
-            content: '';
+        /* Основная стрелка */
+        .upgrade-arrow-main {
             position: absolute;
-            top: -22px;
-            left: -10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #ffdd88, #ff9933, #ff5500);
+            box-shadow: 0 0 30px #ffaa33, 0 0 60px #ff5500;
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Наконечник стрелки (внешний) */
+        .upgrade-arrow-tip-outer {
+            position: absolute;
+            top: -25px;
+            left: -11px;
             width: 0;
             height: 0;
-            border-left: 13px solid transparent;
-            border-right: 13px solid transparent;
-            border-bottom: 30px solid #ffaa33;
-            transform: rotate(0deg);
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 35px solid #ffaa33;
             filter: drop-shadow(0 -5px 20px #ffaa33) drop-shadow(0 -10px 30px #ff5500);
         }
 
-        .upgrade-arrow-clock::after {
-            content: '';
+        /* Наконечник стрелки (внутренний) */
+        .upgrade-arrow-tip-inner {
             position: absolute;
-            top: -18px;
-            left: -7px;
+            top: -20px;
+            left: -8px;
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 24px solid #ffdd88;
-            transform: rotate(0deg);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 28px solid #ffdd88;
             filter: drop-shadow(0 -5px 15px #ffdd88);
-            z-index: 31;
+        }
+
+        /* Свечение вдоль стрелки */
+        .upgrade-arrow-glow {
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 28px;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255,170,51,0.5), transparent 70%);
+            filter: blur(8px);
+            z-index: -1;
         }
 
         .upgrade-center-circle {
@@ -727,24 +833,39 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: radial-gradient(circle, #ffaa33 0%, #ff5500 100%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #ffdd88, #ff9933, #ff5500);
             border: 4px solid #fff;
             border-radius: 50%;
             z-index: 40;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: 3rem;
             color: #000;
-            box-shadow: 0 0 50px #ffaa33, inset 0 0 25px rgba(255,255,255,0.7);
-            animation: centerPulse 2s infinite alternate;
+            box-shadow: 0 0 60px #ffaa33, inset 0 0 30px rgba(255,255,255,0.8);
+            animation: centerGlow 2s infinite alternate;
         }
 
-        @keyframes centerPulse {
-            from { box-shadow: 0 0 50px #ffaa33; }
-            to { box-shadow: 0 0 70px #ffaa33; }
+        @keyframes centerGlow {
+            from { box-shadow: 0 0 60px #ffaa33; }
+            to { box-shadow: 0 0 100px #ffaa33; }
+        }
+
+        /* Внутреннее свечение центра */
+        .upgrade-center-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #fff, #ffdd88);
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: 0.6;
+            z-index: 41;
         }
 
         .upgrade-percent {
@@ -791,6 +912,7 @@
         .upgrade-selector:hover {
             background: rgba(255,153,51,0.2);
             transform: scale(1.02);
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .upgrade-selector:active {
@@ -2398,7 +2520,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда -->
+    <!-- Модальное окно апгрейда (СУПЕР КРАСИВОЕ) -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -2406,11 +2528,29 @@
         </div>
 
         <div class="upgrade-circle-container">
+            <!-- Вращающиеся искры -->
+            <div class="upgrade-sparkle"></div>
+            <div class="upgrade-sparkle-2"></div>
+            
+            <!-- Основной круг -->
             <div class="upgrade-circle">
                 <div class="upgrade-circle-fill" id="circleFill"></div>
             </div>
-            <div class="upgrade-arrow-clock" id="upgradeArrow"></div>
+            
+            <!-- Внутреннее свечение -->
+            <div class="upgrade-glow"></div>
+            
+            <!-- Контейнер для стрелки -->
+            <div class="upgrade-arrow-container" id="upgradeArrowContainer">
+                <div class="upgrade-arrow-main"></div>
+                <div class="upgrade-arrow-tip-outer"></div>
+                <div class="upgrade-arrow-tip-inner"></div>
+                <div class="upgrade-arrow-glow"></div>
+            </div>
+            
+            <!-- Центр -->
             <div class="upgrade-center-circle" id="upgradeCenter">⚡</div>
+            <div class="upgrade-center-inner"></div>
         </div>
 
         <div class="upgrade-percent" id="upgradePercent">0%</div>
@@ -3039,7 +3179,6 @@
                 upgradeModal: document.getElementById('upgradeModal'),
                 upgradeClose: document.getElementById('upgradeClose'),
                 upgradePercent: document.getElementById('upgradePercent'),
-                upgradeArrow: document.getElementById('upgradeArrow'),
                 upgradeCenter: document.getElementById('upgradeCenter'),
                 selectBetGift: document.getElementById('selectBetGift'),
                 selectTargetGift: document.getElementById('selectTargetGift'),
@@ -3103,7 +3242,8 @@
                 playerDice2: document.getElementById('playerDice2'),
                 dealerSum: document.getElementById('dealerSum'),
                 playerSum: document.getElementById('playerSum'),
-                diceBetBtns: document.querySelectorAll('.dice-bet-btn')
+                diceBetBtns: document.querySelectorAll('.dice-bet-btn'),
+                upgradeArrowContainer: document.getElementById('upgradeArrowContainer')
             };
 
             function saveGame() {
@@ -3339,23 +3479,19 @@
 
             // Функция для получения подарка с учетом цены кейса
             function getGiftForCase(casePrice) {
-                // Базовая логика: подарки должны быть близки к цене кейса
                 let minPrice = Math.max(1, Math.floor(casePrice * 0.3));
                 let maxPrice = Math.floor(casePrice * 3);
                 
-                // Фильтруем подарки по цене
                 let suitableGifts = GIFTS.filter(g => g.price >= minPrice && g.price <= maxPrice);
                 
-                // Если нет подходящих, берем все
                 if (suitableGifts.length === 0) {
                     suitableGifts = GIFTS;
                 }
                 
                 const baseGift = suitableGifts[Math.floor(Math.random() * suitableGifts.length)];
-                const multiplier = 0.7 + Math.random() * 0.8; // от 0.7 до 1.5
+                const multiplier = 0.7 + Math.random() * 0.8;
                 let finalPrice = Math.floor(baseGift.price * multiplier);
                 
-                // Корректируем цену, чтобы она была близка к цене кейса
                 if (finalPrice < casePrice * 0.5) finalPrice = Math.floor(casePrice * 0.7);
                 if (finalPrice > casePrice * 2.5) finalPrice = Math.floor(casePrice * 2);
                 
@@ -3449,19 +3585,15 @@
                     const itemWidth = 180;
                     const containerWidth = 800;
                     
-                    // Случайный индекс остановки
                     const stopIndex = Math.floor(Math.random() * itemCount);
                     
-                    // Финальная позиция, чтобы остановиться на stopIndex
                     const finalPos = (containerWidth / 2) - (itemWidth / 2) - (stopIndex * itemWidth);
                     
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
-                    // Резкий старт - много оборотов
                     const spins = 5 + Math.floor(Math.random() * 5);
                     const startPos = finalPos - (spins * itemCount * itemWidth);
                     
-                    // Рандомная задержка для непредсказуемости
                     const duration = 2.5 + Math.random() * 1.5;
                     
                     caseItems.style.transition = 'none';
@@ -3476,7 +3608,6 @@
                                 items[stopIndex].classList.add('win');
                                 sound.playWinSound();
                                 
-                                // Обновляем выигрыш в результатах
                                 const winItem = items[stopIndex];
                                 results[r] = {
                                     name: winItem.dataset.name,
@@ -3484,7 +3615,6 @@
                                     id: winItem.dataset.id
                                 };
                                 
-                                // Обновляем отображение результатов
                                 if (state.multipleResults.length > 0) {
                                     el.caseResults.style.display = 'block';
                                     el.caseResultsList.innerHTML = '';
@@ -4045,13 +4175,13 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд
+            // Апгрейд (КРАСИВАЯ АНИМАЦИЯ)
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
                     el.upgradePercent.textContent = percent + '%';
                     const fill = document.getElementById('circleFill');
-                    fill.style.background = `conic-gradient(#00cc66 0deg, #00cc66 ${percent * 3.6}deg, #ff4444 ${percent * 3.6}deg)`;
+                    fill.style.background = `conic-gradient(#00ff88 0deg, #00ff88 ${percent * 3.6}deg, #ff4444 ${percent * 3.6}deg)`;
                 } else {
                     el.upgradePercent.textContent = '0%';
                 }
@@ -4113,8 +4243,7 @@
                 
                 const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                 
-                el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
-                el.upgradeArrow.style.transition = 'transform 5s cubic-bezier(0.1, 0.8, 0.2, 1)';
+                el.upgradeArrowContainer.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
                 
                 el.upgradeActionBtn.disabled = true;
                 
@@ -4146,7 +4275,7 @@
                     saveGame();
                     el.upgradeActionBtn.disabled = false;
                     
-                    el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
+                    el.upgradeArrowContainer.style.transform = 'translate(-50%, -100%) rotate(0deg)';
                 }, 5000);
             };
 
