@@ -1933,7 +1933,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== КОЛЕСО ФОРТУНЫ (ПОЛНОСТЬЮ ПЕРЕПИСАНО) ========== */
+        /* ========== КОЛЕСО ФОРТУНЫ (ПОЛНОСТЬЮ НОВОЕ) ========== */
         .wheel-modal {
             position: fixed;
             top: 0;
@@ -1945,7 +1945,7 @@
             flex-direction: column;
             z-index: 10000;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px;
             animation: modalFadeIn 0.5s ease;
         }
 
@@ -1956,19 +1956,19 @@
         .wheel-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .wheel-back {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: rgba(255,153,51,0.2);
             border: 2px solid #ff9933;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            margin-right: 15px;
+            margin-right: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1985,18 +1985,18 @@
         }
 
         .wheel-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: #ff9933;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .wheel-container {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 260px;
+            height: 260px;
             margin: 10px auto;
         }
 
@@ -2006,9 +2006,9 @@
             border-radius: 50%;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(255,153,51,0.5);
+            box-shadow: 0 0 40px rgba(255,153,51,0.5);
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
-            border: 6px solid #ff9933;
+            border: 4px solid #ff9933;
             background: #1a1f35;
         }
 
@@ -2023,11 +2023,11 @@
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: white;
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
             clip-path: polygon(0 0, 100% 0, 0 100%);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .wheel-sector:nth-child(1) { transform: rotate(0deg); background: linear-gradient(135deg, #ff4757, #ff6b81); }
@@ -2040,9 +2040,9 @@
         .wheel-sector:nth-child(8) { transform: rotate(315deg); background: linear-gradient(135deg, #ffb8b8, #ffcccc); color: black; }
 
         .wheel-sector span {
-            transform: rotate(45deg) translate(25%, 25%);
+            transform: rotate(45deg) translate(20%, 20%);
             display: block;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
             text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
@@ -2054,9 +2054,9 @@
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 40px solid #ff9933;
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 35px solid #ff9933;
             filter: drop-shadow(0 0 15px #ff9933);
             z-index: 100;
         }
@@ -2066,18 +2066,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: radial-gradient(circle, #ff9933, #ff6600);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: black;
-            border: 4px solid white;
-            box-shadow: 0 0 40px #ff9933;
+            border: 3px solid white;
+            box-shadow: 0 0 30px #ff9933;
             z-index: 50;
         }
 
@@ -2095,43 +2095,44 @@
 
         @keyframes highlightPulse {
             0% { opacity: 0.3; box-shadow: 0 0 20px #ffaa00; }
-            50% { opacity: 0.8; box-shadow: 0 0 60px #ffaa00; }
+            50% { opacity: 0.8; box-shadow: 0 0 50px #ffaa00; }
             100% { opacity: 0.3; box-shadow: 0 0 20px #ffaa00; }
         }
 
         .wheel-bet-panel {
             background: rgba(0,0,0,0.5);
             border-radius: 40px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 2px solid #ff9933;
             backdrop-filter: blur(5px);
         }
 
         .wheel-bet-label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #ff9933;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .wheel-bet-controls {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
 
         .wheel-bet-btn {
             flex: 1;
-            min-width: 60px;
-            padding: 12px;
+            min-width: 50px;
+            padding: 10px;
             border: 2px solid #ff9933;
-            border-radius: 40px;
+            border-radius: 30px;
             background: rgba(255,153,51,0.1);
             color: white;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-size: 0.9rem;
         }
 
         .wheel-bet-btn:hover {
@@ -2142,25 +2143,25 @@
         .wheel-bet-btn.active {
             background: #ff9933;
             color: black;
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 15px #ff9933;
         }
 
         .wheel-bet-input {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #ff9933;
-            border-radius: 40px;
+            border-radius: 30px;
             background: rgba(0,0,0,0.5);
             color: #ff9933;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .wheel-bet-input:focus {
-            box-shadow: 0 0 20px #ff9933;
+            box-shadow: 0 0 15px #ff9933;
             border-color: #ffaa00;
         }
 
@@ -2171,23 +2172,23 @@
 
         .wheel-spin-btn {
             width: 100%;
-            padding: 18px;
+            padding: 15px;
             border: none;
-            border-radius: 60px;
-            font-size: 1.2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
             font-weight: 700;
             background: linear-gradient(135deg, #ff9933, #ff6600);
             color: black;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 0 30px #ff9933;
+            box-shadow: 0 0 25px #ff9933;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .wheel-spin-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 40px #ff9933;
+            box-shadow: 0 0 35px #ff9933;
         }
 
         .wheel-spin-btn:active {
@@ -2201,17 +2202,17 @@
 
         .wheel-result {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #ff9933;
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             border: 2px solid #ff9933;
-            border-radius: 60px;
+            border-radius: 40px;
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
 
-        /* ========== ПЛИНКО (УЛУЧШЕННАЯ ФИЗИКА) ========== */
+        /* ========== ПЛИНКО (УЛУЧШЕННЫЙ) ========== */
         .plinko-modal {
             position: fixed;
             top: 0;
@@ -2274,7 +2275,7 @@
         .plinko-container {
             position: relative;
             width: 100%;
-            height: 380px;
+            height: 360px;
             background: rgba(0, 0, 0, 0.5);
             border: 3px solid #ff9933;
             border-radius: 30px;
@@ -2287,16 +2288,16 @@
             top: 20px;
             left: 0;
             width: 100%;
-            height: 300px;
+            height: 280px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
         .plinko-row {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             justify-content: center;
         }
 
@@ -2327,7 +2328,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px;
+            height: 45px;
             display: flex;
         }
 
@@ -2339,7 +2340,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: #ff9933;
             transition: all 0.3s ease;
@@ -3116,7 +3117,7 @@
         <div class="coinflip-result" id="coinflipResult">Сделайте ставку и выберите сторону</div>
     </div>
 
-    <!-- Модальное окно Колеса Фортуны (ПОЛНОСТЬЮ ПЕРЕПИСАНО) -->
+    <!-- Модальное окно Колеса Фортуны (НОВОЕ) -->
     <div class="wheel-modal" id="wheelModal">
         <div class="wheel-header">
             <div class="wheel-back" id="wheelClose">←</div>
@@ -3155,7 +3156,7 @@
         <div class="wheel-result" id="wheelResult">Сделайте ставку и крутите колесо</div>
     </div>
 
-    <!-- Модальное окно Plinko (УЛУЧШЕННАЯ ФИЗИКА) -->
+    <!-- Модальное окно Plinko (НОВОЕ) -->
     <div class="plinko-modal" id="plinkoModal">
         <div class="plinko-header">
             <div class="plinko-back" id="plinkoClose">←</div>
@@ -4851,7 +4852,6 @@
                 const sectorIndex = Math.floor(Math.random() * state.wheel.sectors.length);
                 const result = state.wheel.sectors[sectorIndex];
                 
-                // Каждый сектор занимает 45 градусов (360/8)
                 const targetRotation = 360 * spins + (sectorIndex * 45) + 22.5;
                 
                 el.wheel.style.transform = `rotate(${targetRotation}deg)`;
@@ -4869,7 +4869,7 @@
                         state.balance += winAmount;
                         sound.playWinSound();
                         el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (${result})`;
-                    } else if (multiplier === 0) {
+                    } else {
                         sound.playLoseSound();
                         el.wheelResult.textContent = `😞 Проигрыш! Выпал LOSE`;
                     }
@@ -4901,11 +4901,11 @@
             
             el.wheelSpinBtn.onclick = spinWheel;
 
-            // Plinko (УЛУЧШЕННАЯ ФИЗИКА)
+            // Plinko (НОВОЕ)
             function initPlinko() {
-                // Создаем компактную пирамиду из 10 рядов
+                // Создаем компактную пирамиду из 8 рядов
                 el.plinkoPegs.innerHTML = '';
-                for (let row = 0; row < 10; row++) {
+                for (let row = 0; row < 8; row++) {
                     const rowDiv = document.createElement('div');
                     rowDiv.className = 'plinko-row';
                     const pegsCount = row + 2;
@@ -4917,7 +4917,7 @@
                     el.plinkoPegs.appendChild(rowDiv);
                 }
                 
-                // Создаем слоты
+                // Создаем компактные слоты
                 el.plinkoSlots.innerHTML = '';
                 state.plinko.slots.forEach((mult, index) => {
                     const slotDiv = document.createElement('div');
@@ -4948,30 +4948,24 @@
                 
                 sound.playPlinkoDropSound();
                 
-                // Убираем подсветку
                 document.querySelectorAll('.plinko-slot').forEach(slot => {
                     slot.classList.remove('highlight');
                 });
                 
-                // Ставим шарик наверх по центру
                 el.plinkoBall.style.left = '50%';
                 el.plinkoBall.style.top = '20px';
                 el.plinkoBall.style.transition = 'none';
                 
-                // Симулируем падение с отскоками
                 setTimeout(() => {
-                    let currentLeft = 50; // проценты
-                    const rows = 10;
+                    let currentLeft = 50;
+                    const rows = 8;
                     
-                    // Анимация падения по рядам
                     for (let row = 0; row < rows; row++) {
                         setTimeout(() => {
-                            // На каждом ряду случайное отклонение влево или вправо
                             const direction = Math.random() > 0.5 ? 1 : -1;
                             const offset = (Math.random() * 2 + 0.5) * direction;
                             currentLeft += offset;
                             
-                            // Ограничиваем, чтобы не вылететь за пределы
                             if (currentLeft < 20) currentLeft = 20;
                             if (currentLeft > 80) currentLeft = 80;
                             
@@ -4981,9 +4975,7 @@
                         }, row * 100);
                     }
                     
-                    // Финальный слот
                     setTimeout(() => {
-                        // Определяем слот на основе финальной позиции
                         const slotWidth = 100 / state.plinko.slots.length;
                         let slotIndex = Math.floor(currentLeft / slotWidth);
                         if (slotIndex < 0) slotIndex = 0;
@@ -4991,21 +4983,22 @@
                         
                         const multiplier = state.plinko.slots[slotIndex];
                         
-                        // Подсвечиваем слот
                         document.getElementById(`plinkoSlot${slotIndex}`).classList.add('highlight');
                         
-                        // Финальная позиция
                         el.plinkoBall.style.left = (slotIndex * slotWidth + slotWidth / 2) + '%';
-                        el.plinkoBall.style.top = '270px';
+                        el.plinkoBall.style.top = '220px';
                         
-                        if (multiplier > 0) {
+                        // 50% шанс проигрыша (LOSE и 0.5x считаются проигрышем)
+                        const isWin = multiplier > 0.5;
+                        
+                        if (isWin) {
                             const winAmount = Math.floor(bet * multiplier);
                             state.balance += winAmount;
                             sound.playWinSound();
                             el.plinkoResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (x${multiplier})`;
                         } else {
                             sound.playLoseSound();
-                            el.plinkoResult.textContent = `😞 Проигрыш! LOSE`;
+                            el.plinkoResult.textContent = multiplier === 0 ? '😞 Проигрыш! LOSE' : `😞 Проигрыш! x${multiplier}`;
                         }
                         
                         updateUI();
@@ -5016,7 +5009,6 @@
                         el.plinkoBet.disabled = false;
                         el.plinkoBetBtns.forEach(btn => btn.disabled = false);
                         
-                        // Возвращаем шарик наверх через секунду
                         setTimeout(() => {
                             el.plinkoBall.style.transition = 'none';
                             el.plinkoBall.style.top = '20px';
