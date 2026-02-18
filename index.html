@@ -1129,7 +1129,7 @@
             transform: scale(0.95);
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО DICE ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО DICE (УПРОЩЕННОЕ) ========== */
         .dice-modal {
             position: fixed;
             top: 0;
@@ -1337,48 +1337,6 @@
         .dice-bet-input:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-        }
-
-        .dice-bet-type {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .dice-type-btn {
-            padding: 15px;
-            border: 2px solid #ff9933;
-            border-radius: 40px;
-            background: rgba(255,153,51,0.1);
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .dice-type-btn:hover {
-            background: rgba(255,153,51,0.2);
-            transform: scale(1.02);
-        }
-
-        .dice-type-btn.active {
-            background: #ff9933;
-            color: black;
-            box-shadow: 0 0 20px #ff9933;
-        }
-
-        .dice-type-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .dice-odds {
-            text-align: center;
-            color: #ff9933;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
         }
 
         .dice-roll-btn {
@@ -2474,7 +2432,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно DICE -->
+    <!-- Модальное окно DICE (упрощенное) -->
     <div class="dice-modal" id="diceModal">
         <div class="dice-header">
             <div class="dice-back" id="diceClose">←</div>
@@ -2530,7 +2488,7 @@
         </div>
 
         <div class="dice-bet-panel">
-            <div class="dice-bet-label">💰 СТАВКА</div>
+            <div class="dice-bet-label">💰 СТАВКА (x2)</div>
             <div class="dice-bet-controls">
                 <button class="dice-bet-btn" data-bet="100">100</button>
                 <button class="dice-bet-btn" data-bet="250">250</button>
@@ -2539,22 +2497,10 @@
             </div>
             <input type="number" class="dice-bet-input" id="diceBet" value="100" min="10" step="10">
 
-            <div class="dice-bet-label">🎯 ТИП СТАВКИ</div>
-            <div class="dice-bet-type">
-                <button class="dice-type-btn" data-type="player">🎲 Игрок (x1.9)</button>
-                <button class="dice-type-btn" data-type="dealer">🤖 Дилер (x1.9)</button>
-                <button class="dice-type-btn" data-type="draw">🤝 Ничья (x5)</button>
-                <button class="dice-type-btn" data-type="over7">📈 >7 (x1.9)</button>
-                <button class="dice-type-btn" data-type="under7">📉 <7 (x1.9)</button>
-                <button class="dice-type-btn" data-type="exact7">🎯 =7 (x5)</button>
-            </div>
-
-            <div class="dice-odds" id="diceOdds">Коэффициент: x1.9</div>
-
             <button class="dice-roll-btn" id="diceRollBtn">🎲 БРОСИТЬ КУБИКИ</button>
         </div>
 
-        <div class="dice-result" id="diceResult">Сделайте ставку и выберите тип</div>
+        <div class="dice-result" id="diceResult">Сделайте ставку и бросьте кубики</div>
     </div>
 
     <!-- Модальное окно Blackjack -->
@@ -2678,7 +2624,7 @@
                 }, 600);
             });
 
-            // Класс для звуков - мягкие и спокойные
+            // Класс для звуков - максимально приятные
             class SoundManager {
                 constructor() {
                     this.audioContext = null;
@@ -2698,57 +2644,65 @@
                     }
                 }
 
-                // Мягкий звук выигрыша (пианино)
+                // Универсальный приятный звук выигрыша
                 playWinSound() {
                     if (!this.audioContext) return;
                     
                     const ctx = this.audioContext;
                     const now = ctx.currentTime;
                     
-                    const notes = [523.25, 659.25, 783.99];
+                    const notes = [
+                        { freq: 523.25, time: 0 }, // C5
+                        { freq: 659.25, time: 0.15 }, // E5
+                        { freq: 783.99, time: 0.3 }  // G5
+                    ];
                     
-                    notes.forEach((freq, i) => {
+                    notes.forEach(note => {
                         const osc = ctx.createOscillator();
                         const gain = ctx.createGain();
                         
                         osc.type = 'sine';
-                        osc.frequency.value = freq;
+                        osc.frequency.value = note.freq;
                         
-                        gain.gain.setValueAtTime(0.1, now + i * 0.15);
-                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 1);
+                        gain.gain.setValueAtTime(0.12, now + note.time);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + note.time + 1);
                         
                         osc.connect(gain);
                         gain.connect(ctx.destination);
                         
-                        osc.start(now + i * 0.15);
-                        osc.stop(now + i * 0.15 + 1);
+                        osc.start(now + note.time);
+                        osc.stop(now + note.time + 1);
                     });
                 }
 
-                // Мягкий звук проигрыша (вибрафон)
+                // Приятный звук проигрыша
                 playLoseSound() {
                     if (!this.audioContext) return;
                     
                     const ctx = this.audioContext;
                     const now = ctx.currentTime;
                     
-                    const notes = [392.00, 329.63, 261.63];
+                    const notes = [
+                        { freq: 392.00, time: 0 }, // G4
+                        { freq: 349.23, time: 0.2 }, // F4
+                        { freq: 329.63, time: 0.4 }  // E4
+                    ];
                     
-                    notes.forEach((freq, i) => {
+                    notes.forEach(note => {
                         const osc = ctx.createOscillator();
                         const gain = ctx.createGain();
                         
-                        osc.type = 'triangle';
-                        osc.frequency.value = freq;
+                        osc.type = 'sine';
+                        osc.frequency.value = note.freq;
                         
-                        gain.gain.setValueAtTime(0.08, now + i * 0.2);
-                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.2 + 1.2);
+                        gain.gain.setValueAtTime(0.1, now + note.time);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + note.time + 0.8);
                         
                         osc.connect(gain);
                         gain.connect(ctx.destination);
                         
-                        osc.start(now + i * 0.2);
-                        osc.stop(now + i * 0.2 + 1.2);
+                        osc.start(now + note.time);
+                        osc.stop(now + note.time + 0.8);
                     });
                 }
 
@@ -2764,7 +2718,6 @@
                     this.playLoseSound();
                 }
 
-                // Звук броска кубиков
                 playDiceRollSound() {
                     if (!this.audioContext) return;
                     
@@ -3025,7 +2978,6 @@
                 flightStopped: false,
                 dice: {
                     bet: 100,
-                    type: 'player',
                     isRolling: false
                 },
                 blackjack: {
@@ -3128,15 +3080,13 @@
                 diceBet: document.getElementById('diceBet'),
                 diceRollBtn: document.getElementById('diceRollBtn'),
                 diceResult: document.getElementById('diceResult'),
-                diceOdds: document.getElementById('diceOdds'),
                 dealerDice1: document.getElementById('dealerDice1'),
                 dealerDice2: document.getElementById('dealerDice2'),
                 playerDice1: document.getElementById('playerDice1'),
                 playerDice2: document.getElementById('playerDice2'),
                 dealerSum: document.getElementById('dealerSum'),
                 playerSum: document.getElementById('playerSum'),
-                diceBetBtns: document.querySelectorAll('.dice-bet-btn'),
-                diceTypeBtns: document.querySelectorAll('.dice-type-btn')
+                diceBetBtns: document.querySelectorAll('.dice-bet-btn')
             };
 
             function saveGame() {
@@ -3225,7 +3175,7 @@
                 }
             };
 
-            // Ракета с новыми вероятностями
+            // Ракета
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
                 
@@ -3277,7 +3227,6 @@
                 state.intervalId = setInterval(() => {
                     if (!state.isFlying) return;
                     
-                    // Основной рост - часто до 2.8x
                     state.multiplier += 0.008 + Math.random() * 0.015;
                     el.multiplier.textContent = state.multiplier.toFixed(2) + 'x';
                     
@@ -3285,17 +3234,16 @@
                         stopFlight();
                     }
                     
-                    // Вероятность краха
                     let crashChance = 0.015;
                     
                     if (state.multiplier < 2) {
-                        crashChance = 0.01; // Очень редко падает на 1х
+                        crashChance = 0.01;
                     } else if (state.multiplier < 2.8) {
-                        crashChance = 0.03; // Часто долетает до 2.8х
+                        crashChance = 0.03;
                     } else if (state.multiplier < 5) {
-                        crashChance = 0.08; // Редко до 5х
+                        crashChance = 0.08;
                     } else if (state.multiplier < 28) {
-                        crashChance = 0.15; // Очень редко до 28х
+                        crashChance = 0.15;
                     } else {
                         crashChance = 0.3;
                     }
@@ -3493,43 +3441,27 @@
                     
                     state.winIndices[r] = targetIndex;
                     
-                    // Рассчитываем позицию для остановки под маркером
                     const finalPos = markerPos - (targetIndex * itemWidth);
                     
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
-                    const spins = 3 + Math.floor(Math.random() * 3);
+                    const spins = 4 + Math.floor(Math.random() * 3);
                     const startPos = finalPos - (spins * itemCount * itemWidth);
                     
                     caseItems.style.transition = 'none';
                     caseItems.style.transform = `translateX(${startPos}px)`;
                     
                     setTimeout(() => {
-                        // Основная анимация
-                        caseItems.style.transition = 'transform 3.8s cubic-bezier(0.1, 0.8, 0.2, 1)';
+                        // Резкая прокрутка с замедлением в конце
+                        caseItems.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.9, 0.3, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
-                        // Эффект магнита - небольшое смещение в конце
                         setTimeout(() => {
-                            // Проверяем, насколько точно попали
-                            const currentTransform = caseItems.style.transform;
-                            const currentX = parseInt(currentTransform.match(/-?\d+/)?.[0] || '0');
-                            const targetX = finalPos;
-                            const diff = Math.abs(currentX - targetX);
-                            
-                            // Если есть небольшое расхождение, делаем "магнит"
-                            if (diff > 5 && diff < 30) {
-                                caseItems.style.transition = 'transform 0.2s ease-out';
-                                caseItems.style.transform = `translateX(${targetX}px)`;
+                            if (items[targetIndex]) {
+                                items[targetIndex].classList.add('win');
+                                sound.playWinSound();
                             }
-                            
-                            setTimeout(() => {
-                                if (items[targetIndex]) {
-                                    items[targetIndex].classList.add('win');
-                                    sound.playWinSound();
-                                }
-                            }, 200);
-                        }, 3800);
+                        }, 2500);
                     }, 50);
                 }
                 
@@ -3568,7 +3500,7 @@
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
-                }, 4500);
+                }, 3000);
             }
 
             el.sellConfirm.onclick = () => {
@@ -3602,26 +3534,7 @@
                 };
             });
 
-            // DICE Game
-            function updateDiceUI() {
-                const odds = {
-                    player: 1.9,
-                    dealer: 1.9,
-                    draw: 5,
-                    over7: 1.9,
-                    under7: 1.9,
-                    exact7: 5
-                };
-                el.diceOdds.textContent = `Коэффициент: x${odds[state.dice.type]}`;
-                
-                el.diceTypeBtns.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.type === state.dice.type) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-
+            // DICE Game (упрощенная)
             function rollDice() {
                 if (state.dice.isRolling) return;
                 
@@ -3639,18 +3552,15 @@
                 el.diceRollBtn.disabled = true;
                 el.diceBet.disabled = true;
                 el.diceBetBtns.forEach(btn => btn.disabled = true);
-                el.diceTypeBtns.forEach(btn => btn.disabled = true);
                 
                 sound.playDiceRollSound();
                 
-                // Анимация вращения
                 const diceElements = [el.playerDice1, el.playerDice2, el.dealerDice1, el.dealerDice2];
                 diceElements.forEach(dice => {
                     dice.style.animation = 'diceRoll 0.5s ease-out';
                 });
                 
                 setTimeout(() => {
-                    // Генерируем результаты
                     const player1 = Math.floor(Math.random() * 6) + 1;
                     const player2 = Math.floor(Math.random() * 6) + 1;
                     const dealer1 = Math.floor(Math.random() * 6) + 1;
@@ -3659,7 +3569,6 @@
                     const playerSum = player1 + player2;
                     const dealerSum = dealer1 + dealer2;
                     
-                    // Обновляем отображение
                     updateDiceDisplay(el.playerDice1, player1);
                     updateDiceDisplay(el.playerDice2, player2);
                     updateDiceDisplay(el.dealerDice1, dealer1);
@@ -3668,53 +3577,25 @@
                     el.playerSum.textContent = playerSum;
                     el.dealerSum.textContent = dealerSum;
                     
-                    // Убираем анимацию
                     diceElements.forEach(dice => {
                         dice.style.animation = '';
                     });
                     
-                    // Определяем результат
-                    let win = false;
-                    let message = '';
-                    const type = state.dice.type;
-                    
-                    if (type === 'player') {
-                        win = playerSum > dealerSum;
-                        message = win ? '🎉 Игрок победил!' : '😞 Дилер победил';
-                    } else if (type === 'dealer') {
-                        win = dealerSum > playerSum;
-                        message = win ? '🎉 Дилер победил!' : '😞 Игрок победил';
-                    } else if (type === 'draw') {
-                        win = playerSum === dealerSum;
-                        message = win ? '🎉 Ничья!' : '😞 Не ничья';
-                    } else if (type === 'over7') {
-                        win = playerSum > 7;
-                        message = win ? '🎉 Сумма больше 7!' : '😞 Сумма не больше 7';
-                    } else if (type === 'under7') {
-                        win = playerSum < 7;
-                        message = win ? '🎉 Сумма меньше 7!' : '😞 Сумма не меньше 7';
-                    } else if (type === 'exact7') {
-                        win = playerSum === 7;
-                        message = win ? '🎉 Ровно 7!' : '😞 Не 7';
-                    }
-                    
-                    const odds = {
-                        player: 1.9,
-                        dealer: 1.9,
-                        draw: 5,
-                        over7: 1.9,
-                        under7: 1.9,
-                        exact7: 5
-                    };
+                    const win = playerSum > dealerSum;
+                    const draw = playerSum === dealerSum;
                     
                     if (win) {
-                        const winAmount = Math.floor(bet * odds[type]);
+                        const winAmount = bet * 2;
                         state.balance += winAmount;
                         sound.playWinSound();
-                        el.diceResult.textContent = `${message} +${winAmount}⭐`;
+                        el.diceResult.textContent = `🎉 Игрок победил! +${winAmount}⭐`;
+                    } else if (draw) {
+                        state.balance += bet;
+                        sound.playWinSound();
+                        el.diceResult.textContent = `🤝 Ничья! Ставка возвращена`;
                     } else {
                         sound.playLoseSound();
-                        el.diceResult.textContent = `${message} -${bet}⭐`;
+                        el.diceResult.textContent = `😞 Дилер победил! -${bet}⭐`;
                     }
                     
                     updateUI();
@@ -3724,22 +3605,17 @@
                     el.diceRollBtn.disabled = false;
                     el.diceBet.disabled = false;
                     el.diceBetBtns.forEach(btn => btn.disabled = false);
-                    el.diceTypeBtns.forEach(btn => btn.disabled = false);
                 }, 500);
             }
 
             function updateDiceDisplay(diceElement, value) {
                 diceElement.dataset.value = value;
-                // Кубик сам обновится через CSS
             }
 
             el.openDiceBtn.onclick = () => {
                 el.diceModal.classList.add('active');
-                state.dice.type = 'player';
-                updateDiceUI();
-                el.diceResult.textContent = 'Сделайте ставку и выберите тип';
+                el.diceResult.textContent = 'Сделайте ставку и бросьте кубики';
                 
-                // Сброс кубиков
                 updateDiceDisplay(el.playerDice1, 1);
                 updateDiceDisplay(el.playerDice2, 1);
                 updateDiceDisplay(el.dealerDice1, 1);
@@ -3758,16 +3634,9 @@
                 };
             });
             
-            el.diceTypeBtns.forEach(btn => {
-                btn.onclick = () => {
-                    state.dice.type = btn.dataset.type;
-                    updateDiceUI();
-                };
-            });
-            
             el.diceRollBtn.onclick = rollDice;
 
-            // Blackjack (сокращен для краткости, но функционал сохранен)
+            // Blackjack
             function createDeck() {
                 const suits = ['♠️', '♥️', '♦️', '♣️'];
                 const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -4140,7 +4009,7 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд (новая плавная анимация)
+            // Апгрейд
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
@@ -4208,7 +4077,6 @@
                 
                 const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
                 
-                // Плавная анимация с замедлением
                 el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
                 el.upgradeArrow.style.transition = 'transform 5s cubic-bezier(0.2, 0.9, 0.3, 1)';
                 
