@@ -1933,7 +1933,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== КОЛЕСО ФОРТУНЫ (НОВЫЙ МИНИМАЛИСТИЧНЫЙ ДИЗАЙН) ========== */
+        /* ========== КОЛЕСО ФОРТУНЫ (НОВОЕ С НЕРАВНЫМИ ШАНСАМИ) ========== */
         .wheel-modal {
             position: fixed;
             top: 0;
@@ -1995,8 +1995,8 @@
 
         .wheel-container {
             position: relative;
-            width: 260px;
-            height: 260px;
+            width: 280px;
+            height: 280px;
             margin: 20px auto;
         }
 
@@ -2006,7 +2006,7 @@
             border-radius: 50%;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(255,153,51,0.5);
+            box-shadow: 0 0 50px rgba(255,153,51,0.5);
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
             border: 4px solid #ff9933;
         }
@@ -2018,18 +2018,35 @@
             transform-origin: bottom right;
             left: 0;
             top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 0 0 5px black;
             clip-path: polygon(0 0, 100% 0, 0 100%);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* 8 разноцветных секторов без текста */
+        /* 9 секторов по 40 градусов */
         .wheel-sector:nth-child(1) { transform: rotate(0deg); background: linear-gradient(135deg, #ff4757, #ff6b81); }
-        .wheel-sector:nth-child(2) { transform: rotate(45deg); background: linear-gradient(135deg, #ffa502, #ffb347); }
-        .wheel-sector:nth-child(3) { transform: rotate(90deg); background: linear-gradient(135deg, #ffcc00, #ffdb4d); }
-        .wheel-sector:nth-child(4) { transform: rotate(135deg); background: linear-gradient(135deg, #2ed573, #7bed9f); }
-        .wheel-sector:nth-child(5) { transform: rotate(180deg); background: linear-gradient(135deg, #1e90ff, #70a1ff); }
-        .wheel-sector:nth-child(6) { transform: rotate(225deg); background: linear-gradient(135deg, #a55eea, #b07cff); }
-        .wheel-sector:nth-child(7) { transform: rotate(270deg); background: linear-gradient(135deg, #ff6b81, #ff8a9f); }
-        .wheel-sector:nth-child(8) { transform: rotate(315deg); background: linear-gradient(135deg, #ffb8b8, #ffcccc); }
+        .wheel-sector:nth-child(2) { transform: rotate(40deg); background: linear-gradient(135deg, #ffa502, #ffb347); }
+        .wheel-sector:nth-child(3) { transform: rotate(80deg); background: linear-gradient(135deg, #ffcc00, #ffdb4d); color: black; }
+        .wheel-sector:nth-child(4) { transform: rotate(120deg); background: linear-gradient(135deg, #2ed573, #7bed9f); color: black; }
+        .wheel-sector:nth-child(5) { transform: rotate(160deg); background: linear-gradient(135deg, #1e90ff, #70a1ff); }
+        .wheel-sector:nth-child(6) { transform: rotate(200deg); background: linear-gradient(135deg, #a55eea, #b07cff); }
+        .wheel-sector:nth-child(7) { transform: rotate(240deg); background: linear-gradient(135deg, #ff6b81, #ff8a9f); }
+        .wheel-sector:nth-child(8) { transform: rotate(280deg); background: linear-gradient(135deg, #ffb8b8, #ffcccc); color: black; }
+        .wheel-sector:nth-child(9) { transform: rotate(320deg); background: linear-gradient(135deg, #ff9ff3, #f368e0); }
+
+        .wheel-sector span {
+            transform: rotate(45deg) translate(20%, 20%);
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
 
         .wheel-marker {
             position: absolute;
@@ -2063,6 +2080,24 @@
             border: 3px solid white;
             box-shadow: 0 0 30px #ff9933;
             z-index: 50;
+        }
+
+        .wheel-highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #ffaa00;
+            animation: highlightPulse 1s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes highlightPulse {
+            0% { opacity: 0.3; box-shadow: 0 0 20px #ffaa00; }
+            50% { opacity: 0.8; box-shadow: 0 0 50px #ffaa00; }
+            100% { opacity: 0.3; box-shadow: 0 0 20px #ffaa00; }
         }
 
         .wheel-bet-panel {
@@ -2178,7 +2213,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== ПЛИНКО (ОГРОМНАЯ ПИРАМИДА) ========== */
+        /* ========== ПЛИНКО (ИСПРАВЛЕННЫЙ) ========== */
         .plinko-modal {
             position: fixed;
             top: 0;
@@ -3083,7 +3118,7 @@
         <div class="coinflip-result" id="coinflipResult">Сделайте ставку и выберите сторону</div>
     </div>
 
-    <!-- Модальное окно Колеса Фортуны (НОВЫЙ МИНИМАЛИСТИЧНЫЙ ДИЗАЙН) -->
+    <!-- Модальное окно Колеса Фортуны (НОВОЕ) -->
     <div class="wheel-modal" id="wheelModal">
         <div class="wheel-header">
             <div class="wheel-back" id="wheelClose">←</div>
@@ -3092,17 +3127,19 @@
 
         <div class="wheel-container">
             <div class="wheel" id="wheel">
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
-                <div class="wheel-sector"></div>
+                <div class="wheel-sector"><span>x0</span></div>
+                <div class="wheel-sector"><span>x0.5</span></div>
+                <div class="wheel-sector"><span>x1</span></div>
+                <div class="wheel-sector"><span>x1.2</span></div>
+                <div class="wheel-sector"><span>x1.5</span></div>
+                <div class="wheel-sector"><span>x2</span></div>
+                <div class="wheel-sector"><span>x3</span></div>
+                <div class="wheel-sector"><span>x5</span></div>
+                <div class="wheel-sector"><span>x10</span></div>
             </div>
             <div class="wheel-marker"></div>
             <div class="wheel-center">🎡</div>
+            <div class="wheel-highlight" id="wheelHighlight"></div>
         </div>
 
         <div class="wheel-bet-panel">
@@ -3122,7 +3159,7 @@
         <div class="wheel-result" id="wheelResult">Сделайте ставку и крутите колесо</div>
     </div>
 
-    <!-- Модальное окно Plinko (ОГРОМНАЯ ПИРАМИДА) -->
+    <!-- Модальное окно Plinko (ИСПРАВЛЕННОЕ) -->
     <div class="plinko-modal" id="plinkoModal">
         <div class="plinko-header">
             <div class="plinko-back" id="plinkoClose">←</div>
@@ -3500,7 +3537,6 @@
 
             // Подарки (МНОГО ДОРОГИХ, ЕСТЬ ЗА 1,000,000)
             const GIFTS = [
-                // Очень дешевые
                 { id: 'common1', name: 'TOY', price: 1, emoji: '🧸', color: '#8b4513' },
                 { id: 'common2', name: 'BALLOON', price: 2, emoji: '🎈', color: '#ff69b4' },
                 { id: 'common3', name: 'CANDY', price: 3, emoji: '🍬', color: '#ff1493' },
@@ -3511,28 +3547,20 @@
                 { id: 'common8', name: 'BADGE', price: 8, emoji: '📛', color: '#dc143c' },
                 { id: 'common9', name: 'PIN', price: 9, emoji: '📌', color: '#b8860b' },
                 { id: 'common10', name: 'COIN', price: 10, emoji: '🪙', color: '#ffd700' },
-                
-                // Дешевые
                 { id: 'common11', name: 'TOY CAR', price: 11, emoji: '🚗', color: '#8b4513' },
                 { id: 'common12', name: 'BALL', price: 12, emoji: '⚽', color: '#ff69b4' },
                 { id: 'common13', name: 'BOOK', price: 13, emoji: '📚', color: '#ff1493' },
                 { id: 'common14', name: 'PEN', price: 14, emoji: '✒️', color: '#32cd32' },
                 { id: 'common15', name: 'PENCIL', price: 15, emoji: '✏️', color: '#ff4500' },
-                
-                // Средние
                 { id: 'common16', name: 'WATCH', price: 30, emoji: '⌚', color: '#ff4500' },
                 { id: 'rare1', name: 'RING', price: 50, emoji: '💍', color: '#cd853f' },
                 { id: 'rare2', name: 'NECKLACE', price: 75, emoji: '📿', color: '#1e90ff' },
                 { id: 'rare3', name: 'BRACELET', price: 100, emoji: '🔗', color: '#dc143c' },
                 { id: 'rare4', name: 'EARRINGS', price: 125, emoji: '💎', color: '#b8860b' },
-                
-                // Дорогие
                 { id: 'epic1', name: 'HEADPHONES', price: 200, emoji: '🎧', color: '#8b4513' },
                 { id: 'epic2', name: 'SPEAKER', price: 250, emoji: '🔊', color: '#ff69b4' },
                 { id: 'epic3', name: 'KEYBOARD', price: 300, emoji: '⌨️', color: '#ff1493' },
                 { id: 'epic4', name: 'MOUSE', price: 350, emoji: '🖱️', color: '#32cd32' },
-                
-                // Очень дорогие
                 { id: 'legend1', name: 'RIP', price: 500, emoji: '💀', color: '#333' },
                 { id: 'legend2', name: 'SKULL', price: 750, emoji: '💀', color: '#444' },
                 { id: 'legend3', name: 'HEART', price: 1000, emoji: '❤️', color: '#ff6b6b' },
@@ -3551,8 +3579,6 @@
                 { id: 'legend16', name: 'UNIVERSE', price: 8000, emoji: '🌌', color: '#4b0082' },
                 { id: 'legend17', name: 'INFINITY', price: 9000, emoji: '∞', color: '#ff1493' },
                 { id: 'legend18', name: 'ETERNITY', price: 10000, emoji: '⏳', color: '#daa520' },
-                
-                // Мифические
                 { id: 'mythic1', name: 'DRAGON', price: 12000, emoji: '🐉', color: '#8b0000' },
                 { id: 'mythic2', name: 'PHOENIX', price: 15000, emoji: '🔥', color: '#ff4500' },
                 { id: 'mythic3', name: 'THOR', price: 18000, emoji: '⚡', color: '#4169e1' },
@@ -3560,8 +3586,6 @@
                 { id: 'mythic5', name: 'ZEUS', price: 25000, emoji: '⚡', color: '#ffd700' },
                 { id: 'mythic6', name: 'POSEIDON', price: 30000, emoji: '🌊', color: '#1e90ff' },
                 { id: 'mythic7', name: 'HADES', price: 35000, emoji: '💀', color: '#4a4a4a' },
-                
-                // Легендарные (ОЧЕНЬ ДОРОГИЕ)
                 { id: 'mythic8', name: 'COSMIC EGG', price: 1000000, emoji: '🥚✨', color: '#9400d3' },
                 { id: 'mythic9', name: 'BLACK HOLE', price: 500000, emoji: '🕳️', color: '#000000' },
                 { id: 'mythic10', name: 'SUPERNOVA', price: 250000, emoji: '💥', color: '#ff4500' },
@@ -3637,12 +3661,15 @@
                 wheel: {
                     bet: 100,
                     isSpinning: false,
-                    prizes: [0, 50, 100, 250, 500, 1000, 5000, 10000]
+                    winStreak: 0, // защита от постоянных выигрышей
+                    multipliers: [0, 0.5, 1, 1.2, 1.5, 2, 3, 5, 10],
+                    weights: [25, 20, 20, 10, 8, 7, 5, 3, 2] // сумма 100
                 },
                 plinko: {
                     bet: 100,
                     isDropping: false,
-                    slots: [0, 0.5, 1, 1, 3, 5, 10, 20]
+                    slots: [0, 0.5, 1, 3, 5, 10, 20],
+                    weights: [35, 25, 20, 8, 6, 4, 2] // сумма 100
                 }
             };
 
@@ -3741,6 +3768,7 @@
                 wheelSpinBtn: document.getElementById('wheelSpinBtn'),
                 wheelResult: document.getElementById('wheelResult'),
                 wheel: document.getElementById('wheel'),
+                wheelHighlight: document.getElementById('wheelHighlight'),
                 wheelBetBtns: document.querySelectorAll('.wheel-bet-btn'),
                 openPlinkoBtn: document.getElementById('openPlinkoBtn'),
                 plinkoModal: document.getElementById('plinkoModal'),
@@ -4811,7 +4839,18 @@
                 showToast(`✅ +${amount}⭐ получено!`);
             }
 
-            // Колесо Фортуны (НОВЫЙ МИНИМАЛИСТИЧНЫЙ ДИЗАЙН)
+            // Колесо Фортуны (НОВОЕ С НЕРАВНЫМИ ШАНСАМИ)
+            function getRandomWheelIndex() {
+                const totalWeight = state.wheel.weights.reduce((a, b) => a + b, 0);
+                let random = Math.random() * totalWeight;
+                let cumulative = 0;
+                for (let i = 0; i < state.wheel.weights.length; i++) {
+                    cumulative += state.wheel.weights[i];
+                    if (random < cumulative) return i;
+                }
+                return 0;
+            }
+
             function spinWheel() {
                 if (state.wheel.isSpinning) return;
                 
@@ -4832,24 +4871,47 @@
                 
                 sound.playWheelSpinSound();
                 
-                const spins = 5 + Math.floor(Math.random() * 5);
-                const sectorIndex = Math.floor(Math.random() * 8);
-                const prize = state.wheel.prizes[sectorIndex];
+                // Защита от постоянных выигрышей
+                let weights = [...state.wheel.weights];
+                if (state.wheel.winStreak >= 2) {
+                    // После 2 выигрышей подряд уменьшаем шансы на высокие множители
+                    for (let i = 5; i < weights.length; i++) {
+                        weights[i] = Math.max(1, Math.floor(weights[i] * 0.5));
+                    }
+                }
                 
-                const targetRotation = 360 * spins + (sectorIndex * 45) + 22.5;
+                const totalWeight = weights.reduce((a, b) => a + b, 0);
+                let random = Math.random() * totalWeight;
+                let cumulative = 0;
+                let sectorIndex = 0;
+                for (let i = 0; i < weights.length; i++) {
+                    cumulative += weights[i];
+                    if (random < cumulative) {
+                        sectorIndex = i;
+                        break;
+                    }
+                }
+                
+                const multiplier = state.wheel.multipliers[sectorIndex];
+                
+                const spins = 5 + Math.floor(Math.random() * 5);
+                const targetRotation = 360 * spins + (sectorIndex * 40) + 20; // 40 градусов на сектор
                 
                 el.wheel.style.transform = `rotate(${targetRotation}deg)`;
                 
                 setTimeout(() => {
                     state.wheel.isSpinning = false;
                     
-                    if (prize > 0) {
-                        state.balance += prize;
+                    if (multiplier > 0) {
+                        const winAmount = Math.floor(bet * multiplier);
+                        state.balance += winAmount;
                         sound.playWinSound();
-                        el.wheelResult.textContent = `🎉 Выигрыш: ${prize}⭐`;
+                        el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (x${multiplier})`;
+                        state.wheel.winStreak++;
                     } else {
                         sound.playLoseSound();
-                        el.wheelResult.textContent = `😞 Проигрыш! 0⭐`;
+                        el.wheelResult.textContent = `😞 Проигрыш! x0`;
+                        state.wheel.winStreak = 0;
                     }
                     
                     updateUI();
@@ -4865,6 +4927,7 @@
                 el.wheelModal.classList.add('active');
                 el.wheelResult.textContent = 'Сделайте ставку и крутите колесо';
                 el.wheel.style.transform = 'rotate(0deg)';
+                state.wheel.winStreak = 0;
             };
             
             el.wheelClose.onclick = () => {
@@ -4879,11 +4942,11 @@
             
             el.wheelSpinBtn.onclick = spinWheel;
 
-            // Plinko (ОГРОМНАЯ ПИРАМИДА)
+            // Plinko (ИСПРАВЛЕННОЕ)
             function initPlinko() {
-                // Создаем огромную пирамиду из 15 рядов
+                // Создаем пирамиду из 12 рядов
                 el.plinkoPegs.innerHTML = '';
-                for (let row = 0; row < 15; row++) {
+                for (let row = 0; row < 12; row++) {
                     const rowDiv = document.createElement('div');
                     rowDiv.className = 'plinko-row';
                     const pegsCount = row + 2;
@@ -4895,13 +4958,14 @@
                     el.plinkoPegs.appendChild(rowDiv);
                 }
                 
-                // Создаем слоты
+                // Создаем 7 слотов
                 el.plinkoSlots.innerHTML = '';
+                const slotLabels = ['LOSE', '0.5x', '1x', '3x', '5x', '10x', '20x'];
                 state.plinko.slots.forEach((mult, index) => {
                     const slotDiv = document.createElement('div');
                     slotDiv.className = 'plinko-slot';
                     slotDiv.id = `plinkoSlot${index}`;
-                    slotDiv.textContent = mult === 0 ? 'LOSE' : `x${mult}`;
+                    slotDiv.textContent = slotLabels[index];
                     el.plinkoSlots.appendChild(slotDiv);
                 });
             }
@@ -4934,9 +4998,25 @@
                 el.plinkoBall.style.top = '20px';
                 el.plinkoBall.style.transition = 'none';
                 
+                // Определяем результат заранее (серверная логика)
+                const totalWeight = state.plinko.weights.reduce((a, b) => a + b, 0);
+                let random = Math.random() * totalWeight;
+                let cumulative = 0;
+                let resultIndex = 0;
+                for (let i = 0; i < state.plinko.weights.length; i++) {
+                    cumulative += state.plinko.weights[i];
+                    if (random < cumulative) {
+                        resultIndex = i;
+                        break;
+                    }
+                }
+                
+                const multiplier = state.plinko.slots[resultIndex];
+                
+                // Симуляция падения с отскоками
                 setTimeout(() => {
                     let currentLeft = 50;
-                    const rows = 15;
+                    const rows = 12;
                     
                     for (let row = 0; row < rows; row++) {
                         setTimeout(() => {
@@ -4955,16 +5035,14 @@
                     
                     setTimeout(() => {
                         const slotWidth = 100 / state.plinko.slots.length;
-                        let slotIndex = Math.floor(currentLeft / slotWidth);
-                        if (slotIndex < 0) slotIndex = 0;
-                        if (slotIndex >= state.plinko.slots.length) slotIndex = state.plinko.slots.length - 1;
+                        // Приводим финальную позицию к нужному слоту
+                        const targetLeft = (resultIndex * slotWidth + slotWidth / 2);
                         
-                        const multiplier = state.plinko.slots[slotIndex];
+                        el.plinkoBall.style.transition = 'top 0.2s linear, left 0.2s linear';
+                        el.plinkoBall.style.left = targetLeft + '%';
+                        el.plinkoBall.style.top = '260px';
                         
-                        document.getElementById(`plinkoSlot${slotIndex}`).classList.add('highlight');
-                        
-                        el.plinkoBall.style.left = (slotIndex * slotWidth + slotWidth / 2) + '%';
-                        el.plinkoBall.style.top = '320px';
+                        document.getElementById(`plinkoSlot${resultIndex}`).classList.add('highlight');
                         
                         const winAmount = Math.floor(bet * multiplier);
                         
@@ -4990,7 +5068,7 @@
                             el.plinkoBall.style.top = '20px';
                             el.plinkoBall.style.left = '50%';
                         }, 1000);
-                    }, rows * 80 + 50);
+                    }, rows * 80 + 100);
                 }, 100);
             }
 
