@@ -195,7 +195,7 @@
         }
 
         /* Кнопки на главном */
-        .upgrade-main-btn, .blackjack-main-btn, .coinflip-main-btn, .dice-main-btn {
+        .upgrade-main-btn, .blackjack-main-btn, .coinflip-main-btn, .dice-main-btn, .wheel-main-btn, .plinko-main-btn {
             background: linear-gradient(135deg, #ff9933, #ff6600);
             border: none;
             border-radius: 60px;
@@ -211,12 +211,12 @@
             transition: all 0.3s ease;
         }
 
-        .upgrade-main-btn:hover, .blackjack-main-btn:hover, .coinflip-main-btn:hover, .dice-main-btn:hover {
+        .upgrade-main-btn:hover, .blackjack-main-btn:hover, .coinflip-main-btn:hover, .dice-main-btn:hover, .wheel-main-btn:hover, .plinko-main-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 50px #ff9933;
         }
 
-        .upgrade-main-btn:active, .blackjack-main-btn:active, .coinflip-main-btn:active, .dice-main-btn:active {
+        .upgrade-main-btn:active, .blackjack-main-btn:active, .coinflip-main-btn:active, .dice-main-btn:active, .wheel-main-btn:active, .plinko-main-btn:active {
             transform: scale(0.98);
         }
 
@@ -1933,6 +1933,511 @@
             backdrop-filter: blur(5px);
         }
 
+        /* ========== КОЛЕСО ФОРТУНЫ ========== */
+        .wheel-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .wheel-modal.active {
+            display: flex;
+        }
+
+        .wheel-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .wheel-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .wheel-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
+        }
+
+        .wheel-back:active {
+            transform: scale(0.95);
+        }
+
+        .wheel-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255,153,51,0.5);
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
+            border: 4px solid #ff9933;
+        }
+
+        .wheel-sector {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: bottom right;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .wheel-sector:nth-child(1) { transform: rotate(0deg); background: #ff6b6b; }
+        .wheel-sector:nth-child(2) { transform: rotate(30deg); background: #4ecdc4; }
+        .wheel-sector:nth-child(3) { transform: rotate(60deg); background: #45b7d1; }
+        .wheel-sector:nth-child(4) { transform: rotate(90deg); background: #96ceb4; }
+        .wheel-sector:nth-child(5) { transform: rotate(120deg); background: #ffeead; color: #333; }
+        .wheel-sector:nth-child(6) { transform: rotate(150deg); background: #ffcc5c; color: #333; }
+        .wheel-sector:nth-child(7) { transform: rotate(180deg); background: #ff6f69; }
+        .wheel-sector:nth-child(8) { transform: rotate(210deg); background: #88d8b0; }
+        .wheel-sector:nth-child(9) { transform: rotate(240deg); background: #ffb347; }
+        .wheel-sector:nth-child(10) { transform: rotate(270deg); background: #5d9cec; }
+        .wheel-sector:nth-child(11) { transform: rotate(300deg); background: #ac92ec; }
+        .wheel-sector:nth-child(12) { transform: rotate(330deg); background: #ec87c0; }
+
+        .wheel-marker {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #ff9933;
+            filter: drop-shadow(0 0 10px #ff9933);
+            z-index: 100;
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: #ff9933;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: black;
+            border: 3px solid white;
+            box-shadow: 0 0 30px #ff9933;
+            z-index: 50;
+        }
+
+        .wheel-bet-panel {
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #ff9933;
+            backdrop-filter: blur(5px);
+        }
+
+        .wheel-bet-label {
+            font-size: 1.1rem;
+            color: #ff9933;
+            margin-bottom: 10px;
+        }
+
+        .wheel-bet-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .wheel-bet-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 12px;
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            background: rgba(255,153,51,0.1);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .wheel-bet-btn:hover {
+            background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
+        }
+
+        .wheel-bet-btn.active {
+            background: #ff9933;
+            color: black;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .wheel-bet-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.5);
+            color: #ff9933;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .wheel-bet-input:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
+        }
+
+        .wheel-bet-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .wheel-spin-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            color: black;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 30px #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .wheel-spin-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #ff9933;
+        }
+
+        .wheel-spin-btn:active {
+            transform: scale(0.98);
+        }
+
+        .wheel-spin-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .wheel-result {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ff9933;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #ff9933;
+            border-radius: 60px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        /* ========== ПЛИНКО (PLINKO) ========== */
+        .plinko-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 20px;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .plinko-modal.active {
+            display: flex;
+        }
+
+        .plinko-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .plinko-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,153,51,0.2);
+            border: 2px solid #ff9933;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .plinko-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
+        }
+
+        .plinko-back:active {
+            transform: scale(0.95);
+        }
+
+        .plinko-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
+        }
+
+        .plinko-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid #ff9933;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .plinko-pegs {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .plinko-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .plinko-peg {
+            width: 10px;
+            height: 10px;
+            background: #ff9933;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff9933;
+        }
+
+        .plinko-ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #fff, #ffd700);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            z-index: 100;
+            box-shadow: 0 0 20px #ffd700;
+            transition: top 2s ease-in, left 2s ease-in;
+        }
+
+        .plinko-slots {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+        }
+
+        .plinko-slot {
+            flex: 1;
+            height: 100%;
+            background: rgba(255,153,51,0.2);
+            border: 1px solid #ff9933;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ff9933;
+        }
+
+        .plinko-slot.highlight {
+            background: #ff9933;
+            color: black;
+            box-shadow: 0 0 30px #ff9933;
+        }
+
+        .plinko-bet-panel {
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #ff9933;
+            backdrop-filter: blur(5px);
+        }
+
+        .plinko-bet-label {
+            font-size: 1.1rem;
+            color: #ff9933;
+            margin-bottom: 10px;
+        }
+
+        .plinko-bet-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .plinko-bet-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 12px;
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            background: rgba(255,153,51,0.1);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .plinko-bet-btn:hover {
+            background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
+        }
+
+        .plinko-bet-btn.active {
+            background: #ff9933;
+            color: black;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .plinko-bet-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ff9933;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.5);
+            color: #ff9933;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .plinko-bet-input:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
+        }
+
+        .plinko-bet-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .plinko-drop-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
+            color: black;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 30px #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .plinko-drop-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #ff9933;
+        }
+
+        .plinko-drop-btn:active {
+            transform: scale(0.98);
+        }
+
+        .plinko-drop-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .plinko-result {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ff9933;
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #ff9933;
+            border-radius: 60px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
         /* ========== ИНВЕНТАРЬ ========== */
         .inventory-section {
             background: rgba(0, 0, 0, 0.8);
@@ -2325,6 +2830,8 @@
             <button class="blackjack-main-btn" id="openBlackjackBtn">🃏 BLACKJACK 🃏</button>
             <button class="coinflip-main-btn" id="openCoinflipBtn">🪙 МОНЕТКА 🪙</button>
             <button class="dice-main-btn" id="openDiceBtn">🎲 DICE 🎲</button>
+            <button class="wheel-main-btn" id="openWheelBtn">🎡 КОЛЕСО</button>
+            <button class="plinko-main-btn" id="openPlinkoBtn">📦 PLINKO</button>
 
             <section class="rocket-section">
                 <div class="rocket-window" id="rocketWindow">
@@ -2581,6 +3088,77 @@
         <div class="coinflip-result" id="coinflipResult">Сделайте ставку и выберите сторону</div>
     </div>
 
+    <!-- Модальное окно Колеса Фортуны -->
+    <div class="wheel-modal" id="wheelModal">
+        <div class="wheel-header">
+            <div class="wheel-back" id="wheelClose">←</div>
+            <div class="wheel-title">🎡 КОЛЕСО ФОРТУНЫ</div>
+        </div>
+
+        <div class="wheel-container">
+            <div class="wheel" id="wheel">
+                <div class="wheel-sector">x1</div>
+                <div class="wheel-sector">x2</div>
+                <div class="wheel-sector">x3</div>
+                <div class="wheel-sector">x5</div>
+                <div class="wheel-sector">x10</div>
+                <div class="wheel-sector">JACK</div>
+                <div class="wheel-sector">x1</div>
+                <div class="wheel-sector">x2</div>
+                <div class="wheel-sector">x3</div>
+                <div class="wheel-sector">x5</div>
+                <div class="wheel-sector">x10</div>
+                <div class="wheel-sector">LOSE</div>
+            </div>
+            <div class="wheel-marker"></div>
+            <div class="wheel-center">🎡</div>
+        </div>
+
+        <div class="wheel-bet-panel">
+            <div class="wheel-bet-label">💰 СТАВКА</div>
+            <div class="wheel-bet-controls">
+                <button class="wheel-bet-btn" data-bet="100">100</button>
+                <button class="wheel-bet-btn" data-bet="250">250</button>
+                <button class="wheel-bet-btn" data-bet="500">500</button>
+                <button class="wheel-bet-btn" data-bet="1000">1000</button>
+            </div>
+            <input type="number" class="wheel-bet-input" id="wheelBet" value="100" min="10" step="10">
+
+            <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 КРУТИТЬ</button>
+        </div>
+
+        <div class="wheel-result" id="wheelResult">Сделайте ставку и крутите колесо</div>
+    </div>
+
+    <!-- Модальное окно Plinko -->
+    <div class="plinko-modal" id="plinkoModal">
+        <div class="plinko-header">
+            <div class="plinko-back" id="plinkoClose">←</div>
+            <div class="plinko-title">📦 PLINKO</div>
+        </div>
+
+        <div class="plinko-container" id="plinkoContainer">
+            <div class="plinko-pegs" id="plinkoPegs"></div>
+            <div class="plinko-ball" id="plinkoBall"></div>
+            <div class="plinko-slots" id="plinkoSlots"></div>
+        </div>
+
+        <div class="plinko-bet-panel">
+            <div class="plinko-bet-label">💰 СТАВКА</div>
+            <div class="plinko-bet-controls">
+                <button class="plinko-bet-btn" data-bet="100">100</button>
+                <button class="plinko-bet-btn" data-bet="250">250</button>
+                <button class="plinko-bet-btn" data-bet="500">500</button>
+                <button class="plinko-bet-btn" data-bet="1000">1000</button>
+            </div>
+            <input type="number" class="plinko-bet-input" id="plinkoBet" value="100" min="10" step="10">
+
+            <button class="plinko-drop-btn" id="plinkoDropBtn">🔴 БРОСИТЬ ШАР</button>
+        </div>
+
+        <div class="plinko-result" id="plinkoResult">Сделайте ставку и бросьте шар</div>
+    </div>
+
     <!-- Окно продажи предмета -->
     <div class="sell-modal" id="sellModal">
         <div class="sell-content">
@@ -2742,6 +3320,53 @@
                     osc.start(now);
                     osc.stop(now + 0.3);
                 }
+
+                playWheelSpinSound() {
+                    if (!this.audioContext) return;
+                    
+                    const ctx = this.audioContext;
+                    const now = ctx.currentTime;
+                    
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, now);
+                    osc.frequency.exponentialRampToValueAtTime(50, now + 3);
+                    
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 3);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.start(now);
+                    osc.stop(now + 3);
+                }
+
+                playPlinkoDropSound() {
+                    if (!this.audioContext) return;
+                    
+                    const ctx = this.audioContext;
+                    const now = ctx.currentTime;
+                    
+                    for (let i = 0; i < 5; i++) {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(300 + i * 50, now + i * 0.2);
+                        
+                        gain.gain.setValueAtTime(0.05, now + i * 0.2);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.2 + 0.1);
+                        
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        
+                        osc.start(now + i * 0.2);
+                        osc.stop(now + i * 0.2 + 0.1);
+                    }
+                }
             }
 
             const sound = new SoundManager();
@@ -2770,7 +3395,7 @@
                         size: Math.random() * 2 + 0.5,
                         speed: Math.random() * 0.1 + 0.05,
                         brightness: Math.random() * 0.8 + 0.2,
-                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`, // Желтые оттенки
+                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`,
                         phase: Math.random() * Math.PI * 2
                     });
                 }
@@ -2790,7 +3415,6 @@
                 ctx.fillStyle = '#000';
                 ctx.fillRect(0, 0, width, height);
                 
-                // Желтые звезды на фоне
                 for (let s of stars) {
                     const twinkle = Math.sin(Date.now() * 0.002 + s.phase) * 0.3 + 0.7;
                     
@@ -2812,7 +3436,6 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
                 
-                // Иногда падающая красивая звезда
                 if (Math.random() < 0.0001) {
                     shootingStars.push({
                         x: Math.random() * width,
@@ -2999,6 +3622,16 @@
                     choice: null,
                     isPlaying: false,
                     result: null
+                },
+                wheel: {
+                    bet: 100,
+                    isSpinning: false,
+                    sectors: ['x1', 'x2', 'x3', 'x5', 'x10', 'JACK', 'x1', 'x2', 'x3', 'x5', 'x10', 'LOSE']
+                },
+                plinko: {
+                    bet: 100,
+                    isDropping: false,
+                    slots: [0, 0.5, 1, 2, 3, 5, 10, 20]
                 }
             };
 
@@ -3089,7 +3722,26 @@
                 playerDice2: document.getElementById('playerDice2'),
                 dealerSum: document.getElementById('dealerSum'),
                 playerSum: document.getElementById('playerSum'),
-                diceBetBtns: document.querySelectorAll('.dice-bet-btn')
+                diceBetBtns: document.querySelectorAll('.dice-bet-btn'),
+                openWheelBtn: document.getElementById('openWheelBtn'),
+                wheelModal: document.getElementById('wheelModal'),
+                wheelClose: document.getElementById('wheelClose'),
+                wheelBet: document.getElementById('wheelBet'),
+                wheelSpinBtn: document.getElementById('wheelSpinBtn'),
+                wheelResult: document.getElementById('wheelResult'),
+                wheel: document.getElementById('wheel'),
+                wheelBetBtns: document.querySelectorAll('.wheel-bet-btn'),
+                openPlinkoBtn: document.getElementById('openPlinkoBtn'),
+                plinkoModal: document.getElementById('plinkoModal'),
+                plinkoClose: document.getElementById('plinkoClose'),
+                plinkoBet: document.getElementById('plinkoBet'),
+                plinkoDropBtn: document.getElementById('plinkoDropBtn'),
+                plinkoResult: document.getElementById('plinkoResult'),
+                plinkoBall: document.getElementById('plinkoBall'),
+                plinkoContainer: document.getElementById('plinkoContainer'),
+                plinkoPegs: document.getElementById('plinkoPegs'),
+                plinkoSlots: document.getElementById('plinkoSlots'),
+                plinkoBetBtns: document.querySelectorAll('.plinko-bet-btn')
             };
 
             function saveGame() {
@@ -3414,7 +4066,6 @@
                     
                     const targetGift = results[r];
                     
-                    // Находим ближайший подарок к маркеру
                     let bestIndex = 0;
                     let minDistance = Infinity;
                     
@@ -4020,7 +4671,7 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд (ИСПРАВЛЕННЫЙ)
+            // Апгрейд
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
@@ -4100,7 +4751,6 @@
                         sound.playWinSound();
                         showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
                         
-                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
@@ -4109,7 +4759,6 @@
                         sound.playLoseSound();
                         showToast('💥 ПРОВАЛ! Подарок сгорел');
                         
-                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
@@ -4151,6 +4800,204 @@
                 showToast(`✅ +${amount}⭐ получено!`);
             }
 
+            // Колесо Фортуны
+            function initWheel() {
+                // Секторы уже созданы в HTML
+            }
+
+            function spinWheel() {
+                if (state.wheel.isSpinning) return;
+                
+                const bet = parseInt(el.wheelBet.value) || 100;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                state.wheel.isSpinning = true;
+                state.balance -= bet;
+                updateUI();
+                
+                el.wheelSpinBtn.disabled = true;
+                el.wheelBet.disabled = true;
+                el.wheelBetBtns.forEach(btn => btn.disabled = true);
+                
+                sound.playWheelSpinSound();
+                
+                const spins = 5 + Math.floor(Math.random() * 5);
+                const sectorIndex = Math.floor(Math.random() * state.wheel.sectors.length);
+                const result = state.wheel.sectors[sectorIndex];
+                
+                const targetRotation = 360 * spins + (sectorIndex * 30) + 15;
+                
+                el.wheel.style.transform = `rotate(${targetRotation}deg)`;
+                
+                setTimeout(() => {
+                    state.wheel.isSpinning = false;
+                    
+                    let multiplier = 0;
+                    if (result === 'JACK') multiplier = 50;
+                    else if (result === 'LOSE') multiplier = 0;
+                    else multiplier = parseFloat(result.substring(1));
+                    
+                    if (multiplier > 0) {
+                        const winAmount = Math.floor(bet * multiplier);
+                        state.balance += winAmount;
+                        sound.playWinSound();
+                        el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (${result})`;
+                    } else if (multiplier === 0) {
+                        sound.playLoseSound();
+                        el.wheelResult.textContent = `😞 Проигрыш! Выпал LOSE`;
+                    } else {
+                        const winAmount = Math.floor(bet * multiplier);
+                        state.balance += winAmount;
+                        sound.playWinSound();
+                        el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (${result})`;
+                    }
+                    
+                    updateUI();
+                    saveGame();
+                    
+                    el.wheelSpinBtn.disabled = false;
+                    el.wheelBet.disabled = false;
+                    el.wheelBetBtns.forEach(btn => btn.disabled = false);
+                }, 4000);
+            }
+
+            el.openWheelBtn.onclick = () => {
+                el.wheelModal.classList.add('active');
+                el.wheelResult.textContent = 'Сделайте ставку и крутите колесо';
+                el.wheel.style.transform = 'rotate(0deg)';
+            };
+            
+            el.wheelClose.onclick = () => {
+                el.wheelModal.classList.remove('active');
+            };
+            
+            el.wheelBetBtns.forEach(btn => {
+                btn.onclick = () => {
+                    el.wheelBet.value = btn.dataset.bet;
+                };
+            });
+            
+            el.wheelSpinBtn.onclick = spinWheel;
+
+            // Plinko
+            function initPlinko() {
+                // Создаем штырьки
+                el.plinkoPegs.innerHTML = '';
+                for (let row = 0; row < 8; row++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'plinko-row';
+                    const pegsCount = row + 3;
+                    for (let peg = 0; peg < pegsCount; peg++) {
+                        const pegDiv = document.createElement('div');
+                        pegDiv.className = 'plinko-peg';
+                        rowDiv.appendChild(pegDiv);
+                    }
+                    el.plinkoPegs.appendChild(rowDiv);
+                }
+                
+                // Создаем слоты
+                el.plinkoSlots.innerHTML = '';
+                state.plinko.slots.forEach((mult, index) => {
+                    const slotDiv = document.createElement('div');
+                    slotDiv.className = 'plinko-slot';
+                    slotDiv.id = `plinkoSlot${index}`;
+                    slotDiv.textContent = mult === 0 ? 'LOSE' : `x${mult}`;
+                    el.plinkoSlots.appendChild(slotDiv);
+                });
+            }
+
+            function dropPlinkoBall() {
+                if (state.plinko.isDropping) return;
+                
+                const bet = parseInt(el.plinkoBet.value) || 100;
+                
+                if (bet > state.balance) {
+                    showToast('❌ Недостаточно звезд!');
+                    return;
+                }
+                
+                state.plinko.isDropping = true;
+                state.balance -= bet;
+                updateUI();
+                
+                el.plinkoDropBtn.disabled = true;
+                el.plinkoBet.disabled = true;
+                el.plinkoBetBtns.forEach(btn => btn.disabled = true);
+                
+                sound.playPlinkoDropSound();
+                
+                // Убираем подсветку
+                document.querySelectorAll('.plinko-slot').forEach(slot => {
+                    slot.classList.remove('highlight');
+                });
+                
+                // Случайное отклонение
+                const randomOffset = (Math.random() - 0.5) * 40;
+                el.plinkoBall.style.left = `calc(50% + ${randomOffset}px)`;
+                el.plinkoBall.style.top = '20px';
+                
+                // Анимация падения
+                setTimeout(() => {
+                    const slotIndex = Math.floor(Math.random() * state.plinko.slots.length);
+                    const multiplier = state.plinko.slots[slotIndex];
+                    
+                    const slotWidth = 100 / state.plinko.slots.length;
+                    const slotLeft = slotIndex * slotWidth + slotWidth / 2;
+                    
+                    el.plinkoBall.style.left = slotLeft + '%';
+                    el.plinkoBall.style.top = '360px';
+                    
+                    setTimeout(() => {
+                        document.getElementById(`plinkoSlot${slotIndex}`).classList.add('highlight');
+                        
+                        if (multiplier > 0) {
+                            const winAmount = Math.floor(bet * multiplier);
+                            state.balance += winAmount;
+                            sound.playWinSound();
+                            el.plinkoResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (x${multiplier})`;
+                        } else {
+                            sound.playLoseSound();
+                            el.plinkoResult.textContent = `😞 Проигрыш! LOSE`;
+                        }
+                        
+                        updateUI();
+                        saveGame();
+                        
+                        state.plinko.isDropping = false;
+                        el.plinkoDropBtn.disabled = false;
+                        el.plinkoBet.disabled = false;
+                        el.plinkoBetBtns.forEach(btn => btn.disabled = false);
+                        
+                        setTimeout(() => {
+                            el.plinkoBall.style.top = '20px';
+                            el.plinkoBall.style.left = '50%';
+                        }, 1000);
+                    }, 2000);
+                }, 100);
+            }
+
+            el.openPlinkoBtn.onclick = () => {
+                el.plinkoModal.classList.add('active');
+                el.plinkoResult.textContent = 'Сделайте ставку и бросьте шар';
+                initPlinko();
+            };
+            
+            el.plinkoClose.onclick = () => {
+                el.plinkoModal.classList.remove('active');
+            };
+            
+            el.plinkoBetBtns.forEach(btn => {
+                btn.onclick = () => {
+                    el.plinkoBet.value = btn.dataset.bet;
+                };
+            });
+            
+            el.plinkoDropBtn.onclick = dropPlinkoBall;
+
             // Инициализация
             function init() {
                 resizeCanvas();
@@ -4159,6 +5006,8 @@
                 initWindowStars();
                 renderCases();
                 loadGame();
+                initWheel();
+                initPlinko();
 
                 el.addFunds.onclick = () => {
                     if (!state.isFlying) {
