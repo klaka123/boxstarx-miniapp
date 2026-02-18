@@ -1947,43 +1947,55 @@
                     }
                 }
 
+                // Новый приятный звук выигрыша
                 playWinSound() {
                     if (!this.audioContext) return;
                     
                     const ctx = this.audioContext;
                     const now = ctx.currentTime;
                     
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
+                    // Создаем несколько осцилляторов для мелодичного звука
+                    const osc1 = ctx.createOscillator();
+                    const osc2 = ctx.createOscillator();
+                    const osc3 = ctx.createOscillator();
+                    const gain1 = ctx.createGain();
+                    const gain2 = ctx.createGain();
+                    const gain3 = ctx.createGain();
                     
-                    osc.type = 'sine';
-                    osc.frequency.value = 523.25;
+                    osc1.type = 'sine';
+                    osc1.frequency.value = 659.25; // E5
                     
-                    gain.gain.setValueAtTime(0.3, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                    osc2.type = 'sine';
+                    osc2.frequency.value = 783.99; // G5
                     
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
+                    osc3.type = 'sine';
+                    osc3.frequency.value = 523.25; // C5
                     
-                    osc.start(now);
-                    osc.stop(now + 0.5);
+                    // Настройка громкости
+                    gain1.gain.setValueAtTime(0.2, now);
+                    gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
                     
-                    setTimeout(() => {
-                        const osc2 = ctx.createOscillator();
-                        const gain2 = ctx.createGain();
-                        
-                        osc2.type = 'sine';
-                        osc2.frequency.value = 659.25;
-                        
-                        gain2.gain.setValueAtTime(0.3, now + 0.1);
-                        gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
-                        
-                        osc2.connect(gain2);
-                        gain2.connect(ctx.destination);
-                        
-                        osc2.start(now + 0.1);
-                        osc2.stop(now + 0.6);
-                    }, 100);
+                    gain2.gain.setValueAtTime(0.2, now + 0.1);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.9);
+                    
+                    gain3.gain.setValueAtTime(0.15, now + 0.2);
+                    gain3.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
+                    
+                    osc1.connect(gain1);
+                    osc2.connect(gain2);
+                    osc3.connect(gain3);
+                    
+                    gain1.connect(ctx.destination);
+                    gain2.connect(ctx.destination);
+                    gain3.connect(ctx.destination);
+                    
+                    osc1.start(now);
+                    osc2.start(now + 0.1);
+                    osc3.start(now + 0.2);
+                    
+                    osc1.stop(now + 0.8);
+                    osc2.stop(now + 0.9);
+                    osc3.stop(now + 1.0);
                 }
 
                 playLoseSound() {
@@ -2163,7 +2175,7 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
                 
-                // Падающие звезды (полностью переделаны)
+                // Падающие звезды
                 if (Math.random() < 0.0004) {
                     shootingStars.push({
                         x: Math.random() * width,
@@ -2237,7 +2249,7 @@
                 }
             }
 
-            // Подарки (сокращен для читаемости, в реальном коде все подарки остаются)
+            // Подарки
             const GIFTS = [
                 { id: 'common1', name: 'TOY', price: 1, emoji: '🧸', color: '#8b4513' },
                 { id: 'common2', name: 'BALLOON', price: 2, emoji: '🎈', color: '#ff69b4' },
@@ -2332,6 +2344,7 @@
                 inventoryPage: 1,
                 multipleResults: [],
                 caseRows: [],
+                winIndices: [], // Сохраняем индексы выигрышей для каждого ряда
                 blackjack: {
                     deck: [],
                     playerCards: [],
@@ -2619,11 +2632,12 @@
                 });
             }
 
-            // Модальное окно кейса (сокращено для brevity, но функционал сохранен)
+            // Модальное окно кейса
             function openCaseModal(c) {
                 state.currentCase = c;
                 state.selectedQty = 1;
                 state.multipleResults = [];
+                state.winIndices = [];
                 el.caseTitle.textContent = `КЕЙС: ${c.name}`;
                 el.quantityBtns.forEach(btn => {
                     btn.classList.remove('active');
@@ -2666,39 +2680,60 @@
             function startOpening() {
                 if (state.isOpening) return;
                 if (!state.currentCase) return;
+                
                 state.isOpening = true;
                 el.caseOpenBtn.disabled = true;
                 el.caseOpenBtn.textContent = 'ОТКРЫВАЕМ...';
+                
                 const totalPrice = state.currentCase.price * state.selectedQty;
                 state.balance = (state.balance || 0) - totalPrice;
                 updateUI();
                 saveGame();
+                
                 const results = [];
+                state.winIndices = [];
+                
+                // Генерируем выигрыши для каждого ряда
                 for (let q = 0; q < state.selectedQty; q++) {
                     let winningGift = { ...GIFTS[Math.floor(Math.random() * GIFTS.length)] };
                     const multiplier = 0.8 + Math.random() * 0.4;
                     winningGift.price = Math.floor(winningGift.price * multiplier);
                     results.push(winningGift);
                 }
+                
                 state.multipleResults = results;
+                
+                // Запускаем анимацию для каждого ряда
                 for (let r = 0; r < state.selectedQty; r++) {
                     const caseItems = document.getElementById(`caseItems_${r}`);
                     if (!caseItems) continue;
+                    
                     const items = caseItems.children;
                     const itemCount = items.length;
+                    
                     const itemWidth = 180;
                     const containerWidth = 800;
                     const centerPos = (containerWidth / 2) - (itemWidth / 2);
+                    
+                    // Выбираем случайный выигрышный индекс и сохраняем его
                     const winIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
+                    state.winIndices[r] = winIndex;
+                    
                     const finalPos = centerPos - (winIndex * itemWidth);
+                    
                     Array.from(items).forEach(item => item.classList.remove('win'));
+                    
                     const spins = 4 * itemCount * itemWidth;
                     const startPos = finalPos - spins;
+                    
                     caseItems.style.transition = 'none';
                     caseItems.style.transform = `translateX(${startPos}px)`;
+                    
                     setTimeout(() => {
                         caseItems.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
+                        
+                        // Подсвечиваем выигрыш после остановки
                         setTimeout(() => {
                             if (items[winIndex]) {
                                 items[winIndex].classList.add('win');
@@ -2707,10 +2742,13 @@
                         }, 3500);
                     }, 50);
                 }
+                
+                // Показываем результаты
                 setTimeout(() => {
                     if (state.multipleResults.length > 0) {
                         el.caseResults.style.display = 'block';
                         el.caseResultsList.innerHTML = '';
+                        
                         state.multipleResults.forEach((result, index) => {
                             const resultDiv = document.createElement('div');
                             resultDiv.className = 'case-result-item';
@@ -2719,6 +2757,8 @@
                             el.caseResultsList.appendChild(resultDiv);
                         });
                     }
+                    
+                    // Обработка выигрышей
                     if (state.selectedQty === 1) {
                         const gift = results[0];
                         const svg = getGiftSVG(gift);
@@ -2733,8 +2773,10 @@
                             state.inventory.push(gift);
                         });
                     }
+                    
                     updateUI();
                     saveGame();
+                    
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
@@ -2772,7 +2814,7 @@
                 };
             });
 
-            // Blackjack (сокращен)
+            // Blackjack
             function createDeck() {
                 const suits = ['♠️', '♥️', '♦️', '♣️'];
                 const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -2965,7 +3007,7 @@
             el.blackjackDouble.onclick = blackjackDouble;
             el.blackjackNew.onclick = startBlackjack;
 
-            // Coinflip (сокращен)
+            // Coinflip
             function playCoinflip(choice) {
                 const bet = parseInt(el.coinflipBet.value) || 100;
                 if (bet > state.balance) {
