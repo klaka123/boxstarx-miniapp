@@ -284,6 +284,11 @@
             opacity: 0;
         }
 
+        .rocket.flown {
+            opacity: 0.3;
+            filter: drop-shadow(0 0 30px #00ff00);
+        }
+
         .explosion {
             position: absolute;
             left: 50%;
@@ -329,6 +334,32 @@
             z-index: 25;
             color: #ff9933;
             backdrop-filter: blur(5px);
+        }
+
+        .final-multiplier {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #ffaa00;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            z-index: 26;
+            color: #ffaa00;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        .final-multiplier.show {
+            display: block;
+            animation: finalPulse 1s infinite alternate;
+        }
+
+        @keyframes finalPulse {
+            from { box-shadow: 0 0 20px #ffaa00; }
+            to { box-shadow: 0 0 40px #ffaa00; }
         }
 
         .auto-buttons {
@@ -658,7 +689,7 @@
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
             box-shadow: 0 -5px 20px #ff9933;
-            transition: transform 5s cubic-bezier(0.1, 0.8, 0.2, 1);
+            transition: transform 5s cubic-bezier(0.1, 0.8, 0.3, 1.2);
             border-radius: 2px;
         }
 
@@ -925,15 +956,15 @@
 
         .case-gift.win {
             border-color: #ffaa00;
-            box-shadow: 0 0 80px #ff9933;
+            box-shadow: 0 0 80px #ff9933, 0 0 40px #ffaa00;
             transform: scale(1.1);
             z-index: 100;
             animation: winPulse 0.5s infinite alternate;
         }
 
         @keyframes winPulse {
-            from { box-shadow: 0 0 40px #ff9933; transform: scale(1.08); }
-            to { box-shadow: 0 0 100px #ff9933; transform: scale(1.12); }
+            from { box-shadow: 0 0 40px #ff9933, 0 0 20px #ffaa00; transform: scale(1.08); }
+            to { box-shadow: 0 0 100px #ff9933, 0 0 60px #ffaa00; transform: scale(1.12); }
         }
 
         .gift-image {
@@ -1166,6 +1197,7 @@
             border: 2px solid #ff9933;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(255,153,51,0.2);
+            min-height: 300px;
         }
 
         .blackjack-dealer, .blackjack-player {
@@ -1288,6 +1320,7 @@
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
 
         .blackjack-bet-input:focus {
@@ -1300,11 +1333,42 @@
             cursor: not-allowed;
         }
 
+        .blackjack-start-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 30px #4caf50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blackjack-start-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #4caf50;
+        }
+
+        .blackjack-start-btn:active {
+            transform: scale(0.98);
+        }
+
+        .blackjack-start-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
         .blackjack-actions {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
+            margin-top: 20px;
         }
 
         .blackjack-action-btn {
@@ -1600,6 +1664,11 @@
 
         .coinflip-choice-btn.choose-tails {
             border-color: #c0c0c0;
+        }
+
+        .coinflip-choice-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
         .coinflip-result {
@@ -2015,6 +2084,7 @@
                         <span class="multiplier-value" id="multiplier">1.00x</span>
                     </div>
                     <div class="timer" id="timer">3с</div>
+                    <div class="final-multiplier" id="finalMultiplier"></div>
                 </div>
 
                 <div class="auto-buttons">
@@ -2145,16 +2215,16 @@
                 <button class="blackjack-bet-btn" data-bet="1000">1000</button>
             </div>
             <input type="number" class="blackjack-bet-input" id="blackjackBet" value="100" min="10" step="10">
+            <button class="blackjack-start-btn" id="blackjackStart">🎮 НАЧАТЬ ИГРУ</button>
         </div>
 
         <div class="blackjack-actions">
             <button class="blackjack-action-btn hit" id="blackjackHit" disabled>➕ ВЗЯТЬ</button>
             <button class="blackjack-action-btn stand" id="blackjackStand" disabled>✋ СТОП</button>
             <button class="blackjack-action-btn double" id="blackjackDouble" disabled>💸 УДВОИТЬ</button>
-            <button class="blackjack-action-btn new" id="blackjackNew" disabled>🔄 НОВАЯ ИГРА</button>
         </div>
 
-        <div class="blackjack-message" id="blackjackMessage">Начните новую игру</div>
+        <div class="blackjack-message" id="blackjackMessage">Сделайте ставку и нажмите "Начать игру"</div>
     </div>
 
     <!-- Модальное окно монетки -->
@@ -2289,6 +2359,85 @@
                     });
                 }
 
+                // Приятный звук для выигрыша в ракетке
+                playRocketWinSound() {
+                    if (!this.audioContext) return;
+                    
+                    const ctx = this.audioContext;
+                    const now = ctx.currentTime;
+                    
+                    // Мажорное арпеджио
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    
+                    notes.forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        
+                        osc.type = 'triangle';
+                        osc.frequency.value = freq;
+                        
+                        gain.gain.setValueAtTime(0.1, now + i * 0.1);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.5);
+                        
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        
+                        osc.start(now + i * 0.1);
+                        osc.stop(now + i * 0.1 + 0.5);
+                    });
+                }
+
+                // Драматичный, но приятный звук проигрыша в ракетке
+                playRocketLoseSound() {
+                    if (!this.audioContext) return;
+                    
+                    const ctx = this.audioContext;
+                    const now = ctx.currentTime;
+                    
+                    // Нисходящее арпеджио
+                    const notes = [392.00, 329.63, 261.63, 196.00];
+                    
+                    notes.forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        
+                        osc.type = 'sine';
+                        osc.frequency.value = freq;
+                        
+                        gain.gain.setValueAtTime(0.15, now + i * 0.15);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 0.6);
+                        
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        
+                        osc.start(now + i * 0.15);
+                        osc.stop(now + i * 0.15 + 0.6);
+                    });
+                    
+                    // Добавляем шум для драматизма
+                    const noise = ctx.createBufferSource();
+                    const bufferSize = 4096;
+                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+                    
+                    noise.buffer = buffer;
+                    noise.loop = true;
+                    
+                    const noiseGain = ctx.createGain();
+                    noiseGain.gain.setValueAtTime(0.1, now + 0.3);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
+                    
+                    noise.connect(noiseGain);
+                    noiseGain.connect(ctx.destination);
+                    
+                    noise.start(now + 0.3);
+                    noise.stop(now + 0.8);
+                }
+
                 playLoseSound() {
                     if (!this.audioContext) return;
                     
@@ -2312,61 +2461,8 @@
                     osc.stop(now + 0.5);
                 }
 
-                playWinFlightSound() {
-                    this.playWinSound(); // Используем тот же приятный звук
-                }
-
                 playExplosionSound() {
-                    if (!this.audioContext) return;
-                    
-                    const ctx = this.audioContext;
-                    const now = ctx.currentTime;
-                    
-                    const osc1 = ctx.createOscillator();
-                    const osc2 = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    
-                    osc1.type = 'sawtooth';
-                    osc1.frequency.setValueAtTime(100, now);
-                    osc1.frequency.exponentialRampToValueAtTime(30, now + 0.3);
-                    
-                    osc2.type = 'sawtooth';
-                    osc2.frequency.setValueAtTime(150, now);
-                    osc2.frequency.exponentialRampToValueAtTime(40, now + 0.3);
-                    
-                    gain.gain.setValueAtTime(0.5, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-                    
-                    osc1.connect(gain);
-                    osc2.connect(gain);
-                    gain.connect(ctx.destination);
-                    
-                    osc1.start(now);
-                    osc2.start(now);
-                    osc1.stop(now + 0.5);
-                    osc2.stop(now + 0.5);
-                    
-                    const noise = ctx.createBufferSource();
-                    const bufferSize = 4096;
-                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                    const data = buffer.getChannelData(0);
-                    
-                    for (let i = 0; i < bufferSize; i++) {
-                        data[i] = Math.random() * 2 - 1;
-                    }
-                    
-                    noise.buffer = buffer;
-                    noise.loop = true;
-                    
-                    const noiseGain = ctx.createGain();
-                    noiseGain.gain.setValueAtTime(0.3, now);
-                    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-                    
-                    noise.connect(noiseGain);
-                    noiseGain.connect(ctx.destination);
-                    
-                    noise.start(now);
-                    noise.stop(now + 0.3);
+                    this.playRocketLoseSound(); // Используем приятный звук проигрыша
                 }
             }
 
@@ -2611,6 +2707,7 @@
                 multipleResults: [],
                 caseRows: [],
                 winIndices: [],
+                flightStopped: false, // Флаг, что игрок забрал ставку
                 blackjack: {
                     deck: [],
                     playerCards: [],
@@ -2619,7 +2716,7 @@
                     dealerScore: 0,
                     gameActive: false,
                     bet: 100,
-                    betLocked: false
+                    gameStarted: false
                 },
                 coinflip: {
                     bet: 100,
@@ -2639,6 +2736,7 @@
                 timer: document.getElementById('timer'),
                 rocket: document.getElementById('rocket'),
                 explosion: document.getElementById('explosion'),
+                finalMultiplier: document.getElementById('finalMultiplier'),
                 casesGrid: document.getElementById('casesGrid'),
                 inventoryGrid: document.getElementById('inventoryGrid'),
                 inventoryCount: document.getElementById('inventoryCount'),
@@ -2662,10 +2760,10 @@
                 blackjackModal: document.getElementById('blackjackModal'),
                 blackjackClose: document.getElementById('blackjackClose'),
                 blackjackBet: document.getElementById('blackjackBet'),
+                blackjackStart: document.getElementById('blackjackStart'),
                 blackjackHit: document.getElementById('blackjackHit'),
                 blackjackStand: document.getElementById('blackjackStand'),
                 blackjackDouble: document.getElementById('blackjackDouble'),
-                blackjackNew: document.getElementById('blackjackNew'),
                 blackjackMessage: document.getElementById('blackjackMessage'),
                 dealerCards: document.getElementById('dealerCards'),
                 playerCards: document.getElementById('playerCards'),
@@ -2794,22 +2892,34 @@
             // Ракета
             function startFlight() {
                 const bet = parseInt(el.bet.value) || 100;
+                
                 if (bet > (state.balance || 0)) {
                     showToast('❌ Недостаточно звезд!');
                     return;
                 }
+                
                 if (state.isFlying) {
                     showToast('❌ Ракета уже в полете!');
                     return;
                 }
+                
+                state.flightStopped = false;
+                state.balance = (state.balance || 0) - bet;
+                updateUI();
+                
                 el.bet.disabled = true;
+                el.finalMultiplier.classList.remove('show');
+                
                 let timeLeft = 3;
                 el.timer.textContent = timeLeft + 'с';
                 el.startBtn.disabled = true;
                 el.rocket.classList.add('shaking');
+                el.rocket.classList.remove('flown');
+                
                 state.countdownId = setInterval(() => {
                     timeLeft--;
                     el.timer.textContent = timeLeft + 'с';
+                    
                     if (timeLeft <= 0) {
                         clearInterval(state.countdownId);
                         executeFlight(bet);
@@ -2818,21 +2928,29 @@
             }
 
             function executeFlight(bet) {
-                state.balance = (state.balance || 0) - bet;
-                updateUI();
                 state.isFlying = true;
                 state.multiplier = 1;
+                
                 el.stopBtn.disabled = false;
                 el.explosion.classList.remove('show');
                 el.rocket.classList.remove('explode');
                 el.rocket.classList.add('shaking');
+                
                 if (state.intervalId) clearInterval(state.intervalId);
+                
                 state.intervalId = setInterval(() => {
                     if (!state.isFlying) return;
+                    
                     state.multiplier += 0.008 + Math.random() * 0.015;
                     el.multiplier.textContent = state.multiplier.toFixed(2) + 'x';
-                    if (state.multiplier >= state.selectedAuto) stopFlight();
+                    
+                    // Проверяем автостоп только если игрок еще не забрал
+                    if (!state.flightStopped && state.multiplier >= state.selectedAuto) {
+                        stopFlight();
+                    }
+                    
                     let crashChance = 0.015;
+                    
                     if (state.multiplier < 2) crashChance = 0.01;
                     else if (state.multiplier < 3) crashChance = 0.03;
                     else if (state.multiplier < 4) crashChance = 0.06;
@@ -2840,51 +2958,73 @@
                     else if (state.multiplier < 10) crashChance = 0.15;
                     else if (state.multiplier < 15) crashChance = 0.25;
                     else crashChance = 0.4;
-                    if (Math.random() < crashChance) crashRocket(bet);
+                    
+                    if (Math.random() < crashChance) {
+                        crashRocket(bet);
+                    }
                 }, 80);
             }
 
             function crashRocket(bet) {
                 clearInterval(state.intervalId);
                 state.intervalId = null;
+                
+                // Показываем финальный множитель
+                el.finalMultiplier.textContent = `💥 КРАХ: ${state.multiplier.toFixed(2)}x`;
+                el.finalMultiplier.classList.add('show');
+                
+                // Если игрок не забрал ставку - списываем
+                if (!state.flightStopped) {
+                    // Ставка уже списана при запуске
+                    sound.playRocketLoseSound();
+                    showToast(`💥 Крах! Вы проиграли ${bet}⭐`);
+                } else {
+                    sound.playRocketLoseSound();
+                    showToast(`💥 Ракета упала на ${state.multiplier.toFixed(2)}x`);
+                }
+                
                 state.isFlying = false;
+                state.flightStopped = false;
                 el.startBtn.disabled = false;
                 el.stopBtn.disabled = true;
                 el.rocket.classList.remove('shaking');
                 el.bet.disabled = false;
+                
                 el.explosion.classList.add('show');
                 el.rocket.classList.add('explode');
-                sound.playExplosionSound();
+                
                 setTimeout(() => {
                     el.explosion.classList.remove('show');
                     el.rocket.classList.remove('explode');
                 }, 1000);
-                showToast(`💥 Проигрыш: ${bet}⭐`);
             }
 
             function stopFlight() {
                 if (!state.isFlying) return;
-                clearInterval(state.intervalId);
-                state.intervalId = null;
+                
                 const bet = parseInt(el.bet.value) || 100;
                 const win = Math.floor(bet * state.multiplier);
-                state.balance = (state.balance || 0) + win;
+                
+                // Если игрок еще не забирал - добавляем выигрыш
+                if (!state.flightStopped) {
+                    state.balance = (state.balance || 0) + win;
+                    sound.playRocketWinSound();
+                    showToast(`✅ Забрано: ${win}⭐ (${state.multiplier.toFixed(2)}x)`);
+                }
+                
+                state.flightStopped = true;
+                el.rocket.classList.add('flown');
+                el.stopBtn.disabled = true;
+                
                 updateUI();
                 saveGame();
-                state.isFlying = false;
-                el.startBtn.disabled = false;
-                el.stopBtn.disabled = true;
-                el.rocket.classList.remove('shaking');
-                el.bet.disabled = false;
-                sound.playWinFlightSound();
-                setTimeout(() => {
-                    el.explosion.classList.add('show');
-                    el.rocket.classList.add('explode');
-                    setTimeout(() => {
-                        el.explosion.classList.remove('show');
-                        el.rocket.classList.remove('explode');
-                    }, 1000);
-                }, 500);
+                
+                // Показываем финальный множитель
+                el.finalMultiplier.textContent = `🏁 ФИНИШ: ${state.multiplier.toFixed(2)}x`;
+                el.finalMultiplier.classList.add('show');
+                
+                // Ракета продолжает лететь до падения
+                // isFlying остается true
             }
 
             // Рендер кейсов
@@ -2926,20 +3066,32 @@
                     rowDiv.className = 'case-row';
                     rowDiv.innerHTML = `<div class="case-row-label">#${r + 1}</div><div class="case-display" id="caseDisplay_${r}"><div class="case-items" id="caseItems_${r}"></div><div class="case-marker"></div></div>`;
                     el.caseMultipleContainer.appendChild(rowDiv);
+                    
+                    // Создаем уникальные подарки для этого ряда
                     const items = [];
+                    const usedGifts = new Set();
+                    
                     for (let i = 0; i < 50; i++) {
-                        let gift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
-                        items.push(gift);
+                        // Выбираем случайный подарок, стараясь не повторяться слишком часто
+                        let gift;
+                        do {
+                            gift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
+                        } while (usedGifts.has(gift.id) && usedGifts.size < GIFTS.length);
+                        
+                        usedGifts.add(gift.id);
+                        items.push({ ...gift }); // Копируем, чтобы не изменять оригинал
                     }
+                    
                     const caseItems = document.getElementById(`caseItems_${r}`);
                     if (caseItems) {
-                        items.forEach(item => {
+                        items.forEach((item, index) => {
                             const giftDiv = document.createElement('div');
                             giftDiv.className = 'case-gift';
                             const svg = getGiftSVG(item);
                             giftDiv.dataset.price = item.price;
                             giftDiv.dataset.name = item.name;
                             giftDiv.dataset.id = item.id;
+                            giftDiv.dataset.index = index;
                             giftDiv.innerHTML = `<div class="gift-image" style="background-image: url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')"></div><div class="gift-name">${item.name}</div><div class="gift-price">${item.price}⭐</div>`;
                             caseItems.appendChild(giftDiv);
                         });
@@ -2965,9 +3117,12 @@
                 
                 // Генерируем выигрыши для каждого ряда
                 for (let q = 0; q < state.selectedQty; q++) {
-                    let winningGift = { ...GIFTS[Math.floor(Math.random() * GIFTS.length)] };
-                    const multiplier = 0.8 + Math.random() * 0.4;
-                    winningGift.price = Math.floor(winningGift.price * multiplier);
+                    // Создаем копию подарка, чтобы можно было изменять цену
+                    const baseGift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
+                    const winningGift = { 
+                        ...baseGift,
+                        price: Math.floor(baseGift.price * (0.8 + Math.random() * 0.4))
+                    };
                     results.push(winningGift);
                 }
                 
@@ -2985,21 +3140,45 @@
                     const containerWidth = 800;
                     const centerPos = (containerWidth / 2) - (itemWidth / 2);
                     
-                    // Ищем индекс, где подарок совпадает с выигрышным
+                    // Ищем индекс, где подарок максимально похож на выигрышный
+                    // Сначала пытаемся найти точное совпадение по имени
                     let winIndex = -1;
                     const targetGift = results[r];
                     
+                    // Сначала ищем точное совпадение по имени и близкую цену
                     for (let i = 0; i < items.length; i++) {
                         const item = items[i];
-                        if (item.dataset.name === targetGift.name) {
+                        if (item.dataset.name === targetGift.name && 
+                            Math.abs(parseInt(item.dataset.price) - targetGift.price) < 100) {
                             winIndex = i;
                             break;
                         }
                     }
                     
-                    // Если не нашли точное совпадение, выбираем случайный
+                    // Если не нашли, ищем по имени без учета цены
+                    if (winIndex === -1) {
+                        for (let i = 0; i < items.length; i++) {
+                            if (items[i].dataset.name === targetGift.name) {
+                                winIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Если все еще не нашли, выбираем случайный, но обновляем его данные
                     if (winIndex === -1) {
                         winIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
+                        // Обновляем данные выигрышного элемента, чтобы они совпадали
+                        const winItem = items[winIndex];
+                        winItem.dataset.price = targetGift.price;
+                        winItem.dataset.name = targetGift.name;
+                        winItem.dataset.id = targetGift.id;
+                        winItem.querySelector('.gift-name').textContent = targetGift.name;
+                        winItem.querySelector('.gift-price').textContent = targetGift.price + '⭐';
+                        
+                        // Обновляем изображение
+                        const svg = getGiftSVG(targetGift);
+                        winItem.querySelector('.gift-image').style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                     }
                     
                     state.winIndices[r] = winIndex;
@@ -3153,10 +3332,11 @@
                     cardEl.style.animation = `cardDeal 0.3s ease-out ${index * 0.1}s both`;
                     el.playerCards.appendChild(cardEl);
                 });
+                
                 el.dealerCards.innerHTML = '';
                 state.blackjack.dealerCards.forEach((card, index) => {
                     const cardEl = document.createElement('div');
-                    if (index === 1 && !showDealerAll && state.blackjack.gameActive) {
+                    if (index === 1 && !showDealerAll && state.blackjack.gameStarted) {
                         cardEl.className = 'blackjack-card';
                         cardEl.textContent = '?';
                         cardEl.style.animation = `cardDeal 0.3s ease-out ${index * 0.1}s both`;
@@ -3167,38 +3347,45 @@
                     }
                     el.dealerCards.appendChild(cardEl);
                 });
+                
                 el.playerScore.textContent = state.blackjack.playerScore;
-                if (showDealerAll || !state.blackjack.gameActive) {
+                
+                if (showDealerAll || !state.blackjack.gameStarted) {
                     el.dealerScore.textContent = state.blackjack.dealerScore;
                 } else {
-                    el.dealerScore.textContent = getCardValue(state.blackjack.dealerCards[0]);
+                    el.dealerScore.textContent = state.blackjack.dealerCards.length > 0 ? getCardValue(state.blackjack.dealerCards[0]) : 0;
                 }
             }
 
-            function lockBlackjackBet(lock) {
-                state.blackjack.betLocked = lock;
-                el.blackjackBet.disabled = lock;
-                el.blackjackBetBtns.forEach(btn => btn.disabled = lock);
-            }
-
-            function startBlackjack() {
+            function startBlackjackGame() {
                 const bet = parseInt(el.blackjackBet.value) || 100;
                 
-                // Проверка на достаточность средств
                 if (bet > state.balance) {
                     showToast('❌ Недостаточно звезд!');
                     return;
                 }
                 
+                // Списываем ставку
+                state.balance -= bet;
+                updateUI();
+                
                 state.blackjack.deck = createDeck();
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
+                state.blackjack.gameStarted = true;
                 state.blackjack.gameActive = true;
                 state.blackjack.bet = bet;
                 
-                // Блокируем ставку
-                lockBlackjackBet(true);
-                el.blackjackNew.disabled = true;
+                // Блокируем элементы ставки
+                el.blackjackBet.disabled = true;
+                el.blackjackBetBtns.forEach(btn => btn.disabled = true);
+                el.blackjackStart.disabled = true;
+                
+                // Очищаем карты
+                el.playerCards.innerHTML = '';
+                el.dealerCards.innerHTML = '';
+                
+                el.blackjackMessage.textContent = 'Раздача...';
                 
                 // Раздаем карты с анимацией
                 setTimeout(() => {
@@ -3224,15 +3411,42 @@
                     
                     updateBlackjackUI();
                     
-                    el.blackjackHit.disabled = false;
-                    el.blackjackStand.disabled = false;
-                    el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
-                    el.blackjackMessage.textContent = 'Ваш ход';
+                    // Проверка на блэкджек
+                    if (state.blackjack.playerScore === 21) {
+                        if (state.blackjack.dealerScore === 21) {
+                            // Ничья
+                            state.balance += state.blackjack.bet;
+                            state.blackjack.gameActive = false;
+                            el.blackjackHit.disabled = true;
+                            el.blackjackStand.disabled = true;
+                            el.blackjackDouble.disabled = true;
+                            el.blackjackMessage.textContent = '🤝 У обоих блэкджек! Ничья';
+                            sound.playWinSound();
+                            updateUI();
+                            saveGame();
+                        } else {
+                            // Игрок выиграл
+                            state.balance += Math.floor(state.blackjack.bet * 2.5);
+                            state.blackjack.gameActive = false;
+                            el.blackjackHit.disabled = true;
+                            el.blackjackStand.disabled = true;
+                            el.blackjackDouble.disabled = true;
+                            el.blackjackMessage.textContent = '🎉 БЛЭКДЖЕК! Вы выиграли!';
+                            sound.playWinSound();
+                            updateUI();
+                            saveGame();
+                        }
+                    } else {
+                        el.blackjackHit.disabled = false;
+                        el.blackjackStand.disabled = false;
+                        el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
+                        el.blackjackMessage.textContent = 'Ваш ход';
+                    }
                 }, 400);
             }
 
             function blackjackHit() {
-                if (!state.blackjack.gameActive) return;
+                if (!state.blackjack.gameActive || !state.blackjack.gameStarted) return;
                 
                 state.blackjack.playerCards.push(state.blackjack.deck.pop());
                 state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
@@ -3241,13 +3455,10 @@
                 
                 if (state.blackjack.playerScore > 21) {
                     // Перебор - проигрыш
-                    state.balance -= state.blackjack.bet;
                     state.blackjack.gameActive = false;
                     el.blackjackHit.disabled = true;
                     el.blackjackStand.disabled = true;
                     el.blackjackDouble.disabled = true;
-                    el.blackjackNew.disabled = false;
-                    lockBlackjackBet(false);
                     el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
                     sound.playLoseSound();
                     updateUI();
@@ -3258,7 +3469,7 @@
             }
 
             function blackjackStand() {
-                if (!state.blackjack.gameActive) return;
+                if (!state.blackjack.gameActive || !state.blackjack.gameStarted) return;
                 
                 state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
                 
@@ -3285,19 +3496,20 @@
                 }
                 
                 if (win) {
-                    state.balance += state.blackjack.bet;
+                    state.balance += state.blackjack.bet * 2;
                     sound.playWinSound();
                 } else if (state.blackjack.playerScore !== state.blackjack.dealerScore) {
-                    state.balance -= state.blackjack.bet;
+                    // Ставка уже списана
                     sound.playLoseSound();
+                } else {
+                    // Ничья - возвращаем ставку
+                    state.balance += state.blackjack.bet;
                 }
                 
                 state.blackjack.gameActive = false;
                 el.blackjackHit.disabled = true;
                 el.blackjackStand.disabled = true;
                 el.blackjackDouble.disabled = true;
-                el.blackjackNew.disabled = false;
-                lockBlackjackBet(false);
                 el.blackjackMessage.textContent = message;
                 
                 updateUI();
@@ -3305,15 +3517,21 @@
             }
 
             function blackjackDouble() {
-                if (!state.blackjack.gameActive || state.blackjack.playerCards.length > 2) return;
+                if (!state.blackjack.gameActive || !state.blackjack.gameStarted || state.blackjack.playerCards.length > 2) return;
                 
                 // Проверяем, хватает ли средств на удвоение
-                if (state.blackjack.bet * 2 > state.balance) {
+                if (state.blackjack.bet > state.balance) {
                     showToast('❌ Недостаточно звезд для удвоения!');
                     return;
                 }
                 
+                // Списываем дополнительную ставку
+                state.balance -= state.blackjack.bet;
                 state.blackjack.bet *= 2;
+                
+                updateUI();
+                
+                // Берем одну карту и сразу стопаем
                 blackjackHit();
                 
                 if (state.blackjack.playerScore <= 21) {
@@ -3321,10 +3539,35 @@
                 }
             }
 
+            // Blackjack обработчики
             el.openBlackjackBtn.onclick = () => {
                 el.blackjackModal.classList.add('active');
-                lockBlackjackBet(false);
-                startBlackjack();
+                
+                // Сбрасываем состояние
+                state.blackjack.gameStarted = false;
+                state.blackjack.gameActive = false;
+                state.blackjack.playerCards = [];
+                state.blackjack.dealerCards = [];
+                state.blackjack.playerScore = 0;
+                state.blackjack.dealerScore = 0;
+                
+                // Разблокируем элементы ставки
+                el.blackjackBet.disabled = false;
+                el.blackjackBetBtns.forEach(btn => btn.disabled = false);
+                el.blackjackStart.disabled = false;
+                
+                // Блокируем игровые кнопки
+                el.blackjackHit.disabled = true;
+                el.blackjackStand.disabled = true;
+                el.blackjackDouble.disabled = true;
+                
+                // Очищаем карты
+                el.playerCards.innerHTML = '';
+                el.dealerCards.innerHTML = '';
+                el.playerScore.textContent = '0';
+                el.dealerScore.textContent = '0';
+                
+                el.blackjackMessage.textContent = 'Сделайте ставку и нажмите "Начать игру"';
             };
             
             el.blackjackClose.onclick = () => {
@@ -3337,10 +3580,10 @@
                 };
             });
             
+            el.blackjackStart.onclick = startBlackjackGame;
             el.blackjackHit.onclick = blackjackHit;
             el.blackjackStand.onclick = blackjackStand;
             el.blackjackDouble.onclick = blackjackDouble;
-            el.blackjackNew.onclick = startBlackjack;
 
             // Coinflip
             function playCoinflip(choice) {
@@ -3356,6 +3599,10 @@
                 state.coinflip.isPlaying = true;
                 state.coinflip.bet = bet;
                 state.coinflip.choice = choice;
+                
+                // Списываем ставку
+                state.balance -= bet;
+                updateUI();
                 
                 // Блокируем элементы управления
                 el.coinflipBet.disabled = true;
@@ -3383,11 +3630,10 @@
                     }
                     
                     if (win) {
-                        state.balance += bet;
+                        state.balance += bet * 2;
                         sound.playWinSound();
                         el.coinflipResult.textContent = `🎉 ВЫ ВЫИГРАЛИ! +${bet}⭐ (${result === 'heads' ? 'ОРЁЛ' : 'РЕШКА'})`;
                     } else {
-                        state.balance -= bet;
                         sound.playLoseSound();
                         el.coinflipResult.textContent = `😞 ВЫ ПРОИГРАЛИ! -${bet}⭐ (выпал ${result === 'heads' ? 'ОРЁЛ' : 'РЕШКА'})`;
                     }
@@ -3512,6 +3758,12 @@
                         state.inventory.push(winGift);
                         sound.playWinSound();
                         showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
+                        
+                        // Удаляем поставленный подарок
+                        const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
+                        if (index !== -1) {
+                            state.inventory.splice(index, 1);
+                        }
                     } else {
                         sound.playLoseSound();
                         showToast('💥 ПРОВАЛ! Подарок сгорел');
