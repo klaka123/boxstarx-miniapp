@@ -142,6 +142,11 @@
             top: 16px;
             z-index: 100;
             box-shadow: 0 4px 20px rgba(255,153,51,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            box-shadow: 0 4px 30px rgba(255,153,51,0.4);
         }
 
         .balance-wrap {
@@ -153,12 +158,19 @@
         .balance-icon {
             font-size: 2rem;
             filter: drop-shadow(0 0 10px #ff9933);
+            transition: all 0.3s ease;
+        }
+
+        .balance-icon:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px #ff9933);
         }
 
         .balance-value {
             font-size: 2rem;
             font-weight: 800;
             color: #ff9933;
+            text-shadow: 0 0 10px rgba(255,153,51,0.5);
         }
 
         .add-btn {
@@ -170,7 +182,12 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.05);
         }
 
         .add-btn:active {
@@ -191,7 +208,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: 0 0 30px #ff9933;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .upgrade-main-btn:hover, .blackjack-main-btn:hover, .coinflip-main-btn:hover {
@@ -210,6 +227,11 @@
             border: 2px solid #ff9933;
             border-radius: 60px;
             padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .rocket-section:hover {
+            box-shadow: 0 0 30px rgba(255,153,51,0.3);
         }
 
         .rocket-window {
@@ -243,6 +265,7 @@
             font-size: 5rem;
             filter: drop-shadow(0 0 30px #ff9933);
             z-index: 20;
+            transition: all 0.3s ease;
         }
 
         .rocket.shaking {
@@ -270,7 +293,7 @@
             opacity: 0;
             z-index: 30;
             text-shadow: 0 0 50px red;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
         .explosion.show {
@@ -290,6 +313,8 @@
             font-size: 1.3rem;
             z-index: 25;
             color: #ff9933;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
 
         .timer {
@@ -303,6 +328,7 @@
             font-size: 1.2rem;
             z-index: 25;
             color: #ff9933;
+            backdrop-filter: blur(5px);
         }
 
         .auto-buttons {
@@ -321,13 +347,19 @@
             font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .auto-btn:hover {
+            background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
         }
 
         .auto-btn.active {
             background: #ff9933;
             color: black;
             font-weight: bold;
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .bet-control {
@@ -346,6 +378,17 @@
             font-size: 1.2rem;
             text-align: center;
             outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .bet-input:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
+        }
+
+        .bet-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .flight-buttons {
@@ -361,7 +404,11 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .flight-btn:hover {
+            transform: scale(1.02);
         }
 
         .flight-btn:active {
@@ -371,12 +418,21 @@
         .btn-start {
             background: #ff9933;
             color: black;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .btn-start:hover {
+            box-shadow: 0 0 30px #ff9933;
         }
 
         .btn-stop {
             background: rgba(255,255,255,0.1);
             border: 2px solid #ff9933;
             color: white;
+        }
+
+        .btn-stop:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         .btn-stop:disabled {
@@ -390,6 +446,13 @@
             text-align: center;
             margin: 20px 0 15px;
             color: #ff9933;
+            text-shadow: 0 0 10px rgba(255,153,51,0.5);
+            animation: titleGlow 2s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 10px rgba(255,153,51,0.5); }
+            to { text-shadow: 0 0 20px rgba(255,153,51,0.8); }
         }
 
         .cases-grid {
@@ -406,17 +469,35 @@
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .case-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,153,51,0.3);
+            border-color: #ffaa00;
         }
 
         .case-card:active {
             transform: scale(0.97);
+        }
+
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,153,51,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .case-card:hover::before {
+            opacity: 1;
         }
 
         .case-emoji {
@@ -425,6 +506,11 @@
             filter: drop-shadow(0 0 15px #ff9933);
             position: relative;
             z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover .case-emoji {
+            transform: scale(1.1);
         }
 
         .case-name {
@@ -456,6 +542,12 @@
             z-index: 10000;
             overflow-y: auto;
             padding: 20px;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .upgrade-modal.active {
@@ -481,6 +573,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .upgrade-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
         }
 
         .upgrade-back:active {
@@ -491,6 +589,7 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: #ff9933;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .upgrade-circle-container {
@@ -508,10 +607,32 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #1a1f35;
+            background: radial-gradient(circle at 30% 30%, #2a2f45, #0a0c1a);
             border: 4px solid #ff9933;
-            box-shadow: 0 0 50px rgba(255,153,51,0.3);
+            box-shadow: 0 0 50px rgba(255,153,51,0.5), inset 0 0 30px rgba(255,153,51,0.3);
             overflow: hidden;
+            animation: circlePulse 3s infinite alternate;
+        }
+
+        @keyframes circlePulse {
+            from { box-shadow: 0 0 50px rgba(255,153,51,0.5), inset 0 0 30px rgba(255,153,51,0.3); }
+            to { box-shadow: 0 0 70px rgba(255,153,51,0.7), inset 0 0 50px rgba(255,153,51,0.5); }
+        }
+
+        .upgrade-circle::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .upgrade-circle-fill {
@@ -522,7 +643,8 @@
             height: 100%;
             background: conic-gradient(#00cc66 0deg, #ff4444 0deg);
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
+            mix-blend-mode: overlay;
         }
 
         .upgrade-arrow-clock {
@@ -536,19 +658,20 @@
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
             box-shadow: 0 -5px 20px #ff9933;
-            transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+            transition: transform 5s cubic-bezier(0.1, 0.8, 0.2, 1);
+            border-radius: 2px;
         }
 
         .upgrade-arrow-clock::before {
             content: '';
             position: absolute;
-            top: -18px;
+            top: -20px;
             left: -8px;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 22px solid #ff9933;
+            border-bottom: 25px solid #ff9933;
             transform: rotate(0deg);
             filter: drop-shadow(0 -5px 15px #ff9933);
         }
@@ -560,16 +683,22 @@
             transform: translate(-50%, -50%);
             width: 80px;
             height: 80px;
-            background: #000;
-            border: 4px solid #ff9933;
+            background: radial-gradient(circle, #ff9933 0%, #ff6600 100%);
+            border: 4px solid #fff;
             border-radius: 50%;
             z-index: 40;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
-            color: #ff9933;
-            box-shadow: 0 0 30px #ff9933;
+            color: #000;
+            box-shadow: 0 0 40px #ff9933, inset 0 0 20px rgba(255,255,255,0.5);
+            animation: centerPulse 2s infinite alternate;
+        }
+
+        @keyframes centerPulse {
+            from { box-shadow: 0 0 40px #ff9933; }
+            to { box-shadow: 0 0 60px #ff9933; }
         }
 
         .upgrade-percent {
@@ -580,15 +709,17 @@
             margin-bottom: 10px;
             z-index: 10;
             position: relative;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .upgrade-binomial {
             text-align: center;
-            color: #666;
+            color: #888;
             margin-bottom: 30px;
             font-size: 0.9rem;
             z-index: 10;
             position: relative;
+            letter-spacing: 2px;
         }
 
         .upgrade-selectors {
@@ -607,12 +738,13 @@
             padding: 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             backdrop-filter: blur(5px);
         }
 
         .upgrade-selector:hover {
             background: rgba(255,153,51,0.2);
+            transform: scale(1.02);
         }
 
         .upgrade-selector:active {
@@ -638,13 +770,19 @@
             border-radius: 60px;
             font-size: 1.2rem;
             font-weight: 700;
-            background: #ff9933;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
             color: black;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             margin-top: 20px;
             z-index: 10;
             position: relative;
+            box-shadow: 0 0 30px #ff9933;
+        }
+
+        .upgrade-action-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #ff9933;
         }
 
         .upgrade-action-btn:active {
@@ -671,6 +809,7 @@
             z-index: 5000;
             overflow-y: auto;
             padding: 20px;
+            animation: modalFadeIn 0.5s ease;
         }
 
         .case-modal.active {
@@ -684,6 +823,7 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .case-quantity {
@@ -703,12 +843,18 @@
             cursor: pointer;
             background: rgba(255,153,51,0.1);
             color: white;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
         }
 
         .quantity-btn.active {
             background: #ff9933;
             color: black;
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .quantity-btn:active {
@@ -723,6 +869,12 @@
 
         .case-row {
             margin-bottom: 20px;
+            animation: rowSlideIn 0.5s ease;
+        }
+
+        @keyframes rowSlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .case-row-label {
@@ -730,6 +882,7 @@
             color: #ff9933;
             margin-bottom: 5px;
             margin-left: 10px;
+            text-shadow: 0 0 10px rgba(255,153,51,0.3);
         }
 
         .case-display {
@@ -740,7 +893,7 @@
             border: 3px solid #ff9933;
             border-radius: 40px;
             background: #000;
-            box-shadow: 0 0 50px #ff9933;
+            box-shadow: 0 0 50px rgba(255,153,51,0.3);
         }
 
         .case-items {
@@ -752,13 +905,13 @@
             gap: 15px;
             padding: 0 15px;
             align-items: center;
-            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
+            will-change: transform;
         }
 
         .case-gift {
             min-width: 150px;
             height: 160px;
-            background: #1a1f35;
+            background: linear-gradient(135deg, #1a1f35, #2a2f45);
             border: 2px solid #ff9933;
             border-radius: 30px;
             display: flex;
@@ -766,11 +919,12 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .case-gift.win {
-            border-color: #ff9933;
+            border-color: #ffaa00;
             box-shadow: 0 0 80px #ff9933;
             transform: scale(1.1);
             z-index: 100;
@@ -778,8 +932,8 @@
         }
 
         @keyframes winPulse {
-            from { box-shadow: 0 0 30px #ff9933; transform: scale(1.05); }
-            to { box-shadow: 0 0 100px #ff9933; transform: scale(1.15); }
+            from { box-shadow: 0 0 40px #ff9933; transform: scale(1.08); }
+            to { box-shadow: 0 0 100px #ff9933; transform: scale(1.12); }
         }
 
         .gift-image {
@@ -790,6 +944,11 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            transition: all 0.3s ease;
+        }
+
+        .case-gift.win .gift-image {
+            filter: drop-shadow(0 0 30px #ffaa00);
         }
 
         .gift-name {
@@ -803,6 +962,12 @@
             font-size: 1rem;
             color: #ff9933;
             font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .case-gift.win .gift-price {
+            color: #ffaa00;
+            text-shadow: 0 0 10px #ffaa00;
         }
 
         .case-marker {
@@ -838,6 +1003,7 @@
             background: rgba(0,0,0,0.5);
             border-radius: 40px;
             border: 2px solid #ff9933;
+            backdrop-filter: blur(5px);
         }
 
         .case-result-item {
@@ -850,6 +1016,12 @@
             align-items: center;
             justify-content: space-between;
             font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .case-result-item:hover {
+            background: rgba(255,153,51,0.2);
+            transform: scale(1.02);
         }
 
         .case-result-item:last-child {
@@ -879,10 +1051,15 @@
             font-size: 1.2rem;
             font-weight: 900;
             cursor: pointer;
-            background: #ff9933;
+            background: linear-gradient(135deg, #ff9933, #ff6600);
             color: black;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
             box-shadow: 0 0 30px #ff9933;
+        }
+
+        .case-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px #ff9933;
         }
 
         .case-btn:active {
@@ -909,6 +1086,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .case-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
         }
 
         .case-close:active {
@@ -928,6 +1111,7 @@
             z-index: 10000;
             overflow-y: auto;
             padding: 20px;
+            animation: modalFadeIn 0.5s ease;
         }
 
         .blackjack-modal.active {
@@ -953,6 +1137,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .blackjack-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
         }
 
         .blackjack-back:active {
@@ -965,6 +1155,7 @@
             color: #ff9933;
             text-transform: uppercase;
             letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .blackjack-table {
@@ -974,6 +1165,7 @@
             margin-bottom: 20px;
             border: 2px solid #ff9933;
             backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255,153,51,0.2);
         }
 
         .blackjack-dealer, .blackjack-player {
@@ -1010,6 +1202,12 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             animation: cardDeal 0.3s ease-out;
             border: 2px solid #ff9933;
+            transition: all 0.2s ease;
+        }
+
+        .blackjack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
         }
 
         @keyframes cardDeal {
@@ -1034,6 +1232,7 @@
             padding: 20px;
             margin-bottom: 20px;
             border: 2px solid #ff9933;
+            backdrop-filter: blur(5px);
         }
 
         .blackjack-bet-label {
@@ -1059,16 +1258,23 @@
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .blackjack-bet-btn:hover {
             background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
         }
 
         .blackjack-bet-btn.active {
             background: #ff9933;
             color: black;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .blackjack-bet-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
         .blackjack-bet-input {
@@ -1081,6 +1287,17 @@
             font-size: 1.2rem;
             text-align: center;
             outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .blackjack-bet-input:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
+        }
+
+        .blackjack-bet-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .blackjack-actions {
@@ -1099,9 +1316,13 @@
             font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+
+        .blackjack-action-btn:hover {
+            transform: scale(1.05);
         }
 
         .blackjack-action-btn:active {
@@ -1146,6 +1367,7 @@
             border: 2px solid #ff9933;
             border-radius: 60px;
             background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         /* ========== МОДАЛЬНОЕ ОКНО МОНЕТКИ ========== */
@@ -1161,6 +1383,7 @@
             z-index: 10000;
             overflow-y: auto;
             padding: 20px;
+            animation: modalFadeIn 0.5s ease;
         }
 
         .coinflip-modal.active {
@@ -1186,6 +1409,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .coinflip-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
         }
 
         .coinflip-back:active {
@@ -1198,6 +1427,7 @@
             color: #ff9933;
             text-transform: uppercase;
             letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .coinflip-coin-container {
@@ -1265,6 +1495,7 @@
             padding: 20px;
             margin-bottom: 20px;
             border: 2px solid #ff9933;
+            backdrop-filter: blur(5px);
         }
 
         .coinflip-bet-label {
@@ -1290,16 +1521,23 @@
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .coinflip-bet-btn:hover {
             background: rgba(255,153,51,0.2);
+            transform: scale(1.05);
         }
 
         .coinflip-bet-btn.active {
             background: #ff9933;
             color: black;
+            box-shadow: 0 0 20px #ff9933;
+        }
+
+        .coinflip-bet-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
         .coinflip-bet-input {
@@ -1312,6 +1550,17 @@
             font-size: 1.2rem;
             text-align: center;
             outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .coinflip-bet-input:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
+        }
+
+        .coinflip-bet-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .coinflip-choices {
@@ -1330,7 +1579,7 @@
             font-size: 2rem;
             font-weight: 900;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -1338,6 +1587,7 @@
         .coinflip-choice-btn:hover {
             background: rgba(255,153,51,0.2);
             transform: scale(1.02);
+            box-shadow: 0 0 30px #ff9933;
         }
 
         .coinflip-choice-btn:active {
@@ -1361,6 +1611,7 @@
             border: 2px solid #ff9933;
             border-radius: 60px;
             background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         /* ========== ИНВЕНТАРЬ ========== */
@@ -1371,6 +1622,11 @@
             border-radius: 60px;
             padding: 20px;
             margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .inventory-section:hover {
+            box-shadow: 0 0 30px rgba(255,153,51,0.3);
         }
 
         .inventory-header {
@@ -1406,11 +1662,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .inventory-page-btn:hover {
             background: rgba(255,153,51,0.2);
+            transform: scale(1.1);
         }
 
         .inventory-page-btn:active {
@@ -1459,12 +1716,13 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .inventory-slot:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
         }
 
         .inventory-slot:active {
@@ -1479,6 +1737,11 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            transition: all 0.2s ease;
+        }
+
+        .inventory-slot:hover .inv-image {
+            filter: drop-shadow(0 0 20px #ffaa00);
         }
 
         .inv-name {
@@ -1499,6 +1762,11 @@
             background: rgba(0,0,0,0.7);
             padding: 2px 5px;
             border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .inventory-slot:hover .inv-price {
+            color: #ffaa00;
         }
 
         .empty-slot {
@@ -1521,6 +1789,11 @@
             border-radius: 60px;
             padding: 16px;
             margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .promo-section:hover {
+            box-shadow: 0 0 30px rgba(255,153,51,0.3);
         }
 
         .promo-title {
@@ -1545,6 +1818,12 @@
             color: white;
             font-size: 1rem;
             outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .promo-field:focus {
+            box-shadow: 0 0 20px #ff9933;
+            border-color: #ffaa00;
         }
 
         .promo-apply {
@@ -1555,6 +1834,12 @@
             color: black;
             font-weight: 700;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .promo-apply:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff9933;
         }
 
         .promo-apply:active {
@@ -1573,7 +1858,8 @@
             font-weight: 700;
             z-index: 30000;
             border: 2px solid white;
-            animation: toastIn 0.3s;
+            animation: toastIn 0.3s ease;
+            box-shadow: 0 0 30px #ff9933;
         }
 
         @keyframes toastIn {
@@ -1594,6 +1880,7 @@
             padding: 20px;
             z-index: 15000;
             overflow-y: auto;
+            animation: modalFadeIn 0.5s ease;
         }
 
         .gift-selector.active {
@@ -1619,6 +1906,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .selector-back:hover {
+            background: rgba(255,153,51,0.3);
+            transform: scale(1.1);
         }
 
         .selector-back:active {
@@ -1645,7 +1938,13 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .selector-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #ff9933;
+            border-color: #ffaa00;
         }
 
         .selector-item:active {
@@ -1659,6 +1958,11 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            transition: all 0.2s ease;
+        }
+
+        .selector-item:hover .selector-item-image {
+            filter: drop-shadow(0 0 20px #ffaa00);
         }
 
         .selector-item-name {
@@ -1942,60 +2246,47 @@
                 init() {
                     try {
                         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        // Разрешаем аудио контекст при первом взаимодействии
+                        document.addEventListener('click', () => {
+                            if (this.audioContext && this.audioContext.state === 'suspended') {
+                                this.audioContext.resume();
+                            }
+                        }, { once: true });
                     } catch (e) {
                         console.log('Web Audio API not supported');
                     }
                 }
 
-                // Новый приятный звук выигрыша
+                // Универсальный приятный звук выигрыша
                 playWinSound() {
                     if (!this.audioContext) return;
                     
                     const ctx = this.audioContext;
                     const now = ctx.currentTime;
                     
-                    // Создаем несколько осцилляторов для мелодичного звука
-                    const osc1 = ctx.createOscillator();
-                    const osc2 = ctx.createOscillator();
-                    const osc3 = ctx.createOscillator();
-                    const gain1 = ctx.createGain();
-                    const gain2 = ctx.createGain();
-                    const gain3 = ctx.createGain();
+                    // Создаем несколько осцилляторов для мелодичного аккорда
+                    const notes = [
+                        { freq: 523.25, time: 0 }, // C5
+                        { freq: 659.25, time: 0.1 }, // E5
+                        { freq: 783.99, time: 0.2 }  // G5
+                    ];
                     
-                    osc1.type = 'sine';
-                    osc1.frequency.value = 659.25; // E5
-                    
-                    osc2.type = 'sine';
-                    osc2.frequency.value = 783.99; // G5
-                    
-                    osc3.type = 'sine';
-                    osc3.frequency.value = 523.25; // C5
-                    
-                    // Настройка громкости
-                    gain1.gain.setValueAtTime(0.2, now);
-                    gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
-                    
-                    gain2.gain.setValueAtTime(0.2, now + 0.1);
-                    gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.9);
-                    
-                    gain3.gain.setValueAtTime(0.15, now + 0.2);
-                    gain3.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
-                    
-                    osc1.connect(gain1);
-                    osc2.connect(gain2);
-                    osc3.connect(gain3);
-                    
-                    gain1.connect(ctx.destination);
-                    gain2.connect(ctx.destination);
-                    gain3.connect(ctx.destination);
-                    
-                    osc1.start(now);
-                    osc2.start(now + 0.1);
-                    osc3.start(now + 0.2);
-                    
-                    osc1.stop(now + 0.8);
-                    osc2.stop(now + 0.9);
-                    osc3.stop(now + 1.0);
+                    notes.forEach(note => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        
+                        osc.type = 'sine';
+                        osc.frequency.value = note.freq;
+                        
+                        gain.gain.setValueAtTime(0.15, now + note.time);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + note.time + 0.8);
+                        
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        
+                        osc.start(now + note.time);
+                        osc.stop(now + note.time + 0.8);
+                    });
                 }
 
                 playLoseSound() {
@@ -2022,32 +2313,7 @@
                 }
 
                 playWinFlightSound() {
-                    if (!this.audioContext) return;
-                    
-                    const ctx = this.audioContext;
-                    const now = ctx.currentTime;
-                    
-                    const osc1 = ctx.createOscillator();
-                    const osc2 = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    
-                    osc1.type = 'triangle';
-                    osc1.frequency.value = 440;
-                    
-                    osc2.type = 'triangle';
-                    osc2.frequency.value = 554.37;
-                    
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
-                    
-                    osc1.connect(gain);
-                    osc2.connect(gain);
-                    gain.connect(ctx.destination);
-                    
-                    osc1.start(now);
-                    osc2.start(now);
-                    osc1.stop(now + 0.8);
-                    osc2.stop(now + 0.8);
+                    this.playWinSound(); // Используем тот же приятный звук
                 }
 
                 playExplosionSound() {
@@ -2344,7 +2610,7 @@
                 inventoryPage: 1,
                 multipleResults: [],
                 caseRows: [],
-                winIndices: [], // Сохраняем индексы выигрышей для каждого ряда
+                winIndices: [],
                 blackjack: {
                     deck: [],
                     playerCards: [],
@@ -2352,7 +2618,8 @@
                     playerScore: 0,
                     dealerScore: 0,
                     gameActive: false,
-                    bet: 100
+                    bet: 100,
+                    betLocked: false
                 },
                 coinflip: {
                     bet: 100,
@@ -2670,6 +2937,9 @@
                             const giftDiv = document.createElement('div');
                             giftDiv.className = 'case-gift';
                             const svg = getGiftSVG(item);
+                            giftDiv.dataset.price = item.price;
+                            giftDiv.dataset.name = item.name;
+                            giftDiv.dataset.id = item.id;
                             giftDiv.innerHTML = `<div class="gift-image" style="background-image: url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')"></div><div class="gift-name">${item.name}</div><div class="gift-price">${item.price}⭐</div>`;
                             caseItems.appendChild(giftDiv);
                         });
@@ -2715,22 +2985,40 @@
                     const containerWidth = 800;
                     const centerPos = (containerWidth / 2) - (itemWidth / 2);
                     
-                    // Выбираем случайный выигрышный индекс и сохраняем его
-                    const winIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
+                    // Ищем индекс, где подарок совпадает с выигрышным
+                    let winIndex = -1;
+                    const targetGift = results[r];
+                    
+                    for (let i = 0; i < items.length; i++) {
+                        const item = items[i];
+                        if (item.dataset.name === targetGift.name) {
+                            winIndex = i;
+                            break;
+                        }
+                    }
+                    
+                    // Если не нашли точное совпадение, выбираем случайный
+                    if (winIndex === -1) {
+                        winIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
+                    }
+                    
                     state.winIndices[r] = winIndex;
                     
                     const finalPos = centerPos - (winIndex * itemWidth);
                     
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
-                    const spins = 4 * itemCount * itemWidth;
-                    const startPos = finalPos - spins;
+                    // Количество оборотов зависит от расстояния
+                    const spins = 3 + Math.floor(Math.random() * 3);
+                    const startPos = finalPos - (spins * itemCount * itemWidth);
                     
                     caseItems.style.transition = 'none';
                     caseItems.style.transform = `translateX(${startPos}px)`;
                     
+                    // Небольшая задержка для синхронности
                     setTimeout(() => {
-                        caseItems.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
+                        // Плавная анимация с ускорением и замедлением
+                        caseItems.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
                         // Подсвечиваем выигрыш после остановки
@@ -2739,7 +3027,7 @@
                                 items[winIndex].classList.add('win');
                                 sound.playWinSound();
                             }
-                        }, 3500);
+                        }, 4000);
                     }, 50);
                 }
                 
@@ -2780,7 +3068,7 @@
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
-                }, 4000);
+                }, 4500);
             }
 
             el.sellConfirm.onclick = () => {
@@ -2887,35 +3175,55 @@
                 }
             }
 
+            function lockBlackjackBet(lock) {
+                state.blackjack.betLocked = lock;
+                el.blackjackBet.disabled = lock;
+                el.blackjackBetBtns.forEach(btn => btn.disabled = lock);
+            }
+
             function startBlackjack() {
                 const bet = parseInt(el.blackjackBet.value) || 100;
+                
+                // Проверка на достаточность средств
                 if (bet > state.balance) {
                     showToast('❌ Недостаточно звезд!');
                     return;
                 }
+                
                 state.blackjack.deck = createDeck();
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
+                state.blackjack.gameActive = true;
+                state.blackjack.bet = bet;
+                
+                // Блокируем ставку
+                lockBlackjackBet(true);
                 el.blackjackNew.disabled = true;
+                
+                // Раздаем карты с анимацией
                 setTimeout(() => {
                     state.blackjack.playerCards.push(state.blackjack.deck.pop());
                     updateBlackjackUI();
                 }, 100);
+                
                 setTimeout(() => {
                     state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                     updateBlackjackUI();
                 }, 200);
+                
                 setTimeout(() => {
                     state.blackjack.playerCards.push(state.blackjack.deck.pop());
                     updateBlackjackUI();
                 }, 300);
+                
                 setTimeout(() => {
                     state.blackjack.dealerCards.push(state.blackjack.deck.pop());
+                    
                     state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
                     state.blackjack.dealerScore = calculateScore([state.blackjack.dealerCards[0]]);
-                    state.blackjack.gameActive = true;
-                    state.blackjack.bet = bet;
+                    
                     updateBlackjackUI();
+                    
                     el.blackjackHit.disabled = false;
                     el.blackjackStand.disabled = false;
                     el.blackjackDouble.disabled = state.blackjack.playerCards.length > 2 || state.blackjack.playerScore > 21;
@@ -2925,34 +3233,45 @@
 
             function blackjackHit() {
                 if (!state.blackjack.gameActive) return;
+                
                 state.blackjack.playerCards.push(state.blackjack.deck.pop());
                 state.blackjack.playerScore = calculateScore(state.blackjack.playerCards);
+                
                 updateBlackjackUI();
+                
                 if (state.blackjack.playerScore > 21) {
+                    // Перебор - проигрыш
                     state.balance -= state.blackjack.bet;
                     state.blackjack.gameActive = false;
                     el.blackjackHit.disabled = true;
                     el.blackjackStand.disabled = true;
                     el.blackjackDouble.disabled = true;
                     el.blackjackNew.disabled = false;
+                    lockBlackjackBet(false);
                     el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
                     sound.playLoseSound();
                     updateUI();
                     saveGame();
                 }
+                
                 el.blackjackDouble.disabled = true;
             }
 
             function blackjackStand() {
                 if (!state.blackjack.gameActive) return;
+                
                 state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
+                
                 while (state.blackjack.dealerScore < 17) {
                     state.blackjack.dealerCards.push(state.blackjack.deck.pop());
                     state.blackjack.dealerScore = calculateScore(state.blackjack.dealerCards);
                 }
+                
                 updateBlackjackUI(true);
+                
                 let message = '';
                 let win = false;
+                
                 if (state.blackjack.dealerScore > 21) {
                     message = '🎉 Дилер перебрал! Вы выиграли!';
                     win = true;
@@ -2964,6 +3283,7 @@
                 } else {
                     message = '🤝 Ничья (ставка возвращена)';
                 }
+                
                 if (win) {
                     state.balance += state.blackjack.bet;
                     sound.playWinSound();
@@ -2971,20 +3291,31 @@
                     state.balance -= state.blackjack.bet;
                     sound.playLoseSound();
                 }
+                
                 state.blackjack.gameActive = false;
                 el.blackjackHit.disabled = true;
                 el.blackjackStand.disabled = true;
                 el.blackjackDouble.disabled = true;
                 el.blackjackNew.disabled = false;
+                lockBlackjackBet(false);
                 el.blackjackMessage.textContent = message;
+                
                 updateUI();
                 saveGame();
             }
 
             function blackjackDouble() {
                 if (!state.blackjack.gameActive || state.blackjack.playerCards.length > 2) return;
+                
+                // Проверяем, хватает ли средств на удвоение
+                if (state.blackjack.bet * 2 > state.balance) {
+                    showToast('❌ Недостаточно звезд для удвоения!');
+                    return;
+                }
+                
                 state.blackjack.bet *= 2;
                 blackjackHit();
+                
                 if (state.blackjack.playerScore <= 21) {
                     blackjackStand();
                 }
@@ -2992,16 +3323,20 @@
 
             el.openBlackjackBtn.onclick = () => {
                 el.blackjackModal.classList.add('active');
+                lockBlackjackBet(false);
                 startBlackjack();
             };
+            
             el.blackjackClose.onclick = () => {
                 el.blackjackModal.classList.remove('active');
             };
+            
             el.blackjackBetBtns.forEach(btn => {
                 btn.onclick = () => {
                     el.blackjackBet.value = btn.dataset.bet;
                 };
             });
+            
             el.blackjackHit.onclick = blackjackHit;
             el.blackjackStand.onclick = blackjackStand;
             el.blackjackDouble.onclick = blackjackDouble;
@@ -3010,24 +3345,43 @@
             // Coinflip
             function playCoinflip(choice) {
                 const bet = parseInt(el.coinflipBet.value) || 100;
+                
                 if (bet > state.balance) {
                     showToast('❌ Недостаточно звезд!');
                     return;
                 }
+                
                 if (state.coinflip.isPlaying) return;
+                
                 state.coinflip.isPlaying = true;
                 state.coinflip.bet = bet;
                 state.coinflip.choice = choice;
+                
+                // Блокируем элементы управления
+                el.coinflipBet.disabled = true;
+                el.coinflipBetBtns.forEach(btn => btn.disabled = true);
+                el.coinflipHeads.disabled = true;
+                el.coinflipTails.disabled = true;
+                
+                // Запускаем анимацию
                 el.coin.classList.add('spinning');
+                
+                // Случайный результат (50/50)
                 const result = Math.random() < 0.5 ? 'heads' : 'tails';
+                
+                // Определяем победу
                 const win = (choice === 'heads' && result === 'heads') || (choice === 'tails' && result === 'tails');
+                
                 setTimeout(() => {
                     el.coin.classList.remove('spinning');
+                    
+                    // Показываем результат
                     if (result === 'heads') {
                         el.coin.className = 'coinflip-coin heads';
                     } else {
                         el.coin.className = 'coinflip-coin tails';
                     }
+                    
                     if (win) {
                         state.balance += bet;
                         sound.playWinSound();
@@ -3037,6 +3391,13 @@
                         sound.playLoseSound();
                         el.coinflipResult.textContent = `😞 ВЫ ПРОИГРАЛИ! -${bet}⭐ (выпал ${result === 'heads' ? 'ОРЁЛ' : 'РЕШКА'})`;
                     }
+                    
+                    // Разблокируем элементы управления
+                    el.coinflipBet.disabled = false;
+                    el.coinflipBetBtns.forEach(btn => btn.disabled = false);
+                    el.coinflipHeads.disabled = false;
+                    el.coinflipTails.disabled = false;
+                    
                     updateUI();
                     saveGame();
                     state.coinflip.isPlaying = false;
@@ -3047,18 +3408,28 @@
                 el.coinflipModal.classList.add('active');
                 el.coinflipResult.textContent = 'Сделайте ставку и выберите сторону';
                 el.coin.className = 'coinflip-coin';
+                
+                // Разблокируем элементы управления
+                el.coinflipBet.disabled = false;
+                el.coinflipBetBtns.forEach(btn => btn.disabled = false);
+                el.coinflipHeads.disabled = false;
+                el.coinflipTails.disabled = false;
             };
+            
             el.coinflipClose.onclick = () => {
                 el.coinflipModal.classList.remove('active');
             };
+            
             el.coinflipBetBtns.forEach(btn => {
                 btn.onclick = () => {
                     el.coinflipBet.value = btn.dataset.bet;
                 };
             });
+            
             el.coinflipHeads.onclick = () => {
                 playCoinflip('heads');
             };
+            
             el.coinflipTails.onclick = () => {
                 playCoinflip('tails');
             };
@@ -3123,12 +3494,18 @@
                     showToast('❌ Выберите подарки!');
                     return;
                 }
+                
                 const chance = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
+                
                 const spins = 5 + Math.floor(Math.random() * 5);
                 const win = Math.random() * 100 < chance;
+                
                 const targetRotation = win ? 360 * spins + 45 : 360 * spins + 225;
+                
                 el.upgradeArrow.style.transform = `translate(-50%, -100%) rotate(${targetRotation}deg)`;
+                
                 el.upgradeActionBtn.disabled = true;
+                
                 setTimeout(() => {
                     if (win) {
                         const winGift = { ...state.upgradeTargetGift };
@@ -3138,15 +3515,23 @@
                     } else {
                         sound.playLoseSound();
                         showToast('💥 ПРОВАЛ! Подарок сгорел');
+                        
+                        // Удаляем поставленный подарок
+                        const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
+                        if (index !== -1) {
+                            state.inventory.splice(index, 1);
+                        }
                     }
+                    
                     state.upgradeBetGift = null;
                     state.upgradeTargetGift = null;
                     updateUpgradeUI();
                     updateUI();
                     saveGame();
                     el.upgradeActionBtn.disabled = false;
+                    
                     el.upgradeArrow.style.transform = 'translate(-50%, -100%) rotate(0deg)';
-                }, 4000);
+                }, 5000);
             };
 
             // Промокоды
