@@ -3,3 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('starCanvas');
     // ... остальной код
 });
+const PROMO_CODES = {
+    '2026': 500,
+    'GIFT2026': 250,
+    'STAR2026': 300,
+    'COSMIC': 1000,
+    'ORANGE': 100,
+    'ROCKET': 200,
+    'BOXSTAR': 750,
+    'HAPPY2026': 400,
+    'GDB': 20000 // Бонус для тестирования
+};
