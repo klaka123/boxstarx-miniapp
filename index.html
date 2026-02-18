@@ -1129,7 +1129,7 @@
             transform: scale(0.95);
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО DICE (УПРОЩЕННОЕ) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО DICE ========== */
         .dice-modal {
             position: fixed;
             top: 0;
@@ -1381,7 +1381,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK (ИСПРАВЛЕННОЕ) ========== */
         .blackjack-modal {
             position: fixed;
             top: 0;
@@ -2432,7 +2432,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно DICE (упрощенное) -->
+    <!-- Модальное окно DICE -->
     <div class="dice-modal" id="diceModal">
         <div class="dice-header">
             <div class="dice-back" id="diceClose">←</div>
@@ -2503,7 +2503,7 @@
         <div class="dice-result" id="diceResult">Сделайте ставку и бросьте кубики</div>
     </div>
 
-    <!-- Модальное окно Blackjack -->
+    <!-- Модальное окно Blackjack (ИСПРАВЛЕННОЕ) -->
     <div class="blackjack-modal" id="blackjackModal">
         <div class="blackjack-header">
             <div class="blackjack-back" id="blackjackClose">←</div>
@@ -2624,7 +2624,7 @@
                 }, 600);
             });
 
-            // Класс для звуков - максимально приятные
+            // Класс для звуков
             class SoundManager {
                 constructor() {
                     this.audioContext = null;
@@ -2644,7 +2644,6 @@
                     }
                 }
 
-                // Универсальный приятный звук выигрыша
                 playWinSound() {
                     if (!this.audioContext) return;
                     
@@ -2652,9 +2651,9 @@
                     const now = ctx.currentTime;
                     
                     const notes = [
-                        { freq: 523.25, time: 0 }, // C5
-                        { freq: 659.25, time: 0.15 }, // E5
-                        { freq: 783.99, time: 0.3 }  // G5
+                        { freq: 523.25, time: 0 },
+                        { freq: 659.25, time: 0.15 },
+                        { freq: 783.99, time: 0.3 }
                     ];
                     
                     notes.forEach(note => {
@@ -2675,7 +2674,6 @@
                     });
                 }
 
-                // Приятный звук проигрыша
                 playLoseSound() {
                     if (!this.audioContext) return;
                     
@@ -2683,9 +2681,9 @@
                     const now = ctx.currentTime;
                     
                     const notes = [
-                        { freq: 392.00, time: 0 }, // G4
-                        { freq: 349.23, time: 0.2 }, // F4
-                        { freq: 329.63, time: 0.4 }  // E4
+                        { freq: 392.00, time: 0 },
+                        { freq: 349.23, time: 0.2 },
+                        { freq: 329.63, time: 0.4 }
                     ];
                     
                     notes.forEach(note => {
@@ -3073,7 +3071,6 @@
                 targetSelectorBack: document.getElementById('targetSelectorBack'),
                 targetSelectorTitle: document.getElementById('targetSelectorTitle'),
                 targetSelectorGrid: document.getElementById('targetSelectorGrid'),
-                // Dice elements
                 openDiceBtn: document.getElementById('openDiceBtn'),
                 diceModal: document.getElementById('diceModal'),
                 diceClose: document.getElementById('diceClose'),
@@ -3452,7 +3449,6 @@
                     caseItems.style.transform = `translateX(${startPos}px)`;
                     
                     setTimeout(() => {
-                        // Резкая прокрутка с замедлением в конце
                         caseItems.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.9, 0.3, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
@@ -3534,7 +3530,7 @@
                 };
             });
 
-            // DICE Game (упрощенная)
+            // DICE Game
             function rollDice() {
                 if (state.dice.isRolling) return;
                 
@@ -3636,7 +3632,7 @@
             
             el.diceRollBtn.onclick = rollDice;
 
-            // Blackjack
+            // Blackjack (ИСПРАВЛЕННЫЙ)
             function createDeck() {
                 const suits = ['♠️', '♥️', '♦️', '♣️'];
                 const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -3712,6 +3708,11 @@
                 }
             }
 
+            function lockBlackjackBet(lock) {
+                el.blackjackBet.disabled = lock;
+                el.blackjackBetBtns.forEach(btn => btn.disabled = lock);
+            }
+
             function startBlackjackGame() {
                 const bet = parseInt(el.blackjackBet.value) || 100;
                 
@@ -3720,9 +3721,6 @@
                     return;
                 }
                 
-                state.balance -= bet;
-                updateUI();
-                
                 state.blackjack.deck = createDeck();
                 state.blackjack.playerCards = [];
                 state.blackjack.dealerCards = [];
@@ -3730,15 +3728,22 @@
                 state.blackjack.gameActive = true;
                 state.blackjack.bet = bet;
                 
-                el.blackjackBet.disabled = true;
-                el.blackjackBetBtns.forEach(btn => btn.disabled = true);
+                // Списываем ставку
+                state.balance -= bet;
+                updateUI();
+                
+                // Блокируем элементы ставки
+                lockBlackjackBet(true);
                 el.blackjackStart.disabled = true;
                 
-                el.playerCards.innerHTML = '';
-                el.dealerCards.innerHTML = '';
+                // Разблокируем игровые кнопки (кроме удвоения, если больше 2 карт)
+                el.blackjackHit.disabled = false;
+                el.blackjackStand.disabled = false;
+                el.blackjackDouble.disabled = false;
                 
                 el.blackjackMessage.textContent = 'Раздача...';
                 
+                // Раздаем карты с анимацией
                 setTimeout(() => {
                     state.blackjack.playerCards.push(state.blackjack.deck.pop());
                     updateBlackjackUI();
@@ -3762,23 +3767,30 @@
                     
                     updateBlackjackUI();
                     
+                    // Проверка на блэкджек
                     if (state.blackjack.playerScore === 21) {
                         if (state.blackjack.dealerScore === 21) {
+                            // Ничья
                             state.balance += state.blackjack.bet;
                             state.blackjack.gameActive = false;
                             el.blackjackHit.disabled = true;
                             el.blackjackStand.disabled = true;
                             el.blackjackDouble.disabled = true;
+                            el.blackjackStart.disabled = false;
+                            lockBlackjackBet(false);
                             el.blackjackMessage.textContent = '🤝 У обоих блэкджек! Ничья';
                             sound.playWinSound();
                             updateUI();
                             saveGame();
                         } else {
+                            // Игрок выиграл
                             state.balance += Math.floor(state.blackjack.bet * 2.5);
                             state.blackjack.gameActive = false;
                             el.blackjackHit.disabled = true;
                             el.blackjackStand.disabled = true;
                             el.blackjackDouble.disabled = true;
+                            el.blackjackStart.disabled = false;
+                            lockBlackjackBet(false);
                             el.blackjackMessage.textContent = '🎉 БЛЭКДЖЕК! Вы выиграли!';
                             sound.playWinSound();
                             updateUI();
@@ -3802,10 +3814,13 @@
                 updateBlackjackUI();
                 
                 if (state.blackjack.playerScore > 21) {
+                    // Перебор - проигрыш
                     state.blackjack.gameActive = false;
                     el.blackjackHit.disabled = true;
                     el.blackjackStand.disabled = true;
                     el.blackjackDouble.disabled = true;
+                    el.blackjackStart.disabled = false;
+                    lockBlackjackBet(false);
                     el.blackjackMessage.textContent = '💥 ПЕРЕБОР! Вы проиграли';
                     sound.playLoseSound();
                     updateUI();
@@ -3855,6 +3870,8 @@
                 el.blackjackHit.disabled = true;
                 el.blackjackStand.disabled = true;
                 el.blackjackDouble.disabled = true;
+                el.blackjackStart.disabled = false;
+                lockBlackjackBet(false);
                 el.blackjackMessage.textContent = message;
                 
                 updateUI();
@@ -3891,8 +3908,7 @@
                 state.blackjack.playerScore = 0;
                 state.blackjack.dealerScore = 0;
                 
-                el.blackjackBet.disabled = false;
-                el.blackjackBetBtns.forEach(btn => btn.disabled = false);
+                lockBlackjackBet(false);
                 el.blackjackStart.disabled = false;
                 
                 el.blackjackHit.disabled = true;
