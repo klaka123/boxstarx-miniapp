@@ -560,7 +560,7 @@
             z-index: 5;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (КРАСИВЫЙ ДИЗАЙН) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) ========== */
         .upgrade-modal {
             position: fixed;
             top: 0;
@@ -617,10 +617,11 @@
         }
 
         .upgrade-title {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 900;
             color: #ff9933;
             text-shadow: 0 0 15px rgba(255,153,51,0.5);
+            letter-spacing: 4px;
         }
 
         .upgrade-circle-container {
@@ -639,32 +640,10 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #3a3f55, #1a1f35);
-            border: 4px solid #ff9933;
-            box-shadow: 0 0 60px rgba(255,153,51,0.6), inset 0 0 40px rgba(255,153,51,0.4);
+            background: radial-gradient(circle at 30% 30%, #2a2f45, #0a0c1a);
+            border: 6px solid #ff9933;
+            box-shadow: 0 0 60px rgba(255,153,51,0.5), inset 0 0 40px rgba(255,153,51,0.3);
             overflow: hidden;
-            animation: circlePulse 3s infinite alternate;
-        }
-
-        @keyframes circlePulse {
-            from { box-shadow: 0 0 50px rgba(255,153,51,0.5), inset 0 0 30px rgba(255,153,51,0.3); }
-            to { box-shadow: 0 0 80px rgba(255,153,51,0.8), inset 0 0 60px rgba(255,153,51,0.6); }
-        }
-
-        .upgrade-circle::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .upgrade-circle-fill {
@@ -676,7 +655,6 @@
             background: conic-gradient(#00ff88 0deg, #ff4444 0deg);
             border-radius: 50%;
             transition: background 0.3s ease;
-            mix-blend-mode: overlay;
             filter: drop-shadow(0 0 10px rgba(0,255,136,0.5));
         }
 
@@ -736,7 +714,7 @@
 
         .upgrade-percent {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: #ffaa33;
             margin-bottom: 10px;
@@ -745,14 +723,12 @@
             text-shadow: 0 0 15px rgba(255,170,51,0.5);
         }
 
-        .upgrade-binomial {
+        .upgrade-chance-text {
             text-align: center;
             color: #888;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-            z-index: 10;
-            position: relative;
-            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         .upgrade-selectors {
@@ -785,13 +761,14 @@
         }
 
         .selector-label {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #aaa;
             margin-bottom: 5px;
+            letter-spacing: 1px;
         }
 
         .selector-value {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #ff9933;
             font-weight: 700;
         }
@@ -811,6 +788,8 @@
             z-index: 10;
             position: relative;
             box-shadow: 0 0 30px #ff9933;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .upgrade-action-btn:hover {
@@ -827,7 +806,7 @@
             cursor: not-allowed;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО КЕЙСА (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО КЕЙСА ========== */
         .case-modal {
             position: fixed;
             top: 0;
@@ -2384,7 +2363,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда (КРАСИВЫЙ ДИЗАЙН) -->
+    <!-- Модальное окно апгрейда (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -2400,23 +2379,23 @@
         </div>
 
         <div class="upgrade-percent" id="upgradePercent">0%</div>
-        <div class="upgrade-binomial">BINOMIAL BUSINESS</div>
+        <div class="upgrade-chance-text" id="upgradeChanceText">ШАНС УСПЕХА</div>
 
         <div class="upgrade-selectors">
             <div class="upgrade-selector" id="selectBetGift">
                 <div class="selector-label">ПОДАРОК ДЛЯ СТАВКИ</div>
-                <div class="selector-value" id="betGiftDisplay">Выбрать</div>
+                <div class="selector-value" id="betGiftDisplay">— ВЫБРАТЬ —</div>
             </div>
             <div class="upgrade-selector" id="selectTargetGift">
                 <div class="selector-label">ЖЕЛАЕМЫЙ ПОДАРОК</div>
-                <div class="selector-value" id="targetGiftDisplay">Выбрать</div>
+                <div class="selector-value" id="targetGiftDisplay">— ВЫБРАТЬ —</div>
             </div>
         </div>
 
         <button class="upgrade-action-btn" id="upgradeActionBtn" disabled>УЛУЧШИТЬ</button>
     </div>
 
-    <!-- Модальное окно кейса (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) -->
+    <!-- Модальное окно кейса -->
     <div class="case-modal" id="caseModal">
         <div class="case-close" id="caseClose">✕</div>
         <div class="case-title" id="caseTitle">КЕЙС</div>
@@ -3345,7 +3324,7 @@
                 });
             }
 
-            // Модальное окно кейса (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО)
+            // Модальное окно кейса
             function openCaseModal(c) {
                 state.currentCase = c;
                 state.selectedQty = 1;
@@ -3436,7 +3415,6 @@
                     
                     const targetGift = results[r];
                     
-                    // Находим подарок с таким же именем
                     let targetIndex = -1;
                     
                     for (let i = 0; i < items.length; i++) {
@@ -4040,7 +4018,7 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд
+            // Апгрейд (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО)
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
@@ -4050,8 +4028,8 @@
                 } else {
                     el.upgradePercent.textContent = '0%';
                 }
-                el.betGiftDisplay.textContent = state.upgradeBetGift ? state.upgradeBetGift.name : 'Выбрать';
-                el.targetGiftDisplay.textContent = state.upgradeTargetGift ? state.upgradeTargetGift.name : 'Выбрать';
+                el.betGiftDisplay.textContent = state.upgradeBetGift ? state.upgradeBetGift.name : '— ВЫБРАТЬ —';
+                el.targetGiftDisplay.textContent = state.upgradeTargetGift ? state.upgradeTargetGift.name : '— ВЫБРАТЬ —';
                 el.upgradeActionBtn.disabled = !(state.upgradeBetGift && state.upgradeTargetGift);
             }
 
