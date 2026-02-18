@@ -560,7 +560,7 @@
             z-index: 5;
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО АПГРЕЙДА ========== */
         .upgrade-modal {
             position: fixed;
             top: 0;
@@ -617,11 +617,10 @@
         }
 
         .upgrade-title {
-            font-size: 2rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: #ff9933;
             text-shadow: 0 0 15px rgba(255,153,51,0.5);
-            letter-spacing: 4px;
         }
 
         .upgrade-circle-container {
@@ -634,16 +633,37 @@
 
         .upgrade-circle {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #2a2f45, #0a0c1a);
-            border: 6px solid #ff9933;
-            box-shadow: 0 0 60px rgba(255,153,51,0.5), inset 0 0 40px rgba(255,153,51,0.3);
+            border: 4px solid #ff9933;
+            box-shadow: 0 0 50px rgba(255,153,51,0.5), inset 0 0 30px rgba(255,153,51,0.3);
             overflow: hidden;
+            animation: circlePulse 3s infinite alternate;
+        }
+
+        @keyframes circlePulse {
+            from { box-shadow: 0 0 50px rgba(255,153,51,0.5), inset 0 0 30px rgba(255,153,51,0.3); }
+            to { box-shadow: 0 0 70px rgba(255,153,51,0.7), inset 0 0 50px rgba(255,153,51,0.5); }
+        }
+
+        .upgrade-circle::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .upgrade-circle-fill {
@@ -652,10 +672,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: conic-gradient(#00ff88 0deg, #ff4444 0deg);
+            background: conic-gradient(#00cc66 0deg, #ff4444 0deg);
             border-radius: 50%;
             transition: background 0.3s ease;
-            filter: drop-shadow(0 0 10px rgba(0,255,136,0.5));
+            mix-blend-mode: overlay;
         }
 
         .upgrade-arrow-clock {
@@ -664,11 +684,11 @@
             left: 50%;
             width: 4px;
             height: 120px;
-            background: linear-gradient(180deg, #ffaa33, #ff6600);
+            background: linear-gradient(180deg, #ff9933, #ff6600);
             transform-origin: bottom center;
             transform: translate(-50%, -100%) rotate(0deg);
             z-index: 30;
-            box-shadow: 0 -5px 20px #ffaa33, 0 0 30px #ff6600;
+            box-shadow: 0 -5px 20px #ff9933;
             transition: transform 5s cubic-bezier(0.2, 0.9, 0.3, 1);
             border-radius: 2px;
         }
@@ -682,9 +702,9 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 25px solid #ffaa33;
+            border-bottom: 25px solid #ff9933;
             transform: rotate(0deg);
-            filter: drop-shadow(0 -5px 15px #ffaa33);
+            filter: drop-shadow(0 -5px 15px #ff9933);
         }
 
         .upgrade-center-circle {
@@ -692,43 +712,45 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: radial-gradient(circle, #ffaa33 0%, #ff5500 100%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ff9933 0%, #ff6600 100%);
             border: 4px solid #fff;
             border-radius: 50%;
             z-index: 40;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #000;
-            box-shadow: 0 0 50px #ffaa33, inset 0 0 30px rgba(255,255,255,0.7);
+            box-shadow: 0 0 40px #ff9933, inset 0 0 20px rgba(255,255,255,0.5);
             animation: centerPulse 2s infinite alternate;
         }
 
         @keyframes centerPulse {
-            from { box-shadow: 0 0 40px #ffaa33; transform: scale(1); }
-            to { box-shadow: 0 0 70px #ffaa33; transform: scale(1.05); }
+            from { box-shadow: 0 0 40px #ff9933; }
+            to { box-shadow: 0 0 60px #ff9933; }
         }
 
         .upgrade-percent {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 900;
-            color: #ffaa33;
+            color: #ff9933;
             margin-bottom: 10px;
             z-index: 10;
             position: relative;
-            text-shadow: 0 0 15px rgba(255,170,51,0.5);
+            text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
-        .upgrade-chance-text {
+        .upgrade-binomial {
             text-align: center;
             color: #888;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            letter-spacing: 1px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            z-index: 10;
+            position: relative;
+            letter-spacing: 2px;
         }
 
         .upgrade-selectors {
@@ -761,14 +783,13 @@
         }
 
         .selector-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #aaa;
             margin-bottom: 5px;
-            letter-spacing: 1px;
         }
 
         .selector-value {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #ff9933;
             font-weight: 700;
         }
@@ -788,8 +809,6 @@
             z-index: 10;
             position: relative;
             box-shadow: 0 0 30px #ff9933;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .upgrade-action-btn:hover {
@@ -2363,7 +2382,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно апгрейда (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО) -->
+    <!-- Модальное окно апгрейда -->
     <div class="upgrade-modal" id="upgradeModal">
         <div class="upgrade-header">
             <div class="upgrade-back" id="upgradeClose">←</div>
@@ -2379,16 +2398,16 @@
         </div>
 
         <div class="upgrade-percent" id="upgradePercent">0%</div>
-        <div class="upgrade-chance-text" id="upgradeChanceText">ШАНС УСПЕХА</div>
+        <div class="upgrade-binomial">BINOMIAL BUSINESS</div>
 
         <div class="upgrade-selectors">
             <div class="upgrade-selector" id="selectBetGift">
                 <div class="selector-label">ПОДАРОК ДЛЯ СТАВКИ</div>
-                <div class="selector-value" id="betGiftDisplay">— ВЫБРАТЬ —</div>
+                <div class="selector-value" id="betGiftDisplay">Выбрать</div>
             </div>
             <div class="upgrade-selector" id="selectTargetGift">
                 <div class="selector-label">ЖЕЛАЕМЫЙ ПОДАРОК</div>
-                <div class="selector-value" id="targetGiftDisplay">— ВЫБРАТЬ —</div>
+                <div class="selector-value" id="targetGiftDisplay">Выбрать</div>
             </div>
         </div>
 
@@ -2735,7 +2754,7 @@
                 }, 1000);
             }, 3000);
 
-            // Звездный фон - желтые звезды
+            // Звездный фон - желтые звезды для фона
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -2751,7 +2770,7 @@
                         size: Math.random() * 2 + 0.5,
                         speed: Math.random() * 0.1 + 0.05,
                         brightness: Math.random() * 0.8 + 0.2,
-                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`,
+                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`, // Желтые оттенки
                         phase: Math.random() * Math.PI * 2
                     });
                 }
@@ -2765,33 +2784,13 @@
                 initStars();
             }
 
-            function drawStar(ctx, cx, cy, spikes, outerR, innerR, rotation) {
-                let rot = Math.PI / 2 * 3;
-                let step = Math.PI / spikes;
-                
-                ctx.beginPath();
-                for (let i = 0; i < spikes; i++) {
-                    let x = cx + Math.cos(rot + rotation) * outerR;
-                    let y = cy + Math.sin(rot + rotation) * outerR;
-                    ctx.lineTo(x, y);
-                    
-                    rot += step;
-                    
-                    x = cx + Math.cos(rot + rotation) * innerR;
-                    y = cy + Math.sin(rot + rotation) * innerR;
-                    ctx.lineTo(x, y);
-                    
-                    rot += step;
-                }
-                ctx.closePath();
-            }
-
             function drawStars() {
                 ctx.clearRect(0, 0, width, height);
                 
                 ctx.fillStyle = '#000';
                 ctx.fillRect(0, 0, width, height);
                 
+                // Желтые звезды на фоне
                 for (let s of stars) {
                     const twinkle = Math.sin(Date.now() * 0.002 + s.phase) * 0.3 + 0.7;
                     
@@ -2813,7 +2812,7 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
                 
-                // Падающая звезда в форме звезды
+                // Иногда падающая красивая звезда
                 if (Math.random() < 0.0001) {
                     shootingStars.push({
                         x: Math.random() * width,
@@ -2821,9 +2820,9 @@
                         length: Math.random() * 150 + 100,
                         speed: Math.random() * 1 + 0.5,
                         angle: Math.random() * 0.3 + 0.35,
-                        life: 800,
+                        life: 600,
                         color: '#ffdd88',
-                        width: Math.random() * 5 + 3,
+                        width: Math.random() * 4 + 2,
                         trail: []
                     });
                 }
@@ -2832,7 +2831,7 @@
                     const s = shootingStars[i];
                     
                     s.trail.push({ x: s.x, y: s.y });
-                    if (s.trail.length > 12) s.trail.shift();
+                    if (s.trail.length > 10) s.trail.shift();
                     
                     s.x += s.speed * Math.cos(s.angle);
                     s.y += s.speed * Math.sin(s.angle);
@@ -2845,24 +2844,24 @@
                     
                     for (let j = 0; j < s.trail.length; j++) {
                         const point = s.trail[j];
-                        const alpha = (s.life / 800) * (j / s.trail.length) * 0.5;
+                        const alpha = (s.life / 600) * (j / s.trail.length) * 0.5;
                         const size = s.width * (1 - j / s.trail.length);
                         
                         ctx.globalAlpha = alpha;
                         ctx.fillStyle = s.color;
                         ctx.shadowColor = s.color;
-                        ctx.shadowBlur = 15;
-                        
-                        drawStar(ctx, point.x, point.y, 5, size, size * 0.4, s.angle);
+                        ctx.shadowBlur = 20;
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
                         ctx.fill();
                     }
                     
-                    ctx.globalAlpha = s.life / 800;
+                    ctx.globalAlpha = s.life / 600;
                     ctx.fillStyle = '#fff';
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 25;
-                    
-                    drawStar(ctx, s.x, s.y, 5, s.width * 2, s.width * 0.8, s.angle);
+                    ctx.shadowBlur = 30;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.width * 1.5, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 
@@ -3353,7 +3352,7 @@
                     el.caseMultipleContainer.appendChild(rowDiv);
                     
                     const items = [];
-                    for (let i = 0; i < 50; i++) {
+                    for (let i = 0; i < 40; i++) {
                         let gift = GIFTS[Math.floor(Math.random() * GIFTS.length)];
                         items.push({ ...gift });
                     }
@@ -3415,50 +3414,53 @@
                     
                     const targetGift = results[r];
                     
-                    let targetIndex = -1;
+                    // Находим ближайший подарок к маркеру
+                    let bestIndex = 0;
+                    let minDistance = Infinity;
                     
                     for (let i = 0; i < items.length; i++) {
-                        if (items[i].dataset.name === targetGift.name) {
-                            targetIndex = i;
-                            break;
+                        const item = items[i];
+                        const itemPos = i * itemWidth;
+                        const distance = Math.abs(itemPos - markerPos);
+                        
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            bestIndex = i;
                         }
                     }
                     
-                    if (targetIndex === -1) {
-                        targetIndex = Math.floor(Math.random() * (itemCount - 20)) + 10;
-                        const winItem = items[targetIndex];
-                        winItem.dataset.price = targetGift.price;
-                        winItem.dataset.name = targetGift.name;
-                        winItem.dataset.id = targetGift.id;
-                        winItem.querySelector('.gift-name').textContent = targetGift.name;
-                        winItem.querySelector('.gift-price').textContent = targetGift.price + '⭐';
-                        
-                        const svg = getGiftSVG(targetGift);
-                        winItem.querySelector('.gift-image').style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
-                    }
+                    const winItem = items[bestIndex];
+                    winItem.dataset.price = targetGift.price;
+                    winItem.dataset.name = targetGift.name;
+                    winItem.dataset.id = targetGift.id;
+                    winItem.querySelector('.gift-name').textContent = targetGift.name;
+                    winItem.querySelector('.gift-price').textContent = targetGift.price + '⭐';
                     
-                    state.winIndices[r] = targetIndex;
+                    const svg = getGiftSVG(targetGift);
+                    winItem.querySelector('.gift-image').style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                     
-                    const finalPos = markerPos - (targetIndex * itemWidth);
+                    state.winIndices[r] = bestIndex;
+                    
+                    const finalPos = markerPos - (bestIndex * itemWidth);
                     
                     Array.from(items).forEach(item => item.classList.remove('win'));
                     
-                    const spins = 4 + Math.floor(Math.random() * 3);
+                    const spins = 3 + Math.floor(Math.random() * 3);
                     const startPos = finalPos - (spins * itemCount * itemWidth);
                     
                     caseItems.style.transition = 'none';
                     caseItems.style.transform = `translateX(${startPos}px)`;
                     
                     setTimeout(() => {
-                        caseItems.style.transition = 'transform 3s cubic-bezier(0.1, 0.9, 0.2, 1)';
+                        caseItems.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.9, 0.3, 1)';
                         caseItems.style.transform = `translateX(${finalPos}px)`;
                         
                         setTimeout(() => {
-                            if (items[targetIndex]) {
-                                items[targetIndex].classList.add('win');
+                            if (items[bestIndex]) {
+                                items[bestIndex].classList.add('win');
                                 sound.playWinSound();
                             }
-                        }, 3000);
+                        }, 2500);
                     }, 50);
                 }
                 
@@ -3497,7 +3499,7 @@
                     el.caseOpenBtn.disabled = false;
                     el.caseOpenBtn.textContent = 'ОТКРЫТЬ ЕЩЕ';
                     state.isOpening = false;
-                }, 3500);
+                }, 3000);
             }
 
             el.sellConfirm.onclick = () => {
@@ -4018,18 +4020,18 @@
                 playCoinflip('tails');
             };
 
-            // Апгрейд (ПОЛНОСТЬЮ ПЕРЕДЕЛАНО)
+            // Апгрейд (ИСПРАВЛЕННЫЙ)
             function updateUpgradeUI() {
                 if (state.upgradeBetGift && state.upgradeTargetGift) {
                     const percent = Math.min(95, Math.floor((state.upgradeBetGift.price / state.upgradeTargetGift.price) * 100));
                     el.upgradePercent.textContent = percent + '%';
                     const fill = document.getElementById('circleFill');
-                    fill.style.background = `conic-gradient(#00ff88 0deg, #00ff88 ${percent * 3.6}deg, #ff4444 ${percent * 3.6}deg)`;
+                    fill.style.background = `conic-gradient(#00cc66 0deg, #00cc66 ${percent * 3.6}deg, #ff4444 ${percent * 3.6}deg)`;
                 } else {
                     el.upgradePercent.textContent = '0%';
                 }
-                el.betGiftDisplay.textContent = state.upgradeBetGift ? state.upgradeBetGift.name : '— ВЫБРАТЬ —';
-                el.targetGiftDisplay.textContent = state.upgradeTargetGift ? state.upgradeTargetGift.name : '— ВЫБРАТЬ —';
+                el.betGiftDisplay.textContent = state.upgradeBetGift ? state.upgradeBetGift.name : 'Выбрать';
+                el.targetGiftDisplay.textContent = state.upgradeTargetGift ? state.upgradeTargetGift.name : 'Выбрать';
                 el.upgradeActionBtn.disabled = !(state.upgradeBetGift && state.upgradeTargetGift);
             }
 
@@ -4098,6 +4100,7 @@
                         sound.playWinSound();
                         showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
                         
+                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
@@ -4106,6 +4109,7 @@
                         sound.playLoseSound();
                         showToast('💥 ПРОВАЛ! Подарок сгорел');
                         
+                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
