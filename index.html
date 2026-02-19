@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOXSTARX 🚀 МЕГА КАЗИНО</title>
+    <title>BOXSTARX 🚀 КОСМИЧЕСКОЕ КАЗИНО</title>
     <style>
         * {
             margin: 0;
@@ -109,7 +109,7 @@
             transition:all 0.2s ease;
         }
         .add-btn:active { transform:scale(0.95); }
-        /* Сетка игр */
+        /* Кнопки игр */
         .game-buttons {
             display:grid;
             grid-template-columns:repeat(3,1fr);
@@ -574,7 +574,7 @@
             display:flex; align-items:center; justify-content:center;
         }
         .case-close:hover { background:rgba(255,255,255,0.2); transform:scale(1.1); }
-        /* Blackjack (mobile) */
+        /* Blackjack */
         .blackjack-table {
             background:rgba(0,100,0,0.3);
             border-radius:60px;
@@ -864,87 +864,6 @@
             border-radius:60px;
             background:rgba(0,0,0,0.5);
         }
-        /* Plinko (canvas) */
-        .plinko-board {
-            background:#0a1f2e;
-            border-radius:60px;
-            padding:20px;
-            margin-bottom:20px;
-            border:2px solid #ff9933;
-        }
-        .plinko-canvas-container {
-            position:relative;
-            width:100%;
-            height:300px;
-            background:#000;
-            border-radius:30px;
-            overflow:hidden;
-            border:2px solid #ff9933;
-        }
-        #plinkoCanvas {
-            position:absolute;
-            top:0; left:0;
-            width:100%; height:100%;
-            display:block;
-        }
-        .plinko-multipliers {
-            display:flex;
-            justify-content:space-around;
-            margin-top:10px;
-            gap:2px;
-        }
-        .plinko-cell {
-            flex:1;
-            text-align:center;
-            padding:5px 0;
-            background:rgba(255,153,51,0.2);
-            border:1px solid #ff9933;
-            border-radius:10px;
-            font-weight:700;
-            color:#ff9933;
-            font-size:0.8rem;
-        }
-        .plinko-cell.highlight {
-            background:#ff9933;
-            color:black;
-            box-shadow:0 0 20px #ff9933;
-            transform:scale(1.05);
-        }
-        /* Колесо фортуны (canvas) */
-        .wheel-container {
-            position:relative;
-            width:280px; height:280px;
-            margin:0 auto 30px;
-        }
-        #wheelCanvas {
-            width:100%; height:100%;
-            display:block;
-        }
-        .wheel-pointer {
-            position:absolute;
-            top:-20px; left:50%;
-            transform:translateX(-50%);
-            width:0; height:0;
-            border-left:20px solid transparent;
-            border-right:20px solid transparent;
-            border-top:40px solid #ff9933;
-            filter:drop-shadow(0 0 15px #ff9933);
-            z-index:10;
-        }
-        .wheel-sectors {
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-            justify-content:center;
-            margin-top:20px;
-        }
-        .wheel-sector-item {
-            background:rgba(255,153,51,0.1);
-            border:1px solid #ff9933;
-            border-radius:20px;
-            padding:5px 10px;
-            font-size:0.8rem;
-        }
         /* Инвентарь */
         .inventory-section {
             background:rgba(0,0,0,0.8);
@@ -1138,8 +1057,6 @@
                 <button class="game-btn" id="openBlackjackBtn">🃏 BLACKJACK</button>
                 <button class="game-btn" id="openCoinflipBtn">🪙 МОНЕТКА</button>
                 <button class="game-btn" id="openDiceBtn">🎲 DICE</button>
-                <button class="game-btn" id="openPlinkoBtn">📌 PLINKO</button>
-                <button class="game-btn" id="openWheelBtn">🎡 КОЛЕСО</button>
             </div>
 
             <!-- Ракета -->
@@ -1289,51 +1206,6 @@
             <button class="dice-roll-btn" id="diceRollBtn">🎲 БРОСИТЬ КУБИКИ</button>
         </div>
         <div class="dice-result" id="diceResult">Сделайте ставку и бросьте кубики</div>
-    </div>
-
-    <!-- Plinko (canvas) -->
-    <div class="modal plinko-modal" id="plinkoModal">
-        <div class="modal-header"><div class="modal-back" id="plinkoClose">←</div><div class="modal-title">📌 PLINKO</div></div>
-        <div class="plinko-board">
-            <div class="plinko-canvas-container">
-                <canvas id="plinkoCanvas" width="400" height="300"></canvas>
-            </div>
-            <div class="plinko-multipliers" id="plinkoMultipliers"></div>
-        </div>
-        <div class="dice-bet-panel">
-            <div class="dice-bet-label">💰 СТАВКА</div>
-            <div class="dice-bet-controls">
-                <button class="dice-bet-btn" data-bet="100">100</button>
-                <button class="dice-bet-btn" data-bet="250">250</button>
-                <button class="dice-bet-btn" data-bet="500">500</button>
-                <button class="dice-bet-btn" data-bet="1000">1000</button>
-            </div>
-            <input type="number" class="dice-bet-input" id="plinkoBet" value="100" min="10" step="10">
-            <button class="dice-roll-btn" id="plinkoDropBtn">📌 БРОСИТЬ ШАР</button>
-        </div>
-        <div class="dice-result" id="plinkoResult"></div>
-    </div>
-
-    <!-- Колесо фортуны (canvas) -->
-    <div class="modal wheel-modal" id="wheelModal">
-        <div class="modal-header"><div class="modal-back" id="wheelClose">←</div><div class="modal-title">🎡 КОЛЕСО</div></div>
-        <div class="wheel-container">
-            <canvas id="wheelCanvas" width="280" height="280"></canvas>
-            <div class="wheel-pointer"></div>
-        </div>
-        <div class="dice-bet-panel">
-            <div class="dice-bet-label">💰 СТАВКА</div>
-            <div class="dice-bet-controls">
-                <button class="dice-bet-btn" data-bet="100">100</button>
-                <button class="dice-bet-btn" data-bet="250">250</button>
-                <button class="dice-bet-btn" data-bet="500">500</button>
-                <button class="dice-bet-btn" data-bet="1000">1000</button>
-            </div>
-            <input type="number" class="dice-bet-input" id="wheelBet" value="100" min="10" step="10">
-            <button class="dice-roll-btn" id="wheelSpinBtn">🎡 КРУТИТЬ</button>
-        </div>
-        <div class="dice-result" id="wheelResult"></div>
-        <div class="wheel-sectors" id="wheelSectors"></div>
     </div>
 
     <!-- Селекторы подарков -->
@@ -1620,9 +1492,7 @@
                 inventoryPage:1, multipleResults:[], winIndices:[], flightStopped:false,
                 dice:{bet:100, isRolling:false},
                 blackjack:{deck:[], playerCards:[], dealerCards:[], playerScore:0, dealerScore:0, gameActive:false, bet:100, gameStarted:false},
-                coinflip:{bet:100, choice:null, isPlaying:false},
-                plinko:{bet:100, isDropping:false},
-                wheel:{bet:100, isSpinning:false, sectors:[3,2,1.5,1.5,1,0.5,1,1.2,1.5,2,3,5]}
+                coinflip:{bet:100, choice:null, isPlaying:false}
             };
 
             const el = {
@@ -1691,22 +1561,6 @@
                 dealerSum: document.getElementById('dealerSum'),
                 playerSum: document.getElementById('playerSum'),
                 diceBetBtns: document.querySelectorAll('.dice-bet-btn'),
-                openPlinkoBtn: document.getElementById('openPlinkoBtn'),
-                plinkoModal: document.getElementById('plinkoModal'),
-                plinkoClose: document.getElementById('plinkoClose'),
-                plinkoBet: document.getElementById('plinkoBet'),
-                plinkoDropBtn: document.getElementById('plinkoDropBtn'),
-                plinkoResult: document.getElementById('plinkoResult'),
-                plinkoCanvas: document.getElementById('plinkoCanvas'),
-                plinkoMultipliers: document.getElementById('plinkoMultipliers'),
-                openWheelBtn: document.getElementById('openWheelBtn'),
-                wheelModal: document.getElementById('wheelModal'),
-                wheelClose: document.getElementById('wheelClose'),
-                wheelBet: document.getElementById('wheelBet'),
-                wheelSpinBtn: document.getElementById('wheelSpinBtn'),
-                wheelResult: document.getElementById('wheelResult'),
-                wheelCanvas: document.getElementById('wheelCanvas'),
-                wheelSectors: document.getElementById('wheelSectors'),
                 caseModal: document.getElementById('caseModal'),
                 caseTitle: document.getElementById('caseTitle'),
                 caseMultipleContainer: document.getElementById('caseMultipleContainer'),
@@ -2228,212 +2082,6 @@
             el.diceClose.onclick = ()=>el.diceModal.classList.remove('active');
             el.diceBetBtns.forEach(btn=>{ btn.onclick=()=>{ el.diceBet.value=btn.dataset.bet; }; });
             el.diceRollBtn.onclick = rollDice;
-
-            // Plinko (canvas с реалистичной физикой)
-            let plinkoCtx = el.plinkoCanvas.getContext('2d');
-            const plinkoCols = 12;
-            const plinkoRows = 12;
-            const pegRadius = 5;
-            let ball = { x: 0, y: 0, vx: 0, vy: 0 };
-            let dropping = false;
-            const multipliers = [3,2,1.5,1.5,1,0.5,1,1.2,1.5,2,3,5];
-            function drawPlinko() {
-                plinkoCtx.clearRect(0,0,el.plinkoCanvas.width,el.plinkoCanvas.height);
-                // штырьки
-                plinkoCtx.fillStyle = '#ff9933';
-                plinkoCtx.shadowColor = '#ff9933';
-                plinkoCtx.shadowBlur = 10;
-                for (let row=0; row<plinkoRows; row++) {
-                    let y = 30 + row*20;
-                    let cols = row+1;
-                    for (let col=0; col<cols; col++) {
-                        let x = (el.plinkoCanvas.width/2) - (col - (cols-1)/2)*20;
-                        plinkoCtx.beginPath();
-                        plinkoCtx.arc(x, y, pegRadius, 0, 2*Math.PI);
-                        plinkoCtx.fill();
-                    }
-                }
-                // ячейки внизу
-                plinkoCtx.shadowBlur = 0;
-                plinkoCtx.fillStyle = '#ff9933';
-                for (let i=0; i<plinkoCols; i++) {
-                    let x = (el.plinkoCanvas.width/2) - (i - (plinkoCols-1)/2)*20;
-                    let y = el.plinkoCanvas.height - 20;
-                    plinkoCtx.fillRect(x-10, y-5, 20, 10);
-                    plinkoCtx.fillStyle = '#fff';
-                    plinkoCtx.font = 'bold 12px Inter';
-                    plinkoCtx.textAlign = 'center';
-                    plinkoCtx.fillText(multipliers[i]+'x', x, y-8);
-                    plinkoCtx.fillStyle = '#ff9933';
-                }
-                // шарик
-                if (dropping) {
-                    plinkoCtx.fillStyle = 'white';
-                    plinkoCtx.shadowColor = 'white';
-                    plinkoCtx.shadowBlur = 15;
-                    plinkoCtx.beginPath();
-                    plinkoCtx.arc(ball.x, ball.y, 8, 0, 2*Math.PI);
-                    plinkoCtx.fill();
-                }
-            }
-            function dropPlinko() {
-                if (dropping || state.plinko.isDropping) return;
-                let bet = parseInt(el.plinkoBet.value)||100;
-                if (bet>state.balance) { showToast('❌ Недостаточно звезд!'); return; }
-                state.plinko.isDropping = true;
-                state.balance -= bet; updateUI();
-                el.plinkoDropBtn.disabled = true; el.plinkoBet.disabled = true;
-                sound.playDiceRollSound();
-                ball.x = el.plinkoCanvas.width/2;
-                ball.y = 20;
-                ball.vx = (Math.random()-0.5)*2;
-                ball.vy = 2;
-                dropping = true;
-                function animate() {
-                    if (!dropping) return;
-                    ball.x += ball.vx;
-                    ball.y += ball.vy;
-                    // столкновения со штырьками
-                    for (let row=0; row<plinkoRows; row++) {
-                        let yp = 30 + row*20;
-                        let cols = row+1;
-                        for (let col=0; col<cols; col++) {
-                            let xp = (el.plinkoCanvas.width/2) - (col - (cols-1)/2)*20;
-                            let dx = ball.x - xp;
-                            let dy = ball.y - yp;
-                            let dist = Math.sqrt(dx*dx+dy*dy);
-                            if (dist < 12) {
-                                // простое отражение
-                                if (Math.abs(dx) > Math.abs(dy)) ball.vx = -ball.vx * 0.5;
-                                else ball.vy = -ball.vy * 0.5;
-                                ball.x += ball.vx*2;
-                                ball.y += ball.vy*2;
-                            }
-                        }
-                    }
-                    // границы
-                    if (ball.x < 30) { ball.x = 30; ball.vx = -ball.vx*0.5; }
-                    if (ball.x > el.plinkoCanvas.width-30) { ball.x = el.plinkoCanvas.width-30; ball.vx = -ball.vx*0.5; }
-                    // достиг дна
-                    if (ball.y > el.plinkoCanvas.height-30) {
-                        let slot = Math.floor((ball.x / el.plinkoCanvas.width) * plinkoCols);
-                        if (slot<0) slot=0; if (slot>=plinkoCols) slot=plinkoCols-1;
-                        let mult = multipliers[slot];
-                        let winAmount = Math.floor(bet * mult);
-                        if (winAmount >= bet) { state.balance += winAmount; sound.playWinSound(); }
-                        else sound.playLoseSound();
-                        el.plinkoResult.textContent = `Шар упал в ячейку с x${mult}. Вы ${winAmount>=bet?'выиграли':'проиграли'}! ${winAmount>=bet?'+'+winAmount:'-'+bet}⭐`;
-                        updateUI(); saveGame();
-                        dropping = false;
-                        state.plinko.isDropping = false;
-                        el.plinkoDropBtn.disabled = false; el.plinkoBet.disabled = false;
-                        drawPlinko();
-                        return;
-                    }
-                    drawPlinko();
-                    requestAnimationFrame(animate);
-                }
-                animate();
-            }
-            el.openPlinkoBtn.onclick = ()=>{
-                el.plinkoModal.classList.add('active');
-                let html = '';
-                multipliers.forEach(m => html += `<div class="plinko-cell">${m}x</div>`);
-                el.plinkoMultipliers.innerHTML = html;
-                drawPlinko();
-            };
-            el.plinkoClose.onclick = ()=>{ dropping=false; el.plinkoModal.classList.remove('active'); };
-            el.plinkoDropBtn.onclick = dropPlinko;
-
-            // Колесо фортуны (canvas с подписями и подсветкой выигрыша)
-            let wheelCtx = el.wheelCanvas.getContext('2d');
-            let wheelSectors = state.wheel.sectors;
-            let spinTimeout;
-            function drawWheel(highlightIndex = -1) {
-                wheelCtx.clearRect(0,0,el.wheelCanvas.width,el.wheelCanvas.height);
-                const centerX = 140, centerY = 140, radius = 120;
-                const angleStep = (2 * Math.PI) / wheelSectors.length;
-                for (let i=0; i<wheelSectors.length; i++) {
-                    let startAngle = i * angleStep;
-                    let endAngle = (i+1) * angleStep;
-                    // цвет сектора
-                    let colors = ['#ff6b6b','#4ecdc4','#ffe66d','#ff9f1c','#bf8cf0','#ff8c42','#ff6b6b','#4ecdc4','#ffe66d','#ff9f1c','#bf8cf0','#ff8c42'];
-                    wheelCtx.fillStyle = colors[i % colors.length];
-                    wheelCtx.beginPath();
-                    wheelCtx.moveTo(centerX, centerY);
-                    wheelCtx.arc(centerX, centerY, radius, startAngle, endAngle);
-                    wheelCtx.closePath();
-                    wheelCtx.fill();
-                    // подпись множителя
-                    wheelCtx.save();
-                    wheelCtx.translate(centerX, centerY);
-                    wheelCtx.rotate(startAngle + angleStep/2);
-                    wheelCtx.textAlign = 'center';
-                    wheelCtx.fillStyle = '#000';
-                    wheelCtx.font = 'bold 16px Inter';
-                    wheelCtx.fillText(wheelSectors[i]+'x', 85, 10);
-                    wheelCtx.restore();
-                }
-                // обод
-                wheelCtx.strokeStyle = '#ff9933';
-                wheelCtx.lineWidth = 4;
-                wheelCtx.beginPath();
-                wheelCtx.arc(centerX, centerY, radius, 0, 2*Math.PI);
-                wheelCtx.stroke();
-                // подсветка выигравшего сектора, если нужно
-                if (highlightIndex >= 0) {
-                    let startAngle = highlightIndex * angleStep;
-                    let endAngle = (highlightIndex+1) * angleStep;
-                    wheelCtx.shadowColor = '#ffaa00';
-                    wheelCtx.shadowBlur = 20;
-                    wheelCtx.strokeStyle = '#ffaa00';
-                    wheelCtx.lineWidth = 6;
-                    wheelCtx.beginPath();
-                    wheelCtx.arc(centerX, centerY, radius-2, startAngle, endAngle);
-                    wheelCtx.stroke();
-                    wheelCtx.shadowBlur = 0;
-                }
-            }
-            function spinWheel() {
-                if (state.wheel.isSpinning) return;
-                let bet = parseInt(el.wheelBet.value)||100;
-                if (bet>state.balance) { showToast('❌ Недостаточно звезд!'); return; }
-                state.wheel.isSpinning = true;
-                state.balance -= bet; updateUI();
-                el.wheelSpinBtn.disabled = true; el.wheelBet.disabled = true;
-                sound.playDiceRollSound();
-                let spins = 5 + Math.floor(Math.random()*5);
-                let targetIndex = Math.floor(Math.random() * wheelSectors.length);
-                let targetMult = wheelSectors[targetIndex];
-                let totalAngle = 360*spins + (targetIndex*30) + 15;
-                el.wheelCanvas.style.transition = 'transform 4s cubic-bezier(0.1,0.9,0.3,1)';
-                el.wheelCanvas.style.transform = `rotate(${totalAngle}deg)`;
-                if (spinTimeout) clearTimeout(spinTimeout);
-                spinTimeout = setTimeout(()=>{
-                    el.wheelCanvas.style.transition = '';
-                    el.wheelCanvas.style.transform = '';
-                    let winAmount = Math.floor(bet * targetMult);
-                    el.wheelResult.textContent = `Сектор ${targetIndex+1}: x${targetMult}. Вы ${winAmount>=bet?'выиграли':'проиграли'}! ${winAmount>=bet?'+'+winAmount:'-'+bet}⭐`;
-                    if (winAmount>=bet) { state.balance += winAmount; sound.playWinSound(); }
-                    else sound.playLoseSound();
-                    updateUI(); saveGame();
-                    state.wheel.isSpinning = false;
-                    el.wheelSpinBtn.disabled = false; el.wheelBet.disabled = false;
-                    drawWheel(targetIndex); // подсветить выигравший сектор
-                },4000);
-            }
-            el.openWheelBtn.onclick = ()=>{
-                el.wheelModal.classList.add('active');
-                drawWheel();
-                let sectorHtml = '';
-                wheelSectors.forEach((m,i)=> sectorHtml += `<div class="wheel-sector-item">${i+1}: ${m}x</div>`);
-                el.wheelSectors.innerHTML = sectorHtml;
-            };
-            el.wheelClose.onclick = ()=>{
-                if (spinTimeout) clearTimeout(spinTimeout);
-                el.wheelModal.classList.remove('active');
-            };
-            el.wheelSpinBtn.onclick = spinWheel;
 
             // Upgrade
             function updateUpgradeUI() {
