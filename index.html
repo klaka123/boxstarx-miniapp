@@ -195,7 +195,7 @@
         }
 
         /* Кнопки на главном */
-        .upgrade-main-btn, .blackjack-main-btn, .coinflip-main-btn, .dice-main-btn, .wheel-main-btn, .plinko-main-btn {
+        .upgrade-main-btn, .blackjack-main-btn, .coinflip-main-btn, .dice-main-btn {
             background: linear-gradient(135deg, #ff9933, #ff6600);
             border: none;
             border-radius: 60px;
@@ -211,12 +211,12 @@
             transition: all 0.3s ease;
         }
 
-        .upgrade-main-btn:hover, .blackjack-main-btn:hover, .coinflip-main-btn:hover, .dice-main-btn:hover, .wheel-main-btn:hover, .plinko-main-btn:hover {
+        .upgrade-main-btn:hover, .blackjack-main-btn:hover, .coinflip-main-btn:hover, .dice-main-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 50px #ff9933;
         }
 
-        .upgrade-main-btn:active, .blackjack-main-btn:active, .coinflip-main-btn:active, .dice-main-btn:active, .wheel-main-btn:active, .plinko-main-btn:active {
+        .upgrade-main-btn:active, .blackjack-main-btn:active, .coinflip-main-btn:active, .dice-main-btn:active {
             transform: scale(0.98);
         }
 
@@ -1386,7 +1386,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО BLACKJACK (МОБИЛЬНАЯ АДАПТАЦИЯ) ========== */
         .blackjack-modal {
             position: fixed;
             top: 0;
@@ -1398,7 +1398,7 @@
             flex-direction: column;
             z-index: 10000;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px;
             animation: modalFadeIn 0.5s ease;
         }
 
@@ -1409,19 +1409,19 @@
         .blackjack-header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .blackjack-back {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: rgba(255,153,51,0.2);
             border: 2px solid #ff9933;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            margin-right: 15px;
+            margin-right: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1438,56 +1438,56 @@
         }
 
         .blackjack-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 900;
             color: #ff9933;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(255,153,51,0.5);
         }
 
         .blackjack-table {
             background: rgba(0, 100, 0, 0.3);
-            border-radius: 60px;
-            padding: 30px 20px;
-            margin-bottom: 20px;
+            border-radius: 40px;
+            padding: 20px 15px;
+            margin-bottom: 15px;
             border: 2px solid #ff9933;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(255,153,51,0.2);
         }
 
         .blackjack-dealer, .blackjack-player {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .blackjack-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #ff9933;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .blackjack-cards {
             display: flex;
-            gap: 15px;
-            min-height: 120px;
+            gap: 8px;
+            min-height: 90px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .blackjack-card {
-            width: 80px;
-            height: 120px;
+            width: 60px;
+            height: 90px;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 900;
             color: black;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
             animation: cardDeal 0.3s ease-out;
             border: 2px solid #ff9933;
             transition: all 0.2s ease;
@@ -1495,7 +1495,7 @@
 
         .blackjack-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
         }
 
         @keyframes cardDeal {
@@ -1508,45 +1508,46 @@
         }
 
         .blackjack-score {
-            font-size: 1.5rem;
-            margin-top: 10px;
+            font-size: 1.2rem;
+            margin-top: 8px;
             color: #ff9933;
             font-weight: 700;
         }
 
         .blackjack-bet-panel {
             background: rgba(0,0,0,0.5);
-            border-radius: 40px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 15px;
             border: 2px solid #ff9933;
             backdrop-filter: blur(5px);
         }
 
         .blackjack-bet-label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #ff9933;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .blackjack-bet-controls {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
 
         .blackjack-bet-btn {
             flex: 1;
-            min-width: 60px;
-            padding: 12px;
+            min-width: 50px;
+            padding: 10px;
             border: 2px solid #ff9933;
-            border-radius: 40px;
+            border-radius: 30px;
             background: rgba(255,153,51,0.1);
             color: white;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-size: 0.9rem;
         }
 
         .blackjack-bet-btn:hover {
@@ -1567,16 +1568,16 @@
 
         .blackjack-bet-input {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #ff9933;
-            border-radius: 40px;
+            border-radius: 30px;
             background: rgba(0,0,0,0.5);
             color: #ff9933;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .blackjack-bet-input:focus {
@@ -1591,10 +1592,10 @@
 
         .blackjack-start-btn {
             width: 100%;
-            padding: 18px;
+            padding: 15px;
             border: none;
-            border-radius: 60px;
-            font-size: 1.2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
             font-weight: 700;
             background: linear-gradient(135deg, #4caf50, #45a049);
             color: white;
@@ -1602,7 +1603,7 @@
             transition: all 0.2s ease;
             box-shadow: 0 0 30px #4caf50;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .blackjack-start-btn:hover {
@@ -1621,24 +1622,24 @@
 
         .blackjack-actions {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .blackjack-action-btn {
             flex: 1;
-            min-width: 120px;
-            padding: 18px;
+            min-width: 90px;
+            padding: 15px;
             border: none;
-            border-radius: 60px;
-            font-size: 1.2rem;
+            border-radius: 40px;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .blackjack-action-btn:hover {
@@ -1674,12 +1675,12 @@
 
         .blackjack-message {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #ff9933;
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             border: 2px solid #ff9933;
-            border-radius: 60px;
+            border-radius: 40px;
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
@@ -1929,582 +1930,6 @@
             padding: 15px;
             border: 2px solid #ff9933;
             border-radius: 60px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        /* ========== КОЛЕСО ФОРТУНЫ (НЕОНОВЫЙ ДИЗАЙН) ========== */
-        .wheel-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: none;
-            flex-direction: column;
-            z-index: 10000;
-            overflow-y: auto;
-            padding: 15px;
-            animation: modalFadeIn 0.5s ease;
-        }
-
-        .wheel-modal.active {
-            display: flex;
-        }
-
-        .wheel-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .wheel-back {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .wheel-back:hover {
-            background: rgba(255,153,51,0.3);
-            transform: scale(1.1);
-        }
-
-        .wheel-back:active {
-            transform: scale(0.95);
-        }
-
-        .wheel-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ff9933;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255,153,51,0.5);
-        }
-
-        .wheel-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 20px auto;
-        }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(255,153,51,0.7);
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
-            border: 4px solid #ff9933;
-        }
-
-        .wheel-sector {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: bottom right;
-            left: 0;
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.4rem;
-            color: white;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px #ff9933;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
-            border: 1px solid rgba(255,153,51,0.5);
-            transition: all 0.3s ease;
-        }
-
-        /* 12 секторов по 30 градусов */
-        .wheel-sector:nth-child(1) { transform: rotate(0deg); background: linear-gradient(135deg, #ff0055, #ff3860); }
-        .wheel-sector:nth-child(2) { transform: rotate(30deg); background: linear-gradient(135deg, #ff5500, #ff7b00); }
-        .wheel-sector:nth-child(3) { transform: rotate(60deg); background: linear-gradient(135deg, #ffaa00, #ffbb00); color: black; }
-        .wheel-sector:nth-child(4) { transform: rotate(90deg); background: linear-gradient(135deg, #aaff00, #88dd00); color: black; }
-        .wheel-sector:nth-child(5) { transform: rotate(120deg); background: linear-gradient(135deg, #00ff88, #00cc77); color: black; }
-        .wheel-sector:nth-child(6) { transform: rotate(150deg); background: linear-gradient(135deg, #00aaff, #0088dd); }
-        .wheel-sector:nth-child(7) { transform: rotate(180deg); background: linear-gradient(135deg, #2200ff, #5500ff); }
-        .wheel-sector:nth-child(8) { transform: rotate(210deg); background: linear-gradient(135deg, #aa00ff, #bb00ff); }
-        .wheel-sector:nth-child(9) { transform: rotate(240deg); background: linear-gradient(135deg, #ff00cc, #ff00aa); }
-        .wheel-sector:nth-child(10) { transform: rotate(270deg); background: linear-gradient(135deg, #ff0066, #ff0044); }
-        .wheel-sector:nth-child(11) { transform: rotate(300deg); background: linear-gradient(135deg, #ff3300, #ff5500); }
-        .wheel-sector:nth-child(12) { transform: rotate(330deg); background: linear-gradient(135deg, #ffaa00, #ffbb00); color: black; }
-
-        .wheel-sector span {
-            transform: rotate(45deg) translate(20%, 20%);
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-shadow: 0 0 15px rgba(0,0,0,0.7), 0 0 25px currentColor;
-        }
-
-        .wheel-marker {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 40px solid #ff9933;
-            filter: drop-shadow(0 0 20px #ff9933);
-            z-index: 100;
-        }
-
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle, #ff9933, #ff6600);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: black;
-            border: 4px solid white;
-            box-shadow: 0 0 50px #ff9933;
-            z-index: 50;
-        }
-
-        .wheel-highlight {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            box-shadow: 0 0 50px #ffaa00;
-            animation: highlightPulse 1s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes highlightPulse {
-            0% { opacity: 0.3; box-shadow: 0 0 30px #ffaa00; }
-            50% { opacity: 0.8; box-shadow: 0 0 70px #ffaa00; }
-            100% { opacity: 0.3; box-shadow: 0 0 30px #ffaa00; }
-        }
-
-        .wheel-bet-panel {
-            background: rgba(0,0,0,0.5);
-            border-radius: 40px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 2px solid #ff9933;
-            backdrop-filter: blur(5px);
-        }
-
-        .wheel-bet-label {
-            font-size: 1rem;
-            color: #ff9933;
-            margin-bottom: 8px;
-        }
-
-        .wheel-bet-controls {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .wheel-bet-btn {
-            flex: 1;
-            min-width: 50px;
-            padding: 10px;
-            border: 2px solid #ff9933;
-            border-radius: 30px;
-            background: rgba(255,153,51,0.1);
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-        }
-
-        .wheel-bet-btn:hover {
-            background: rgba(255,153,51,0.2);
-            transform: scale(1.05);
-        }
-
-        .wheel-bet-btn.active {
-            background: #ff9933;
-            color: black;
-            box-shadow: 0 0 15px #ff9933;
-        }
-
-        .wheel-bet-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ff9933;
-            border-radius: 30px;
-            background: rgba(0,0,0,0.5);
-            color: #ff9933;
-            font-size: 1rem;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .wheel-bet-input:focus {
-            box-shadow: 0 0 15px #ff9933;
-            border-color: #ffaa00;
-        }
-
-        .wheel-bet-input:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .wheel-spin-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: black;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 25px #ff9933;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .wheel-spin-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 35px #ff9933;
-        }
-
-        .wheel-spin-btn:active {
-            transform: scale(0.98);
-        }
-
-        .wheel-spin-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .wheel-result {
-            text-align: center;
-            font-size: 1.5rem;
-            color: #ff9933;
-            margin-top: 15px;
-            padding: 15px;
-            border: 2px solid #ff9933;
-            border-radius: 40px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        /* ========== ПЛИНКО (НОВЫЙ ДИЗАЙН С ПАНЕЛЬЮ УПРАВЛЕНИЯ) ========== */
-        .plinko-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: none;
-            flex-direction: column;
-            z-index: 10000;
-            overflow-y: auto;
-            padding: 15px;
-            animation: modalFadeIn 0.5s ease;
-        }
-
-        .plinko-modal.active {
-            display: flex;
-        }
-
-        .plinko-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .plinko-back {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,153,51,0.2);
-            border: 2px solid #ff9933;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .plinko-back:hover {
-            background: rgba(255,153,51,0.3);
-            transform: scale(1.1);
-        }
-
-        .plinko-back:active {
-            transform: scale(0.95);
-        }
-
-        .plinko-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ff9933;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255,153,51,0.5);
-        }
-
-        .plinko-container {
-            position: relative;
-            width: 100%;
-            height: 450px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 3px solid #ff9933;
-            border-radius: 30px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(255,153,51,0.3);
-        }
-
-        .plinko-pegs {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .plinko-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .plinko-peg {
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ff9933, #ff6600);
-            border-radius: 50%;
-            box-shadow: 0 0 12px #ff9933;
-            animation: pegGlow 2s infinite alternate;
-        }
-
-        @keyframes pegGlow {
-            from { box-shadow: 0 0 8px #ff9933; }
-            to { box-shadow: 0 0 18px #ffaa00; }
-        }
-
-        .plinko-ball {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle at 30% 30%, #fff, #ffd700);
-            border-radius: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 20px;
-            z-index: 200;
-            box-shadow: 0 0 30px #ffd700, 0 0 15px #ff9933;
-            transition: all 0.05s linear;
-        }
-
-        .plinko-slots {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            display: flex;
-            background: rgba(0,0,0,0.8);
-            border-top: 2px solid #ff9933;
-        }
-
-        .plinko-slot {
-            flex: 1;
-            height: 100%;
-            background: rgba(255,153,51,0.15);
-            border-right: 1px solid #ff9933;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ff9933;
-            text-shadow: 0 0 10px #ff9933;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .plinko-slot:last-child {
-            border-right: none;
-        }
-
-        .plinko-slot::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,153,51,0.4), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .plinko-slot:hover::before {
-            left: 100%;
-        }
-
-        .plinko-slot.highlight {
-            background: #ff9933;
-            color: black;
-            box-shadow: 0 0 50px #ff9933, inset 0 0 20px rgba(255,255,255,0.5);
-            transform: scale(1.05);
-            z-index: 10;
-            animation: slotPulse 0.5s infinite alternate;
-        }
-
-        @keyframes slotPulse {
-            from { box-shadow: 0 0 30px #ff9933; }
-            to { box-shadow: 0 0 70px #ffaa00; }
-        }
-
-        .plinko-bet-panel {
-            background: rgba(0,0,0,0.5);
-            border-radius: 40px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 2px solid #ff9933;
-            backdrop-filter: blur(5px);
-        }
-
-        .plinko-bet-label {
-            font-size: 1rem;
-            color: #ff9933;
-            margin-bottom: 8px;
-        }
-
-        .plinko-bet-controls {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .plinko-bet-btn {
-            flex: 1;
-            min-width: 50px;
-            padding: 10px;
-            border: 2px solid #ff9933;
-            border-radius: 30px;
-            background: rgba(255,153,51,0.1);
-            color: white;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-        }
-
-        .plinko-bet-btn:hover {
-            background: rgba(255,153,51,0.2);
-            transform: scale(1.05);
-        }
-
-        .plinko-bet-btn.active {
-            background: #ff9933;
-            color: black;
-            box-shadow: 0 0 15px #ff9933;
-        }
-
-        .plinko-bet-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ff9933;
-            border-radius: 30px;
-            background: rgba(0,0,0,0.5);
-            color: #ff9933;
-            font-size: 1rem;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .plinko-bet-input:focus {
-            box-shadow: 0 0 15px #ff9933;
-            border-color: #ffaa00;
-        }
-
-        .plinko-bet-input:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .plinko-drop-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff9933, #ff6600);
-            color: black;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 25px #ff9933;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .plinko-drop-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 35px #ff9933;
-        }
-
-        .plinko-drop-btn:active {
-            transform: scale(0.98);
-        }
-
-        .plinko-drop-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .plinko-result {
-            text-align: center;
-            font-size: 1.3rem;
-            color: #ff9933;
-            margin-top: 10px;
-            padding: 12px;
-            border: 2px solid #ff9933;
-            border-radius: 40px;
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
@@ -2901,8 +2326,6 @@
             <button class="blackjack-main-btn" id="openBlackjackBtn">🃏 BLACKJACK 🃏</button>
             <button class="coinflip-main-btn" id="openCoinflipBtn">🪙 МОНЕТКА 🪙</button>
             <button class="dice-main-btn" id="openDiceBtn">🎲 DICE 🎲</button>
-            <button class="wheel-main-btn" id="openWheelBtn">🎡 КОЛЕСО</button>
-            <button class="plinko-main-btn" id="openPlinkoBtn">📦 PLINKO</button>
 
             <section class="rocket-section">
                 <div class="rocket-window" id="rocketWindow">
@@ -3159,80 +2582,6 @@
         <div class="coinflip-result" id="coinflipResult">Сделайте ставку и выберите сторону</div>
     </div>
 
-    <!-- Модальное окно Колеса Фортуны (НЕОНОВЫЙ ДИЗАЙН) -->
-    <div class="wheel-modal" id="wheelModal">
-        <div class="wheel-header">
-            <div class="wheel-back" id="wheelClose">←</div>
-            <div class="wheel-title">🎡 КОЛЕСО</div>
-        </div>
-
-        <div class="wheel-container">
-            <div class="wheel" id="wheel">
-                <div class="wheel-sector"><span>x0</span></div>
-                <div class="wheel-sector"><span>x0.5</span></div>
-                <div class="wheel-sector"><span>x1</span></div>
-                <div class="wheel-sector"><span>x1.5</span></div>
-                <div class="wheel-sector"><span>x2</span></div>
-                <div class="wheel-sector"><span>x3</span></div>
-                <div class="wheel-sector"><span>x5</span></div>
-                <div class="wheel-sector"><span>x10</span></div>
-                <div class="wheel-sector"><span>x20</span></div>
-                <div class="wheel-sector"><span>x50</span></div>
-                <div class="wheel-sector"><span>x100</span></div>
-                <div class="wheel-sector"><span>LOSE</span></div>
-            </div>
-            <div class="wheel-marker"></div>
-            <div class="wheel-center">🎡</div>
-            <div class="wheel-highlight" id="wheelHighlight"></div>
-        </div>
-
-        <div class="wheel-bet-panel">
-            <div class="wheel-bet-label">💰 СТАВКА</div>
-            <div class="wheel-bet-controls">
-                <button class="wheel-bet-btn" data-bet="50">50</button>
-                <button class="wheel-bet-btn" data-bet="100">100</button>
-                <button class="wheel-bet-btn" data-bet="250">250</button>
-                <button class="wheel-bet-btn" data-bet="500">500</button>
-                <button class="wheel-bet-btn" data-bet="1000">1000</button>
-            </div>
-            <input type="number" class="wheel-bet-input" id="wheelBet" value="100" min="10" step="10">
-
-            <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 КРУТИТЬ</button>
-        </div>
-
-        <div class="wheel-result" id="wheelResult">Сделайте ставку и крутите колесо</div>
-    </div>
-
-    <!-- Модальное окно Plinko (НОВЫЙ ДИЗАЙН С ПАНЕЛЬЮ УПРАВЛЕНИЯ) -->
-    <div class="plinko-modal" id="plinkoModal">
-        <div class="plinko-header">
-            <div class="plinko-back" id="plinkoClose">←</div>
-            <div class="plinko-title">📦 PLINKO</div>
-        </div>
-
-        <div class="plinko-container" id="plinkoContainer">
-            <div class="plinko-pegs" id="plinkoPegs"></div>
-            <div class="plinko-ball" id="plinkoBall"></div>
-            <div class="plinko-slots" id="plinkoSlots"></div>
-        </div>
-
-        <div class="plinko-bet-panel">
-            <div class="plinko-bet-label">💰 СТАВКА</div>
-            <div class="plinko-bet-controls">
-                <button class="plinko-bet-btn" data-bet="10">10</button>
-                <button class="plinko-bet-btn" data-bet="100">100</button>
-                <button class="plinko-bet-btn" data-bet="250">250</button>
-                <button class="plinko-bet-btn" data-bet="500">500</button>
-                <button class="plinko-bet-btn" data-bet="1000">1000</button>
-            </div>
-            <input type="number" class="plinko-bet-input" id="plinkoBet" value="100" min="10" step="10">
-
-            <button class="plinko-drop-btn" id="plinkoDropBtn">🔴 БРОСИТЬ ШАР</button>
-        </div>
-
-        <div class="plinko-result" id="plinkoResult">Сделайте ставку и бросьте шар</div>
-    </div>
-
     <!-- Окно продажи предмета -->
     <div class="sell-modal" id="sellModal">
         <div class="sell-content">
@@ -3394,53 +2743,6 @@
                     osc.start(now);
                     osc.stop(now + 0.3);
                 }
-
-                playWheelSpinSound() {
-                    if (!this.audioContext) return;
-                    
-                    const ctx = this.audioContext;
-                    const now = ctx.currentTime;
-                    
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, now);
-                    osc.frequency.exponentialRampToValueAtTime(50, now + 3);
-                    
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 3);
-                    
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    
-                    osc.start(now);
-                    osc.stop(now + 3);
-                }
-
-                playPlinkoDropSound() {
-                    if (!this.audioContext) return;
-                    
-                    const ctx = this.audioContext;
-                    const now = ctx.currentTime;
-                    
-                    for (let i = 0; i < 16; i++) {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(300 + i * 15, now + i * 0.08);
-                        
-                        gain.gain.setValueAtTime(0.02, now + i * 0.08);
-                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.05);
-                        
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        
-                        osc.start(now + i * 0.08);
-                        osc.stop(now + i * 0.08 + 0.05);
-                    }
-                }
             }
 
             const sound = new SoundManager();
@@ -3453,7 +2755,7 @@
                 }, 1000);
             }, 3000);
 
-            // Звездный фон - желтые звезды для фона
+            // Звездный фон - желтые звезды для фона, белые в ракете
             const canvas = document.getElementById('starCanvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -3469,7 +2771,7 @@
                         size: Math.random() * 2 + 0.5,
                         speed: Math.random() * 0.1 + 0.05,
                         brightness: Math.random() * 0.8 + 0.2,
-                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`,
+                        color: `hsl(${Math.random() * 30 + 45}, 100%, 70%)`, // Желтые оттенки
                         phase: Math.random() * Math.PI * 2
                     });
                 }
@@ -3489,6 +2791,7 @@
                 ctx.fillStyle = '#000';
                 ctx.fillRect(0, 0, width, height);
                 
+                // Желтые звезды на фоне
                 for (let s of stars) {
                     const twinkle = Math.sin(Date.now() * 0.002 + s.phase) * 0.3 + 0.7;
                     
@@ -3510,6 +2813,7 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
                 
+                // Иногда падающая красивая звезда
                 if (Math.random() < 0.0001) {
                     shootingStars.push({
                         x: Math.random() * width,
@@ -3580,7 +2884,7 @@
                 }
             }
 
-            // Подарки (30+ новых, с ценами до 1,000,000)
+            // Подарки
             const GIFTS = [
                 { id: 'common1', name: 'TOY', price: 1, emoji: '🧸', color: '#8b4513' },
                 { id: 'common2', name: 'BALLOON', price: 2, emoji: '🎈', color: '#ff69b4' },
@@ -3592,36 +2896,45 @@
                 { id: 'common8', name: 'BADGE', price: 8, emoji: '📛', color: '#dc143c' },
                 { id: 'common9', name: 'PIN', price: 9, emoji: '📌', color: '#b8860b' },
                 { id: 'common10', name: 'COIN', price: 10, emoji: '🪙', color: '#ffd700' },
-                { id: 'common11', name: 'MOON', price: 15, emoji: '🌙', color: '#c0c0c0' },
-                { id: 'common12', name: 'SUN', price: 20, emoji: '☀️', color: '#ffaa00' },
-                { id: 'common13', name: 'MERCURY', price: 25, emoji: '☿', color: '#8c8c8c' },
-                { id: 'common14', name: 'VENUS', price: 30, emoji: '♀️', color: '#ffb6c1' },
-                { id: 'common15', name: 'EARTH', price: 35, emoji: '🌍', color: '#2288ff' },
-                { id: 'common16', name: 'MARS', price: 40, emoji: '♂️', color: '#ff4d4d' },
-                { id: 'common17', name: 'JUPITER', price: 45, emoji: '♃', color: '#d2b48c' },
-                { id: 'common18', name: 'SATURN', price: 50, emoji: '🪐', color: '#e0b060' },
-                { id: 'common19', name: 'URANUS', price: 55, emoji: '⛢', color: '#7fffd4' },
-                { id: 'common20', name: 'NEPTUNE', price: 60, emoji: '♆', color: '#4169e1' },
-                { id: 'rare1', name: 'PLUTO', price: 70, emoji: '♇', color: '#dda0dd' },
-                { id: 'rare2', name: 'ASTEROID', price: 80, emoji: '☄️', color: '#a0522d' },
-                { id: 'rare3', name: 'COMET', price: 90, emoji: '🌠', color: '#00ffff' },
-                { id: 'rare4', name: 'STAR', price: 100, emoji: '⭐', color: '#ffd700' },
-                { id: 'rare5', name: 'GALAXY', price: 120, emoji: '🌌', color: '#8a2be2' },
-                { id: 'rare6', name: 'NEBULA', price: 150, emoji: '🌫️', color: '#ff69b4' },
-                { id: 'epic1', name: 'BLACK HOLE', price: 200, emoji: '🕳️', color: '#000000' },
-                { id: 'epic2', name: 'WHITE HOLE', price: 250, emoji: '⚪', color: '#ffffff' },
-                { id: 'epic3', name: 'SUPERNOVA', price: 300, emoji: '💥', color: '#ff4500' },
-                { id: 'epic4', name: 'PULSAR', price: 350, emoji: '🌀', color: '#00ced1' },
-                { id: 'legend1', name: 'QUASAR', price: 500, emoji: '⚡', color: '#ff00ff' },
-                { id: 'legend2', name: 'MAGNETAR', price: 750, emoji: '🧲', color: '#ff1493' },
-                { id: 'legend3', name: 'NEUTRON STAR', price: 1000, emoji: '⚛️', color: '#7b68ee' },
-                { id: 'legend4', name: 'RED GIANT', price: 1500, emoji: '🔴', color: '#ff3333' },
-                { id: 'legend5', name: 'WHITE DWARF', price: 2000, emoji: '⚪', color: '#f0f8ff' },
-                { id: 'legend6', name: 'BROWN DWARF', price: 2500, emoji: '🟤', color: '#8b4513' },
-                { id: 'mythic1', name: 'EXOPLANET', price: 5000, emoji: '🪐', color: '#20b2aa' },
-                { id: 'mythic2', name: 'TERRAFORM', price: 7500, emoji: '🌱', color: '#32cd32' },
-                { id: 'mythic3', name: 'DYSON SPHERE', price: 10000, emoji: '🔆', color: '#ffd700' },
-                { id: 'mythic4', name: 'COSMIC EGG', price: 1000000, emoji: '🥚✨', color: '#9400d3' }
+                { id: 'common11', name: 'TOY CAR', price: 11, emoji: '🚗', color: '#8b4513' },
+                { id: 'common12', name: 'BALL', price: 12, emoji: '⚽', color: '#ff69b4' },
+                { id: 'common13', name: 'BOOK', price: 13, emoji: '📚', color: '#ff1493' },
+                { id: 'common14', name: 'PEN', price: 14, emoji: '✒️', color: '#32cd32' },
+                { id: 'common15', name: 'PENCIL', price: 15, emoji: '✏️', color: '#ff4500' },
+                { id: 'common16', name: 'WATCH', price: 30, emoji: '⌚', color: '#ff4500' },
+                { id: 'rare1', name: 'RING', price: 50, emoji: '💍', color: '#cd853f' },
+                { id: 'rare2', name: 'NECKLACE', price: 75, emoji: '📿', color: '#1e90ff' },
+                { id: 'rare3', name: 'BRACELET', price: 100, emoji: '🔗', color: '#dc143c' },
+                { id: 'rare4', name: 'EARRINGS', price: 125, emoji: '💎', color: '#b8860b' },
+                { id: 'epic1', name: 'HEADPHONES', price: 200, emoji: '🎧', color: '#8b4513' },
+                { id: 'epic2', name: 'SPEAKER', price: 250, emoji: '🔊', color: '#ff69b4' },
+                { id: 'epic3', name: 'KEYBOARD', price: 300, emoji: '⌨️', color: '#ff1493' },
+                { id: 'epic4', name: 'MOUSE', price: 350, emoji: '🖱️', color: '#32cd32' },
+                { id: 'legend1', name: 'RIP', price: 500, emoji: '💀', color: '#333' },
+                { id: 'legend2', name: 'SKULL', price: 750, emoji: '💀', color: '#444' },
+                { id: 'legend3', name: 'HEART', price: 1000, emoji: '❤️', color: '#ff6b6b' },
+                { id: 'legend4', name: 'FIRE', price: 1500, emoji: '🔥', color: '#ff8c00' },
+                { id: 'legend5', name: 'DIAMOND', price: 2000, emoji: '💎', color: '#00ff88' },
+                { id: 'legend6', name: 'CROWN', price: 2500, emoji: '👑', color: '#ffd700' },
+                { id: 'legend7', name: 'STAR', price: 3000, emoji: '⭐', color: '#ffd700' },
+                { id: 'legend8', name: 'COMET', price: 3500, emoji: '☄️', color: '#66ccff' },
+                { id: 'legend9', name: 'METEOR', price: 4000, emoji: '🌠', color: '#ff8c00' },
+                { id: 'legend10', name: 'GALAXY', price: 4500, emoji: '🌌', color: '#9b59b6' },
+                { id: 'legend11', name: 'DEMON', price: 5000, emoji: '👿', color: '#800' },
+                { id: 'legend12', name: 'ANGEL', price: 5500, emoji: '👼', color: '#ffd700' },
+                { id: 'legend13', name: 'DEVIL', price: 6000, emoji: '😈', color: '#ff4444' },
+                { id: 'legend14', name: 'GODLY', price: 6500, emoji: '👁️', color: '#00ffff' },
+                { id: 'legend15', name: 'COSMIC', price: 7000, emoji: '🌠', color: '#9932cc' },
+                { id: 'legend16', name: 'UNIVERSE', price: 8000, emoji: '🌌', color: '#4b0082' },
+                { id: 'legend17', name: 'INFINITY', price: 9000, emoji: '∞', color: '#ff1493' },
+                { id: 'legend18', name: 'ETERNITY', price: 10000, emoji: '⏳', color: '#daa520' },
+                { id: 'mythic1', name: 'DRAGON', price: 12000, emoji: '🐉', color: '#8b0000' },
+                { id: 'mythic2', name: 'PHOENIX', price: 15000, emoji: '🔥', color: '#ff4500' },
+                { id: 'mythic3', name: 'THOR', price: 18000, emoji: '⚡', color: '#4169e1' },
+                { id: 'mythic4', name: 'ODIN', price: 20000, emoji: '👁️', color: '#2e8b57' },
+                { id: 'mythic5', name: 'ZEUS', price: 25000, emoji: '⚡', color: '#ffd700' },
+                { id: 'mythic6', name: 'POSEIDON', price: 30000, emoji: '🌊', color: '#1e90ff' },
+                { id: 'mythic7', name: 'HADES', price: 35000, emoji: '💀', color: '#4a4a4a' }
             ];
 
             function getGiftSVG(gift) {
@@ -3687,19 +3000,6 @@
                     choice: null,
                     isPlaying: false,
                     result: null
-                },
-                wheel: {
-                    bet: 100,
-                    isSpinning: false,
-                    winStreak: 0,
-                    multipliers: [0, 0.5, 1, 1.5, 2, 3, 5, 10, 20, 50, 100, 0],
-                    weights: [20, 15, 15, 10, 8, 7, 6, 5, 4, 3, 2, 5] // сумма 100
-                },
-                plinko: {
-                    bet: 100,
-                    isDropping: false,
-                    slots: [0, 0.5, 1, 2, 3, 5, 10, 20],
-                    weights: [25, 20, 20, 12, 10, 7, 4, 2] // сумма 100
                 }
             };
 
@@ -3790,27 +3090,7 @@
                 playerDice2: document.getElementById('playerDice2'),
                 dealerSum: document.getElementById('dealerSum'),
                 playerSum: document.getElementById('playerSum'),
-                diceBetBtns: document.querySelectorAll('.dice-bet-btn'),
-                openWheelBtn: document.getElementById('openWheelBtn'),
-                wheelModal: document.getElementById('wheelModal'),
-                wheelClose: document.getElementById('wheelClose'),
-                wheelBet: document.getElementById('wheelBet'),
-                wheelSpinBtn: document.getElementById('wheelSpinBtn'),
-                wheelResult: document.getElementById('wheelResult'),
-                wheel: document.getElementById('wheel'),
-                wheelHighlight: document.getElementById('wheelHighlight'),
-                wheelBetBtns: document.querySelectorAll('.wheel-bet-btn'),
-                openPlinkoBtn: document.getElementById('openPlinkoBtn'),
-                plinkoModal: document.getElementById('plinkoModal'),
-                plinkoClose: document.getElementById('plinkoClose'),
-                plinkoBet: document.getElementById('plinkoBet'),
-                plinkoDropBtn: document.getElementById('plinkoDropBtn'),
-                plinkoResult: document.getElementById('plinkoResult'),
-                plinkoBall: document.getElementById('plinkoBall'),
-                plinkoContainer: document.getElementById('plinkoContainer'),
-                plinkoPegs: document.getElementById('plinkoPegs'),
-                plinkoSlots: document.getElementById('plinkoSlots'),
-                plinkoBetBtns: document.querySelectorAll('.plinko-bet-btn')
+                diceBetBtns: document.querySelectorAll('.dice-bet-btn')
             };
 
             function saveGame() {
@@ -4135,6 +3415,7 @@
                     
                     const targetGift = results[r];
                     
+                    // Находим ближайший подарок к маркеру
                     let bestIndex = 0;
                     let minDistance = Infinity;
                     
@@ -4820,6 +4101,7 @@
                         sound.playWinSound();
                         showToast(`🎉 УСПЕХ! Получен ${winGift.name}`);
                         
+                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
@@ -4828,6 +4110,7 @@
                         sound.playLoseSound();
                         showToast('💥 ПРОВАЛ! Подарок сгорел');
                         
+                        // Удаляем поставленный подарок
                         const index = state.inventory.findIndex(g => g.id === state.upgradeBetGift.id);
                         if (index !== -1) {
                             state.inventory.splice(index, 1);
@@ -4868,267 +4151,6 @@
                 el.promoField.value = '';
                 showToast(`✅ +${amount}⭐ получено!`);
             }
-
-            // Колесо Фортуны (НЕОНОВЫЙ ДИЗАЙН)
-            function getRandomWheelIndex() {
-                const totalWeight = state.wheel.weights.reduce((a, b) => a + b, 0);
-                let random = Math.random() * totalWeight;
-                let cumulative = 0;
-                for (let i = 0; i < state.wheel.weights.length; i++) {
-                    cumulative += state.wheel.weights[i];
-                    if (random < cumulative) return i;
-                }
-                return 0;
-            }
-
-            function spinWheel() {
-                if (state.wheel.isSpinning) return;
-                
-                const bet = parseInt(el.wheelBet.value) || 100;
-                
-                if (bet > state.balance) {
-                    showToast('❌ Недостаточно звезд!');
-                    return;
-                }
-                
-                state.wheel.isSpinning = true;
-                state.balance -= bet;
-                updateUI();
-                
-                el.wheelSpinBtn.disabled = true;
-                el.wheelBet.disabled = true;
-                el.wheelBetBtns.forEach(btn => btn.disabled = true);
-                
-                sound.playWheelSpinSound();
-                
-                // Защита от постоянных выигрышей
-                let weights = [...state.wheel.weights];
-                if (state.wheel.winStreak >= 2) {
-                    for (let i = 5; i < weights.length; i++) {
-                        weights[i] = Math.max(1, Math.floor(weights[i] * 0.5));
-                    }
-                }
-                
-                const totalWeight = weights.reduce((a, b) => a + b, 0);
-                let random = Math.random() * totalWeight;
-                let cumulative = 0;
-                let sectorIndex = 0;
-                for (let i = 0; i < weights.length; i++) {
-                    cumulative += weights[i];
-                    if (random < cumulative) {
-                        sectorIndex = i;
-                        break;
-                    }
-                }
-                
-                const multiplier = state.wheel.multipliers[sectorIndex];
-                
-                const spins = 5 + Math.floor(Math.random() * 5);
-                const targetRotation = 360 * spins + (sectorIndex * 30) + 15;
-                
-                el.wheel.style.transform = `rotate(${targetRotation}deg)`;
-                
-                setTimeout(() => {
-                    state.wheel.isSpinning = false;
-                    
-                    if (multiplier > 0) {
-                        const winAmount = Math.floor(bet * multiplier);
-                        state.balance += winAmount;
-                        sound.playWinSound();
-                        el.wheelResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (x${multiplier})`;
-                        state.wheel.winStreak++;
-                    } else {
-                        sound.playLoseSound();
-                        el.wheelResult.textContent = multiplier === 0 ? '😞 Проигрыш! LOSE' : `😞 Проигрыш! x${multiplier}`;
-                        state.wheel.winStreak = 0;
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                    
-                    el.wheelSpinBtn.disabled = false;
-                    el.wheelBet.disabled = false;
-                    el.wheelBetBtns.forEach(btn => btn.disabled = false);
-                }, 4000);
-            }
-
-            el.openWheelBtn.onclick = () => {
-                el.wheelModal.classList.add('active');
-                el.wheelResult.textContent = 'Сделайте ставку и крутите колесо';
-                el.wheel.style.transform = 'rotate(0deg)';
-                state.wheel.winStreak = 0;
-            };
-            
-            el.wheelClose.onclick = () => {
-                el.wheelModal.classList.remove('active');
-            };
-            
-            el.wheelBetBtns.forEach(btn => {
-                btn.onclick = () => {
-                    el.wheelBet.value = btn.dataset.bet;
-                };
-            });
-            
-            el.wheelSpinBtn.onclick = spinWheel;
-
-            // Plinko (НОВЫЙ ДИЗАЙН С ПАНЕЛЬЮ УПРАВЛЕНИЯ)
-            function initPlinko() {
-                // Создаем пирамиду из 16 рядов
-                el.plinkoPegs.innerHTML = '';
-                for (let row = 0; row < 16; row++) {
-                    const rowDiv = document.createElement('div');
-                    rowDiv.className = 'plinko-row';
-                    const pegsCount = row + 2;
-                    for (let peg = 0; peg < pegsCount; peg++) {
-                        const pegDiv = document.createElement('div');
-                        pegDiv.className = 'plinko-peg';
-                        rowDiv.appendChild(pegDiv);
-                    }
-                    el.plinkoPegs.appendChild(rowDiv);
-                }
-                
-                // Создаем 8 слотов
-                el.plinkoSlots.innerHTML = '';
-                const slotLabels = ['LOSE', '0.5x', '1x', '2x', '3x', '5x', '10x', '20x'];
-                state.plinko.slots.forEach((mult, index) => {
-                    const slotDiv = document.createElement('div');
-                    slotDiv.className = 'plinko-slot';
-                    slotDiv.id = `plinkoSlot${index}`;
-                    slotDiv.textContent = slotLabels[index];
-                    el.plinkoSlots.appendChild(slotDiv);
-                });
-            }
-
-            function dropPlinkoBall() {
-                if (state.plinko.isDropping) return;
-                
-                const bet = parseInt(el.plinkoBet.value) || 100;
-                
-                if (bet > state.balance) {
-                    showToast('❌ Недостаточно звезд!');
-                    return;
-                }
-                
-                state.plinko.isDropping = true;
-                state.balance -= bet;
-                updateUI();
-                
-                el.plinkoDropBtn.disabled = true;
-                el.plinkoBet.disabled = true;
-                el.plinkoBetBtns.forEach(btn => btn.disabled = true);
-                
-                sound.playPlinkoDropSound();
-                
-                document.querySelectorAll('.plinko-slot').forEach(slot => {
-                    slot.classList.remove('highlight');
-                });
-                
-                el.plinkoBall.style.left = '50%';
-                el.plinkoBall.style.top = '20px';
-                el.plinkoBall.style.transition = 'none';
-                
-                // Определяем результат заранее (серверная логика)
-                const totalWeight = state.plinko.weights.reduce((a, b) => a + b, 0);
-                let random = Math.random() * totalWeight;
-                let cumulative = 0;
-                let resultIndex = 0;
-                for (let i = 0; i < state.plinko.weights.length; i++) {
-                    cumulative += state.plinko.weights[i];
-                    if (random < cumulative) {
-                        resultIndex = i;
-                        break;
-                    }
-                }
-                
-                const multiplier = state.plinko.slots[resultIndex];
-                
-                // Реалистичная анимация падения с отскоками
-                const rows = 16;
-                const stepTime = 70;
-                let currentLeft = 50;
-                let path = [];
-                
-                // Генерируем случайный путь с отскоками
-                for (let row = 0; row < rows; row++) {
-                    const direction = Math.random() > 0.5 ? 1 : -1;
-                    const offset = (Math.random() * 2 + 1) * direction;
-                    currentLeft += offset;
-                    if (currentLeft < 20) currentLeft = 20;
-                    if (currentLeft > 80) currentLeft = 80;
-                    path.push(currentLeft);
-                }
-                
-                // Корректируем последние шаги, чтобы попасть в нужный слот
-                const slotWidth = 100 / state.plinko.slots.length;
-                const targetLeft = resultIndex * slotWidth + slotWidth / 2;
-                
-                // Плавно корректируем последние 4 шага
-                for (let i = 0; i < 4; i++) {
-                    const weight = (i + 1) / 5;
-                    path[rows - 4 + i] = path[rows - 4 + i] * (1 - weight) + targetLeft * weight;
-                }
-                
-                // Запускаем анимацию
-                for (let row = 0; row < rows; row++) {
-                    setTimeout(() => {
-                        el.plinkoBall.style.transition = `top ${stepTime}ms linear, left ${stepTime}ms linear`;
-                        el.plinkoBall.style.left = path[row] + '%';
-                        el.plinkoBall.style.top = (20 + row * 22) + 'px';
-                    }, row * stepTime);
-                }
-                
-                setTimeout(() => {
-                    // Финальная позиция точно в слоте
-                    el.plinkoBall.style.transition = `top 200ms ease-out, left 200ms ease-out`;
-                    el.plinkoBall.style.left = targetLeft + '%';
-                    el.plinkoBall.style.top = (20 + rows * 22) + 'px';
-                    
-                    document.getElementById(`plinkoSlot${resultIndex}`).classList.add('highlight');
-                    
-                    const winAmount = Math.floor(bet * multiplier);
-                    
-                    if (multiplier > 0.5) {
-                        state.balance += winAmount;
-                        sound.playWinSound();
-                        el.plinkoResult.textContent = `🎉 Выигрыш: ${winAmount}⭐ (x${multiplier})`;
-                    } else {
-                        sound.playLoseSound();
-                        el.plinkoResult.textContent = multiplier === 0 ? '😞 Проигрыш! LOSE' : `😞 Проигрыш! x${multiplier}`;
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                    
-                    state.plinko.isDropping = false;
-                    el.plinkoDropBtn.disabled = false;
-                    el.plinkoBet.disabled = false;
-                    el.plinkoBetBtns.forEach(btn => btn.disabled = false);
-                    
-                    setTimeout(() => {
-                        el.plinkoBall.style.transition = 'none';
-                        el.plinkoBall.style.top = '20px';
-                        el.plinkoBall.style.left = '50%';
-                    }, 1000);
-                }, rows * stepTime + 150);
-            }
-
-            el.openPlinkoBtn.onclick = () => {
-                el.plinkoModal.classList.add('active');
-                el.plinkoResult.textContent = 'Сделайте ставку и бросьте шар';
-                initPlinko();
-            };
-            
-            el.plinkoClose.onclick = () => {
-                el.plinkoModal.classList.remove('active');
-            };
-            
-            el.plinkoBetBtns.forEach(btn => {
-                btn.onclick = () => {
-                    el.plinkoBet.value = btn.dataset.bet;
-                };
-            });
-            
-            el.plinkoDropBtn.onclick = dropPlinkoBall;
 
             // Инициализация
             function init() {
