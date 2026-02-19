@@ -1856,7 +1856,7 @@
                 el.finalMultiplier.classList.add('show');
             }
 
-            // Кейсы (старая правильная механика: выигрышный подарок ровно под маркер)
+            // Кейсы (старая правильная механика: ближайший к маркеру)
             function renderCases() {
                 el.casesGrid.innerHTML = '';
                 CASES.forEach(c => {
@@ -1927,23 +1927,27 @@
                     const containerWidth = 800;
                     const markerPos = (containerWidth/2) - (itemWidth/2);
                     const targetGift = results[r];
-                    // Ищем подарок с таким же именем (или любым, если не найдём)
-                    let targetIndex = -1;
+                    // Ищем подарок с таким же именем (или ближайший)
+                    let targetIndex = 0;
+                    let minDist = Infinity;
                     for (let i=0; i<items.length; i++) {
-                        if (items[i].dataset.name === targetGift.name) { targetIndex = i; break; }
+                        const item = items[i];
+                        const itemPos = i*itemWidth;
+                        const dist = Math.abs(itemPos - markerPos);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            targetIndex = i;
+                        }
                     }
-                    if (targetIndex === -1) {
-                        targetIndex = Math.floor(Math.random() * items.length);
-                        // Заменяем этот подарок на целевой
-                        const winItem = items[targetIndex];
-                        winItem.dataset.price = targetGift.price;
-                        winItem.dataset.name = targetGift.name;
-                        winItem.dataset.id = targetGift.id;
-                        winItem.querySelector('.gift-name').textContent = targetGift.name;
-                        winItem.querySelector('.gift-price').textContent = targetGift.price+'⭐';
-                        const svg = getGiftSVG(targetGift);
-                        winItem.querySelector('.gift-image').style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
-                    }
+                    // Заменяем этот подарок на целевой
+                    const winItem = items[targetIndex];
+                    winItem.dataset.price = targetGift.price;
+                    winItem.dataset.name = targetGift.name;
+                    winItem.dataset.id = targetGift.id;
+                    winItem.querySelector('.gift-name').textContent = targetGift.name;
+                    winItem.querySelector('.gift-price').textContent = targetGift.price+'⭐';
+                    const svg = getGiftSVG(targetGift);
+                    winItem.querySelector('.gift-image').style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
                     state.winIndices[r] = targetIndex;
                     // Рассчитываем финальную позицию так, чтобы targetIndex оказался под маркером
                     const finalPos = markerPos - targetIndex * itemWidth;
@@ -2225,7 +2229,7 @@
             el.diceBetBtns.forEach(btn=>{ btn.onclick=()=>{ el.diceBet.value=btn.dataset.bet; }; });
             el.diceRollBtn.onclick = rollDice;
 
-            // Plinko (canvas с физикой)
+            // Plinko (canvas с реалистичной физикой)
             let plinkoCtx = el.plinkoCanvas.getContext('2d');
             const plinkoCols = 12;
             const plinkoRows = 12;
@@ -2341,17 +2345,18 @@
             el.plinkoClose.onclick = ()=>{ dropping=false; el.plinkoModal.classList.remove('active'); };
             el.plinkoDropBtn.onclick = dropPlinko;
 
-            // Колесо фортуны (canvas с подписями)
+            // Колесо фортуны (canvas с подписями и подсветкой выигрыша)
             let wheelCtx = el.wheelCanvas.getContext('2d');
             let wheelSectors = state.wheel.sectors;
-            function drawWheel() {
+            let spinTimeout;
+            function drawWheel(highlightIndex = -1) {
                 wheelCtx.clearRect(0,0,el.wheelCanvas.width,el.wheelCanvas.height);
                 const centerX = 140, centerY = 140, radius = 120;
                 const angleStep = (2 * Math.PI) / wheelSectors.length;
                 for (let i=0; i<wheelSectors.length; i++) {
                     let startAngle = i * angleStep;
                     let endAngle = (i+1) * angleStep;
-                    // цвет
+                    // цвет сектора
                     let colors = ['#ff6b6b','#4ecdc4','#ffe66d','#ff9f1c','#bf8cf0','#ff8c42','#ff6b6b','#4ecdc4','#ffe66d','#ff9f1c','#bf8cf0','#ff8c42'];
                     wheelCtx.fillStyle = colors[i % colors.length];
                     wheelCtx.beginPath();
@@ -2359,7 +2364,7 @@
                     wheelCtx.arc(centerX, centerY, radius, startAngle, endAngle);
                     wheelCtx.closePath();
                     wheelCtx.fill();
-                    // подпись
+                    // подпись множителя
                     wheelCtx.save();
                     wheelCtx.translate(centerX, centerY);
                     wheelCtx.rotate(startAngle + angleStep/2);
@@ -2375,6 +2380,19 @@
                 wheelCtx.beginPath();
                 wheelCtx.arc(centerX, centerY, radius, 0, 2*Math.PI);
                 wheelCtx.stroke();
+                // подсветка выигравшего сектора, если нужно
+                if (highlightIndex >= 0) {
+                    let startAngle = highlightIndex * angleStep;
+                    let endAngle = (highlightIndex+1) * angleStep;
+                    wheelCtx.shadowColor = '#ffaa00';
+                    wheelCtx.shadowBlur = 20;
+                    wheelCtx.strokeStyle = '#ffaa00';
+                    wheelCtx.lineWidth = 6;
+                    wheelCtx.beginPath();
+                    wheelCtx.arc(centerX, centerY, radius-2, startAngle, endAngle);
+                    wheelCtx.stroke();
+                    wheelCtx.shadowBlur = 0;
+                }
             }
             function spinWheel() {
                 if (state.wheel.isSpinning) return;
@@ -2390,7 +2408,8 @@
                 let totalAngle = 360*spins + (targetIndex*30) + 15;
                 el.wheelCanvas.style.transition = 'transform 4s cubic-bezier(0.1,0.9,0.3,1)';
                 el.wheelCanvas.style.transform = `rotate(${totalAngle}deg)`;
-                setTimeout(()=>{
+                if (spinTimeout) clearTimeout(spinTimeout);
+                spinTimeout = setTimeout(()=>{
                     el.wheelCanvas.style.transition = '';
                     el.wheelCanvas.style.transform = '';
                     let winAmount = Math.floor(bet * targetMult);
@@ -2400,6 +2419,7 @@
                     updateUI(); saveGame();
                     state.wheel.isSpinning = false;
                     el.wheelSpinBtn.disabled = false; el.wheelBet.disabled = false;
+                    drawWheel(targetIndex); // подсветить выигравший сектор
                 },4000);
             }
             el.openWheelBtn.onclick = ()=>{
@@ -2409,7 +2429,10 @@
                 wheelSectors.forEach((m,i)=> sectorHtml += `<div class="wheel-sector-item">${i+1}: ${m}x</div>`);
                 el.wheelSectors.innerHTML = sectorHtml;
             };
-            el.wheelClose.onclick = ()=>el.wheelModal.classList.remove('active');
+            el.wheelClose.onclick = ()=>{
+                if (spinTimeout) clearTimeout(spinTimeout);
+                el.wheelModal.classList.remove('active');
+            };
             el.wheelSpinBtn.onclick = spinWheel;
 
             // Upgrade
